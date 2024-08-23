@@ -20,8 +20,6 @@ namespace Smart_Asset
             Login lg = new Login();
             lg.StartPosition = FormStartPosition.CenterScreen;
             lg.Show();
-
-
         }
     }
 }

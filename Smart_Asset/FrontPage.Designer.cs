@@ -103,7 +103,7 @@
             // 
             button2.Anchor = AnchorStyles.Bottom;
             button2.Font = new Font("Microsoft Sans Serif", 12.75F);
-            button2.Location = new Point(23, 672);
+            button2.Location = new Point(24, 681);
             button2.Name = "button2";
             button2.Size = new Size(161, 33);
             button2.TabIndex = 13;

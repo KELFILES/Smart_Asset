@@ -35,6 +35,7 @@
             forgotPassword_Lbl = new Label();
             submit_Btn = new Button();
             manageUsers_Lbl = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
             // username_Lbl
@@ -111,11 +112,21 @@
             manageUsers_Lbl.TabIndex = 6;
             manageUsers_Lbl.Text = "Manage Users";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(495, 225);
+            label1.Name = "label1";
+            label1.Size = new Size(122, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Add background here";
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1109, 681);
+            Controls.Add(label1);
             Controls.Add(manageUsers_Lbl);
             Controls.Add(submit_Btn);
             Controls.Add(forgotPassword_Lbl);
@@ -140,5 +151,6 @@
         private Label forgotPassword_Lbl;
         private Button submit_Btn;
         private Label manageUsers_Lbl;
+        private Label label1;
     }
 }

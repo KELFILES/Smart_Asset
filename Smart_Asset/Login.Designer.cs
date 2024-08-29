@@ -114,12 +114,13 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Location = new Point(495, 225);
+            label1.Location = new Point(471, 297);
             label1.Name = "label1";
-            label1.Size = new Size(122, 15);
+            label1.Size = new Size(157, 15);
             label1.TabIndex = 7;
-            label1.Text = "Add background here";
+            label1.Text = "Add background photo here";
             // 
             // Login
             // 

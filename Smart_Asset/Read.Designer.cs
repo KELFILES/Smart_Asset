@@ -106,6 +106,7 @@
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.Location = new Point(11, 128);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(1166, 536);
             dataGridView1.TabIndex = 4;
             // 
@@ -219,7 +220,7 @@
             // show1_Btn
             // 
             show1_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            show1_Btn.Location = new Point(210, 62);
+            show1_Btn.Location = new Point(202, 62);
             show1_Btn.Name = "show1_Btn";
             show1_Btn.Size = new Size(64, 23);
             show1_Btn.TabIndex = 19;
@@ -240,11 +241,15 @@
             // serialNo_Cmb
             // 
             serialNo_Cmb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            serialNo_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            serialNo_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             serialNo_Cmb.FormattingEnabled = true;
             serialNo_Cmb.Location = new Point(98, 33);
             serialNo_Cmb.Name = "serialNo_Cmb";
             serialNo_Cmb.Size = new Size(283, 23);
             serialNo_Cmb.TabIndex = 23;
+            serialNo_Cmb.KeyPress += serialNo_Cmb_KeyPress;
+            serialNo_Cmb.MouseEnter += serialNo_Cmb_MouseEnter;
             // 
             // panel5
             // 

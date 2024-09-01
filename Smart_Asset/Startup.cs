@@ -5,6 +5,7 @@ namespace Smart_Asset
         public Startup()
         {
             InitializeComponent();
+            MyDbMethods.TestMongoDBConnection();
         }
 
         private void Form1_Load(object sender, EventArgs e)

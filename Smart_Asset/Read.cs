@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Windows.Forms;
 using MongoDB.Bson;
+using static Smart_Asset.Read;
+
 
 namespace Smart_Asset
 {
@@ -46,23 +48,37 @@ namespace Smart_Asset
             public string WarrantyStatus { get; set; }
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
-
             public string Location { get; set; }  // New property
         }
 
+        public class Read_ReservedHardwares
+        {
+            public string Id { get; set; }
+            public string Type { get; set; }
+            public string Model { get; set; }
+            public string SerialNo { get; set; }
+            public string Cost { get; set; }
+            public string Supplier { get; set; }
+            public string Warranty { get; set; }
+            public string WarrantyStatus { get; set; }
+            public string PurchaseDate { get; set; }
+            public string Location { get; set; }  // New property
+        }
+
+
         private void show1_Btn_Click(object sender, EventArgs e)
         {
-            MyDbMethods.Read_LoadData("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
+            MyDbMethods.Read_SerialNo("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
         }
 
         public async void reservedHardwares_Btn_Click(object sender, EventArgs e)
         {
-            MyDbMethods.LoadAllCollData("SmartAssetDb", "Reserved_Hardwares", dataGridView1);
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MyDbMethods.LoadAllCollData("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", dataGridView1);
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
         }
 
         private async void location_Cmb_DropDown(object sender, EventArgs e)
@@ -78,5 +94,16 @@ namespace Smart_Asset
             await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unit_Cmb);
             Cursor = Cursors.Arrow;
         }
+
+        private void serialNo_Cmb_MouseEnter(object sender, EventArgs e)
+        {
+            MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serialNo_Cmb);
+        }
+
+        private void serialNo_Cmb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
     }
 }

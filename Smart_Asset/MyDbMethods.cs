@@ -529,6 +529,102 @@ namespace Smart_Asset
             // Subscribe to events for cursor changes
             dataGridViewName.CellMouseEnter += DataGridView_CellMouseEnter;
             dataGridViewName.CellMouseLeave += DataGridView_CellMouseLeave;
+
+            // Subscribe to the CellClick event for showing DateTimePicker
+            dataGridViewName.CellClick += DataGridView_CellClick;
+        }
+
+        private static DateTimePicker _dateTimePicker; // Class-level variable
+
+        private static void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = sender as DataGridView;
+
+            // Ensure that the click is within the PurchaseDate column and a valid row
+            if (e.ColumnIndex == dataGridView.Columns["PurchaseDate"].Index && e.RowIndex >= 0)
+            {
+                // Remove any existing DateTimePicker
+                if (_dateTimePicker != null)
+                {
+                    dataGridView.Controls.Remove(_dateTimePicker);
+                    _dateTimePicker.Dispose();
+                    _dateTimePicker = null;
+                }
+
+                // Create a new DateTimePicker control
+                _dateTimePicker = new DateTimePicker
+                {
+                    Format = DateTimePickerFormat.Custom,
+                    CustomFormat = "dddd, MMMM d, yyyy",
+                    Visible = true
+                };
+
+                // Set the DateTimePicker's initial value to the current cell value
+                if (dataGridView.CurrentCell.Value != null)
+                {
+                    _dateTimePicker.Value = DateTime.Parse(dataGridView.CurrentCell.Value.ToString());
+                }
+
+                // Set the size and location of the DateTimePicker to fit the cell
+                Rectangle cellRectangle = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                _dateTimePicker.Size = new Size(cellRectangle.Width, cellRectangle.Height);
+                _dateTimePicker.Location = new Point(cellRectangle.X, cellRectangle.Y);
+
+                // Handle the event when the user changes the value
+                _dateTimePicker.CloseUp += (s, ev) =>
+                {
+                    dataGridView.CurrentCell.Value = _dateTimePicker.Value.ToString("dddd, MMMM d, yyyy");
+                    dataGridView.RefreshEdit();  // This forces the DataGridView to refresh the cell content
+                    dataGridView.NotifyCurrentCellDirty(true);  // Notify that the current cell has been modified
+
+                    if (_dateTimePicker != null)
+                    {
+                        dataGridView.Controls.Remove(_dateTimePicker);
+
+                        _dateTimePicker = null;
+                    }
+                };
+
+                _dateTimePicker.LostFocus += (s, ev) =>
+                {
+                    if (_dateTimePicker != null)
+                    {
+                        dataGridView.Controls.Remove(_dateTimePicker);
+
+                        _dateTimePicker = null;
+                    }
+                };
+
+                _dateTimePicker.KeyPress += (s, ev) =>
+                {
+                    if (ev.KeyChar == (char)Keys.Escape)
+                    {
+                        if (_dateTimePicker != null)
+                        {
+                            dataGridView.Controls.Remove(_dateTimePicker);
+
+                            _dateTimePicker = null;
+                        }
+                    }
+                };
+
+                // Add the DateTimePicker control to the DataGridView
+                dataGridView.Controls.Add(_dateTimePicker);
+
+                // Bring the DateTimePicker into focus and make sure it's visible
+                _dateTimePicker.BringToFront();
+                _dateTimePicker.Focus();
+            }
+            else
+            {
+                // Remove the DateTimePicker if clicking outside the PurchaseDate column
+                if (_dateTimePicker != null)
+                {
+                    dataGridView.Controls.Remove(_dateTimePicker);
+
+                    _dateTimePicker = null;
+                }
+            }
         }
 
 

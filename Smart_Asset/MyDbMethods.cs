@@ -538,6 +538,55 @@ namespace Smart_Asset
             dataGridViewName.CellClick += DataGridView_CellClick;
         }
 
+        // FOR UPDATING USING SERIALNO
+        public static void UpdateUsingSerialNo(string dbName, DataGridView dataGridViewName, string serialNo)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            var allDocuments = new List<Read_Model>();
+
+            var collectionNames = database.ListCollectionNames().ToList();
+
+            foreach (var collectionName in collectionNames)
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                var documents = collection.Find(filter).ToList();
+
+                var cpuList = documents.Select(doc => new Read_Model
+                {
+                    Id = doc["_id"].ToString(),
+                    Type = doc["Type"].AsString,
+                    Model = doc["Model"].AsString,
+                    SerialNo = doc["SerialNo"].AsString,
+                    Cost = doc["Cost"].AsString,
+                    Supplier = doc["Supplier"].AsString,
+                    Warranty = doc["Warranty"].AsString,
+                    WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+                    PurchaseDate = doc["PurchaseDate"].AsString,
+                    Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+                    Location = collectionName // Store the collection name
+                }).ToList();
+
+                allDocuments.AddRange(cpuList);
+            }
+
+            if (allDocuments.Count == 0)
+            {
+                MessageBox.Show($"No records found with SerialNo: {serialNo}", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            dataGridViewName.DataSource = allDocuments;
+            LockColumns(dataGridViewName);
+            dataGridViewName.CellMouseEnter += DataGridView_CellMouseEnter;
+            dataGridViewName.CellMouseLeave += DataGridView_CellMouseLeave;
+            dataGridViewName.CellClick += DataGridView_CellClick;
+        }
+
         private static DateTimePicker _dateTimePicker;
 
         private static void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -581,69 +630,7 @@ namespace Smart_Asset
         }
 
 
-        public static void UpdateUsingSerialNo(string dbName, DataGridView dataGridViewName, string serialNo)
-        {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-
-            var allDocuments = new List<Read_Model>();
-
-            // Retrieve all collections
-            var collectionNames = database.ListCollectionNames().ToList();
-
-            foreach (var collectionName in collectionNames)
-            {
-                var collection = database.GetCollection<BsonDocument>(collectionName);
-
-                // Filter documents by SerialNo
-                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
-                var documents = collection.Find(filter).ToList();
-
-                // Map BsonDocument results to Read_Model objects
-                var cpuList = documents.Select(doc => new Read_Model
-                {
-                    Id = doc["_id"].ToString(),
-                    Type = doc["Type"].AsString,
-                    Model = doc["Model"].AsString,
-                    SerialNo = doc["SerialNo"].AsString,
-                    Cost = doc["Cost"].AsString,
-                    Supplier = doc["Supplier"].AsString,
-                    Warranty = doc["Warranty"].AsString,
-
-                    // Calculate warranty status if still valid
-                    WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
-
-                    PurchaseDate = doc["PurchaseDate"].AsString,
-
-                    // Calculate usage as years, months, and days
-                    Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
-
-                    // Set the collection name
-                    Location = collectionName
-                }).ToList();
-
-                allDocuments.AddRange(cpuList);
-            }
-
-            if (allDocuments.Count == 0)
-            {
-                // Display "not found" message
-                MessageBox.Show($"No records found with SerialNo: {serialNo}", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Optionally, clear the DataGridView or set it to an empty state
-                dataGridViewName.DataSource = null;
-                return;
-            }
-
-            // Bind the list to the DataGridView
-            dataGridViewName.DataSource = allDocuments;
-
-            // Lock specified columns and set cell styles
-            LockColumns(dataGridViewName);
-
-            // Subscribe to events for cursor changes
-            dataGridViewName.CellMouseEnter += DataGridView_CellMouseEnter;
-            dataGridViewName.CellMouseLeave += DataGridView_CellMouseLeave;
-        }
+        
 
         private static void LockColumns(DataGridView dataGridView)
         {
@@ -689,23 +676,20 @@ namespace Smart_Asset
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collectionName);
 
             LockColumns(dataGridView);
 
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
-                // Check if the row is not new and has data
                 if (row.IsNewRow) continue;
 
-                // Get the Id value from the DataGridView row (ensure your ID column is correctly named)
                 var id = row.Cells["Id"].Value?.ToString();
                 if (string.IsNullOrEmpty(id)) continue;
 
-                // Create a filter to find the document by Id
-                var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+                var docCollectionName = row.Cells["Location"].Value?.ToString(); // Get the original collection name
+                var collection = database.GetCollection<BsonDocument>(docCollectionName); // Use the correct collection
 
-                // Create an update definition with only the modified fields
+                var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
                 var update = Builders<BsonDocument>.Update
                     .Set("Type", row.Cells["Type"].Value?.ToString())
                     .Set("Model", row.Cells["Model"].Value?.ToString())
@@ -715,7 +699,6 @@ namespace Smart_Asset
                     .Set("Warranty", row.Cells["Warranty"].Value?.ToString())
                     .Set("PurchaseDate", row.Cells["PurchaseDate"].Value?.ToString());
 
-                // Update the document in MongoDB
                 collection.UpdateOne(filter, update);
             }
 

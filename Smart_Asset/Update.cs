@@ -52,5 +52,10 @@ namespace Smart_Asset
         {
             MyDbMethods.UpdateUsingSerialNo("SmartAssetDb", dataGridView1, $"{serialNo_Cmb.Text}");
         }
+
+        private void serialNo_Cmb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
     }
 }

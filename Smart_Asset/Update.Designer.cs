@@ -94,6 +94,7 @@
             serialNo_Cmb.Size = new Size(431, 23);
             serialNo_Cmb.TabIndex = 5;
             serialNo_Cmb.DropDown += serialNo_Cmb_MouseEnter;
+            serialNo_Cmb.KeyPress += serialNo_Cmb_KeyPress;
             serialNo_Cmb.MouseEnter += serialNo_Cmb_MouseEnter;
             // 
             // label3

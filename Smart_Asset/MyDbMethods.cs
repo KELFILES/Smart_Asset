@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Smart_Asset.Read;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace Smart_Asset
@@ -427,7 +428,9 @@ namespace Smart_Asset
             dataGridViewName.DataSource = allDocuments;
         }
 
-        public static void SwapDocumentsBySerialNo(string dbName, string collection1Name, string collection2Name, string serialNo1, string serialNo2)
+
+
+        public static void SwapDocumentsByType(string dbName, string collection1Name, string collection2Name, string typeValue)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
@@ -436,58 +439,77 @@ namespace Smart_Asset
             var collection1 = database.GetCollection<BsonDocument>(collection1Name);
             var collection2 = database.GetCollection<BsonDocument>(collection2Name);
 
-            // Define the filters for SerialNo1 in collection1 and SerialNo2 in collection2
-            var filter1 = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo1);
-            var filter2 = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo2);
+            // Trim the typeValue and define the filters for Type in both collections
+            typeValue = typeValue.Trim();
 
-            // Find the documents in their respective collections
+            var filter1 = Builders<BsonDocument>.Filter.Eq("Type", typeValue);
+            var filter2 = Builders<BsonDocument>.Filter.Eq("Type", typeValue);
+
+            // Find the first documents with the matching Type in their respective collections
             var document1 = collection1.Find(filter1).FirstOrDefault();
             var document2 = collection2.Find(filter2).FirstOrDefault();
+
+            // Log the results for debugging
+            Console.WriteLine($"Type Value: '{typeValue}'");
+            Console.WriteLine($"Collection1 Document Found: {document1 != null}");
+            Console.WriteLine($"Collection2 Document Found: {document2 != null}");
+
+            // Print document details for further debugging
+            if (document1 != null)
+            {
+                Console.WriteLine("Document1 Details: ");
+                Console.WriteLine(document1.ToString());
+            }
+            else
+            {
+                Console.WriteLine("No document found in Collection1 with Type: " + typeValue);
+            }
+
+            if (document2 != null)
+            {
+                Console.WriteLine("Document2 Details: ");
+                Console.WriteLine(document2.ToString());
+            }
+            else
+            {
+                Console.WriteLine("No document found in Collection2 with Type: " + typeValue);
+            }
 
             // Check if both documents were found
             if (document1 == null || document2 == null)
             {
-                MessageBox.Show("One or both documents not found with the specified SerialNo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("One or both documents not found with the specified Type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Ensure the "Type" field values match between the two documents
-            var type1 = document1["Type"].AsString;
-            var type2 = document2["Type"].AsString;
+            // Retrieve SerialNo from both documents
+            var serialNo1 = document1["SerialNo"].AsString;
+            var serialNo2 = document2["SerialNo"].AsString;
 
-            if (type1 != type2)
-            {
-                MessageBox.Show("The 'Type' value in both documents must be the same to perform a swap.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            // Remove _id field from both documents to avoid conflicts when inserting
+            document1.Remove("_id");
+            document2.Remove("_id");
 
             // Swap documents between collections
             collection2.InsertOne(document1);
             collection1.InsertOne(document2);
 
             // Delete the original documents
-            collection1.DeleteOne(filter1);
-            collection2.DeleteOne(filter2);
+            collection1.DeleteOne(Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo1));
+            collection2.DeleteOne(Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo2));
 
             MessageBox.Show("Documents swapped successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
 
-        //FOR UPDATING USING LOCATION
+        // FOR UPDATING USING LOCATION
         public static void UpdateUsingLocation(string dbName, DataGridView dataGridViewName, string collectionName)
         {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collectionName);
+            var database = new MongoClient(DefaultConnectionString).GetDatabase(dbName);
+            var documents = database.GetCollection<BsonDocument>(collectionName).Find(new BsonDocument()).ToList();
 
-            // Retrieve all documents from the collection
-            var documents = collection.Find(new BsonDocument()).ToList();
-
-            var allDocuments = new List<Read_Model>();
-
-            // Map BsonDocument results to Read_Model objects
-            var cpuList = documents.Select(doc => new Read_Model
+            var allDocuments = documents.Select(doc => new Read_Model
             {
                 Id = doc["_id"].ToString(),
                 Type = doc["Type"].AsString,
@@ -496,134 +518,65 @@ namespace Smart_Asset
                 Cost = doc["Cost"].AsString,
                 Supplier = doc["Supplier"].AsString,
                 Warranty = doc["Warranty"].AsString,
-
-                // Calculate warranty status if still valid
                 WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
-
                 PurchaseDate = doc["PurchaseDate"].AsString,
-
-                // Calculate usage as years, months, and days
                 Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
-
-                // Set the collection name
                 Location = collectionName
             }).ToList();
 
-            allDocuments.AddRange(cpuList);
-
-            if (allDocuments.Count == 0)
+            if (!allDocuments.Any())
             {
-                // Display "not found" message
                 MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Optionally, clear the DataGridView or set it to an empty state
                 dataGridViewName.DataSource = null;
                 return;
             }
 
-            // Bind the list to the DataGridView
             dataGridViewName.DataSource = allDocuments;
-
-            // Lock specified columns and set cell styles
             LockColumns(dataGridViewName);
-
-            // Subscribe to events for cursor changes
             dataGridViewName.CellMouseEnter += DataGridView_CellMouseEnter;
             dataGridViewName.CellMouseLeave += DataGridView_CellMouseLeave;
-
-            // Subscribe to the CellClick event for showing DateTimePicker
             dataGridViewName.CellClick += DataGridView_CellClick;
         }
 
-        private static DateTimePicker _dateTimePicker; // Class-level variable
+        private static DateTimePicker _dateTimePicker;
 
         private static void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView dataGridView = sender as DataGridView;
-
-            // Ensure that the click is within the PurchaseDate column and a valid row
+            var dataGridView = sender as DataGridView;
             if (e.ColumnIndex == dataGridView.Columns["PurchaseDate"].Index && e.RowIndex >= 0)
             {
-                // Remove any existing DateTimePicker
-                if (_dateTimePicker != null)
-                {
-                    dataGridView.Controls.Remove(_dateTimePicker);
-                    _dateTimePicker.Dispose();
-                    _dateTimePicker = null;
-                }
+                _dateTimePicker?.Dispose();
 
-                // Create a new DateTimePicker control
                 _dateTimePicker = new DateTimePicker
                 {
                     Format = DateTimePickerFormat.Custom,
                     CustomFormat = "dddd, MMMM d, yyyy",
+                    Size = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Size,
+                    Location = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Location,
                     Visible = true
                 };
 
-                // Set the DateTimePicker's initial value to the current cell value
                 if (dataGridView.CurrentCell.Value != null)
-                {
                     _dateTimePicker.Value = DateTime.Parse(dataGridView.CurrentCell.Value.ToString());
-                }
 
-                // Set the size and location of the DateTimePicker to fit the cell
-                Rectangle cellRectangle = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-                _dateTimePicker.Size = new Size(cellRectangle.Width, cellRectangle.Height);
-                _dateTimePicker.Location = new Point(cellRectangle.X, cellRectangle.Y);
-
-                // Handle the event when the user changes the value
                 _dateTimePicker.CloseUp += (s, ev) =>
                 {
                     dataGridView.CurrentCell.Value = _dateTimePicker.Value.ToString("dddd, MMMM d, yyyy");
-                    dataGridView.RefreshEdit();  // This forces the DataGridView to refresh the cell content
-                    dataGridView.NotifyCurrentCellDirty(true);  // Notify that the current cell has been modified
-
-                    if (_dateTimePicker != null)
-                    {
-                        dataGridView.Controls.Remove(_dateTimePicker);
-
-                        _dateTimePicker = null;
-                    }
+                    dataGridView.RefreshEdit();
+                    dataGridView.NotifyCurrentCellDirty(true);
+                    _dateTimePicker.Dispose();
                 };
 
-                _dateTimePicker.LostFocus += (s, ev) =>
-                {
-                    if (_dateTimePicker != null)
-                    {
-                        dataGridView.Controls.Remove(_dateTimePicker);
+                _dateTimePicker.LostFocus += (s, ev) => _dateTimePicker?.Dispose();
+                _dateTimePicker.KeyPress += (s, ev) => { if (ev.KeyChar == (char)Keys.Escape) _dateTimePicker?.Dispose(); };
 
-                        _dateTimePicker = null;
-                    }
-                };
-
-                _dateTimePicker.KeyPress += (s, ev) =>
-                {
-                    if (ev.KeyChar == (char)Keys.Escape)
-                    {
-                        if (_dateTimePicker != null)
-                        {
-                            dataGridView.Controls.Remove(_dateTimePicker);
-
-                            _dateTimePicker = null;
-                        }
-                    }
-                };
-
-                // Add the DateTimePicker control to the DataGridView
                 dataGridView.Controls.Add(_dateTimePicker);
-
-                // Bring the DateTimePicker into focus and make sure it's visible
                 _dateTimePicker.BringToFront();
                 _dateTimePicker.Focus();
             }
             else
             {
-                // Remove the DateTimePicker if clicking outside the PurchaseDate column
-                if (_dateTimePicker != null)
-                {
-                    dataGridView.Controls.Remove(_dateTimePicker);
-
-                    _dateTimePicker = null;
-                }
+                _dateTimePicker?.Dispose();
             }
         }
 

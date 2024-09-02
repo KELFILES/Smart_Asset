@@ -51,19 +51,6 @@ namespace Smart_Asset
             public string Location { get; set; }  // New property
         }
 
-        public class Read_ReservedHardwares
-        {
-            public string Id { get; set; }
-            public string Type { get; set; }
-            public string Model { get; set; }
-            public string SerialNo { get; set; }
-            public string Cost { get; set; }
-            public string Supplier { get; set; }
-            public string Warranty { get; set; }
-            public string WarrantyStatus { get; set; }
-            public string PurchaseDate { get; set; }
-            public string Location { get; set; }  // New property
-        }
 
 
         private void show1_Btn_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace Smart_Asset
 {
-    partial class Delete
+    partial class Remove
     {
         /// <summary>
         /// Required designer variable.
@@ -38,18 +38,15 @@
             textBox6 = new TextBox();
             label8 = new Label();
             panel2 = new Panel();
+            location_Cmb = new ComboBox();
+            unit_Cmb = new ComboBox();
             checkBox4 = new CheckBox();
-            checkBox3 = new CheckBox();
             checkBox2 = new CheckBox();
             checkBox1 = new CheckBox();
             button1 = new Button();
             label6 = new Label();
             richTextBox1 = new RichTextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
             label4 = new Label();
-            label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             panel1.SuspendLayout();
@@ -79,16 +76,17 @@
             panel3.Controls.Add(label5);
             panel3.Controls.Add(textBox6);
             panel3.Controls.Add(label8);
-            panel3.Location = new Point(12, 465);
+            panel3.Location = new Point(12, 12);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1101, 323);
+            panel3.Size = new Size(1101, 360);
             panel3.TabIndex = 7;
             // 
             // checkBox5
             // 
+            checkBox5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             checkBox5.AutoSize = true;
             checkBox5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox5.Location = new Point(253, 262);
+            checkBox5.Location = new Point(253, 299);
             checkBox5.Name = "checkBox5";
             checkBox5.Size = new Size(135, 25);
             checkBox5.TabIndex = 14;
@@ -112,14 +110,14 @@
             richTextBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             richTextBox2.Location = new Point(253, 121);
             richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(626, 135);
+            richTextBox2.Size = new Size(626, 172);
             richTextBox2.TabIndex = 11;
             richTextBox2.Text = "";
             // 
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom;
-            button2.Location = new Point(521, 290);
+            button2.Location = new Point(521, 327);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 10;
@@ -133,9 +131,9 @@
             label5.Font = new Font("Segoe UI", 14F);
             label5.Location = new Point(461, 18);
             label5.Name = "label5";
-            label5.Size = new Size(219, 25);
+            label5.Size = new Size(215, 25);
             label5.TabIndex = 7;
-            label5.Text = "Remove using Serial No.:";
+            label5.Text = "Remove using Serial No:";
             // 
             // textBox6
             // 
@@ -158,47 +156,61 @@
             // 
             // panel2
             // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.DarkGray;
+            panel2.Controls.Add(location_Cmb);
+            panel2.Controls.Add(unit_Cmb);
             panel2.Controls.Add(checkBox4);
-            panel2.Controls.Add(checkBox3);
             panel2.Controls.Add(checkBox2);
             panel2.Controls.Add(checkBox1);
             panel2.Controls.Add(button1);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(richTextBox1);
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(textBox1);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(12, 12);
+            panel2.Location = new Point(12, 378);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1101, 447);
+            panel2.Size = new Size(1101, 410);
             panel2.TabIndex = 0;
+            // 
+            // location_Cmb
+            // 
+            location_Cmb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            location_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            location_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            location_Cmb.FormattingEnabled = true;
+            location_Cmb.Location = new Point(253, 63);
+            location_Cmb.Name = "location_Cmb";
+            location_Cmb.Size = new Size(605, 23);
+            location_Cmb.TabIndex = 18;
+            location_Cmb.DropDown += location_Cmb_DropDown;
+            // 
+            // unit_Cmb
+            // 
+            unit_Cmb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            unit_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            unit_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            unit_Cmb.FormattingEnabled = true;
+            unit_Cmb.Location = new Point(253, 92);
+            unit_Cmb.Name = "unit_Cmb";
+            unit_Cmb.Size = new Size(605, 23);
+            unit_Cmb.TabIndex = 19;
+            unit_Cmb.DropDown += unit_Cmb_DropDown;
             // 
             // checkBox4
             // 
+            checkBox4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             checkBox4.AutoSize = true;
             checkBox4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox4.Location = new Point(253, 384);
+            checkBox4.Location = new Point(253, 320);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(135, 25);
             checkBox4.TabIndex = 13;
             checkBox4.Text = "FOR DISPOSAL";
             checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            checkBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(863, 128);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(15, 14);
-            checkBox3.TabIndex = 12;
-            checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBox2
             // 
@@ -223,7 +235,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom;
-            button1.Location = new Point(521, 412);
+            button1.Location = new Point(520, 348);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 9;
@@ -236,7 +248,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F);
             label6.ForeColor = Color.Red;
-            label6.Location = new Point(253, 154);
+            label6.Location = new Point(252, 127);
             label6.Name = "label6";
             label6.Size = new Size(125, 20);
             label6.TabIndex = 8;
@@ -245,35 +257,11 @@
             // richTextBox1
             // 
             richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox1.Location = new Point(253, 175);
+            richTextBox1.Location = new Point(252, 148);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(626, 203);
+            richTextBox1.Size = new Size(626, 166);
             richTextBox1.TabIndex = 7;
             richTextBox1.Text = "";
-            // 
-            // textBox3
-            // 
-            textBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox3.Location = new Point(253, 121);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(604, 23);
-            textBox3.TabIndex = 6;
-            // 
-            // textBox2
-            // 
-            textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.Location = new Point(253, 92);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(604, 23);
-            textBox2.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(253, 63);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(604, 23);
-            textBox1.TabIndex = 4;
             // 
             // label4
             // 
@@ -286,17 +274,6 @@
             label4.Size = new Size(334, 20);
             label4.TabIndex = 3;
             label4.Text = "Reminder: Notice the checkbox before removing!";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14F);
-            label3.Location = new Point(132, 119);
-            label3.Name = "label3";
-            label3.Size = new Size(98, 25);
-            label3.TabIndex = 2;
-            label3.Text = "Hardware:";
             // 
             // label2
             // 
@@ -320,14 +297,14 @@
             label1.TabIndex = 0;
             label1.Text = "Location:";
             // 
-            // Delete
+            // Remove
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1125, 800);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Delete";
+            Name = "Remove";
             Text = "Delete";
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -340,28 +317,28 @@
         #endregion
 
         private Panel panel1;
-        private Panel panel3;
-        private TextBox textBox6;
-        private Label label8;
         private Panel panel2;
         private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
         private Label label4;
         private Label label3;
         private Label label2;
         private Label label1;
-        private Label label5;
         private RichTextBox richTextBox1;
         private Label label6;
-        private Button button2;
         private Button button1;
-        private RichTextBox richTextBox2;
-        private Label label7;
         private CheckBox checkBox1;
         private CheckBox checkBox3;
         private CheckBox checkBox2;
-        private CheckBox checkBox5;
         private CheckBox checkBox4;
+        private ComboBox location_Cmb;
+        private ComboBox unit_Cmb;
+        private Panel panel3;
+        private CheckBox checkBox5;
+        private Label label7;
+        private RichTextBox richTextBox2;
+        private Button button2;
+        private Label label5;
+        private TextBox textBox6;
+        private Label label8;
     }
 }

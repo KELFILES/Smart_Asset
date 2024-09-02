@@ -29,7 +29,7 @@ namespace Smart_Asset
         Create cr = new Create();
         Read rd = new Read();
         Update ud = new Update();
-        Delete del = new Delete();
+        Remove del = new Remove();
         Dashboard db = new Dashboard();
         Deployment dp = new Deployment();
         Swap sw = new Swap();

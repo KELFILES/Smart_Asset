@@ -19,11 +19,11 @@ namespace Smart_Asset
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MyDbMethods.SwapDocumentsBySerialNo("SmartAssetDb", 
+            MyDbMethods.SwapDocumentsByType("SmartAssetDb", 
                 $"{location_Cmb.Text}_{unit_Cmb.Text}",
                 $"{location2_Cmb.Text}_{unit2_Cmb.Text}",
-                $"{serialNo1.Text}", 
-                $"{serialNo2.Text}");
+                type_Cmb.Text
+                );
         }
 
         private async void location_Cmb_DropDown(object sender, EventArgs e)
@@ -51,6 +51,18 @@ namespace Smart_Asset
         {
             Cursor = Cursors.WaitCursor;
             await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unit2_Cmb);
+            Cursor = Cursors.Arrow;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void type_Cmb_DropDown(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Type_List", type_Cmb);
             Cursor = Cursors.Arrow;
         }
     }

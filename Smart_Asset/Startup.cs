@@ -1,3 +1,6 @@
+using System.Reflection.Emit;
+using System.Windows.Forms;
+
 namespace Smart_Asset
 {
     public partial class Startup : Form
@@ -14,7 +17,20 @@ namespace Smart_Asset
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         }
 
-        private void start_Btn_Click(object sender, EventArgs e)
+
+        private void Startup_Shown(object sender, EventArgs e)
+        {
+            // Construct the relative path to the image
+            string imagePath = System.IO.Path.Combine(Application.StartupPath, "Images", "startup_Image.jpg");
+
+            // Load the image from the relative path
+            panel1.BackgroundImage = Image.FromFile(imagePath);
+
+            // Set the layout of the background image
+            panel1.BackgroundImageLayout = ImageLayout.Stretch; // Or use Tile, Center, Zoom, None
+        }
+
+        private void start_Btn_Click_1(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -22,5 +38,8 @@ namespace Smart_Asset
             lg.StartPosition = FormStartPosition.CenterScreen;
             lg.Show();
         }
+
+
+
     }
 }

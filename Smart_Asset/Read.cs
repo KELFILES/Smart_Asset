@@ -48,7 +48,7 @@ namespace Smart_Asset
             public string WarrantyStatus { get; set; }
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
-            public string Location { get; set; }  // New property
+            public string Location { get; set; }
         }
 
 
@@ -56,16 +56,19 @@ namespace Smart_Asset
         private void show1_Btn_Click(object sender, EventArgs e)
         {
             MyDbMethods.Read_SerialNo("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
+            _lastRefreshAction = () => MyDbMethods.Read_SerialNo("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
         }
 
         public async void reservedHardwares_Btn_Click(object sender, EventArgs e)
         {
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
         }
 
         private async void location_Cmb_DropDown(object sender, EventArgs e)
@@ -91,6 +94,32 @@ namespace Smart_Asset
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
+
+
+
+
+
+        private Action _lastRefreshAction;
+
+        // Override ProcessCmdKey to handle Ctrl+R key press
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Check if the Ctrl + R key combination is pressed
+            if (keyData == (Keys.Control | Keys.R))
+            {
+                _lastRefreshAction?.Invoke(); // Invoke the last refresh action
+                MessageBox.Show("DATA HAS BEEN REFRESHED");
+                return true; // Indicate that the key press was handled
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+
+
+
+
 
     }
 }

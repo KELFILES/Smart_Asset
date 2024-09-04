@@ -772,12 +772,130 @@ namespace Smart_Asset
 
 
 
+        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNo, string notes)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+
+            BsonDocument document = null;
+            string sourceCollectionName = null;
+
+            using (var cursor = await database.ListCollectionNamesAsync())
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    foreach (var collectionName in cursor.Current)
+                    {
+                        if (!excludeCollections.Contains(collectionName))
+                        {
+                            var collection = database.GetCollection<BsonDocument>(collectionName);
+                            var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
+                            document = await collection.Find(filter).FirstOrDefaultAsync();
+
+                            if (document != null)
+                            {
+                                sourceCollectionName = collectionName;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (document != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (document != null && sourceCollectionName != null)
+            {
+                try
+                {
+                    // Step 2: Conditionally add the "OldLocation" field to the document
+                    var exemptLocations = new[] { "Repairing", "Cleaning", "Disposal", "BorrowedItems", "Delete" };
+
+                    if (!exemptLocations.Contains(sourceCollectionName))
+                    {
+                        document["OldLocation"] = sourceCollectionName;
+                    }
+
+                    // Add the "Notes" field to the document
+                    document["notes"] = notes;
+
+                    // Step 3: Insert the document into the transfer collection
+                    var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+                    await transferCollection.InsertOneAsync(document);
+
+                    // Step 4: Delete the document from the source collection
+                    var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+                    var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                    await sourceCollection.DeleteOneAsync(filter);
+
+                    MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
 
 
 
+        public static async Task TransferDocumentsByCollectionName(string dbName, string sourceCollectionName, string transferColl, string notes)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
 
+            if (excludeCollections.Contains(sourceCollectionName))
+            {
+                MessageBox.Show($"The collection '{sourceCollectionName}' is excluded from transfers.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+            var documents = await sourceCollection.Find(new BsonDocument()).ToListAsync();
+
+            if (documents == null || !documents.Any())
+            {
+                MessageBox.Show($"No documents found in the collection '{sourceCollectionName}'.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+
+                foreach (var document in documents)
+                {
+                    // Add the "OldLocation" field to the document
+                    document["OldLocation"] = sourceCollectionName;
+
+                    // Add the "Notes" field to the document
+                    document["notes"] = notes;
+
+                    // Insert the document into the transfer collection
+                    await transferCollection.InsertOneAsync(document);
+                }
+
+                // After transferring all documents, delete them from the source collection
+                await sourceCollection.DeleteManyAsync(new BsonDocument());
+
+                MessageBox.Show($"All documents from '{sourceCollectionName}' successfully transferred to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
 

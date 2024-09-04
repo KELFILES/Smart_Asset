@@ -28,63 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panel1 = new Panel();
+            title_Lbl = new Label();
             start_Btn = new Button();
-            label1 = new Label();
-            label2 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(title_Lbl);
+            panel1.Controls.Add(start_Btn);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1109, 681);
+            panel1.TabIndex = 0;
+            // 
+            // title_Lbl
+            // 
+            title_Lbl.Anchor = AnchorStyles.None;
+            title_Lbl.AutoSize = true;
+            title_Lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            title_Lbl.Location = new Point(189, 120);
+            title_Lbl.Name = "title_Lbl";
+            title_Lbl.Size = new Size(730, 45);
+            title_Lbl.TabIndex = 4;
+            title_Lbl.Text = "SMART ASSET MANAGEMENT - STI MUNOZ EDSA";
             // 
             // start_Btn
             // 
             start_Btn.Anchor = AnchorStyles.None;
             start_Btn.Cursor = Cursors.Hand;
-            start_Btn.Location = new Point(477, 564);
+            start_Btn.Location = new Point(461, 515);
             start_Btn.Name = "start_Btn";
             start_Btn.Size = new Size(135, 46);
-            start_Btn.TabIndex = 0;
+            start_Btn.TabIndex = 3;
             start_Btn.Text = "START";
             start_Btn.UseVisualStyleBackColor = true;
-            start_Btn.Click += start_Btn_Click;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.None;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(205, 169);
-            label1.Name = "label1";
-            label1.Size = new Size(730, 45);
-            label1.TabIndex = 1;
-            label1.Text = "SMART ASSET MANAGEMENT - STI MUNOZ EDSA";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(430, 348);
-            label2.Name = "label2";
-            label2.Size = new Size(220, 15);
-            label2.TabIndex = 2;
-            label2.Text = "ADD BACKGROUND PHOTO OF STI HERE";
+            start_Btn.Click += start_Btn_Click_1;
             // 
             // Startup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1109, 681);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(start_Btn);
+            Controls.Add(panel1);
             Name = "Startup";
             StartPosition = FormStartPosition.CenterScreen;
             TopMost = true;
             Load += Form1_Load;
+            Shown += Startup_Shown;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
+        private Panel panel1;
+        private Label title_Lbl;
         private Button start_Btn;
-        private Label label1;
-        private Label label2;
     }
 }

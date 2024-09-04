@@ -39,7 +39,7 @@
             button4 = new Button();
             Deployment_Btn = new Button();
             label1 = new Label();
-            button1 = new Button();
+            repairing_Btn = new Button();
             archive_Btn = new Button();
             toolStrip1 = new ToolStrip();
             toolStripLabel1 = new ToolStripDropDownButton();
@@ -51,6 +51,7 @@
             mainPanel = new Panel();
             panel1 = new Panel();
             header_Lbl = new Label();
+            manageRoles_Btn = new Button();
             sidePanel.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             sidePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             sidePanel.BackColor = SystemColors.ActiveCaptionText;
+            sidePanel.Controls.Add(manageRoles_Btn);
             sidePanel.Controls.Add(button3);
             sidePanel.Controls.Add(button2);
             sidePanel.Controls.Add(swap_Btn);
@@ -80,7 +82,7 @@
             sidePanel.Controls.Add(button4);
             sidePanel.Controls.Add(Deployment_Btn);
             sidePanel.Controls.Add(label1);
-            sidePanel.Controls.Add(button1);
+            sidePanel.Controls.Add(repairing_Btn);
             sidePanel.Controls.Add(archive_Btn);
             sidePanel.Controls.Add(toolStrip1);
             sidePanel.Controls.Add(dashboard_Btn);
@@ -174,15 +176,16 @@
             label1.TabIndex = 6;
             label1.Text = "Logout";
             // 
-            // button1
+            // repairing_Btn
             // 
-            button1.Font = new Font("Microsoft Sans Serif", 12.75F);
-            button1.Location = new Point(22, 215);
-            button1.Name = "button1";
-            button1.Size = new Size(109, 33);
-            button1.TabIndex = 5;
-            button1.Text = "REPAIRING";
-            button1.UseVisualStyleBackColor = true;
+            repairing_Btn.Font = new Font("Microsoft Sans Serif", 12.75F);
+            repairing_Btn.Location = new Point(22, 215);
+            repairing_Btn.Name = "repairing_Btn";
+            repairing_Btn.Size = new Size(109, 33);
+            repairing_Btn.TabIndex = 5;
+            repairing_Btn.Text = "REPAIRING";
+            repairing_Btn.UseVisualStyleBackColor = true;
+            repairing_Btn.Click += repairing_Btn_Click;
             // 
             // archive_Btn
             // 
@@ -219,29 +222,29 @@
             // cREATEToolStripMenuItem
             // 
             cREATEToolStripMenuItem.Name = "cREATEToolStripMenuItem";
-            cREATEToolStripMenuItem.Size = new Size(150, 24);
+            cREATEToolStripMenuItem.Size = new Size(167, 24);
             cREATEToolStripMenuItem.Text = "CREATE";
             cREATEToolStripMenuItem.Click += cREATEToolStripMenuItem_Click;
             // 
             // rEADToolStripMenuItem
             // 
             rEADToolStripMenuItem.Name = "rEADToolStripMenuItem";
-            rEADToolStripMenuItem.Size = new Size(150, 24);
+            rEADToolStripMenuItem.Size = new Size(167, 24);
             rEADToolStripMenuItem.Text = "READ";
             rEADToolStripMenuItem.Click += rEADToolStripMenuItem_Click;
             // 
             // uPDATEToolStripMenuItem
             // 
             uPDATEToolStripMenuItem.Name = "uPDATEToolStripMenuItem";
-            uPDATEToolStripMenuItem.Size = new Size(150, 24);
+            uPDATEToolStripMenuItem.Size = new Size(167, 24);
             uPDATEToolStripMenuItem.Text = "UPDATE";
             uPDATEToolStripMenuItem.Click += uPDATEToolStripMenuItem_Click;
             // 
             // rEMOVEToolStripMenuItem
             // 
             rEMOVEToolStripMenuItem.Name = "rEMOVEToolStripMenuItem";
-            rEMOVEToolStripMenuItem.Size = new Size(150, 24);
-            rEMOVEToolStripMenuItem.Text = "REMOVE";
+            rEMOVEToolStripMenuItem.Size = new Size(167, 24);
+            rEMOVEToolStripMenuItem.Text = "TRANSFER";
             rEMOVEToolStripMenuItem.Click += rEMOVEToolStripMenuItem_Click;
             // 
             // panel2
@@ -285,6 +288,17 @@
             header_Lbl.TabIndex = 0;
             header_Lbl.Text = "Header";
             // 
+            // manageRoles_Btn
+            // 
+            manageRoles_Btn.Anchor = AnchorStyles.Bottom;
+            manageRoles_Btn.Font = new Font("Microsoft Sans Serif", 12.75F);
+            manageRoles_Btn.Location = new Point(24, 642);
+            manageRoles_Btn.Name = "manageRoles_Btn";
+            manageRoles_Btn.Size = new Size(161, 33);
+            manageRoles_Btn.TabIndex = 15;
+            manageRoles_Btn.Text = "MANAGE ROLES";
+            manageRoles_Btn.UseVisualStyleBackColor = true;
+            // 
             // FrontPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -324,7 +338,7 @@
         private Panel panel2;
         private Panel mainPanel;
         private Panel panel1;
-        private Button button1;
+        private Button repairing_Btn;
         private Label label1;
         private Label header_Lbl;
         private Button Deployment_Btn;
@@ -334,5 +348,6 @@
         private Button swap_Btn;
         private Button button2;
         private Button button3;
+        private Button manageRoles_Btn;
     }
 }

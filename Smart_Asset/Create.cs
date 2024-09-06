@@ -110,7 +110,6 @@ namespace Smart_Asset
                 }
                 else
                 {
-                    model_Tb.Text = string.Empty;
                     serial_Tb.Text = string.Empty;
                 }
 

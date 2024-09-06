@@ -60,7 +60,7 @@
             manageUsers_Lbl.AutoSize = true;
             manageUsers_Lbl.Cursor = Cursors.Hand;
             manageUsers_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
-            manageUsers_Lbl.Location = new Point(491, 602);
+            manageUsers_Lbl.Location = new Point(528, 604);
             manageUsers_Lbl.Name = "manageUsers_Lbl";
             manageUsers_Lbl.Size = new Size(81, 15);
             manageUsers_Lbl.TabIndex = 13;
@@ -70,7 +70,7 @@
             // 
             submit_Btn.Anchor = AnchorStyles.None;
             submit_Btn.Cursor = Cursors.Hand;
-            submit_Btn.Location = new Point(497, 527);
+            submit_Btn.Location = new Point(534, 529);
             submit_Btn.Name = "submit_Btn";
             submit_Btn.Size = new Size(75, 23);
             submit_Btn.TabIndex = 12;
@@ -84,7 +84,7 @@
             forgotPassword_Lbl.AutoSize = true;
             forgotPassword_Lbl.Cursor = Cursors.Hand;
             forgotPassword_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
-            forgotPassword_Lbl.Location = new Point(481, 575);
+            forgotPassword_Lbl.Location = new Point(518, 577);
             forgotPassword_Lbl.Name = "forgotPassword_Lbl";
             forgotPassword_Lbl.Size = new Size(101, 15);
             forgotPassword_Lbl.TabIndex = 11;
@@ -94,25 +94,25 @@
             // 
             password_Tb.Anchor = AnchorStyles.None;
             password_Tb.Cursor = Cursors.IBeam;
-            password_Tb.Location = new Point(514, 488);
+            password_Tb.Location = new Point(464, 489);
             password_Tb.Name = "password_Tb";
-            password_Tb.Size = new Size(100, 23);
+            password_Tb.Size = new Size(224, 23);
             password_Tb.TabIndex = 10;
             // 
             // username_Tb
             // 
             username_Tb.Anchor = AnchorStyles.None;
             username_Tb.Cursor = Cursors.IBeam;
-            username_Tb.Location = new Point(514, 452);
+            username_Tb.Location = new Point(464, 453);
             username_Tb.Name = "username_Tb";
-            username_Tb.Size = new Size(100, 23);
+            username_Tb.Size = new Size(224, 23);
             username_Tb.TabIndex = 9;
             // 
             // password_Lbl
             // 
             password_Lbl.Anchor = AnchorStyles.None;
             password_Lbl.AutoSize = true;
-            password_Lbl.Location = new Point(445, 496);
+            password_Lbl.Location = new Point(395, 492);
             password_Lbl.Name = "password_Lbl";
             password_Lbl.Size = new Size(60, 15);
             password_Lbl.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             username_Lbl.Anchor = AnchorStyles.None;
             username_Lbl.AutoSize = true;
-            username_Lbl.Location = new Point(445, 460);
+            username_Lbl.Location = new Point(395, 456);
             username_Lbl.Name = "username_Lbl";
             username_Lbl.Size = new Size(63, 15);
             username_Lbl.TabIndex = 7;

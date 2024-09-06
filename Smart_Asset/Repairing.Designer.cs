@@ -111,6 +111,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1109, 761);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Repairing";
             Text = "Repairing";
             Shown += Repairing_Shown;

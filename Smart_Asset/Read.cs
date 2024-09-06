@@ -59,26 +59,21 @@ namespace Smart_Asset
             _lastRefreshAction = () => MyDbMethods.Read_SerialNo("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
         }
 
-        public async void reservedHardwares_Btn_Click(object sender, EventArgs e)
+        private void reservedHardwares_Btn_Click_1(object sender, EventArgs e)
         {
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-        }
 
-        private async void location_Cmb_DropDown(object sender, EventArgs e)
+        private async void location_Cmb_DropDown_1(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Location_List", location_Cmb);
             Cursor = Cursors.Arrow;
         }
 
-        private async void unit_Cmb_DropDown(object sender, EventArgs e)
+        private async void unit_Cmb_DropDown_1(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unit_Cmb);
@@ -115,11 +110,10 @@ namespace Smart_Asset
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
-
-
-
-
-
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+        }
     }
 }

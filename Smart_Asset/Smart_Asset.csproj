@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Images\chartExample_Image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\login_Image.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

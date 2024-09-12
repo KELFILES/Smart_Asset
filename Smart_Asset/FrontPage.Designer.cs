@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrontPage));
             dashboard_Btn = new Button();
             sidePanel = new Panel();
+            manageRoles_Btn = new Button();
             button3 = new Button();
             button2 = new Button();
             swap_Btn = new Button();
@@ -51,7 +52,6 @@
             mainPanel = new Panel();
             panel1 = new Panel();
             header_Lbl = new Label();
-            manageRoles_Btn = new Button();
             sidePanel.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -90,6 +90,17 @@
             sidePanel.Name = "sidePanel";
             sidePanel.Size = new Size(200, 760);
             sidePanel.TabIndex = 5;
+            // 
+            // manageRoles_Btn
+            // 
+            manageRoles_Btn.Anchor = AnchorStyles.Bottom;
+            manageRoles_Btn.Font = new Font("Microsoft Sans Serif", 12.75F);
+            manageRoles_Btn.Location = new Point(24, 642);
+            manageRoles_Btn.Name = "manageRoles_Btn";
+            manageRoles_Btn.Size = new Size(161, 33);
+            manageRoles_Btn.TabIndex = 15;
+            manageRoles_Btn.Text = "MANAGE ROLES";
+            manageRoles_Btn.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -204,20 +215,21 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabel1 });
             toolStrip1.Location = new Point(24, 105);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(142, 27);
+            toolStrip1.Size = new Size(225, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
+            toolStripLabel1.AutoSize = false;
             toolStripLabel1.DisplayStyle = ToolStripItemDisplayStyle.Text;
             toolStripLabel1.DropDownItems.AddRange(new ToolStripItem[] { cREATEToolStripMenuItem, rEADToolStripMenuItem, uPDATEToolStripMenuItem, rEMOVEToolStripMenuItem });
             toolStripLabel1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             toolStripLabel1.Image = (Image)resources.GetObject("toolStripLabel1.Image");
             toolStripLabel1.ImageTransparentColor = Color.Magenta;
             toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(130, 24);
-            toolStripLabel1.Text = "OPERATIONS";
+            toolStripLabel1.Size = new Size(182, 24);
+            toolStripLabel1.Text = "FILE MAINTENANCE";
             // 
             // cREATEToolStripMenuItem
             // 
@@ -287,17 +299,6 @@
             header_Lbl.Size = new Size(100, 31);
             header_Lbl.TabIndex = 0;
             header_Lbl.Text = "Header";
-            // 
-            // manageRoles_Btn
-            // 
-            manageRoles_Btn.Anchor = AnchorStyles.Bottom;
-            manageRoles_Btn.Font = new Font("Microsoft Sans Serif", 12.75F);
-            manageRoles_Btn.Location = new Point(24, 642);
-            manageRoles_Btn.Name = "manageRoles_Btn";
-            manageRoles_Btn.Size = new Size(161, 33);
-            manageRoles_Btn.TabIndex = 15;
-            manageRoles_Btn.Text = "MANAGE ROLES";
-            manageRoles_Btn.UseVisualStyleBackColor = true;
             // 
             // FrontPage
             // 

@@ -18,6 +18,15 @@ namespace Smart_Asset
             fileMaintenance_SubMenuPanel.Visible = false;
         }
 
+        private void FrontPage_Final_Load(object sender, EventArgs e)
+        {
+            // Scroll the panel to the top
+            sideMenu_Panel.AutoScrollPosition = new Point(0, 0);
+
+            // To show first the dashboard
+            dashboard_Btn.PerformClick();
+        }
+
 
         private void customizeDesign()
         {
@@ -150,6 +159,7 @@ namespace Smart_Asset
             hideSubMenu();
             Console.WriteLine("LOGOUT CLICKED");
         }
+
 
     }
 }

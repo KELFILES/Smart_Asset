@@ -47,10 +47,10 @@
             dashboard_Btn = new Button();
             logo_Panel = new Panel();
             panelLogo = new Panel();
-            button3 = new Button();
-            button2 = new Button();
+            manageRoles_Btn = new Button();
+            createReport_Btn = new Button();
             logout_Panel = new Panel();
-            button1 = new Button();
+            logout_Btn = new Button();
             panel3 = new Panel();
             header_Lbl = new Label();
             panel4 = new Panel();
@@ -109,6 +109,7 @@
             artificialIntelligence_Btn.Text = "Artificial Intelligence";
             artificialIntelligence_Btn.TextAlign = ContentAlignment.MiddleLeft;
             artificialIntelligence_Btn.UseVisualStyleBackColor = true;
+            artificialIntelligence_Btn.Click += artificialIntelligence_Btn_Click;
             // 
             // borrowedItems_Btn
             // 
@@ -124,6 +125,7 @@
             borrowedItems_Btn.Text = "Borrowed Items";
             borrowedItems_Btn.TextAlign = ContentAlignment.MiddleLeft;
             borrowedItems_Btn.UseVisualStyleBackColor = true;
+            borrowedItems_Btn.Click += borrowedItems_Btn_Click;
             // 
             // recyleBin_Btn
             // 
@@ -139,6 +141,7 @@
             recyleBin_Btn.Text = "Recycle Bin";
             recyleBin_Btn.TextAlign = ContentAlignment.MiddleLeft;
             recyleBin_Btn.UseVisualStyleBackColor = true;
+            recyleBin_Btn.Click += recyleBin_Btn_Click;
             // 
             // disposed_Btn
             // 
@@ -154,6 +157,7 @@
             disposed_Btn.Text = "Disposed";
             disposed_Btn.TextAlign = ContentAlignment.MiddleLeft;
             disposed_Btn.UseVisualStyleBackColor = true;
+            disposed_Btn.Click += disposed_Btn_Click;
             // 
             // cleaning_Btn
             // 
@@ -169,6 +173,7 @@
             cleaning_Btn.Text = "Cleaning";
             cleaning_Btn.TextAlign = ContentAlignment.MiddleLeft;
             cleaning_Btn.UseVisualStyleBackColor = true;
+            cleaning_Btn.Click += cleaning_Btn_Click;
             // 
             // repairing_Btn
             // 
@@ -184,6 +189,7 @@
             repairing_Btn.Text = "Repairing";
             repairing_Btn.TextAlign = ContentAlignment.MiddleLeft;
             repairing_Btn.UseVisualStyleBackColor = true;
+            repairing_Btn.Click += repairing_Btn_Click;
             // 
             // swap_Btn
             // 
@@ -199,6 +205,7 @@
             swap_Btn.Text = "Swap";
             swap_Btn.TextAlign = ContentAlignment.MiddleLeft;
             swap_Btn.UseVisualStyleBackColor = true;
+            swap_Btn.Click += swap_Btn_Click;
             // 
             // deployment_Btn
             // 
@@ -214,6 +221,7 @@
             deployment_Btn.Text = "Deployment";
             deployment_Btn.TextAlign = ContentAlignment.MiddleLeft;
             deployment_Btn.UseVisualStyleBackColor = true;
+            deployment_Btn.Click += deployment_Btn_Click;
             // 
             // fileMaintenance_SubMenuPanel
             // 
@@ -242,6 +250,7 @@
             transfer_Btn.Text = "Transfer";
             transfer_Btn.TextAlign = ContentAlignment.MiddleLeft;
             transfer_Btn.UseVisualStyleBackColor = true;
+            transfer_Btn.Click += transfer_Btn_Click;
             // 
             // update_Btn
             // 
@@ -257,6 +266,7 @@
             update_Btn.Text = "Update";
             update_Btn.TextAlign = ContentAlignment.MiddleLeft;
             update_Btn.UseVisualStyleBackColor = true;
+            update_Btn.Click += update_Btn_Click;
             // 
             // read_Btn
             // 
@@ -272,6 +282,7 @@
             read_Btn.Text = "Read";
             read_Btn.TextAlign = ContentAlignment.MiddleLeft;
             read_Btn.UseVisualStyleBackColor = true;
+            read_Btn.Click += read_Btn_Click;
             // 
             // create_Btn
             // 
@@ -287,6 +298,7 @@
             create_Btn.Text = "Create";
             create_Btn.TextAlign = ContentAlignment.MiddleLeft;
             create_Btn.UseVisualStyleBackColor = true;
+            create_Btn.Click += create_Btn_Click;
             // 
             // fileMaintenance_Btn
             // 
@@ -302,6 +314,7 @@
             fileMaintenance_Btn.Text = "File Maintenance";
             fileMaintenance_Btn.TextAlign = ContentAlignment.MiddleLeft;
             fileMaintenance_Btn.UseVisualStyleBackColor = true;
+            fileMaintenance_Btn.Click += fileMaintenance_Btn_Click;
             // 
             // dashboard_Btn
             // 
@@ -317,6 +330,7 @@
             dashboard_Btn.Text = "Dashboard";
             dashboard_Btn.TextAlign = ContentAlignment.MiddleLeft;
             dashboard_Btn.UseVisualStyleBackColor = true;
+            dashboard_Btn.Click += dashboard_Btn_Click;
             // 
             // logo_Panel
             // 
@@ -328,8 +342,8 @@
             // 
             // panelLogo
             // 
-            panelLogo.Controls.Add(button3);
-            panelLogo.Controls.Add(button2);
+            panelLogo.Controls.Add(manageRoles_Btn);
+            panelLogo.Controls.Add(createReport_Btn);
             panelLogo.Controls.Add(logout_Panel);
             panelLogo.Dock = DockStyle.Bottom;
             panelLogo.Location = new Point(0, 886);
@@ -337,39 +351,39 @@
             panelLogo.Size = new Size(246, 151);
             panelLogo.TabIndex = 46;
             // 
-            // button3
+            // manageRoles_Btn
             // 
-            button3.Dock = DockStyle.Bottom;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.ForeColor = Color.Gainsboro;
-            button3.Location = new Point(0, -1);
-            button3.Name = "button3";
-            button3.Padding = new Padding(10, 0, 0, 0);
-            button3.Size = new Size(246, 45);
-            button3.TabIndex = 48;
-            button3.Text = "Manage Roles";
-            button3.TextAlign = ContentAlignment.MiddleLeft;
-            button3.UseVisualStyleBackColor = true;
+            manageRoles_Btn.Dock = DockStyle.Bottom;
+            manageRoles_Btn.FlatAppearance.BorderSize = 0;
+            manageRoles_Btn.FlatStyle = FlatStyle.Flat;
+            manageRoles_Btn.ForeColor = Color.Gainsboro;
+            manageRoles_Btn.Location = new Point(0, -1);
+            manageRoles_Btn.Name = "manageRoles_Btn";
+            manageRoles_Btn.Padding = new Padding(10, 0, 0, 0);
+            manageRoles_Btn.Size = new Size(246, 45);
+            manageRoles_Btn.TabIndex = 48;
+            manageRoles_Btn.Text = "Manage Roles";
+            manageRoles_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            manageRoles_Btn.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // createReport_Btn
             // 
-            button2.Dock = DockStyle.Bottom;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.ForeColor = Color.Gainsboro;
-            button2.Location = new Point(0, 44);
-            button2.Name = "button2";
-            button2.Padding = new Padding(10, 0, 0, 0);
-            button2.Size = new Size(246, 45);
-            button2.TabIndex = 47;
-            button2.Text = "Create Report";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.UseVisualStyleBackColor = true;
+            createReport_Btn.Dock = DockStyle.Bottom;
+            createReport_Btn.FlatAppearance.BorderSize = 0;
+            createReport_Btn.FlatStyle = FlatStyle.Flat;
+            createReport_Btn.ForeColor = Color.Gainsboro;
+            createReport_Btn.Location = new Point(0, 44);
+            createReport_Btn.Name = "createReport_Btn";
+            createReport_Btn.Padding = new Padding(10, 0, 0, 0);
+            createReport_Btn.Size = new Size(246, 45);
+            createReport_Btn.TabIndex = 47;
+            createReport_Btn.Text = "Create Report";
+            createReport_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            createReport_Btn.UseVisualStyleBackColor = true;
             // 
             // logout_Panel
             // 
-            logout_Panel.Controls.Add(button1);
+            logout_Panel.Controls.Add(logout_Btn);
             logout_Panel.Dock = DockStyle.Bottom;
             logout_Panel.Location = new Point(0, 89);
             logout_Panel.Name = "logout_Panel";
@@ -377,21 +391,21 @@
             logout_Panel.Size = new Size(246, 62);
             logout_Panel.TabIndex = 46;
             // 
-            // button1
+            // logout_Btn
             // 
-            button1.AutoSize = true;
-            button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button1.Dock = DockStyle.Right;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.System;
-            button1.Font = new Font("Segoe UI", 8F);
-            button1.ForeColor = Color.Gainsboro;
-            button1.Location = new Point(98, 20);
-            button1.Name = "button1";
-            button1.Size = new Size(58, 22);
-            button1.TabIndex = 32;
-            button1.Text = "Logout";
-            button1.UseVisualStyleBackColor = true;
+            logout_Btn.AutoSize = true;
+            logout_Btn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            logout_Btn.Dock = DockStyle.Right;
+            logout_Btn.FlatAppearance.BorderSize = 0;
+            logout_Btn.FlatStyle = FlatStyle.System;
+            logout_Btn.Font = new Font("Segoe UI", 8F);
+            logout_Btn.ForeColor = Color.Gainsboro;
+            logout_Btn.Location = new Point(98, 20);
+            logout_Btn.Name = "logout_Btn";
+            logout_Btn.Size = new Size(58, 22);
+            logout_Btn.TabIndex = 32;
+            logout_Btn.Text = "Logout";
+            logout_Btn.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -455,10 +469,10 @@
         private Panel panel3;
         private Panel panel4;
         private Panel panelLogo;
-        private Button button3;
-        private Button button2;
+        private Button manageRoles_Btn;
+        private Button createReport_Btn;
         private Panel logout_Panel;
-        private Button button1;
+        private Button logout_Btn;
         private Panel logo_Panel;
         private Panel panel5;
         private Button artificialIntelligence_Btn;

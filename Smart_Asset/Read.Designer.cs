@@ -57,21 +57,21 @@
             // 
             // panel3
             // 
-            panel3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.BackColor = Color.DimGray;
             panel3.Controls.Add(exportTo_Cb);
             panel3.Controls.Add(export_Btn);
             panel3.Controls.Add(exportTo_Lbl);
-            panel3.Location = new Point(11, 684);
+            panel3.Dock = DockStyle.Bottom;
+            panel3.Location = new Point(8, 688);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1166, 104);
+            panel3.Size = new Size(1173, 104);
             panel3.TabIndex = 9;
             // 
             // exportTo_Cb
             // 
             exportTo_Cb.Anchor = AnchorStyles.Top;
             exportTo_Cb.FormattingEnabled = true;
-            exportTo_Cb.Location = new Point(543, 30);
+            exportTo_Cb.Location = new Point(546, 30);
             exportTo_Cb.Name = "exportTo_Cb";
             exportTo_Cb.Size = new Size(133, 23);
             exportTo_Cb.TabIndex = 8;
@@ -80,7 +80,7 @@
             // export_Btn
             // 
             export_Btn.Anchor = AnchorStyles.Top;
-            export_Btn.Location = new Point(574, 59);
+            export_Btn.Location = new Point(577, 59);
             export_Btn.Name = "export_Btn";
             export_Btn.Size = new Size(75, 23);
             export_Btn.TabIndex = 7;
@@ -92,7 +92,7 @@
             // 
             exportTo_Lbl.Anchor = AnchorStyles.Top;
             exportTo_Lbl.AutoSize = true;
-            exportTo_Lbl.Location = new Point(478, 33);
+            exportTo_Lbl.Location = new Point(481, 33);
             exportTo_Lbl.Name = "exportTo_Lbl";
             exportTo_Lbl.Size = new Size(59, 15);
             exportTo_Lbl.TabIndex = 5;
@@ -101,13 +101,13 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToOrderColumns = true;
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.Location = new Point(11, 128);
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(8, 124);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(1166, 550);
+            dataGridView1.Size = new Size(1173, 564);
             dataGridView1.TabIndex = 4;
             // 
             // panel1
@@ -119,12 +119,12 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(8);
             panel1.Size = new Size(1189, 800);
             panel1.TabIndex = 8;
             // 
             // panel2
             // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.DimGray;
             panel2.Controls.Add(location_Cmb);
             panel2.Controls.Add(label1);
@@ -134,9 +134,10 @@
             panel2.Controls.Add(unit_Cmb);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel6);
-            panel2.Location = new Point(11, 6);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(8, 8);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1166, 116);
+            panel2.Size = new Size(1173, 116);
             panel2.TabIndex = 8;
             // 
             // location_Cmb
@@ -146,7 +147,7 @@
             location_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             location_Cmb.FormattingEnabled = true;
-            location_Cmb.Location = new Point(601, 17);
+            location_Cmb.Location = new Point(604, 17);
             location_Cmb.Name = "location_Cmb";
             location_Cmb.Size = new Size(293, 23);
             location_Cmb.TabIndex = 25;
@@ -157,7 +158,7 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Gray;
-            label1.Location = new Point(539, 20);
+            label1.Location = new Point(542, 20);
             label1.Name = "label1";
             label1.Size = new Size(56, 15);
             label1.TabIndex = 24;
@@ -168,7 +169,7 @@
             panel5.Anchor = AnchorStyles.Top;
             panel5.BackColor = Color.Gray;
             panel5.Controls.Add(reservedHardwares_Btn);
-            panel5.Location = new Point(939, 8);
+            panel5.Location = new Point(942, 8);
             panel5.Name = "panel5";
             panel5.Size = new Size(136, 100);
             panel5.TabIndex = 22;
@@ -190,7 +191,7 @@
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.BackColor = Color.Gray;
-            label2.Location = new Point(539, 49);
+            label2.Location = new Point(542, 49);
             label2.Name = "label2";
             label2.Size = new Size(32, 15);
             label2.TabIndex = 27;
@@ -199,7 +200,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Top;
-            button1.Location = new Point(705, 75);
+            button1.Location = new Point(708, 75);
             button1.Name = "button1";
             button1.Size = new Size(74, 23);
             button1.TabIndex = 28;
@@ -214,7 +215,7 @@
             unit_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             unit_Cmb.FormattingEnabled = true;
-            unit_Cmb.Location = new Point(601, 46);
+            unit_Cmb.Location = new Point(604, 46);
             unit_Cmb.Name = "unit_Cmb";
             unit_Cmb.Size = new Size(293, 23);
             unit_Cmb.TabIndex = 26;
@@ -227,7 +228,7 @@
             panel4.Controls.Add(show1_Btn);
             panel4.Controls.Add(serialNo_Cmb);
             panel4.Controls.Add(label4);
-            panel4.Location = new Point(90, 8);
+            panel4.Location = new Point(93, 8);
             panel4.Name = "panel4";
             panel4.Size = new Size(421, 100);
             panel4.TabIndex = 29;
@@ -270,7 +271,7 @@
             // 
             panel6.Anchor = AnchorStyles.Top;
             panel6.BackColor = Color.Gray;
-            panel6.Location = new Point(517, 8);
+            panel6.Location = new Point(520, 8);
             panel6.Name = "panel6";
             panel6.Size = new Size(416, 100);
             panel6.TabIndex = 30;

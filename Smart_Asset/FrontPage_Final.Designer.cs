@@ -53,7 +53,7 @@
             logout_Btn = new Button();
             panel3 = new Panel();
             header_Lbl = new Label();
-            panel4 = new Panel();
+            mainPanel = new Panel();
             sideMenu_Panel.SuspendLayout();
             panel5.SuspendLayout();
             fileMaintenance_SubMenuPanel.SuspendLayout();
@@ -65,7 +65,7 @@
             // sideMenu_Panel
             // 
             sideMenu_Panel.AutoScroll = true;
-            sideMenu_Panel.BackColor = Color.FromArgb(11, 7, 17);
+            sideMenu_Panel.BackColor = Color.FromArgb(11, 8, 20);
             sideMenu_Panel.BorderStyle = BorderStyle.Fixed3D;
             sideMenu_Panel.Controls.Add(panel5);
             sideMenu_Panel.Controls.Add(logo_Panel);
@@ -110,6 +110,8 @@
             artificialIntelligence_Btn.TextAlign = ContentAlignment.MiddleLeft;
             artificialIntelligence_Btn.UseVisualStyleBackColor = true;
             artificialIntelligence_Btn.Click += artificialIntelligence_Btn_Click;
+            artificialIntelligence_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
+            artificialIntelligence_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
             // 
             // borrowedItems_Btn
             // 
@@ -126,6 +128,8 @@
             borrowedItems_Btn.TextAlign = ContentAlignment.MiddleLeft;
             borrowedItems_Btn.UseVisualStyleBackColor = true;
             borrowedItems_Btn.Click += borrowedItems_Btn_Click;
+            borrowedItems_Btn.MouseEnter += borrowedItems_Btn_MouseEnter;
+            borrowedItems_Btn.MouseLeave += borrowedItems_Btn_MouseLeave;
             // 
             // recyleBin_Btn
             // 
@@ -142,6 +146,8 @@
             recyleBin_Btn.TextAlign = ContentAlignment.MiddleLeft;
             recyleBin_Btn.UseVisualStyleBackColor = true;
             recyleBin_Btn.Click += recyleBin_Btn_Click;
+            recyleBin_Btn.MouseEnter += recyleBin_Btn_MouseEnter;
+            recyleBin_Btn.MouseLeave += recyleBin_Btn_MouseLeave;
             // 
             // disposed_Btn
             // 
@@ -158,6 +164,8 @@
             disposed_Btn.TextAlign = ContentAlignment.MiddleLeft;
             disposed_Btn.UseVisualStyleBackColor = true;
             disposed_Btn.Click += disposed_Btn_Click;
+            disposed_Btn.MouseEnter += disposed_Btn_MouseEnter;
+            disposed_Btn.MouseLeave += disposed_Btn_MouseLeave;
             // 
             // cleaning_Btn
             // 
@@ -174,6 +182,8 @@
             cleaning_Btn.TextAlign = ContentAlignment.MiddleLeft;
             cleaning_Btn.UseVisualStyleBackColor = true;
             cleaning_Btn.Click += cleaning_Btn_Click;
+            cleaning_Btn.MouseEnter += cleaning_Btn_MouseEnter;
+            cleaning_Btn.MouseLeave += cleaning_Btn_MouseLeave;
             // 
             // repairing_Btn
             // 
@@ -190,6 +200,8 @@
             repairing_Btn.TextAlign = ContentAlignment.MiddleLeft;
             repairing_Btn.UseVisualStyleBackColor = true;
             repairing_Btn.Click += repairing_Btn_Click;
+            repairing_Btn.MouseEnter += repairing_Btn_MouseEnter;
+            repairing_Btn.MouseLeave += repairing_Btn_MouseLeave;
             // 
             // swap_Btn
             // 
@@ -206,6 +218,8 @@
             swap_Btn.TextAlign = ContentAlignment.MiddleLeft;
             swap_Btn.UseVisualStyleBackColor = true;
             swap_Btn.Click += swap_Btn_Click;
+            swap_Btn.MouseEnter += swap_Btn_MouseEnter;
+            swap_Btn.MouseLeave += swap_Btn_MouseLeave;
             // 
             // deployment_Btn
             // 
@@ -222,6 +236,8 @@
             deployment_Btn.TextAlign = ContentAlignment.MiddleLeft;
             deployment_Btn.UseVisualStyleBackColor = true;
             deployment_Btn.Click += deployment_Btn_Click;
+            deployment_Btn.MouseEnter += deployment_Btn_MouseEnter;
+            deployment_Btn.MouseLeave += deployment_Btn_MouseLeave;
             // 
             // fileMaintenance_SubMenuPanel
             // 
@@ -251,6 +267,8 @@
             transfer_Btn.TextAlign = ContentAlignment.MiddleLeft;
             transfer_Btn.UseVisualStyleBackColor = true;
             transfer_Btn.Click += transfer_Btn_Click;
+            transfer_Btn.MouseEnter += transfer_Btn_MouseEnter;
+            transfer_Btn.MouseLeave += transfer_Btn_MouseLeave;
             // 
             // update_Btn
             // 
@@ -267,6 +285,8 @@
             update_Btn.TextAlign = ContentAlignment.MiddleLeft;
             update_Btn.UseVisualStyleBackColor = true;
             update_Btn.Click += update_Btn_Click;
+            update_Btn.MouseEnter += update_Btn_MouseEnter;
+            update_Btn.MouseLeave += update_Btn_MouseLeave;
             // 
             // read_Btn
             // 
@@ -283,6 +303,8 @@
             read_Btn.TextAlign = ContentAlignment.MiddleLeft;
             read_Btn.UseVisualStyleBackColor = true;
             read_Btn.Click += read_Btn_Click;
+            read_Btn.MouseEnter += read_Btn_MouseEnter;
+            read_Btn.MouseLeave += read_Btn_MouseLeave;
             // 
             // create_Btn
             // 
@@ -299,6 +321,8 @@
             create_Btn.TextAlign = ContentAlignment.MiddleLeft;
             create_Btn.UseVisualStyleBackColor = true;
             create_Btn.Click += create_Btn_Click;
+            create_Btn.MouseEnter += create_Btn_MouseEnter;
+            create_Btn.MouseLeave += create_Btn_MouseLeave;
             // 
             // fileMaintenance_Btn
             // 
@@ -315,6 +339,8 @@
             fileMaintenance_Btn.TextAlign = ContentAlignment.MiddleLeft;
             fileMaintenance_Btn.UseVisualStyleBackColor = true;
             fileMaintenance_Btn.Click += fileMaintenance_Btn_Click;
+            fileMaintenance_Btn.MouseEnter += fileMaintenance_Btn_MouseEnter;
+            fileMaintenance_Btn.MouseLeave += fileMaintenance_Btn_MouseLeave;
             // 
             // dashboard_Btn
             // 
@@ -331,6 +357,8 @@
             dashboard_Btn.TextAlign = ContentAlignment.MiddleLeft;
             dashboard_Btn.UseVisualStyleBackColor = true;
             dashboard_Btn.Click += dashboard_Btn_Click;
+            dashboard_Btn.MouseEnter += dashboard_Btn_MouseEnter;
+            dashboard_Btn.MouseLeave += dashboard_Btn_MouseLeave;
             // 
             // logo_Panel
             // 
@@ -365,6 +393,8 @@
             manageRoles_Btn.Text = "Manage Roles";
             manageRoles_Btn.TextAlign = ContentAlignment.MiddleLeft;
             manageRoles_Btn.UseVisualStyleBackColor = true;
+            manageRoles_Btn.MouseEnter += manageRoles_Btn_MouseEnter;
+            manageRoles_Btn.MouseLeave += manageRoles_Btn_MouseLeave;
             // 
             // createReport_Btn
             // 
@@ -380,6 +410,8 @@
             createReport_Btn.Text = "Create Report";
             createReport_Btn.TextAlign = ContentAlignment.MiddleLeft;
             createReport_Btn.UseVisualStyleBackColor = true;
+            createReport_Btn.MouseEnter += createReport_Btn_MouseEnter;
+            createReport_Btn.MouseLeave += createReport_Btn_MouseLeave;
             // 
             // logout_Panel
             // 
@@ -426,26 +458,26 @@
             header_Lbl.ForeColor = SystemColors.ButtonFace;
             header_Lbl.Location = new Point(0, 10);
             header_Lbl.Name = "header_Lbl";
-            header_Lbl.Padding = new Padding(20, 0, 0, 0);
-            header_Lbl.Size = new Size(137, 34);
+            header_Lbl.Padding = new Padding(70, 0, 0, 0);
+            header_Lbl.Size = new Size(187, 34);
             header_Lbl.TabIndex = 0;
             header_Lbl.Text = "HEADER";
             // 
-            // panel4
+            // mainPanel
             // 
-            panel4.BackColor = Color.FromArgb(30, 30, 45);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(250, 55);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1654, 986);
-            panel4.TabIndex = 2;
+            mainPanel.BackColor = Color.FromArgb(30, 30, 45);
+            mainPanel.Dock = DockStyle.Fill;
+            mainPanel.Location = new Point(250, 55);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new Size(1654, 986);
+            mainPanel.TabIndex = 2;
             // 
             // FrontPage_Final
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(panel4);
+            Controls.Add(mainPanel);
             Controls.Add(panel3);
             Controls.Add(sideMenu_Panel);
             Font = new Font("Segoe UI", 10F);
@@ -467,7 +499,7 @@
         #endregion
         private Panel sideMenu_Panel;
         private Panel panel3;
-        private Panel panel4;
+        private Panel mainPanel;
         private Panel panelLogo;
         private Button manageRoles_Btn;
         private Button createReport_Btn;

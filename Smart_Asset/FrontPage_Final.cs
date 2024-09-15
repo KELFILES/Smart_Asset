@@ -141,7 +141,7 @@ namespace Smart_Asset
 
         private void create_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref cr, "ASSET MANAGEMENT: CREATE");
+
 
             #region NOTES
             /*
@@ -165,29 +165,30 @@ namespace Smart_Asset
 
         private void read_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref rd, "ASSET MANAGEMENT: READ");
+
         }
 
         private void update_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref ud, "ASSET MANAGEMENT: UPDATE");
+
         }
 
         private void transfer_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref del, "ASSET MANAGEMENT: TRANSFER");
+
         }
 
         #endregion
 
         private void dashboard_Btn_Click(object sender, EventArgs e)
         {
+            crud_Panel.Visible = false;
             showFormSelected(ref db, "ASSET MANAGEMENT: DASHBOARD");
         }
 
         private void deployment_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref dp, "ASSET MANAGEMENT: DEPLOYMENT");
+
         }
 
         private void swap_Btn_Click(object sender, EventArgs e)
@@ -195,10 +196,7 @@ namespace Smart_Asset
             showFormSelected(ref sw, "ASSET MANAGEMENT: SWAP");
         }
 
-        private void repairing_Btn_Click(object sender, EventArgs e)
-        {
-            showFormSelected(ref rep, "ASSET MANAGEMENT: REPAIRING");
-        }
+
 
         private void cleaning_Btn_Click(object sender, EventArgs e)
         {
@@ -290,75 +288,7 @@ namespace Smart_Asset
             ButtonLeaveColor(fileMaintenance_Btn);
         }
 
-        private void deployment_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(deployment_Btn);
-        }
-
-        private void deployment_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(deployment_Btn);
-        }
-
-        private void swap_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(swap_Btn);
-        }
-
-        private void swap_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(swap_Btn);
-        }
-
-        private void repairing_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(repairing_Btn);
-        }
-
-        private void repairing_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(repairing_Btn);
-        }
-
-        private void cleaning_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(cleaning_Btn);
-        }
-
-        private void cleaning_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(cleaning_Btn);
-        }
-
-        private void disposed_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(disposed_Btn);
-        }
-
-        private void disposed_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(disposed_Btn);
-        }
-
-        private void recyleBin_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(recyleBin_Btn);
-        }
-
-        private void recyleBin_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(recyleBin_Btn);
-        }
-
-        private void borrowedItems_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(borrowedItems_Btn);
-        }
-
-        private void borrowedItems_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(borrowedItems_Btn);
-        }
+        
 
         private void artificialIntelligence_Btn_MouseEnter(object sender, EventArgs e)
         {
@@ -370,65 +300,7 @@ namespace Smart_Asset
             ButtonLeaveColor(artificialIntelligence_Btn);
         }
 
-        private void manageRoles_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(manageRoles_Btn);
-        }
-
-        private void manageRoles_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            ButtonLeaveColor(manageRoles_Btn);
-        }
-
-        private void createReport_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            ButtonEnterColor(createReport_Btn);
-        }
-
-        private void createReport_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            SubButtonLeaveColor(createReport_Btn);
-        }
-
-        private void create_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            SubButtonEnterColor(create_Btn);
-        }
-
-        private void create_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            SubButtonLeaveColor(create_Btn);
-        }
-
-        private void read_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            SubButtonEnterColor(read_Btn);
-        }
-
-        private void read_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            SubButtonLeaveColor(read_Btn);
-        }
-
-        private void update_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            SubButtonEnterColor(update_Btn);
-        }
-
-        private void update_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            SubButtonLeaveColor(update_Btn);
-        }
-
-        private void transfer_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            SubButtonEnterColor(transfer_Btn);
-        }
-
-        private void transfer_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            SubButtonLeaveColor(transfer_Btn);
-        }
+        
 
         private void questionMark_Btn_Click(object sender, EventArgs e)
         {
@@ -486,11 +358,11 @@ namespace Smart_Asset
             // Check header_Lbl.Text for specific actions
             if (header_Lbl.Text.Equals("ASSET MANAGEMENT: DASHBOARD"))
             {
-                Console.WriteLine("DASHBOARD MANUAL");
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
             }
             if (header_Lbl.Text.Equals("ASSET MANAGEMENT: CREATE"))
             {
-                Console.WriteLine("CREATE MANUAL");
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
             }
 
 
@@ -499,5 +371,83 @@ namespace Smart_Asset
 
 
         }
+
+        private void assetManagement_Btn_Click(object sender, EventArgs e)
+        {
+            crud_Panel.Visible = true;
+
+            //SHOW FIRST CREATE IN PANEL
+            create_Rdb.Select();
+            showFormSelected(ref cr, "ASSET MANAGEMENT: CREATE");
+
+        }
+
+        private void create_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (create_Rdb.Checked)
+            {
+                showFormSelected(ref cr, "ASSET MANAGEMENT: CREATE");
+            }
+        }
+
+        private void read_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (read_Rdb.Checked)
+            {
+                showFormSelected(ref rd, "ASSET MANAGEMENT: READ");
+            }
+        }
+
+        private void update_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (update_Rdb.Checked)
+            {
+                showFormSelected(ref ud, "ASSET MANAGEMENT: UPDATE");
+            }
+        }
+
+        private void transfer_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (transfer_Rdb.Checked)
+            {
+                showFormSelected(ref del, "ASSET MANAGEMENT: TRANSFER");
+            }
+        }
+
+        private void deployment_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (deployment_Rdb.Checked)
+            {
+                showFormSelected(ref dp, "ASSET MANAGEMENT: DEPLOYMENT");
+            }
+        }
+
+        private void swap_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (swap_Rdb.Checked)
+            {
+                showFormSelected(ref sw, "ASSET MANAGEMENT: SWAP");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

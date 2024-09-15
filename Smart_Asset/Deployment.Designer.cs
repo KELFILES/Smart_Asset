@@ -48,27 +48,30 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(10, 18, 45);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 55, 0, 0);
             panel1.Size = new Size(1109, 761);
             panel1.TabIndex = 0;
             // 
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel3.BackColor = Color.DimGray;
-            panel3.Location = new Point(12, 218);
+            panel3.BackColor = SystemColors.WindowFrame;
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Location = new Point(12, 273);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1085, 531);
+            panel3.Size = new Size(1085, 476);
             panel3.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.BackColor = Color.DarkGray;
+            panel2.BackColor = SystemColors.ControlDark;
             panel2.Controls.Add(serialNo_Cmb);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
@@ -80,7 +83,7 @@
             panel2.Controls.Add(addLocation_Btn);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(12, 12);
+            panel2.Location = new Point(12, 67);
             panel2.Name = "panel2";
             panel2.Size = new Size(1085, 200);
             panel2.TabIndex = 0;
@@ -100,6 +103,7 @@
             label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
+            label4.ForeColor = Color.White;
             label4.Location = new Point(526, 113);
             label4.Name = "label4";
             label4.Size = new Size(76, 21);
@@ -111,6 +115,7 @@
             label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
+            label3.ForeColor = Color.White;
             label3.Location = new Point(194, 113);
             label3.Name = "label3";
             label3.Size = new Size(45, 21);
@@ -134,7 +139,7 @@
             enter_Btn.Anchor = AnchorStyles.Top;
             enter_Btn.Location = new Point(508, 162);
             enter_Btn.Name = "enter_Btn";
-            enter_Btn.Size = new Size(75, 23);
+            enter_Btn.Size = new Size(94, 23);
             enter_Btn.TabIndex = 43;
             enter_Btn.Text = "ENTER";
             enter_Btn.UseVisualStyleBackColor = true;
@@ -193,6 +198,7 @@
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
+            label2.ForeColor = Color.White;
             label2.Location = new Point(167, 59);
             label2.Name = "label2";
             label2.Size = new Size(42, 21);
@@ -204,6 +210,7 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(167, 29);
             label1.Name = "label1";
             label1.Size = new Size(72, 21);

@@ -45,11 +45,13 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(10, 18, 45);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 55, 0, 0);
             panel1.Size = new Size(1109, 761);
             panel1.TabIndex = 0;
             // 
@@ -58,9 +60,9 @@
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.BackColor = SystemColors.ControlDark;
             panel3.Controls.Add(dataGridView1);
-            panel3.Location = new Point(12, 445);
+            panel3.Location = new Point(12, 500);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1085, 304);
+            panel3.Size = new Size(1085, 249);
             panel3.TabIndex = 1;
             // 
             // dataGridView1
@@ -70,7 +72,7 @@
             dataGridView1.Location = new Point(0, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(1085, 304);
+            dataGridView1.Size = new Size(1085, 249);
             dataGridView1.TabIndex = 0;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
             // 
@@ -80,7 +82,7 @@
             panel2.BackColor = Color.Gray;
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
-            panel2.Location = new Point(12, 12);
+            panel2.Location = new Point(12, 67);
             panel2.Name = "panel2";
             panel2.Size = new Size(1085, 427);
             panel2.TabIndex = 0;

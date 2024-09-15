@@ -42,6 +42,7 @@
             label8 = new Label();
             notes_Tb = new RichTextBox();
             panel2 = new Panel();
+            label4 = new Label();
             transfer2_Btn = new Button();
             delete2_RadBtn = new RadioButton();
             borrow2_RadBtn = new RadioButton();
@@ -53,7 +54,6 @@
             repairing2_RadBtn = new RadioButton();
             checkBox1 = new CheckBox();
             label6 = new Label();
-            label4 = new Label();
             label2 = new Label();
             label1 = new Label();
             notes2_Tb = new RichTextBox();
@@ -65,11 +65,13 @@
             // panel1
             // 
             panel1.AutoScroll = true;
+            panel1.BackColor = Color.FromArgb(10, 18, 45);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 55, 0, 0);
             panel1.Size = new Size(1125, 800);
             panel1.TabIndex = 0;
             // 
@@ -88,7 +90,7 @@
             panel3.Controls.Add(label5);
             panel3.Controls.Add(label8);
             panel3.Controls.Add(notes_Tb);
-            panel3.Location = new Point(12, 12);
+            panel3.Location = new Point(12, 67);
             panel3.Name = "panel3";
             panel3.Size = new Size(1101, 418);
             panel3.TabIndex = 7;
@@ -109,7 +111,7 @@
             transfer_Btn.Anchor = AnchorStyles.Bottom;
             transfer_Btn.Location = new Point(521, 382);
             transfer_Btn.Name = "transfer_Btn";
-            transfer_Btn.Size = new Size(85, 26);
+            transfer_Btn.Size = new Size(100, 26);
             transfer_Btn.TabIndex = 29;
             transfer_Btn.Text = "TRANSFER";
             transfer_Btn.UseVisualStyleBackColor = true;
@@ -220,7 +222,8 @@
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.BackColor = Color.DarkGray;
+            panel2.BackColor = Color.DimGray;
+            panel2.Controls.Add(label4);
             panel2.Controls.Add(transfer2_Btn);
             panel2.Controls.Add(delete2_RadBtn);
             panel2.Controls.Add(borrow2_RadBtn);
@@ -232,21 +235,32 @@
             panel2.Controls.Add(repairing2_RadBtn);
             panel2.Controls.Add(checkBox1);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(label4);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(notes2_Tb);
-            panel2.Location = new Point(12, 436);
+            panel2.Location = new Point(12, 491);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1101, 352);
+            panel2.Size = new Size(1101, 297);
             panel2.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14F);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(461, 24);
+            label4.Name = "label4";
+            label4.Size = new Size(211, 25);
+            label4.TabIndex = 35;
+            label4.Text = "Transfer using Location:";
             // 
             // transfer2_Btn
             // 
             transfer2_Btn.Anchor = AnchorStyles.Bottom;
-            transfer2_Btn.Location = new Point(521, 307);
+            transfer2_Btn.Location = new Point(521, 252);
             transfer2_Btn.Name = "transfer2_Btn";
-            transfer2_Btn.Size = new Size(85, 26);
+            transfer2_Btn.Size = new Size(100, 26);
             transfer2_Btn.TabIndex = 34;
             transfer2_Btn.Text = "TRANSFER";
             transfer2_Btn.UseVisualStyleBackColor = true;
@@ -256,7 +270,8 @@
             // 
             delete2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             delete2_RadBtn.AutoSize = true;
-            delete2_RadBtn.Location = new Point(641, 262);
+            delete2_RadBtn.ForeColor = Color.White;
+            delete2_RadBtn.Location = new Point(641, 207);
             delete2_RadBtn.Name = "delete2_RadBtn";
             delete2_RadBtn.Size = new Size(63, 19);
             delete2_RadBtn.TabIndex = 33;
@@ -268,7 +283,8 @@
             // 
             borrow2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             borrow2_RadBtn.AutoSize = true;
-            borrow2_RadBtn.Location = new Point(546, 262);
+            borrow2_RadBtn.ForeColor = Color.White;
+            borrow2_RadBtn.Location = new Point(546, 207);
             borrow2_RadBtn.Name = "borrow2_RadBtn";
             borrow2_RadBtn.Size = new Size(75, 19);
             borrow2_RadBtn.TabIndex = 32;
@@ -293,7 +309,8 @@
             // 
             disposal2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             disposal2_RadBtn.AutoSize = true;
-            disposal2_RadBtn.Location = new Point(449, 262);
+            disposal2_RadBtn.ForeColor = Color.White;
+            disposal2_RadBtn.Location = new Point(449, 207);
             disposal2_RadBtn.Name = "disposal2_RadBtn";
             disposal2_RadBtn.Size = new Size(78, 19);
             disposal2_RadBtn.TabIndex = 31;
@@ -318,7 +335,8 @@
             // 
             cleaning2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             cleaning2_RadBtn.AutoSize = true;
-            cleaning2_RadBtn.Location = new Point(351, 262);
+            cleaning2_RadBtn.ForeColor = Color.White;
+            cleaning2_RadBtn.Location = new Point(351, 207);
             cleaning2_RadBtn.Name = "cleaning2_RadBtn";
             cleaning2_RadBtn.Size = new Size(82, 19);
             cleaning2_RadBtn.TabIndex = 30;
@@ -340,7 +358,8 @@
             // 
             repairing2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             repairing2_RadBtn.AutoSize = true;
-            repairing2_RadBtn.Location = new Point(252, 262);
+            repairing2_RadBtn.ForeColor = Color.White;
+            repairing2_RadBtn.Location = new Point(252, 207);
             repairing2_RadBtn.Name = "repairing2_RadBtn";
             repairing2_RadBtn.Size = new Size(82, 19);
             repairing2_RadBtn.TabIndex = 29;
@@ -369,18 +388,6 @@
             label6.Size = new Size(125, 20);
             label6.TabIndex = 8;
             label6.Text = "Notes: \"Optional\"";
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11F);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(420, 28);
-            label4.Name = "label4";
-            label4.Size = new Size(334, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Reminder: Notice the checkbox before removing!";
             // 
             // label2
             // 
@@ -411,7 +418,7 @@
             notes2_Tb.BorderStyle = BorderStyle.None;
             notes2_Tb.Location = new Point(252, 148);
             notes2_Tb.Name = "notes2_Tb";
-            notes2_Tb.Size = new Size(626, 108);
+            notes2_Tb.Size = new Size(626, 53);
             notes2_Tb.TabIndex = 7;
             notes2_Tb.Text = "";
             // 
@@ -437,7 +444,6 @@
         private Panel panel1;
         private Panel panel2;
         private TextBox textBox3;
-        private Label label4;
         private Label label3;
         private Label label2;
         private Label label1;
@@ -467,5 +473,6 @@
         private RadioButton delete_RadBtn;
         private RadioButton delete2_RadBtn;
         private Button transfer2_Btn;
+        private Label label4;
     }
 }

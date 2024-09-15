@@ -115,5 +115,23 @@ namespace Smart_Asset
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
         }
+
+        private void disposed_Btn_Click(object sender, EventArgs e)
+        {
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+        }
+
+        private void repairingHardwares_Btn_Click(object sender, EventArgs e)
+        {
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+        }
+
+        private void cleaningHardwares_Btn_Click(object sender, EventArgs e)
+        {
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+        }
     }
 }

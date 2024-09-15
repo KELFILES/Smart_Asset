@@ -29,46 +29,41 @@
         private void InitializeComponent()
         {
             sideMenu_Panel = new Panel();
+            logout_Panel = new Panel();
+            logout_Btn = new Button();
             panel5 = new Panel();
+            button2 = new Button();
+            button1 = new Button();
             artificialIntelligence_Btn = new Button();
-            recyleBin_Btn = new Button();
-            borrowedItems_Btn = new Button();
-            disposed_Btn = new Button();
-            cleaning_Btn = new Button();
-            repairing_Btn = new Button();
-            swap_Btn = new Button();
-            deployment_Btn = new Button();
             fileMaintenance_SubMenuPanel = new Panel();
-            transfer_Btn = new Button();
-            update_Btn = new Button();
-            read_Btn = new Button();
-            create_Btn = new Button();
+            assetManagement_Btn = new Button();
             fileMaintenance_Btn = new Button();
             dashboard_Btn = new Button();
             logo_Panel = new Panel();
             pictureBox1 = new PictureBox();
-            panelLogo = new Panel();
-            manageRoles_Btn = new Button();
-            createReport_Btn = new Button();
-            logout_Panel = new Panel();
-            logout_Btn = new Button();
             panel3 = new Panel();
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
-            questionMark_Btn = new Button();
+            qmark_Btn = new Button();
             header_Lbl = new Label();
             mainPanel = new Panel();
+            crud_Panel = new Panel();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
+            swap_Rdb = new RadioButton();
+            deployment_Rdb = new RadioButton();
+            transfer_Rdb = new RadioButton();
+            update_Rdb = new RadioButton();
+            read_Rdb = new RadioButton();
+            create_Rdb = new RadioButton();
             sideMenu_Panel.SuspendLayout();
+            logout_Panel.SuspendLayout();
             panel5.SuspendLayout();
             fileMaintenance_SubMenuPanel.SuspendLayout();
             logo_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panelLogo.SuspendLayout();
-            logout_Panel.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
+            crud_Panel.SuspendLayout();
             SuspendLayout();
             // 
             // sideMenu_Panel
@@ -76,34 +71,85 @@
             sideMenu_Panel.AutoScroll = true;
             sideMenu_Panel.BackColor = Color.FromArgb(11, 8, 20);
             sideMenu_Panel.BorderStyle = BorderStyle.Fixed3D;
+            sideMenu_Panel.Controls.Add(logout_Panel);
             sideMenu_Panel.Controls.Add(panel5);
             sideMenu_Panel.Controls.Add(logo_Panel);
-            sideMenu_Panel.Controls.Add(panelLogo);
             sideMenu_Panel.Dock = DockStyle.Left;
             sideMenu_Panel.Location = new Point(0, 0);
             sideMenu_Panel.Name = "sideMenu_Panel";
             sideMenu_Panel.Size = new Size(250, 1041);
             sideMenu_Panel.TabIndex = 0;
             // 
+            // logout_Panel
+            // 
+            logout_Panel.Controls.Add(logout_Btn);
+            logout_Panel.Dock = DockStyle.Bottom;
+            logout_Panel.Location = new Point(0, 975);
+            logout_Panel.Name = "logout_Panel";
+            logout_Panel.Padding = new Padding(0, 20, 90, 20);
+            logout_Panel.Size = new Size(246, 62);
+            logout_Panel.TabIndex = 50;
+            // 
+            // logout_Btn
+            // 
+            logout_Btn.AutoSize = true;
+            logout_Btn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            logout_Btn.Dock = DockStyle.Right;
+            logout_Btn.FlatAppearance.BorderSize = 0;
+            logout_Btn.FlatStyle = FlatStyle.System;
+            logout_Btn.Font = new Font("Segoe UI", 8F);
+            logout_Btn.ForeColor = Color.Gainsboro;
+            logout_Btn.Location = new Point(98, 20);
+            logout_Btn.Name = "logout_Btn";
+            logout_Btn.Size = new Size(58, 22);
+            logout_Btn.TabIndex = 32;
+            logout_Btn.Text = "Logout";
+            logout_Btn.UseVisualStyleBackColor = true;
+            // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(11, 8, 20);
+            panel5.Controls.Add(button2);
+            panel5.Controls.Add(button1);
             panel5.Controls.Add(artificialIntelligence_Btn);
-            panel5.Controls.Add(recyleBin_Btn);
-            panel5.Controls.Add(borrowedItems_Btn);
-            panel5.Controls.Add(disposed_Btn);
-            panel5.Controls.Add(cleaning_Btn);
-            panel5.Controls.Add(repairing_Btn);
-            panel5.Controls.Add(swap_Btn);
-            panel5.Controls.Add(deployment_Btn);
             panel5.Controls.Add(fileMaintenance_SubMenuPanel);
             panel5.Controls.Add(fileMaintenance_Btn);
             panel5.Controls.Add(dashboard_Btn);
-            panel5.Dock = DockStyle.Top;
+            panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 100);
             panel5.Name = "panel5";
-            panel5.Size = new Size(246, 642);
+            panel5.Size = new Size(246, 937);
             panel5.TabIndex = 49;
+            // 
+            // button2
+            // 
+            button2.Dock = DockStyle.Top;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.ForeColor = Color.Gainsboro;
+            button2.Location = new Point(0, 310);
+            button2.Name = "button2";
+            button2.Padding = new Padding(10, 0, 0, 0);
+            button2.Size = new Size(246, 45);
+            button2.TabIndex = 38;
+            button2.Text = "Create Report";
+            button2.TextAlign = ContentAlignment.MiddleLeft;
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Dock = DockStyle.Top;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.Gainsboro;
+            button1.Location = new Point(0, 265);
+            button1.Name = "button1";
+            button1.Padding = new Padding(10, 0, 0, 0);
+            button1.Size = new Size(246, 45);
+            button1.TabIndex = 37;
+            button1.Text = "Manage Roles";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
+            button1.UseVisualStyleBackColor = true;
             // 
             // artificialIntelligence_Btn
             // 
@@ -111,7 +157,7 @@
             artificialIntelligence_Btn.FlatAppearance.BorderSize = 0;
             artificialIntelligence_Btn.FlatStyle = FlatStyle.Flat;
             artificialIntelligence_Btn.ForeColor = Color.Gainsboro;
-            artificialIntelligence_Btn.Location = new Point(0, 572);
+            artificialIntelligence_Btn.Location = new Point(0, 220);
             artificialIntelligence_Btn.Name = "artificialIntelligence_Btn";
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
             artificialIntelligence_Btn.Size = new Size(246, 45);
@@ -122,214 +168,31 @@
             artificialIntelligence_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
             artificialIntelligence_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
             // 
-            // recyleBin_Btn
-            // 
-            recyleBin_Btn.Dock = DockStyle.Top;
-            recyleBin_Btn.FlatAppearance.BorderSize = 0;
-            recyleBin_Btn.FlatStyle = FlatStyle.Flat;
-            recyleBin_Btn.ForeColor = Color.Gainsboro;
-            recyleBin_Btn.Location = new Point(0, 527);
-            recyleBin_Btn.Name = "recyleBin_Btn";
-            recyleBin_Btn.Padding = new Padding(10, 0, 0, 0);
-            recyleBin_Btn.Size = new Size(246, 45);
-            recyleBin_Btn.TabIndex = 35;
-            recyleBin_Btn.Text = "Recycle Bin";
-            recyleBin_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            recyleBin_Btn.UseVisualStyleBackColor = true;
-            recyleBin_Btn.MouseEnter += recyleBin_Btn_MouseEnter;
-            recyleBin_Btn.MouseLeave += recyleBin_Btn_MouseLeave;
-            // 
-            // borrowedItems_Btn
-            // 
-            borrowedItems_Btn.Dock = DockStyle.Top;
-            borrowedItems_Btn.FlatAppearance.BorderSize = 0;
-            borrowedItems_Btn.FlatStyle = FlatStyle.Flat;
-            borrowedItems_Btn.ForeColor = Color.Gainsboro;
-            borrowedItems_Btn.Location = new Point(0, 482);
-            borrowedItems_Btn.Name = "borrowedItems_Btn";
-            borrowedItems_Btn.Padding = new Padding(10, 0, 0, 0);
-            borrowedItems_Btn.Size = new Size(246, 45);
-            borrowedItems_Btn.TabIndex = 32;
-            borrowedItems_Btn.Text = "Borrowed Items";
-            borrowedItems_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            borrowedItems_Btn.UseVisualStyleBackColor = true;
-            borrowedItems_Btn.MouseEnter += borrowedItems_Btn_MouseEnter;
-            borrowedItems_Btn.MouseLeave += borrowedItems_Btn_MouseLeave;
-            // 
-            // disposed_Btn
-            // 
-            disposed_Btn.Dock = DockStyle.Top;
-            disposed_Btn.FlatAppearance.BorderSize = 0;
-            disposed_Btn.FlatStyle = FlatStyle.Flat;
-            disposed_Btn.ForeColor = Color.Gainsboro;
-            disposed_Btn.Location = new Point(0, 437);
-            disposed_Btn.Name = "disposed_Btn";
-            disposed_Btn.Padding = new Padding(10, 0, 0, 0);
-            disposed_Btn.Size = new Size(246, 45);
-            disposed_Btn.TabIndex = 28;
-            disposed_Btn.Text = "Disposed";
-            disposed_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            disposed_Btn.UseVisualStyleBackColor = true;
-            disposed_Btn.Click += disposed_Btn_Click;
-            disposed_Btn.MouseEnter += disposed_Btn_MouseEnter;
-            disposed_Btn.MouseLeave += disposed_Btn_MouseLeave;
-            // 
-            // cleaning_Btn
-            // 
-            cleaning_Btn.Dock = DockStyle.Top;
-            cleaning_Btn.FlatAppearance.BorderSize = 0;
-            cleaning_Btn.FlatStyle = FlatStyle.Flat;
-            cleaning_Btn.ForeColor = Color.Gainsboro;
-            cleaning_Btn.Location = new Point(0, 392);
-            cleaning_Btn.Name = "cleaning_Btn";
-            cleaning_Btn.Padding = new Padding(10, 0, 0, 0);
-            cleaning_Btn.Size = new Size(246, 45);
-            cleaning_Btn.TabIndex = 27;
-            cleaning_Btn.Text = "Cleaning";
-            cleaning_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            cleaning_Btn.UseVisualStyleBackColor = true;
-            cleaning_Btn.Click += cleaning_Btn_Click;
-            cleaning_Btn.MouseEnter += cleaning_Btn_MouseEnter;
-            cleaning_Btn.MouseLeave += cleaning_Btn_MouseLeave;
-            // 
-            // repairing_Btn
-            // 
-            repairing_Btn.Dock = DockStyle.Top;
-            repairing_Btn.FlatAppearance.BorderSize = 0;
-            repairing_Btn.FlatStyle = FlatStyle.Flat;
-            repairing_Btn.ForeColor = Color.Gainsboro;
-            repairing_Btn.Location = new Point(0, 347);
-            repairing_Btn.Name = "repairing_Btn";
-            repairing_Btn.Padding = new Padding(10, 0, 0, 0);
-            repairing_Btn.Size = new Size(246, 45);
-            repairing_Btn.TabIndex = 26;
-            repairing_Btn.Text = "Repairing";
-            repairing_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            repairing_Btn.UseVisualStyleBackColor = true;
-            repairing_Btn.Click += repairing_Btn_Click;
-            repairing_Btn.MouseEnter += repairing_Btn_MouseEnter;
-            repairing_Btn.MouseLeave += repairing_Btn_MouseLeave;
-            // 
-            // swap_Btn
-            // 
-            swap_Btn.Dock = DockStyle.Top;
-            swap_Btn.FlatAppearance.BorderSize = 0;
-            swap_Btn.FlatStyle = FlatStyle.Flat;
-            swap_Btn.ForeColor = Color.Gainsboro;
-            swap_Btn.Location = new Point(0, 302);
-            swap_Btn.Name = "swap_Btn";
-            swap_Btn.Padding = new Padding(10, 0, 0, 0);
-            swap_Btn.Size = new Size(246, 45);
-            swap_Btn.TabIndex = 25;
-            swap_Btn.Text = "Swap";
-            swap_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            swap_Btn.UseVisualStyleBackColor = true;
-            swap_Btn.Click += swap_Btn_Click;
-            swap_Btn.MouseEnter += swap_Btn_MouseEnter;
-            swap_Btn.MouseLeave += swap_Btn_MouseLeave;
-            // 
-            // deployment_Btn
-            // 
-            deployment_Btn.Dock = DockStyle.Top;
-            deployment_Btn.FlatAppearance.BorderSize = 0;
-            deployment_Btn.FlatStyle = FlatStyle.Flat;
-            deployment_Btn.ForeColor = Color.Gainsboro;
-            deployment_Btn.Location = new Point(0, 257);
-            deployment_Btn.Name = "deployment_Btn";
-            deployment_Btn.Padding = new Padding(10, 0, 0, 0);
-            deployment_Btn.Size = new Size(246, 45);
-            deployment_Btn.TabIndex = 24;
-            deployment_Btn.Text = "Deployment";
-            deployment_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            deployment_Btn.UseVisualStyleBackColor = true;
-            deployment_Btn.Click += deployment_Btn_Click;
-            deployment_Btn.MouseEnter += deployment_Btn_MouseEnter;
-            deployment_Btn.MouseLeave += deployment_Btn_MouseLeave;
-            // 
             // fileMaintenance_SubMenuPanel
             // 
             fileMaintenance_SubMenuPanel.BackColor = Color.FromArgb(35, 32, 39);
-            fileMaintenance_SubMenuPanel.Controls.Add(transfer_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(update_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(read_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(create_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(assetManagement_Btn);
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
             fileMaintenance_SubMenuPanel.Name = "fileMaintenance_SubMenuPanel";
-            fileMaintenance_SubMenuPanel.Size = new Size(246, 167);
+            fileMaintenance_SubMenuPanel.Size = new Size(246, 130);
             fileMaintenance_SubMenuPanel.TabIndex = 23;
             // 
-            // transfer_Btn
+            // assetManagement_Btn
             // 
-            transfer_Btn.Dock = DockStyle.Top;
-            transfer_Btn.FlatAppearance.BorderSize = 0;
-            transfer_Btn.FlatStyle = FlatStyle.Flat;
-            transfer_Btn.ForeColor = Color.Gainsboro;
-            transfer_Btn.Location = new Point(0, 120);
-            transfer_Btn.Name = "transfer_Btn";
-            transfer_Btn.Padding = new Padding(35, 0, 0, 0);
-            transfer_Btn.Size = new Size(246, 40);
-            transfer_Btn.TabIndex = 3;
-            transfer_Btn.Text = "Transfer";
-            transfer_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            transfer_Btn.UseVisualStyleBackColor = true;
-            transfer_Btn.Click += transfer_Btn_Click;
-            transfer_Btn.MouseEnter += transfer_Btn_MouseEnter;
-            transfer_Btn.MouseLeave += transfer_Btn_MouseLeave;
-            // 
-            // update_Btn
-            // 
-            update_Btn.Dock = DockStyle.Top;
-            update_Btn.FlatAppearance.BorderSize = 0;
-            update_Btn.FlatStyle = FlatStyle.Flat;
-            update_Btn.ForeColor = Color.Gainsboro;
-            update_Btn.Location = new Point(0, 80);
-            update_Btn.Name = "update_Btn";
-            update_Btn.Padding = new Padding(35, 0, 0, 0);
-            update_Btn.Size = new Size(246, 40);
-            update_Btn.TabIndex = 2;
-            update_Btn.Text = "Update";
-            update_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            update_Btn.UseVisualStyleBackColor = true;
-            update_Btn.Click += update_Btn_Click;
-            update_Btn.MouseEnter += update_Btn_MouseEnter;
-            update_Btn.MouseLeave += update_Btn_MouseLeave;
-            // 
-            // read_Btn
-            // 
-            read_Btn.Dock = DockStyle.Top;
-            read_Btn.FlatAppearance.BorderSize = 0;
-            read_Btn.FlatStyle = FlatStyle.Flat;
-            read_Btn.ForeColor = Color.Gainsboro;
-            read_Btn.Location = new Point(0, 40);
-            read_Btn.Name = "read_Btn";
-            read_Btn.Padding = new Padding(35, 0, 0, 0);
-            read_Btn.Size = new Size(246, 40);
-            read_Btn.TabIndex = 1;
-            read_Btn.Text = "Read";
-            read_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            read_Btn.UseVisualStyleBackColor = true;
-            read_Btn.Click += read_Btn_Click;
-            read_Btn.MouseEnter += read_Btn_MouseEnter;
-            read_Btn.MouseLeave += read_Btn_MouseLeave;
-            // 
-            // create_Btn
-            // 
-            create_Btn.Dock = DockStyle.Top;
-            create_Btn.FlatAppearance.BorderSize = 0;
-            create_Btn.FlatStyle = FlatStyle.Flat;
-            create_Btn.ForeColor = Color.Gainsboro;
-            create_Btn.Location = new Point(0, 0);
-            create_Btn.Name = "create_Btn";
-            create_Btn.Padding = new Padding(35, 0, 0, 0);
-            create_Btn.Size = new Size(246, 40);
-            create_Btn.TabIndex = 0;
-            create_Btn.Text = "Create";
-            create_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            create_Btn.UseVisualStyleBackColor = true;
-            create_Btn.Click += create_Btn_Click;
-            create_Btn.MouseEnter += create_Btn_MouseEnter;
-            create_Btn.MouseLeave += create_Btn_MouseLeave;
+            assetManagement_Btn.Dock = DockStyle.Top;
+            assetManagement_Btn.FlatAppearance.BorderSize = 0;
+            assetManagement_Btn.FlatStyle = FlatStyle.Flat;
+            assetManagement_Btn.ForeColor = Color.Gainsboro;
+            assetManagement_Btn.Location = new Point(0, 0);
+            assetManagement_Btn.Name = "assetManagement_Btn";
+            assetManagement_Btn.Padding = new Padding(35, 0, 0, 0);
+            assetManagement_Btn.Size = new Size(246, 40);
+            assetManagement_Btn.TabIndex = 4;
+            assetManagement_Btn.Text = "Asset Management";
+            assetManagement_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            assetManagement_Btn.UseVisualStyleBackColor = true;
+            assetManagement_Btn.Click += assetManagement_Btn_Click;
             // 
             // fileMaintenance_Btn
             // 
@@ -390,86 +253,12 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // panelLogo
-            // 
-            panelLogo.Controls.Add(manageRoles_Btn);
-            panelLogo.Controls.Add(createReport_Btn);
-            panelLogo.Controls.Add(logout_Panel);
-            panelLogo.Dock = DockStyle.Bottom;
-            panelLogo.Location = new Point(0, 886);
-            panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(246, 151);
-            panelLogo.TabIndex = 46;
-            // 
-            // manageRoles_Btn
-            // 
-            manageRoles_Btn.Dock = DockStyle.Bottom;
-            manageRoles_Btn.FlatAppearance.BorderSize = 0;
-            manageRoles_Btn.FlatStyle = FlatStyle.Flat;
-            manageRoles_Btn.ForeColor = Color.Gainsboro;
-            manageRoles_Btn.Location = new Point(0, -1);
-            manageRoles_Btn.Name = "manageRoles_Btn";
-            manageRoles_Btn.Padding = new Padding(10, 0, 0, 0);
-            manageRoles_Btn.Size = new Size(246, 45);
-            manageRoles_Btn.TabIndex = 48;
-            manageRoles_Btn.Text = "Manage Roles";
-            manageRoles_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            manageRoles_Btn.UseVisualStyleBackColor = true;
-            manageRoles_Btn.MouseEnter += manageRoles_Btn_MouseEnter;
-            manageRoles_Btn.MouseLeave += manageRoles_Btn_MouseLeave;
-            // 
-            // createReport_Btn
-            // 
-            createReport_Btn.Dock = DockStyle.Bottom;
-            createReport_Btn.FlatAppearance.BorderSize = 0;
-            createReport_Btn.FlatStyle = FlatStyle.Flat;
-            createReport_Btn.ForeColor = Color.Gainsboro;
-            createReport_Btn.Location = new Point(0, 44);
-            createReport_Btn.Name = "createReport_Btn";
-            createReport_Btn.Padding = new Padding(10, 0, 0, 0);
-            createReport_Btn.Size = new Size(246, 45);
-            createReport_Btn.TabIndex = 47;
-            createReport_Btn.Text = "Create Report";
-            createReport_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            createReport_Btn.UseVisualStyleBackColor = true;
-            createReport_Btn.MouseEnter += createReport_Btn_MouseEnter;
-            createReport_Btn.MouseLeave += createReport_Btn_MouseLeave;
-            // 
-            // logout_Panel
-            // 
-            logout_Panel.Controls.Add(logout_Btn);
-            logout_Panel.Dock = DockStyle.Bottom;
-            logout_Panel.Location = new Point(0, 89);
-            logout_Panel.Name = "logout_Panel";
-            logout_Panel.Padding = new Padding(0, 20, 90, 20);
-            logout_Panel.Size = new Size(246, 62);
-            logout_Panel.TabIndex = 46;
-            // 
-            // logout_Btn
-            // 
-            logout_Btn.AutoSize = true;
-            logout_Btn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            logout_Btn.Dock = DockStyle.Right;
-            logout_Btn.FlatAppearance.BorderSize = 0;
-            logout_Btn.FlatStyle = FlatStyle.System;
-            logout_Btn.Font = new Font("Segoe UI", 8F);
-            logout_Btn.ForeColor = Color.Gainsboro;
-            logout_Btn.Location = new Point(98, 20);
-            logout_Btn.Name = "logout_Btn";
-            logout_Btn.Size = new Size(58, 22);
-            logout_Btn.TabIndex = 32;
-            logout_Btn.Text = "Logout";
-            logout_Btn.UseVisualStyleBackColor = true;
-            // 
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(11, 7, 17);
             panel3.BorderStyle = BorderStyle.Fixed3D;
             panel3.Controls.Add(iconPictureBox1);
-            panel3.Controls.Add(button3);
-            panel3.Controls.Add(button2);
-            panel3.Controls.Add(button1);
-            panel3.Controls.Add(questionMark_Btn);
+            panel3.Controls.Add(qmark_Btn);
             panel3.Controls.Add(header_Lbl);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(250, 0);
@@ -494,61 +283,19 @@
             iconPictureBox1.TabIndex = 37;
             iconPictureBox1.TabStop = false;
             // 
-            // button3
+            // qmark_Btn
             // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.ForeColor = SystemColors.ButtonFace;
-            button3.Location = new Point(1536, 13);
-            button3.Name = "button3";
-            button3.Size = new Size(21, 21);
-            button3.TabIndex = 4;
-            button3.Text = "?";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = SystemColors.ButtonFace;
-            button2.Location = new Point(1563, 13);
-            button2.Name = "button2";
-            button2.Size = new Size(21, 21);
-            button2.TabIndex = 3;
-            button2.Text = "-";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ButtonFace;
-            button1.Location = new Point(1590, 13);
-            button1.Name = "button1";
-            button1.Size = new Size(21, 21);
-            button1.TabIndex = 2;
-            button1.Text = ".";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // questionMark_Btn
-            // 
-            questionMark_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            questionMark_Btn.FlatStyle = FlatStyle.Flat;
-            questionMark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            questionMark_Btn.ForeColor = SystemColors.ButtonFace;
-            questionMark_Btn.Location = new Point(1617, 13);
-            questionMark_Btn.Name = "questionMark_Btn";
-            questionMark_Btn.Size = new Size(21, 21);
-            questionMark_Btn.TabIndex = 1;
-            questionMark_Btn.Text = "X";
-            questionMark_Btn.UseVisualStyleBackColor = true;
-            questionMark_Btn.Click += questionMark_Btn_Click;
+            qmark_Btn.Anchor = AnchorStyles.Right;
+            qmark_Btn.FlatStyle = FlatStyle.Flat;
+            qmark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            qmark_Btn.ForeColor = SystemColors.ButtonFace;
+            qmark_Btn.Location = new Point(1619, 13);
+            qmark_Btn.Name = "qmark_Btn";
+            qmark_Btn.Size = new Size(21, 21);
+            qmark_Btn.TabIndex = 4;
+            qmark_Btn.Text = "?";
+            qmark_Btn.UseVisualStyleBackColor = true;
+            qmark_Btn.Click += button3_Click;
             // 
             // header_Lbl
             // 
@@ -570,68 +317,201 @@
             mainPanel.Location = new Point(250, 55);
             mainPanel.Name = "mainPanel";
             mainPanel.Size = new Size(1654, 986);
-            mainPanel.TabIndex = 2;
+            mainPanel.TabIndex = 4;
+            // 
+            // crud_Panel
+            // 
+            crud_Panel.AutoScroll = true;
+            crud_Panel.BackColor = Color.DimGray;
+            crud_Panel.Controls.Add(radioButton2);
+            crud_Panel.Controls.Add(radioButton1);
+            crud_Panel.Controls.Add(swap_Rdb);
+            crud_Panel.Controls.Add(deployment_Rdb);
+            crud_Panel.Controls.Add(transfer_Rdb);
+            crud_Panel.Controls.Add(update_Rdb);
+            crud_Panel.Controls.Add(read_Rdb);
+            crud_Panel.Controls.Add(create_Rdb);
+            crud_Panel.Dock = DockStyle.Top;
+            crud_Panel.Location = new Point(250, 55);
+            crud_Panel.Name = "crud_Panel";
+            crud_Panel.Padding = new Padding(8, 0, 8, 0);
+            crud_Panel.Size = new Size(1654, 47);
+            crud_Panel.TabIndex = 7;
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Dock = DockStyle.Left;
+            radioButton2.ForeColor = Color.White;
+            radioButton2.Location = new Point(914, 0);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Padding = new Padding(50, 0, 0, 0);
+            radioButton2.Size = new Size(138, 47);
+            radioButton2.TabIndex = 7;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "Recyle Bin";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Dock = DockStyle.Left;
+            radioButton1.ForeColor = Color.White;
+            radioButton1.Location = new Point(740, 0);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Padding = new Padding(50, 0, 0, 0);
+            radioButton1.Size = new Size(174, 47);
+            radioButton1.TabIndex = 6;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Borrowed Items";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // swap_Rdb
+            // 
+            swap_Rdb.AutoSize = true;
+            swap_Rdb.Dock = DockStyle.Left;
+            swap_Rdb.ForeColor = Color.White;
+            swap_Rdb.Location = new Point(631, 0);
+            swap_Rdb.Name = "swap_Rdb";
+            swap_Rdb.Padding = new Padding(50, 0, 0, 0);
+            swap_Rdb.Size = new Size(109, 47);
+            swap_Rdb.TabIndex = 5;
+            swap_Rdb.TabStop = true;
+            swap_Rdb.Text = "Swap";
+            swap_Rdb.UseVisualStyleBackColor = true;
+            swap_Rdb.CheckedChanged += swap_Rdb_CheckedChanged;
+            // 
+            // deployment_Rdb
+            // 
+            deployment_Rdb.AutoSize = true;
+            deployment_Rdb.Dock = DockStyle.Left;
+            deployment_Rdb.ForeColor = Color.White;
+            deployment_Rdb.Location = new Point(479, 0);
+            deployment_Rdb.Name = "deployment_Rdb";
+            deployment_Rdb.Padding = new Padding(50, 0, 0, 0);
+            deployment_Rdb.Size = new Size(152, 47);
+            deployment_Rdb.TabIndex = 4;
+            deployment_Rdb.TabStop = true;
+            deployment_Rdb.Text = "Deployment";
+            deployment_Rdb.UseVisualStyleBackColor = true;
+            deployment_Rdb.CheckedChanged += deployment_Rdb_CheckedChanged;
+            // 
+            // transfer_Rdb
+            // 
+            transfer_Rdb.AutoSize = true;
+            transfer_Rdb.Dock = DockStyle.Left;
+            transfer_Rdb.ForeColor = Color.White;
+            transfer_Rdb.Location = new Point(354, 0);
+            transfer_Rdb.Name = "transfer_Rdb";
+            transfer_Rdb.Padding = new Padding(50, 0, 0, 0);
+            transfer_Rdb.Size = new Size(125, 47);
+            transfer_Rdb.TabIndex = 3;
+            transfer_Rdb.TabStop = true;
+            transfer_Rdb.Text = "Transfer";
+            transfer_Rdb.UseVisualStyleBackColor = true;
+            transfer_Rdb.CheckedChanged += transfer_Rdb_CheckedChanged;
+            // 
+            // update_Rdb
+            // 
+            update_Rdb.AutoSize = true;
+            update_Rdb.Dock = DockStyle.Left;
+            update_Rdb.ForeColor = Color.White;
+            update_Rdb.Location = new Point(232, 0);
+            update_Rdb.Name = "update_Rdb";
+            update_Rdb.Padding = new Padding(50, 0, 0, 0);
+            update_Rdb.Size = new Size(122, 47);
+            update_Rdb.TabIndex = 2;
+            update_Rdb.TabStop = true;
+            update_Rdb.Text = "Update";
+            update_Rdb.UseVisualStyleBackColor = true;
+            update_Rdb.CheckedChanged += update_Rdb_CheckedChanged;
+            // 
+            // read_Rdb
+            // 
+            read_Rdb.AutoSize = true;
+            read_Rdb.Dock = DockStyle.Left;
+            read_Rdb.ForeColor = Color.White;
+            read_Rdb.Location = new Point(125, 0);
+            read_Rdb.Name = "read_Rdb";
+            read_Rdb.Padding = new Padding(50, 0, 0, 0);
+            read_Rdb.Size = new Size(107, 47);
+            read_Rdb.TabIndex = 1;
+            read_Rdb.TabStop = true;
+            read_Rdb.Text = "Read";
+            read_Rdb.UseVisualStyleBackColor = true;
+            read_Rdb.CheckedChanged += read_Rdb_CheckedChanged;
+            // 
+            // create_Rdb
+            // 
+            create_Rdb.AutoSize = true;
+            create_Rdb.Dock = DockStyle.Left;
+            create_Rdb.ForeColor = Color.White;
+            create_Rdb.Location = new Point(8, 0);
+            create_Rdb.Name = "create_Rdb";
+            create_Rdb.Padding = new Padding(50, 0, 0, 0);
+            create_Rdb.Size = new Size(117, 47);
+            create_Rdb.TabIndex = 0;
+            create_Rdb.TabStop = true;
+            create_Rdb.Text = "Create";
+            create_Rdb.UseVisualStyleBackColor = true;
+            create_Rdb.CheckedChanged += create_Rdb_CheckedChanged;
             // 
             // FrontPage_Final
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(crud_Panel);
             Controls.Add(mainPanel);
             Controls.Add(panel3);
             Controls.Add(sideMenu_Panel);
             Font = new Font("Segoe UI", 10F);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "FrontPage_Final";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrontPage_Final";
             Load += FrontPage_Final_Load;
             sideMenu_Panel.ResumeLayout(false);
+            logout_Panel.ResumeLayout(false);
+            logout_Panel.PerformLayout();
             panel5.ResumeLayout(false);
             fileMaintenance_SubMenuPanel.ResumeLayout(false);
             logo_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panelLogo.ResumeLayout(false);
-            logout_Panel.ResumeLayout(false);
-            logout_Panel.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
+            crud_Panel.ResumeLayout(false);
+            crud_Panel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
         private Panel sideMenu_Panel;
         private Panel panel3;
-        private Panel mainPanel;
-        private Panel panelLogo;
-        private Button manageRoles_Btn;
-        private Button createReport_Btn;
-        private Panel logout_Panel;
-        private Button logout_Btn;
         private Panel logo_Panel;
         private Panel panel5;
-        private Button disposed_Btn;
-        private Button cleaning_Btn;
-        private Button repairing_Btn;
-        private Button swap_Btn;
-        private Button deployment_Btn;
         private Panel fileMaintenance_SubMenuPanel;
-        private Button transfer_Btn;
-        private Button update_Btn;
-        private Button read_Btn;
-        private Button create_Btn;
         private Button fileMaintenance_Btn;
         private Button dashboard_Btn;
-        private Button questionMark_Btn;
-        private Button borrowedItems_Btn;
         private Button artificialIntelligence_Btn;
-        private Button recyleBin_Btn;
-        private Button button3;
-        private Button button2;
-        private Button button1;
-        private PictureBox pictureBox1;
+        private Button qmark_Btn;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         public Label header_Lbl;
+        private Button assetManagement_Btn;
+        private Panel mainPanel;
+        private Panel crud_Panel;
+        private RadioButton transfer_Rdb;
+        private RadioButton update_Rdb;
+        private RadioButton read_Rdb;
+        private RadioButton create_Rdb;
+        private RadioButton deployment_Rdb;
+        private RadioButton swap_Rdb;
+        private PictureBox pictureBox1;
+        private Panel logout_Panel;
+        private Button logout_Btn;
+        private Button button2;
+        private Button button1;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
     }
 }

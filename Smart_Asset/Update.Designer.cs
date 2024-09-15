@@ -50,6 +50,7 @@
             // panel1
             // 
             panel1.AutoScroll = true;
+            panel1.BackColor = Color.FromArgb(10, 18, 45);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(dataGridView1);
@@ -57,6 +58,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 55, 0, 0);
             panel1.Size = new Size(1125, 800);
             panel1.TabIndex = 9;
             // 
@@ -67,7 +69,7 @@
             panel3.Controls.Add(show2_Btn);
             panel3.Controls.Add(serialNo_Cmb);
             panel3.Controls.Add(label3);
-            panel3.Location = new Point(572, 12);
+            panel3.Location = new Point(572, 67);
             panel3.Name = "panel3";
             panel3.Size = new Size(541, 102);
             panel3.TabIndex = 10;
@@ -125,9 +127,9 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
-            dataGridView1.Location = new Point(11, 120);
+            dataGridView1.Location = new Point(11, 175);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1102, 625);
+            dataGridView1.Size = new Size(1102, 570);
             dataGridView1.TabIndex = 4;
             dataGridView1.MouseClick += dataGridView1_MouseClick;
             // 
@@ -140,7 +142,7 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(unit_Cmb);
             panel2.Controls.Add(label2);
-            panel2.Location = new Point(11, 12);
+            panel2.Location = new Point(11, 67);
             panel2.Name = "panel2";
             panel2.Size = new Size(555, 102);
             panel2.TabIndex = 8;

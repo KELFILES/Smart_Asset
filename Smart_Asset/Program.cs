@@ -8,13 +8,13 @@ namespace Smart_Asset
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            //Application.Run(new Startup());
-            //Application.Run(new FrontPage());
-            Application.Run(new FrontPage_Final());
+            // These must be called before creating the first form
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
+            // Run your main form
+            //Application.Run(new FrontPage_Final());
+            Application.Run(new Startup());
         }
     }
 }

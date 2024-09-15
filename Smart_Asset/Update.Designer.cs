@@ -129,6 +129,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(1102, 625);
             dataGridView1.TabIndex = 4;
+            dataGridView1.MouseClick += dataGridView1_MouseClick;
             // 
             // panel2
             // 

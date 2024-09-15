@@ -59,6 +59,7 @@
             manageUsers_Lbl.Anchor = AnchorStyles.None;
             manageUsers_Lbl.AutoSize = true;
             manageUsers_Lbl.Cursor = Cursors.Hand;
+            manageUsers_Lbl.FlatStyle = FlatStyle.Flat;
             manageUsers_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
             manageUsers_Lbl.Location = new Point(528, 604);
             manageUsers_Lbl.Name = "manageUsers_Lbl";
@@ -83,6 +84,7 @@
             forgotPassword_Lbl.Anchor = AnchorStyles.None;
             forgotPassword_Lbl.AutoSize = true;
             forgotPassword_Lbl.Cursor = Cursors.Hand;
+            forgotPassword_Lbl.FlatStyle = FlatStyle.Flat;
             forgotPassword_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
             forgotPassword_Lbl.Location = new Point(518, 577);
             forgotPassword_Lbl.Name = "forgotPassword_Lbl";

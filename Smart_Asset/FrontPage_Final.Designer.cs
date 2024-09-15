@@ -31,8 +31,8 @@
             sideMenu_Panel = new Panel();
             panel5 = new Panel();
             artificialIntelligence_Btn = new Button();
-            borrowedItems_Btn = new Button();
             recyleBin_Btn = new Button();
+            borrowedItems_Btn = new Button();
             disposed_Btn = new Button();
             cleaning_Btn = new Button();
             repairing_Btn = new Button();
@@ -46,20 +46,29 @@
             fileMaintenance_Btn = new Button();
             dashboard_Btn = new Button();
             logo_Panel = new Panel();
+            pictureBox1 = new PictureBox();
             panelLogo = new Panel();
             manageRoles_Btn = new Button();
             createReport_Btn = new Button();
             logout_Panel = new Panel();
             logout_Btn = new Button();
             panel3 = new Panel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
+            questionMark_Btn = new Button();
             header_Lbl = new Label();
             mainPanel = new Panel();
             sideMenu_Panel.SuspendLayout();
             panel5.SuspendLayout();
             fileMaintenance_SubMenuPanel.SuspendLayout();
+            logo_Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelLogo.SuspendLayout();
             logout_Panel.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // sideMenu_Panel
@@ -78,9 +87,10 @@
             // 
             // panel5
             // 
+            panel5.BackColor = Color.FromArgb(11, 8, 20);
             panel5.Controls.Add(artificialIntelligence_Btn);
-            panel5.Controls.Add(borrowedItems_Btn);
             panel5.Controls.Add(recyleBin_Btn);
+            panel5.Controls.Add(borrowedItems_Btn);
             panel5.Controls.Add(disposed_Btn);
             panel5.Controls.Add(cleaning_Btn);
             panel5.Controls.Add(repairing_Btn);
@@ -105,31 +115,12 @@
             artificialIntelligence_Btn.Name = "artificialIntelligence_Btn";
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
             artificialIntelligence_Btn.Size = new Size(246, 45);
-            artificialIntelligence_Btn.TabIndex = 31;
+            artificialIntelligence_Btn.TabIndex = 36;
             artificialIntelligence_Btn.Text = "Artificial Intelligence";
             artificialIntelligence_Btn.TextAlign = ContentAlignment.MiddleLeft;
             artificialIntelligence_Btn.UseVisualStyleBackColor = true;
-            artificialIntelligence_Btn.Click += artificialIntelligence_Btn_Click;
             artificialIntelligence_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
             artificialIntelligence_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
-            // 
-            // borrowedItems_Btn
-            // 
-            borrowedItems_Btn.Dock = DockStyle.Top;
-            borrowedItems_Btn.FlatAppearance.BorderSize = 0;
-            borrowedItems_Btn.FlatStyle = FlatStyle.Flat;
-            borrowedItems_Btn.ForeColor = Color.Gainsboro;
-            borrowedItems_Btn.Location = new Point(0, 527);
-            borrowedItems_Btn.Name = "borrowedItems_Btn";
-            borrowedItems_Btn.Padding = new Padding(10, 0, 0, 0);
-            borrowedItems_Btn.Size = new Size(246, 45);
-            borrowedItems_Btn.TabIndex = 30;
-            borrowedItems_Btn.Text = "Borrowed Items";
-            borrowedItems_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            borrowedItems_Btn.UseVisualStyleBackColor = true;
-            borrowedItems_Btn.Click += borrowedItems_Btn_Click;
-            borrowedItems_Btn.MouseEnter += borrowedItems_Btn_MouseEnter;
-            borrowedItems_Btn.MouseLeave += borrowedItems_Btn_MouseLeave;
             // 
             // recyleBin_Btn
             // 
@@ -137,17 +128,33 @@
             recyleBin_Btn.FlatAppearance.BorderSize = 0;
             recyleBin_Btn.FlatStyle = FlatStyle.Flat;
             recyleBin_Btn.ForeColor = Color.Gainsboro;
-            recyleBin_Btn.Location = new Point(0, 482);
+            recyleBin_Btn.Location = new Point(0, 527);
             recyleBin_Btn.Name = "recyleBin_Btn";
             recyleBin_Btn.Padding = new Padding(10, 0, 0, 0);
             recyleBin_Btn.Size = new Size(246, 45);
-            recyleBin_Btn.TabIndex = 29;
+            recyleBin_Btn.TabIndex = 35;
             recyleBin_Btn.Text = "Recycle Bin";
             recyleBin_Btn.TextAlign = ContentAlignment.MiddleLeft;
             recyleBin_Btn.UseVisualStyleBackColor = true;
-            recyleBin_Btn.Click += recyleBin_Btn_Click;
             recyleBin_Btn.MouseEnter += recyleBin_Btn_MouseEnter;
             recyleBin_Btn.MouseLeave += recyleBin_Btn_MouseLeave;
+            // 
+            // borrowedItems_Btn
+            // 
+            borrowedItems_Btn.Dock = DockStyle.Top;
+            borrowedItems_Btn.FlatAppearance.BorderSize = 0;
+            borrowedItems_Btn.FlatStyle = FlatStyle.Flat;
+            borrowedItems_Btn.ForeColor = Color.Gainsboro;
+            borrowedItems_Btn.Location = new Point(0, 482);
+            borrowedItems_Btn.Name = "borrowedItems_Btn";
+            borrowedItems_Btn.Padding = new Padding(10, 0, 0, 0);
+            borrowedItems_Btn.Size = new Size(246, 45);
+            borrowedItems_Btn.TabIndex = 32;
+            borrowedItems_Btn.Text = "Borrowed Items";
+            borrowedItems_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            borrowedItems_Btn.UseVisualStyleBackColor = true;
+            borrowedItems_Btn.MouseEnter += borrowedItems_Btn_MouseEnter;
+            borrowedItems_Btn.MouseLeave += borrowedItems_Btn_MouseLeave;
             // 
             // disposed_Btn
             // 
@@ -330,6 +337,7 @@
             fileMaintenance_Btn.FlatAppearance.BorderSize = 0;
             fileMaintenance_Btn.FlatStyle = FlatStyle.Flat;
             fileMaintenance_Btn.ForeColor = Color.Gainsboro;
+            fileMaintenance_Btn.ImageAlign = ContentAlignment.MiddleRight;
             fileMaintenance_Btn.Location = new Point(0, 45);
             fileMaintenance_Btn.Name = "fileMaintenance_Btn";
             fileMaintenance_Btn.Padding = new Padding(10, 0, 0, 0);
@@ -362,11 +370,25 @@
             // 
             // logo_Panel
             // 
+            logo_Panel.Controls.Add(pictureBox1);
             logo_Panel.Dock = DockStyle.Top;
             logo_Panel.Location = new Point(0, 0);
             logo_Panel.Name = "logo_Panel";
             logo_Panel.Size = new Size(246, 100);
             logo_Panel.TabIndex = 47;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Image = Properties.Resources.sti_Image;
+            pictureBox1.ImageLocation = "";
+            pictureBox1.InitialImage = null;
+            pictureBox1.Location = new Point(63, 20);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(104, 52);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // panelLogo
             // 
@@ -442,6 +464,12 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(11, 7, 17);
+            panel3.BorderStyle = BorderStyle.Fixed3D;
+            panel3.Controls.Add(iconPictureBox1);
+            panel3.Controls.Add(button3);
+            panel3.Controls.Add(button2);
+            panel3.Controls.Add(button1);
+            panel3.Controls.Add(questionMark_Btn);
             panel3.Controls.Add(header_Lbl);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(250, 0);
@@ -449,6 +477,78 @@
             panel3.Padding = new Padding(0, 10, 0, 0);
             panel3.Size = new Size(1654, 55);
             panel3.TabIndex = 1;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.Anchor = AnchorStyles.Top;
+            iconPictureBox1.BackColor = Color.FromArgb(11, 8, 20);
+            iconPictureBox1.ForeColor = Color.Red;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.GaugeSimpleMed;
+            iconPictureBox1.IconColor = Color.Red;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 42;
+            iconPictureBox1.Location = new Point(16, 7);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(42, 42);
+            iconPictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            iconPictureBox1.TabIndex = 37;
+            iconPictureBox1.TabStop = false;
+            // 
+            // button3
+            // 
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button3.ForeColor = SystemColors.ButtonFace;
+            button3.Location = new Point(1536, 13);
+            button3.Name = "button3";
+            button3.Size = new Size(21, 21);
+            button3.TabIndex = 4;
+            button3.Text = "?";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.ForeColor = SystemColors.ButtonFace;
+            button2.Location = new Point(1563, 13);
+            button2.Name = "button2";
+            button2.Size = new Size(21, 21);
+            button2.TabIndex = 3;
+            button2.Text = "-";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonFace;
+            button1.Location = new Point(1590, 13);
+            button1.Name = "button1";
+            button1.Size = new Size(21, 21);
+            button1.TabIndex = 2;
+            button1.Text = ".";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // questionMark_Btn
+            // 
+            questionMark_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            questionMark_Btn.FlatStyle = FlatStyle.Flat;
+            questionMark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            questionMark_Btn.ForeColor = SystemColors.ButtonFace;
+            questionMark_Btn.Location = new Point(1617, 13);
+            questionMark_Btn.Name = "questionMark_Btn";
+            questionMark_Btn.Size = new Size(21, 21);
+            questionMark_Btn.TabIndex = 1;
+            questionMark_Btn.Text = "X";
+            questionMark_Btn.UseVisualStyleBackColor = true;
+            questionMark_Btn.Click += questionMark_Btn_Click;
             // 
             // header_Lbl
             // 
@@ -481,6 +581,7 @@
             Controls.Add(panel3);
             Controls.Add(sideMenu_Panel);
             Font = new Font("Segoe UI", 10F);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FrontPage_Final";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrontPage_Final";
@@ -488,11 +589,14 @@
             sideMenu_Panel.ResumeLayout(false);
             panel5.ResumeLayout(false);
             fileMaintenance_SubMenuPanel.ResumeLayout(false);
+            logo_Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelLogo.ResumeLayout(false);
             logout_Panel.ResumeLayout(false);
             logout_Panel.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -507,9 +611,6 @@
         private Button logout_Btn;
         private Panel logo_Panel;
         private Panel panel5;
-        private Button artificialIntelligence_Btn;
-        private Button borrowedItems_Btn;
-        private Button recyleBin_Btn;
         private Button disposed_Btn;
         private Button cleaning_Btn;
         private Button repairing_Btn;
@@ -522,6 +623,15 @@
         private Button create_Btn;
         private Button fileMaintenance_Btn;
         private Button dashboard_Btn;
-        private Label header_Lbl;
+        private Button questionMark_Btn;
+        private Button borrowedItems_Btn;
+        private Button artificialIntelligence_Btn;
+        private Button recyleBin_Btn;
+        private Button button3;
+        private Button button2;
+        private Button button1;
+        private PictureBox pictureBox1;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        public Label header_Lbl;
     }
 }

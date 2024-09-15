@@ -29,41 +29,41 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            type_Lbl = new Label();
-            Model_Lbl = new Label();
-            Serial_Lbl = new Label();
-            Cost_Lbl = new Label();
-            Warranty_Lbl = new Label();
-            Supplier_Lbl = new Label();
-            PurchaseDate_Lbl = new Label();
-            label13 = new Label();
-            label14 = new Label();
-            label15 = new Label();
-            add_Btn = new Button();
-            type_Cmb = new ComboBox();
-            model_Tb = new TextBox();
-            serial_Tb = new TextBox();
-            cost_Tb = new TextBox();
-            years_numericUpDown = new NumericUpDown();
-            months_numericUpDown = new NumericUpDown();
-            days_numericUpDown = new NumericUpDown();
-            supplier_Tb = new TextBox();
-            purchaseDate_Dtp = new DateTimePicker();
-            autoFill_checkBox = new CheckBox();
-            register_Btn = new Button();
             Clear_Btn = new Button();
+            register_Btn = new Button();
+            autoFill_checkBox = new CheckBox();
+            purchaseDate_Dtp = new DateTimePicker();
+            supplier_Tb = new TextBox();
+            days_numericUpDown = new NumericUpDown();
+            months_numericUpDown = new NumericUpDown();
+            years_numericUpDown = new NumericUpDown();
+            cost_Tb = new TextBox();
+            serial_Tb = new TextBox();
+            model_Tb = new TextBox();
+            type_Cmb = new ComboBox();
+            add_Btn = new Button();
+            label15 = new Label();
+            label14 = new Label();
+            label13 = new Label();
+            PurchaseDate_Lbl = new Label();
+            Supplier_Lbl = new Label();
+            Warranty_Lbl = new Label();
+            Cost_Lbl = new Label();
+            Serial_Lbl = new Label();
+            Model_Lbl = new Label();
+            type_Lbl = new Label();
             panel3 = new Panel();
-            label12 = new Label();
-            qr_pictureBox = new PictureBox();
-            label10 = new Label();
-            generate_Btn = new Button();
-            button3 = new Button();
             serial2_Tb = new TextBox();
+            button3 = new Button();
+            generate_Btn = new Button();
+            label10 = new Label();
+            qr_pictureBox = new PictureBox();
+            label12 = new Label();
             panel2 = new Panel();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)years_numericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)months_numericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)days_numericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)months_numericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)years_numericUpDown).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)qr_pictureBox).BeginInit();
             panel2.SuspendLayout();
@@ -101,226 +101,16 @@
             panel1.Size = new Size(1246, 491);
             panel1.TabIndex = 49;
             // 
-            // type_Lbl
+            // Clear_Btn
             // 
-            type_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            type_Lbl.AutoSize = true;
-            type_Lbl.BackColor = Color.White;
-            type_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            type_Lbl.Location = new Point(39, 130);
-            type_Lbl.Name = "type_Lbl";
-            type_Lbl.Size = new Size(50, 20);
-            type_Lbl.TabIndex = 49;
-            type_Lbl.Text = "Type:";
-            // 
-            // Model_Lbl
-            // 
-            Model_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Model_Lbl.AutoSize = true;
-            Model_Lbl.BackColor = Color.White;
-            Model_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Model_Lbl.Location = new Point(39, 164);
-            Model_Lbl.Name = "Model_Lbl";
-            Model_Lbl.Size = new Size(59, 20);
-            Model_Lbl.TabIndex = 50;
-            Model_Lbl.Text = "Model:";
-            // 
-            // Serial_Lbl
-            // 
-            Serial_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Serial_Lbl.AutoSize = true;
-            Serial_Lbl.BackColor = Color.White;
-            Serial_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Serial_Lbl.Location = new Point(39, 199);
-            Serial_Lbl.Name = "Serial_Lbl";
-            Serial_Lbl.Size = new Size(87, 20);
-            Serial_Lbl.TabIndex = 51;
-            Serial_Lbl.Text = "Serial No.:";
-            // 
-            // Cost_Lbl
-            // 
-            Cost_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Cost_Lbl.AutoSize = true;
-            Cost_Lbl.BackColor = Color.White;
-            Cost_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Cost_Lbl.Location = new Point(40, 229);
-            Cost_Lbl.Name = "Cost_Lbl";
-            Cost_Lbl.Size = new Size(49, 20);
-            Cost_Lbl.TabIndex = 52;
-            Cost_Lbl.Text = "Cost:";
-            // 
-            // Warranty_Lbl
-            // 
-            Warranty_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Warranty_Lbl.AutoSize = true;
-            Warranty_Lbl.BackColor = Color.White;
-            Warranty_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Warranty_Lbl.Location = new Point(39, 264);
-            Warranty_Lbl.Name = "Warranty_Lbl";
-            Warranty_Lbl.Size = new Size(82, 20);
-            Warranty_Lbl.TabIndex = 53;
-            Warranty_Lbl.Text = "Warranty:";
-            // 
-            // Supplier_Lbl
-            // 
-            Supplier_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Supplier_Lbl.AutoSize = true;
-            Supplier_Lbl.BackColor = Color.White;
-            Supplier_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Supplier_Lbl.Location = new Point(39, 298);
-            Supplier_Lbl.Name = "Supplier_Lbl";
-            Supplier_Lbl.Size = new Size(75, 20);
-            Supplier_Lbl.TabIndex = 54;
-            Supplier_Lbl.Text = "Supplier:";
-            // 
-            // PurchaseDate_Lbl
-            // 
-            PurchaseDate_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            PurchaseDate_Lbl.AutoSize = true;
-            PurchaseDate_Lbl.BackColor = Color.White;
-            PurchaseDate_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            PurchaseDate_Lbl.Location = new Point(40, 334);
-            PurchaseDate_Lbl.Name = "PurchaseDate_Lbl";
-            PurchaseDate_Lbl.Size = new Size(126, 20);
-            PurchaseDate_Lbl.TabIndex = 55;
-            PurchaseDate_Lbl.Text = "Purchase Date:";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.BackColor = Color.White;
-            label13.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label13.Location = new Point(228, 263);
-            label13.Name = "label13";
-            label13.Size = new Size(57, 20);
-            label13.TabIndex = 56;
-            label13.Text = "Years:";
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.BackColor = Color.White;
-            label14.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label14.Location = new Point(361, 263);
-            label14.Name = "label14";
-            label14.Size = new Size(69, 20);
-            label14.TabIndex = 57;
-            label14.Text = "Months:";
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.BackColor = Color.White;
-            label15.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label15.Location = new Point(508, 263);
-            label15.Name = "label15";
-            label15.Size = new Size(53, 20);
-            label15.TabIndex = 58;
-            label15.Text = "Days:";
-            // 
-            // add_Btn
-            // 
-            add_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            add_Btn.Font = new Font("Segoe UI", 12F);
-            add_Btn.Location = new Point(1096, 120);
-            add_Btn.Name = "add_Btn";
-            add_Btn.Size = new Size(33, 28);
-            add_Btn.TabIndex = 59;
-            add_Btn.Text = "+";
-            add_Btn.UseVisualStyleBackColor = true;
-            add_Btn.Click += add_Btn_Click;
-            // 
-            // type_Cmb
-            // 
-            type_Cmb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            type_Cmb.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            type_Cmb.DropDownHeight = 150;
-            type_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
-            type_Cmb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            type_Cmb.FormattingEnabled = true;
-            type_Cmb.IntegralHeight = false;
-            type_Cmb.Location = new Point(228, 121);
-            type_Cmb.MaxDropDownItems = 20;
-            type_Cmb.Name = "type_Cmb";
-            type_Cmb.Size = new Size(862, 28);
-            type_Cmb.TabIndex = 60;
-            type_Cmb.DropDown += type_Cmb_DropDown;
-            // 
-            // model_Tb
-            // 
-            model_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            model_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            model_Tb.Location = new Point(228, 156);
-            model_Tb.Name = "model_Tb";
-            model_Tb.Size = new Size(901, 27);
-            model_Tb.TabIndex = 61;
-            // 
-            // serial_Tb
-            // 
-            serial_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            serial_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            serial_Tb.Location = new Point(228, 189);
-            serial_Tb.Name = "serial_Tb";
-            serial_Tb.Size = new Size(901, 27);
-            serial_Tb.TabIndex = 62;
-            // 
-            // cost_Tb
-            // 
-            cost_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            cost_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            cost_Tb.Location = new Point(228, 222);
-            cost_Tb.Name = "cost_Tb";
-            cost_Tb.Size = new Size(901, 27);
-            cost_Tb.TabIndex = 63;
-            // 
-            // years_numericUpDown
-            // 
-            years_numericUpDown.Location = new Point(291, 261);
-            years_numericUpDown.Name = "years_numericUpDown";
-            years_numericUpDown.Size = new Size(48, 23);
-            years_numericUpDown.TabIndex = 64;
-            // 
-            // months_numericUpDown
-            // 
-            months_numericUpDown.Location = new Point(437, 260);
-            months_numericUpDown.Name = "months_numericUpDown";
-            months_numericUpDown.Size = new Size(48, 23);
-            months_numericUpDown.TabIndex = 65;
-            // 
-            // days_numericUpDown
-            // 
-            days_numericUpDown.Location = new Point(567, 261);
-            days_numericUpDown.Name = "days_numericUpDown";
-            days_numericUpDown.Size = new Size(48, 23);
-            days_numericUpDown.TabIndex = 66;
-            // 
-            // supplier_Tb
-            // 
-            supplier_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            supplier_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            supplier_Tb.Location = new Point(228, 298);
-            supplier_Tb.Name = "supplier_Tb";
-            supplier_Tb.Size = new Size(901, 27);
-            supplier_Tb.TabIndex = 67;
-            // 
-            // purchaseDate_Dtp
-            // 
-            purchaseDate_Dtp.Checked = false;
-            purchaseDate_Dtp.Location = new Point(228, 331);
-            purchaseDate_Dtp.Name = "purchaseDate_Dtp";
-            purchaseDate_Dtp.Size = new Size(211, 23);
-            purchaseDate_Dtp.TabIndex = 68;
-            // 
-            // autoFill_checkBox
-            // 
-            autoFill_checkBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            autoFill_checkBox.AutoSize = true;
-            autoFill_checkBox.Location = new Point(1123, 59);
-            autoFill_checkBox.Name = "autoFill_checkBox";
-            autoFill_checkBox.Size = new Size(80, 19);
-            autoFill_checkBox.TabIndex = 69;
-            autoFill_checkBox.Text = "AUTO FILL";
-            autoFill_checkBox.UseVisualStyleBackColor = true;
+            Clear_Btn.Anchor = AnchorStyles.Top;
+            Clear_Btn.Location = new Point(1123, 75);
+            Clear_Btn.Name = "Clear_Btn";
+            Clear_Btn.Size = new Size(80, 30);
+            Clear_Btn.TabIndex = 71;
+            Clear_Btn.Text = "CLEAR";
+            Clear_Btn.UseVisualStyleBackColor = true;
+            Clear_Btn.Click += Clear_Btn_Click;
             // 
             // register_Btn
             // 
@@ -334,16 +124,226 @@
             register_Btn.UseVisualStyleBackColor = true;
             register_Btn.Click += register_Btn_Click;
             // 
-            // Clear_Btn
+            // autoFill_checkBox
             // 
-            Clear_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            Clear_Btn.Location = new Point(1123, 84);
-            Clear_Btn.Name = "Clear_Btn";
-            Clear_Btn.Size = new Size(75, 23);
-            Clear_Btn.TabIndex = 71;
-            Clear_Btn.Text = "CLEAR";
-            Clear_Btn.UseVisualStyleBackColor = true;
-            Clear_Btn.Click += Clear_Btn_Click;
+            autoFill_checkBox.Anchor = AnchorStyles.Top;
+            autoFill_checkBox.AutoSize = true;
+            autoFill_checkBox.Location = new Point(1123, 50);
+            autoFill_checkBox.Name = "autoFill_checkBox";
+            autoFill_checkBox.Size = new Size(80, 19);
+            autoFill_checkBox.TabIndex = 69;
+            autoFill_checkBox.Text = "AUTO FILL";
+            autoFill_checkBox.UseVisualStyleBackColor = true;
+            // 
+            // purchaseDate_Dtp
+            // 
+            purchaseDate_Dtp.Anchor = AnchorStyles.Top;
+            purchaseDate_Dtp.Checked = false;
+            purchaseDate_Dtp.Location = new Point(228, 331);
+            purchaseDate_Dtp.Name = "purchaseDate_Dtp";
+            purchaseDate_Dtp.Size = new Size(211, 23);
+            purchaseDate_Dtp.TabIndex = 68;
+            // 
+            // supplier_Tb
+            // 
+            supplier_Tb.Anchor = AnchorStyles.Top;
+            supplier_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            supplier_Tb.Location = new Point(228, 298);
+            supplier_Tb.Name = "supplier_Tb";
+            supplier_Tb.Size = new Size(901, 27);
+            supplier_Tb.TabIndex = 67;
+            // 
+            // days_numericUpDown
+            // 
+            days_numericUpDown.Anchor = AnchorStyles.Top;
+            days_numericUpDown.Location = new Point(567, 261);
+            days_numericUpDown.Name = "days_numericUpDown";
+            days_numericUpDown.Size = new Size(48, 23);
+            days_numericUpDown.TabIndex = 66;
+            // 
+            // months_numericUpDown
+            // 
+            months_numericUpDown.Anchor = AnchorStyles.Top;
+            months_numericUpDown.Location = new Point(437, 260);
+            months_numericUpDown.Name = "months_numericUpDown";
+            months_numericUpDown.Size = new Size(48, 23);
+            months_numericUpDown.TabIndex = 65;
+            // 
+            // years_numericUpDown
+            // 
+            years_numericUpDown.Anchor = AnchorStyles.Top;
+            years_numericUpDown.Location = new Point(291, 261);
+            years_numericUpDown.Name = "years_numericUpDown";
+            years_numericUpDown.Size = new Size(48, 23);
+            years_numericUpDown.TabIndex = 64;
+            // 
+            // cost_Tb
+            // 
+            cost_Tb.Anchor = AnchorStyles.Top;
+            cost_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            cost_Tb.Location = new Point(228, 222);
+            cost_Tb.Name = "cost_Tb";
+            cost_Tb.Size = new Size(901, 27);
+            cost_Tb.TabIndex = 63;
+            // 
+            // serial_Tb
+            // 
+            serial_Tb.Anchor = AnchorStyles.Top;
+            serial_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            serial_Tb.Location = new Point(228, 189);
+            serial_Tb.Name = "serial_Tb";
+            serial_Tb.Size = new Size(901, 27);
+            serial_Tb.TabIndex = 62;
+            // 
+            // model_Tb
+            // 
+            model_Tb.Anchor = AnchorStyles.Top;
+            model_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            model_Tb.Location = new Point(228, 156);
+            model_Tb.Name = "model_Tb";
+            model_Tb.Size = new Size(901, 27);
+            model_Tb.TabIndex = 61;
+            // 
+            // type_Cmb
+            // 
+            type_Cmb.Anchor = AnchorStyles.Top;
+            type_Cmb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            type_Cmb.DropDownHeight = 150;
+            type_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            type_Cmb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            type_Cmb.FormattingEnabled = true;
+            type_Cmb.IntegralHeight = false;
+            type_Cmb.Location = new Point(228, 121);
+            type_Cmb.MaxDropDownItems = 20;
+            type_Cmb.Name = "type_Cmb";
+            type_Cmb.Size = new Size(862, 28);
+            type_Cmb.TabIndex = 60;
+            type_Cmb.DropDown += type_Cmb_DropDown;
+            // 
+            // add_Btn
+            // 
+            add_Btn.Anchor = AnchorStyles.Top;
+            add_Btn.Font = new Font("Segoe UI", 12F);
+            add_Btn.Location = new Point(1096, 120);
+            add_Btn.Name = "add_Btn";
+            add_Btn.Size = new Size(33, 28);
+            add_Btn.TabIndex = 59;
+            add_Btn.Text = "+";
+            add_Btn.UseVisualStyleBackColor = true;
+            add_Btn.Click += add_Btn_Click;
+            // 
+            // label15
+            // 
+            label15.Anchor = AnchorStyles.Top;
+            label15.AutoSize = true;
+            label15.BackColor = Color.White;
+            label15.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label15.Location = new Point(508, 263);
+            label15.Name = "label15";
+            label15.Size = new Size(53, 20);
+            label15.TabIndex = 58;
+            label15.Text = "Days:";
+            // 
+            // label14
+            // 
+            label14.Anchor = AnchorStyles.Top;
+            label14.AutoSize = true;
+            label14.BackColor = Color.White;
+            label14.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label14.Location = new Point(361, 263);
+            label14.Name = "label14";
+            label14.Size = new Size(69, 20);
+            label14.TabIndex = 57;
+            label14.Text = "Months:";
+            // 
+            // label13
+            // 
+            label13.Anchor = AnchorStyles.Top;
+            label13.AutoSize = true;
+            label13.BackColor = Color.White;
+            label13.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label13.Location = new Point(228, 263);
+            label13.Name = "label13";
+            label13.Size = new Size(57, 20);
+            label13.TabIndex = 56;
+            label13.Text = "Years:";
+            // 
+            // PurchaseDate_Lbl
+            // 
+            PurchaseDate_Lbl.Anchor = AnchorStyles.Top;
+            PurchaseDate_Lbl.AutoSize = true;
+            PurchaseDate_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            PurchaseDate_Lbl.Location = new Point(86, 331);
+            PurchaseDate_Lbl.Name = "PurchaseDate_Lbl";
+            PurchaseDate_Lbl.Size = new Size(126, 20);
+            PurchaseDate_Lbl.TabIndex = 55;
+            PurchaseDate_Lbl.Text = "Purchase Date:";
+            // 
+            // Supplier_Lbl
+            // 
+            Supplier_Lbl.Anchor = AnchorStyles.Top;
+            Supplier_Lbl.AutoSize = true;
+            Supplier_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            Supplier_Lbl.Location = new Point(85, 295);
+            Supplier_Lbl.Name = "Supplier_Lbl";
+            Supplier_Lbl.Size = new Size(75, 20);
+            Supplier_Lbl.TabIndex = 54;
+            Supplier_Lbl.Text = "Supplier:";
+            // 
+            // Warranty_Lbl
+            // 
+            Warranty_Lbl.Anchor = AnchorStyles.Top;
+            Warranty_Lbl.AutoSize = true;
+            Warranty_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            Warranty_Lbl.Location = new Point(85, 261);
+            Warranty_Lbl.Name = "Warranty_Lbl";
+            Warranty_Lbl.Size = new Size(82, 20);
+            Warranty_Lbl.TabIndex = 53;
+            Warranty_Lbl.Text = "Warranty:";
+            // 
+            // Cost_Lbl
+            // 
+            Cost_Lbl.Anchor = AnchorStyles.Top;
+            Cost_Lbl.AutoSize = true;
+            Cost_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            Cost_Lbl.Location = new Point(86, 226);
+            Cost_Lbl.Name = "Cost_Lbl";
+            Cost_Lbl.Size = new Size(49, 20);
+            Cost_Lbl.TabIndex = 52;
+            Cost_Lbl.Text = "Cost:";
+            // 
+            // Serial_Lbl
+            // 
+            Serial_Lbl.Anchor = AnchorStyles.Top;
+            Serial_Lbl.AutoSize = true;
+            Serial_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            Serial_Lbl.Location = new Point(85, 196);
+            Serial_Lbl.Name = "Serial_Lbl";
+            Serial_Lbl.Size = new Size(87, 20);
+            Serial_Lbl.TabIndex = 51;
+            Serial_Lbl.Text = "Serial No.:";
+            // 
+            // Model_Lbl
+            // 
+            Model_Lbl.Anchor = AnchorStyles.Top;
+            Model_Lbl.AutoSize = true;
+            Model_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            Model_Lbl.Location = new Point(85, 161);
+            Model_Lbl.Name = "Model_Lbl";
+            Model_Lbl.Size = new Size(59, 20);
+            Model_Lbl.TabIndex = 50;
+            Model_Lbl.Text = "Model:";
+            // 
+            // type_Lbl
+            // 
+            type_Lbl.Anchor = AnchorStyles.Top;
+            type_Lbl.AutoSize = true;
+            type_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            type_Lbl.Location = new Point(85, 127);
+            type_Lbl.Name = "type_Lbl";
+            type_Lbl.Size = new Size(50, 20);
+            type_Lbl.TabIndex = 49;
+            type_Lbl.Text = "Type:";
             // 
             // panel3
             // 
@@ -360,39 +360,24 @@
             panel3.Size = new Size(1246, 476);
             panel3.TabIndex = 51;
             // 
-            // label12
+            // serial2_Tb
             // 
-            label12.Anchor = AnchorStyles.None;
-            label12.AutoSize = true;
-            label12.BackColor = Color.White;
-            label12.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label12.Location = new Point(262, 231);
-            label12.Name = "label12";
-            label12.Size = new Size(87, 20);
-            label12.TabIndex = 11;
-            label12.Text = "Serial No.:";
+            serial2_Tb.Anchor = AnchorStyles.None;
+            serial2_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            serial2_Tb.Location = new Point(355, 228);
+            serial2_Tb.Name = "serial2_Tb";
+            serial2_Tb.Size = new Size(319, 27);
+            serial2_Tb.TabIndex = 21;
             // 
-            // qr_pictureBox
+            // button3
             // 
-            qr_pictureBox.Anchor = AnchorStyles.None;
-            qr_pictureBox.BackColor = Color.White;
-            qr_pictureBox.Location = new Point(697, 131);
-            qr_pictureBox.Name = "qr_pictureBox";
-            qr_pictureBox.Size = new Size(250, 250);
-            qr_pictureBox.TabIndex = 15;
-            qr_pictureBox.TabStop = false;
-            // 
-            // label10
-            // 
-            label10.Anchor = AnchorStyles.None;
-            label10.AutoSize = true;
-            label10.BackColor = Color.White;
-            label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(262, 162);
-            label10.Name = "label10";
-            label10.Size = new Size(199, 30);
-            label10.TabIndex = 0;
-            label10.Text = "QR Code Generator:";
+            button3.Anchor = AnchorStyles.None;
+            button3.Location = new Point(782, 387);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 20;
+            button3.Text = "SAVE";
+            button3.UseVisualStyleBackColor = true;
             // 
             // generate_Btn
             // 
@@ -405,24 +390,37 @@
             generate_Btn.Text = "Generate";
             generate_Btn.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // label10
             // 
-            button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(782, 387);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 20;
-            button3.Text = "SAVE";
-            button3.UseVisualStyleBackColor = true;
+            label10.Anchor = AnchorStyles.None;
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(262, 162);
+            label10.Name = "label10";
+            label10.Size = new Size(199, 30);
+            label10.TabIndex = 0;
+            label10.Text = "QR Code Generator:";
             // 
-            // serial2_Tb
+            // qr_pictureBox
             // 
-            serial2_Tb.Anchor = AnchorStyles.None;
-            serial2_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            serial2_Tb.Location = new Point(355, 228);
-            serial2_Tb.Name = "serial2_Tb";
-            serial2_Tb.Size = new Size(319, 27);
-            serial2_Tb.TabIndex = 21;
+            qr_pictureBox.Anchor = AnchorStyles.None;
+            qr_pictureBox.BackColor = Color.White;
+            qr_pictureBox.Location = new Point(697, 131);
+            qr_pictureBox.Name = "qr_pictureBox";
+            qr_pictureBox.Size = new Size(250, 250);
+            qr_pictureBox.TabIndex = 15;
+            qr_pictureBox.TabStop = false;
+            // 
+            // label12
+            // 
+            label12.Anchor = AnchorStyles.None;
+            label12.AutoSize = true;
+            label12.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label12.Location = new Point(262, 231);
+            label12.Name = "label12";
+            label12.Size = new Size(87, 20);
+            label12.TabIndex = 11;
+            label12.Text = "Serial No.:";
             // 
             // panel2
             // 
@@ -452,9 +450,9 @@
             Resize += Create_Resize;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)years_numericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)months_numericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)days_numericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)months_numericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)years_numericUpDown).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)qr_pictureBox).EndInit();

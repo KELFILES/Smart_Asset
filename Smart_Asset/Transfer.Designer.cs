@@ -38,9 +38,9 @@
             repairing_RadBtn = new RadioButton();
             serialNo_Cmb = new ComboBox();
             label7 = new Label();
-            notes_Tb = new RichTextBox();
             label5 = new Label();
             label8 = new Label();
+            notes_Tb = new RichTextBox();
             panel2 = new Panel();
             transfer2_Btn = new Button();
             delete2_RadBtn = new RadioButton();
@@ -53,10 +53,10 @@
             repairing2_RadBtn = new RadioButton();
             checkBox1 = new CheckBox();
             label6 = new Label();
-            notes2_Tb = new RichTextBox();
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
+            notes2_Tb = new RichTextBox();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -85,9 +85,9 @@
             panel3.Controls.Add(repairing_RadBtn);
             panel3.Controls.Add(serialNo_Cmb);
             panel3.Controls.Add(label7);
-            panel3.Controls.Add(notes_Tb);
             panel3.Controls.Add(label5);
             panel3.Controls.Add(label8);
+            panel3.Controls.Add(notes_Tb);
             panel3.Location = new Point(12, 12);
             panel3.Name = "panel3";
             panel3.Size = new Size(1101, 418);
@@ -96,7 +96,7 @@
             // delete_RadBtn
             // 
             delete_RadBtn.AutoSize = true;
-            delete_RadBtn.Location = new Point(585, 357);
+            delete_RadBtn.Location = new Point(641, 357);
             delete_RadBtn.Name = "delete_RadBtn";
             delete_RadBtn.Size = new Size(63, 19);
             delete_RadBtn.TabIndex = 30;
@@ -109,7 +109,7 @@
             transfer_Btn.Anchor = AnchorStyles.Bottom;
             transfer_Btn.Location = new Point(521, 382);
             transfer_Btn.Name = "transfer_Btn";
-            transfer_Btn.Size = new Size(75, 23);
+            transfer_Btn.Size = new Size(85, 26);
             transfer_Btn.TabIndex = 29;
             transfer_Btn.Text = "TRANSFER";
             transfer_Btn.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
             // borrow_RadBtn
             // 
             borrow_RadBtn.AutoSize = true;
-            borrow_RadBtn.Location = new Point(504, 357);
+            borrow_RadBtn.Location = new Point(546, 357);
             borrow_RadBtn.Name = "borrow_RadBtn";
             borrow_RadBtn.Size = new Size(75, 19);
             borrow_RadBtn.TabIndex = 28;
@@ -129,7 +129,7 @@
             // disposal_RadBtn
             // 
             disposal_RadBtn.AutoSize = true;
-            disposal_RadBtn.Location = new Point(420, 357);
+            disposal_RadBtn.Location = new Point(449, 357);
             disposal_RadBtn.Name = "disposal_RadBtn";
             disposal_RadBtn.Size = new Size(78, 19);
             disposal_RadBtn.TabIndex = 27;
@@ -140,7 +140,7 @@
             // cleaning_RadBtn
             // 
             cleaning_RadBtn.AutoSize = true;
-            cleaning_RadBtn.Location = new Point(336, 357);
+            cleaning_RadBtn.Location = new Point(351, 357);
             cleaning_RadBtn.Name = "cleaning_RadBtn";
             cleaning_RadBtn.Size = new Size(82, 19);
             cleaning_RadBtn.TabIndex = 26;
@@ -184,15 +184,6 @@
             label7.TabIndex = 12;
             label7.Text = "Notes: \"Optional\"";
             // 
-            // notes_Tb
-            // 
-            notes_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            notes_Tb.Location = new Point(253, 121);
-            notes_Tb.Name = "notes_Tb";
-            notes_Tb.Size = new Size(626, 230);
-            notes_Tb.TabIndex = 11;
-            notes_Tb.Text = "";
-            // 
             // label5
             // 
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
@@ -215,6 +206,17 @@
             label8.TabIndex = 0;
             label8.Text = "Serial No.:";
             // 
+            // notes_Tb
+            // 
+            notes_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            notes_Tb.BackColor = Color.Silver;
+            notes_Tb.BorderStyle = BorderStyle.None;
+            notes_Tb.Location = new Point(253, 121);
+            notes_Tb.Name = "notes_Tb";
+            notes_Tb.Size = new Size(626, 230);
+            notes_Tb.TabIndex = 11;
+            notes_Tb.Text = "";
+            // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -230,10 +232,10 @@
             panel2.Controls.Add(repairing2_RadBtn);
             panel2.Controls.Add(checkBox1);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(notes2_Tb);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
+            panel2.Controls.Add(notes2_Tb);
             panel2.Location = new Point(12, 436);
             panel2.Name = "panel2";
             panel2.Size = new Size(1101, 352);
@@ -244,7 +246,7 @@
             transfer2_Btn.Anchor = AnchorStyles.Bottom;
             transfer2_Btn.Location = new Point(521, 307);
             transfer2_Btn.Name = "transfer2_Btn";
-            transfer2_Btn.Size = new Size(75, 23);
+            transfer2_Btn.Size = new Size(85, 26);
             transfer2_Btn.TabIndex = 34;
             transfer2_Btn.Text = "TRANSFER";
             transfer2_Btn.UseVisualStyleBackColor = true;
@@ -254,7 +256,7 @@
             // 
             delete2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             delete2_RadBtn.AutoSize = true;
-            delete2_RadBtn.Location = new Point(585, 262);
+            delete2_RadBtn.Location = new Point(641, 262);
             delete2_RadBtn.Name = "delete2_RadBtn";
             delete2_RadBtn.Size = new Size(63, 19);
             delete2_RadBtn.TabIndex = 33;
@@ -266,7 +268,7 @@
             // 
             borrow2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             borrow2_RadBtn.AutoSize = true;
-            borrow2_RadBtn.Location = new Point(504, 262);
+            borrow2_RadBtn.Location = new Point(546, 262);
             borrow2_RadBtn.Name = "borrow2_RadBtn";
             borrow2_RadBtn.Size = new Size(75, 19);
             borrow2_RadBtn.TabIndex = 32;
@@ -291,7 +293,7 @@
             // 
             disposal2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             disposal2_RadBtn.AutoSize = true;
-            disposal2_RadBtn.Location = new Point(420, 262);
+            disposal2_RadBtn.Location = new Point(449, 262);
             disposal2_RadBtn.Name = "disposal2_RadBtn";
             disposal2_RadBtn.Size = new Size(78, 19);
             disposal2_RadBtn.TabIndex = 31;
@@ -316,7 +318,7 @@
             // 
             cleaning2_RadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             cleaning2_RadBtn.AutoSize = true;
-            cleaning2_RadBtn.Location = new Point(336, 262);
+            cleaning2_RadBtn.Location = new Point(351, 262);
             cleaning2_RadBtn.Name = "cleaning2_RadBtn";
             cleaning2_RadBtn.Size = new Size(82, 19);
             cleaning2_RadBtn.TabIndex = 30;
@@ -368,15 +370,6 @@
             label6.TabIndex = 8;
             label6.Text = "Notes: \"Optional\"";
             // 
-            // notes2_Tb
-            // 
-            notes2_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            notes2_Tb.Location = new Point(252, 148);
-            notes2_Tb.Name = "notes2_Tb";
-            notes2_Tb.Size = new Size(626, 108);
-            notes2_Tb.TabIndex = 7;
-            notes2_Tb.Text = "";
-            // 
             // label4
             // 
             label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
@@ -410,6 +403,17 @@
             label1.Size = new Size(88, 25);
             label1.TabIndex = 0;
             label1.Text = "Location:";
+            // 
+            // notes2_Tb
+            // 
+            notes2_Tb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            notes2_Tb.BackColor = Color.Silver;
+            notes2_Tb.BorderStyle = BorderStyle.None;
+            notes2_Tb.Location = new Point(252, 148);
+            notes2_Tb.Name = "notes2_Tb";
+            notes2_Tb.Size = new Size(626, 108);
+            notes2_Tb.TabIndex = 7;
+            notes2_Tb.Text = "";
             // 
             // Transfer
             // 

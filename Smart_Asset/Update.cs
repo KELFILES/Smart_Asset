@@ -12,6 +12,10 @@ namespace Smart_Asset
 {
     public partial class Update : Form
     {
+
+        private RightClick rc = new RightClick();
+
+
         public Update()
         {
             InitializeComponent();
@@ -57,5 +61,53 @@ namespace Smart_Asset
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                // Dispose of the previous form if it's still open
+                if (rc != null)
+                {
+                    rc.Dispose();
+                    rc = null;
+                }
+
+                // Create a new instance of RightClick form
+                rc = new RightClick();
+
+                // Convert the mouse position to screen coordinates
+                Point screenPoint = dataGridView1.PointToScreen(e.Location);
+
+                // Adjust for window borders and toolbars if needed (if the form has non-client areas)
+                rc.StartPosition = FormStartPosition.Manual;
+                rc.Location = screenPoint;  // Directly set to the screen position
+
+                // Set up an event handler to close the form when clicking outside of it
+                rc.Deactivate += (s, ev) =>
+                {
+                    rc.Dispose();
+                    rc = null; // Set to null when disposed
+                };
+
+                // Show the new form
+                rc.Show();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -29,8 +29,8 @@ namespace Smart_Asset
 
         private void submit_Btn_Click_1(object sender, EventArgs e)
         {
-            FrontPage db = new FrontPage();
-            db.Show();
+            FrontPage_Final pff = new FrontPage_Final();
+            pff.Show();
             this.Hide();
         }
 

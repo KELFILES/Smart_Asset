@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace Smart_Asset
 {
@@ -18,6 +19,7 @@ namespace Smart_Asset
 
             // Store the original back color when the form loads
             originalBackColor = sideMenu_Panel.BackColor;
+            SubOriginalBackColor = fileMaintenance_SubMenuPanel.BackColor;
 
 
             fileMaintenance_SubMenuPanel.Visible = false;
@@ -35,6 +37,11 @@ namespace Smart_Asset
 
         // Declare a variable to store the original background color
         private Color originalBackColor;
+        private Color SubOriginalBackColor;
+
+        private Button toggleButton;
+        private bool isMaximized = false;
+        private Rectangle originalBounds;
 
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
@@ -168,7 +175,7 @@ namespace Smart_Asset
 
         private void transfer_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref rep, "ASSET MANAGEMENT: REPAIRING");
+            showFormSelected(ref del, "ASSET MANAGEMENT: TRANSFER");
         }
 
         #endregion
@@ -234,7 +241,11 @@ namespace Smart_Asset
         }
 
 
-
+        private void SubButtonEnterColor(Button btnName)
+        {
+            // Change the back color to red with 20% transparency
+            btnName.BackColor = Color.FromArgb(255, 102, 187, 106); // 204 is 20% transparency
+        }
 
         private void ButtonEnterColor(Button btnName)
         {
@@ -249,10 +260,10 @@ namespace Smart_Asset
         }
 
 
-        private void SubButtonEnterColor(Button btnName)
+        private void SubButtonLeaveColor(Button btnName)
         {
-            // Change the back color to red with 20% transparency
-            btnName.BackColor = Color.FromArgb(255, 85, 37, 93); // 204 is 20% transparency
+            // Restore the original background color
+            btnName.BackColor = SubOriginalBackColor;
         }
 
 
@@ -376,7 +387,7 @@ namespace Smart_Asset
 
         private void createReport_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(createReport_Btn);
+            SubButtonLeaveColor(createReport_Btn);
         }
 
         private void create_Btn_MouseEnter(object sender, EventArgs e)
@@ -386,7 +397,7 @@ namespace Smart_Asset
 
         private void create_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(create_Btn);
+            SubButtonLeaveColor(create_Btn);
         }
 
         private void read_Btn_MouseEnter(object sender, EventArgs e)
@@ -396,7 +407,7 @@ namespace Smart_Asset
 
         private void read_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(read_Btn);
+            SubButtonLeaveColor(read_Btn);
         }
 
         private void update_Btn_MouseEnter(object sender, EventArgs e)
@@ -406,7 +417,7 @@ namespace Smart_Asset
 
         private void update_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(update_Btn);
+            SubButtonLeaveColor(update_Btn);
         }
 
         private void transfer_Btn_MouseEnter(object sender, EventArgs e)
@@ -416,7 +427,77 @@ namespace Smart_Asset
 
         private void transfer_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(transfer_Btn);
+            SubButtonLeaveColor(transfer_Btn);
+        }
+
+        private void questionMark_Btn_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (isMaximized)
+            {
+                // Restore the form to its original size and position
+                this.Bounds = originalBounds;
+                isMaximized = false;
+            }
+            else
+            {
+                // Store the original bounds before maximizing
+                originalBounds = this.Bounds;
+
+                // Maximize the form within the working area (excluding taskbar)
+                Rectangle workingArea = Screen.FromControl(this).WorkingArea;
+                this.Location = workingArea.Location;
+                this.Size = workingArea.Size;
+                isMaximized = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Check if an instance of QuestionMark is already open and close it
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is QuestionMark)
+                {
+                    openForm.Close();
+                    break; // Exit the loop after closing the form
+                }
+            }
+
+            // Now create a new instance of QuestionMark
+            QuestionMark qm = new QuestionMark();
+            qm.Size = new Size(this.Width / 2, this.Height / 2);
+
+            // Optionally center Form2 on the screen or relative to Form1
+            qm.StartPosition = FormStartPosition.Manual;
+            qm.Location = new Point(this.Location.X + this.Width / 4, this.Location.Y + this.Height / 4); // Center relative to Form1
+
+            qm.Show();
+
+            // Check header_Lbl.Text for specific actions
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: DASHBOARD"))
+            {
+                Console.WriteLine("DASHBOARD MANUAL");
+            }
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: CREATE"))
+            {
+                Console.WriteLine("CREATE MANUAL");
+            }
+
+
+
+
+
+
         }
     }
 }

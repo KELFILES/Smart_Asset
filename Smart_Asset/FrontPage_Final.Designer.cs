@@ -32,10 +32,11 @@
             logout_Panel = new Panel();
             logout_Btn = new Button();
             panel5 = new Panel();
-            button2 = new Button();
-            button1 = new Button();
+            createReport_Btn = new Button();
+            ManageRoles_Btn = new Button();
             artificialIntelligence_Btn = new Button();
             fileMaintenance_SubMenuPanel = new Panel();
+            button3 = new Button();
             assetManagement_Btn = new Button();
             fileMaintenance_Btn = new Button();
             dashboard_Btn = new Button();
@@ -47,8 +48,7 @@
             header_Lbl = new Label();
             mainPanel = new Panel();
             crud_Panel = new Panel();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
+            recycleBin_Rdb = new RadioButton();
             swap_Rdb = new RadioButton();
             deployment_Rdb = new RadioButton();
             transfer_Rdb = new RadioButton();
@@ -75,16 +75,16 @@
             sideMenu_Panel.Controls.Add(panel5);
             sideMenu_Panel.Controls.Add(logo_Panel);
             sideMenu_Panel.Dock = DockStyle.Left;
-            sideMenu_Panel.Location = new Point(0, 0);
+            sideMenu_Panel.Location = new Point(2, 2);
             sideMenu_Panel.Name = "sideMenu_Panel";
-            sideMenu_Panel.Size = new Size(250, 1041);
+            sideMenu_Panel.Size = new Size(250, 1037);
             sideMenu_Panel.TabIndex = 0;
             // 
             // logout_Panel
             // 
             logout_Panel.Controls.Add(logout_Btn);
             logout_Panel.Dock = DockStyle.Bottom;
-            logout_Panel.Location = new Point(0, 975);
+            logout_Panel.Location = new Point(0, 971);
             logout_Panel.Name = "logout_Panel";
             logout_Panel.Padding = new Padding(0, 20, 90, 20);
             logout_Panel.Size = new Size(246, 62);
@@ -105,12 +105,13 @@
             logout_Btn.TabIndex = 32;
             logout_Btn.Text = "Logout";
             logout_Btn.UseVisualStyleBackColor = true;
+            logout_Btn.Click += logout_Btn_Click_1;
             // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(11, 8, 20);
-            panel5.Controls.Add(button2);
-            panel5.Controls.Add(button1);
+            panel5.Controls.Add(createReport_Btn);
+            panel5.Controls.Add(ManageRoles_Btn);
             panel5.Controls.Add(artificialIntelligence_Btn);
             panel5.Controls.Add(fileMaintenance_SubMenuPanel);
             panel5.Controls.Add(fileMaintenance_Btn);
@@ -118,38 +119,40 @@
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 100);
             panel5.Name = "panel5";
-            panel5.Size = new Size(246, 937);
+            panel5.Size = new Size(246, 933);
             panel5.TabIndex = 49;
             // 
-            // button2
+            // createReport_Btn
             // 
-            button2.Dock = DockStyle.Top;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.ForeColor = Color.Gainsboro;
-            button2.Location = new Point(0, 310);
-            button2.Name = "button2";
-            button2.Padding = new Padding(10, 0, 0, 0);
-            button2.Size = new Size(246, 45);
-            button2.TabIndex = 38;
-            button2.Text = "Create Report";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.UseVisualStyleBackColor = true;
+            createReport_Btn.Dock = DockStyle.Top;
+            createReport_Btn.FlatAppearance.BorderSize = 0;
+            createReport_Btn.FlatStyle = FlatStyle.Flat;
+            createReport_Btn.ForeColor = Color.Gainsboro;
+            createReport_Btn.Location = new Point(0, 266);
+            createReport_Btn.Name = "createReport_Btn";
+            createReport_Btn.Padding = new Padding(10, 0, 0, 0);
+            createReport_Btn.Size = new Size(246, 45);
+            createReport_Btn.TabIndex = 38;
+            createReport_Btn.Text = "Create Report";
+            createReport_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            createReport_Btn.UseVisualStyleBackColor = true;
+            createReport_Btn.Click += createReport_Btn_Click_1;
             // 
-            // button1
+            // ManageRoles_Btn
             // 
-            button1.Dock = DockStyle.Top;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.Gainsboro;
-            button1.Location = new Point(0, 265);
-            button1.Name = "button1";
-            button1.Padding = new Padding(10, 0, 0, 0);
-            button1.Size = new Size(246, 45);
-            button1.TabIndex = 37;
-            button1.Text = "Manage Roles";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            button1.UseVisualStyleBackColor = true;
+            ManageRoles_Btn.Dock = DockStyle.Top;
+            ManageRoles_Btn.FlatAppearance.BorderSize = 0;
+            ManageRoles_Btn.FlatStyle = FlatStyle.Flat;
+            ManageRoles_Btn.ForeColor = Color.Gainsboro;
+            ManageRoles_Btn.Location = new Point(0, 221);
+            ManageRoles_Btn.Name = "ManageRoles_Btn";
+            ManageRoles_Btn.Padding = new Padding(10, 0, 0, 0);
+            ManageRoles_Btn.Size = new Size(246, 45);
+            ManageRoles_Btn.TabIndex = 37;
+            ManageRoles_Btn.Text = "Manage Roles";
+            ManageRoles_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            ManageRoles_Btn.UseVisualStyleBackColor = true;
+            ManageRoles_Btn.Click += ManageRoles_Btn_Click_1;
             // 
             // artificialIntelligence_Btn
             // 
@@ -157,7 +160,7 @@
             artificialIntelligence_Btn.FlatAppearance.BorderSize = 0;
             artificialIntelligence_Btn.FlatStyle = FlatStyle.Flat;
             artificialIntelligence_Btn.ForeColor = Color.Gainsboro;
-            artificialIntelligence_Btn.Location = new Point(0, 220);
+            artificialIntelligence_Btn.Location = new Point(0, 176);
             artificialIntelligence_Btn.Name = "artificialIntelligence_Btn";
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
             artificialIntelligence_Btn.Size = new Size(246, 45);
@@ -165,18 +168,36 @@
             artificialIntelligence_Btn.Text = "Artificial Intelligence";
             artificialIntelligence_Btn.TextAlign = ContentAlignment.MiddleLeft;
             artificialIntelligence_Btn.UseVisualStyleBackColor = true;
+            artificialIntelligence_Btn.Click += artificialIntelligence_Btn_Click_1;
             artificialIntelligence_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
             artificialIntelligence_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
             // 
             // fileMaintenance_SubMenuPanel
             // 
             fileMaintenance_SubMenuPanel.BackColor = Color.FromArgb(35, 32, 39);
+            fileMaintenance_SubMenuPanel.Controls.Add(button3);
             fileMaintenance_SubMenuPanel.Controls.Add(assetManagement_Btn);
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
             fileMaintenance_SubMenuPanel.Name = "fileMaintenance_SubMenuPanel";
-            fileMaintenance_SubMenuPanel.Size = new Size(246, 130);
+            fileMaintenance_SubMenuPanel.Size = new Size(246, 86);
             fileMaintenance_SubMenuPanel.TabIndex = 23;
+            // 
+            // button3
+            // 
+            button3.Dock = DockStyle.Top;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.ForeColor = Color.Gainsboro;
+            button3.Location = new Point(0, 40);
+            button3.Name = "button3";
+            button3.Padding = new Padding(35, 0, 0, 0);
+            button3.Size = new Size(246, 40);
+            button3.TabIndex = 5;
+            button3.Text = "Backup Data";
+            button3.TextAlign = ContentAlignment.MiddleLeft;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
             // 
             // assetManagement_Btn
             // 
@@ -261,10 +282,10 @@
             panel3.Controls.Add(qmark_Btn);
             panel3.Controls.Add(header_Lbl);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(250, 0);
+            panel3.Location = new Point(252, 2);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(0, 10, 0, 0);
-            panel3.Size = new Size(1654, 55);
+            panel3.Size = new Size(1650, 55);
             panel3.TabIndex = 1;
             // 
             // iconPictureBox1
@@ -276,7 +297,7 @@
             iconPictureBox1.IconColor = Color.Red;
             iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconPictureBox1.IconSize = 42;
-            iconPictureBox1.Location = new Point(16, 7);
+            iconPictureBox1.Location = new Point(14, 7);
             iconPictureBox1.Name = "iconPictureBox1";
             iconPictureBox1.Size = new Size(42, 42);
             iconPictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -285,11 +306,10 @@
             // 
             // qmark_Btn
             // 
-            qmark_Btn.Anchor = AnchorStyles.Right;
             qmark_Btn.FlatStyle = FlatStyle.Flat;
             qmark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             qmark_Btn.ForeColor = SystemColors.ButtonFace;
-            qmark_Btn.Location = new Point(1619, 13);
+            qmark_Btn.Location = new Point(1615, 13);
             qmark_Btn.Name = "qmark_Btn";
             qmark_Btn.Size = new Size(21, 21);
             qmark_Btn.TabIndex = 4;
@@ -314,17 +334,16 @@
             // 
             mainPanel.BackColor = Color.FromArgb(30, 30, 45);
             mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(250, 55);
+            mainPanel.Location = new Point(252, 57);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(1654, 986);
+            mainPanel.Size = new Size(1650, 982);
             mainPanel.TabIndex = 4;
             // 
             // crud_Panel
             // 
             crud_Panel.AutoScroll = true;
             crud_Panel.BackColor = Color.DimGray;
-            crud_Panel.Controls.Add(radioButton2);
-            crud_Panel.Controls.Add(radioButton1);
+            crud_Panel.Controls.Add(recycleBin_Rdb);
             crud_Panel.Controls.Add(swap_Rdb);
             crud_Panel.Controls.Add(deployment_Rdb);
             crud_Panel.Controls.Add(transfer_Rdb);
@@ -332,52 +351,40 @@
             crud_Panel.Controls.Add(read_Rdb);
             crud_Panel.Controls.Add(create_Rdb);
             crud_Panel.Dock = DockStyle.Top;
-            crud_Panel.Location = new Point(250, 55);
+            crud_Panel.Location = new Point(252, 57);
+            crud_Panel.Margin = new Padding(3, 3, 10, 3);
             crud_Panel.Name = "crud_Panel";
             crud_Panel.Padding = new Padding(8, 0, 8, 0);
-            crud_Panel.Size = new Size(1654, 47);
+            crud_Panel.Size = new Size(1650, 47);
             crud_Panel.TabIndex = 7;
             // 
-            // radioButton2
+            // recycleBin_Rdb
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Dock = DockStyle.Left;
-            radioButton2.ForeColor = Color.White;
-            radioButton2.Location = new Point(914, 0);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Padding = new Padding(50, 0, 0, 0);
-            radioButton2.Size = new Size(138, 47);
-            radioButton2.TabIndex = 7;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Recyle Bin";
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Dock = DockStyle.Left;
-            radioButton1.ForeColor = Color.White;
-            radioButton1.Location = new Point(740, 0);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Padding = new Padding(50, 0, 0, 0);
-            radioButton1.Size = new Size(174, 47);
-            radioButton1.TabIndex = 6;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Borrowed Items";
-            radioButton1.UseVisualStyleBackColor = true;
+            recycleBin_Rdb.AutoSize = true;
+            recycleBin_Rdb.Dock = DockStyle.Left;
+            recycleBin_Rdb.ForeColor = Color.White;
+            recycleBin_Rdb.Location = new Point(1274, 0);
+            recycleBin_Rdb.Name = "recycleBin_Rdb";
+            recycleBin_Rdb.Padding = new Padding(50, 0, 0, 0);
+            recycleBin_Rdb.Size = new Size(138, 47);
+            recycleBin_Rdb.TabIndex = 9;
+            recycleBin_Rdb.TabStop = true;
+            recycleBin_Rdb.Text = "Recyle Bin";
+            recycleBin_Rdb.UseVisualStyleBackColor = true;
+            recycleBin_Rdb.CheckedChanged += recycleBin_Rdb_CheckedChanged;
             // 
             // swap_Rdb
             // 
             swap_Rdb.AutoSize = true;
             swap_Rdb.Dock = DockStyle.Left;
             swap_Rdb.ForeColor = Color.White;
-            swap_Rdb.Location = new Point(631, 0);
+            swap_Rdb.Location = new Point(1096, 0);
             swap_Rdb.Name = "swap_Rdb";
             swap_Rdb.Padding = new Padding(50, 0, 0, 0);
-            swap_Rdb.Size = new Size(109, 47);
+            swap_Rdb.Size = new Size(178, 47);
             swap_Rdb.TabIndex = 5;
             swap_Rdb.TabStop = true;
-            swap_Rdb.Text = "Swap";
+            swap_Rdb.Text = "Swap Hardwares";
             swap_Rdb.UseVisualStyleBackColor = true;
             swap_Rdb.CheckedChanged += swap_Rdb_CheckedChanged;
             // 
@@ -386,13 +393,13 @@
             deployment_Rdb.AutoSize = true;
             deployment_Rdb.Dock = DockStyle.Left;
             deployment_Rdb.ForeColor = Color.White;
-            deployment_Rdb.Location = new Point(479, 0);
+            deployment_Rdb.Location = new Point(907, 0);
             deployment_Rdb.Name = "deployment_Rdb";
             deployment_Rdb.Padding = new Padding(50, 0, 0, 0);
-            deployment_Rdb.Size = new Size(152, 47);
+            deployment_Rdb.Size = new Size(189, 47);
             deployment_Rdb.TabIndex = 4;
             deployment_Rdb.TabStop = true;
-            deployment_Rdb.Text = "Deployment";
+            deployment_Rdb.Text = "Deploy Hardwares";
             deployment_Rdb.UseVisualStyleBackColor = true;
             deployment_Rdb.CheckedChanged += deployment_Rdb_CheckedChanged;
             // 
@@ -401,13 +408,13 @@
             transfer_Rdb.AutoSize = true;
             transfer_Rdb.Dock = DockStyle.Left;
             transfer_Rdb.ForeColor = Color.White;
-            transfer_Rdb.Location = new Point(354, 0);
+            transfer_Rdb.Location = new Point(680, 0);
             transfer_Rdb.Name = "transfer_Rdb";
             transfer_Rdb.Padding = new Padding(50, 0, 0, 0);
-            transfer_Rdb.Size = new Size(125, 47);
+            transfer_Rdb.Size = new Size(227, 47);
             transfer_Rdb.TabIndex = 3;
             transfer_Rdb.TabStop = true;
-            transfer_Rdb.Text = "Transfer";
+            transfer_Rdb.Text = "Transfer Hardwares Data";
             transfer_Rdb.UseVisualStyleBackColor = true;
             transfer_Rdb.CheckedChanged += transfer_Rdb_CheckedChanged;
             // 
@@ -416,13 +423,13 @@
             update_Rdb.AutoSize = true;
             update_Rdb.Dock = DockStyle.Left;
             update_Rdb.ForeColor = Color.White;
-            update_Rdb.Location = new Point(232, 0);
+            update_Rdb.Location = new Point(458, 0);
             update_Rdb.Name = "update_Rdb";
             update_Rdb.Padding = new Padding(50, 0, 0, 0);
-            update_Rdb.Size = new Size(122, 47);
+            update_Rdb.Size = new Size(222, 47);
             update_Rdb.TabIndex = 2;
             update_Rdb.TabStop = true;
-            update_Rdb.Text = "Update";
+            update_Rdb.Text = "Modify Hardwares Data";
             update_Rdb.UseVisualStyleBackColor = true;
             update_Rdb.CheckedChanged += update_Rdb_CheckedChanged;
             // 
@@ -431,13 +438,13 @@
             read_Rdb.AutoSize = true;
             read_Rdb.Dock = DockStyle.Left;
             read_Rdb.ForeColor = Color.White;
-            read_Rdb.Location = new Point(125, 0);
+            read_Rdb.Location = new Point(229, 0);
             read_Rdb.Name = "read_Rdb";
             read_Rdb.Padding = new Padding(50, 0, 0, 0);
-            read_Rdb.Size = new Size(107, 47);
+            read_Rdb.Size = new Size(229, 47);
             read_Rdb.TabIndex = 1;
             read_Rdb.TabStop = true;
-            read_Rdb.Text = "Read";
+            read_Rdb.Text = "Monitor Hardwares Data";
             read_Rdb.UseVisualStyleBackColor = true;
             read_Rdb.CheckedChanged += read_Rdb_CheckedChanged;
             // 
@@ -449,10 +456,10 @@
             create_Rdb.Location = new Point(8, 0);
             create_Rdb.Name = "create_Rdb";
             create_Rdb.Padding = new Padding(50, 0, 0, 0);
-            create_Rdb.Size = new Size(117, 47);
+            create_Rdb.Size = new Size(221, 47);
             create_Rdb.TabIndex = 0;
             create_Rdb.TabStop = true;
-            create_Rdb.Text = "Create";
+            create_Rdb.Text = "Import Hardwares Data";
             create_Rdb.UseVisualStyleBackColor = true;
             create_Rdb.CheckedChanged += create_Rdb_CheckedChanged;
             // 
@@ -467,6 +474,7 @@
             Controls.Add(sideMenu_Panel);
             Font = new Font("Segoe UI", 10F);
             Name = "FrontPage_Final";
+            Padding = new Padding(2);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrontPage_Final";
             Load += FrontPage_Final_Load;
@@ -502,16 +510,16 @@
         private Panel crud_Panel;
         private RadioButton transfer_Rdb;
         private RadioButton update_Rdb;
-        private RadioButton read_Rdb;
         private RadioButton create_Rdb;
         private RadioButton deployment_Rdb;
         private RadioButton swap_Rdb;
         private PictureBox pictureBox1;
         private Panel logout_Panel;
         private Button logout_Btn;
-        private Button button2;
-        private Button button1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private Button createReport_Btn;
+        private Button ManageRoles_Btn;
+        private RadioButton recycleBin_Rdb;
+        private Button button3;
+        private RadioButton read_Rdb;
     }
 }

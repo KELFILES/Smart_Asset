@@ -41,7 +41,7 @@ namespace Smart_Asset
         private void RefreshDataGrid()
         {
             // Replace MyDbMethods.ReadLocation with your actual data-fetching logic
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Repairing");
         }
 
         private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
@@ -76,5 +76,77 @@ namespace Smart_Asset
                 rc.Show();
             }
         }
+
+
+        // A list to store SerialNo values of selected rows
+        List<string> selectedSerialNos = new List<string>();
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Initialize RightClick before accessing it
+                RightClick rc = new RightClick();
+
+                // Initialize selectedSerialNos if it's null
+                if (selectedSerialNos == null)
+                {
+                    selectedSerialNos = new List<string>();
+                }
+
+                // If no rows are selected, set selectedSerialNos to null
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    selectedSerialNos = null;
+                    Console.WriteLine("No rows selected. selectedSerialNos is now null.");
+                    rc.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
+                    return;
+                }
+
+                // Clear the previous data from the list
+                selectedSerialNos.Clear();
+
+                if (dataGridView1.SelectedRows.Count == 1)
+                {
+                    // If only one row is selected, store the SerialNo of that row
+                    string serialNo = dataGridView1.SelectedRows[0].Cells["SerialNo"].Value.ToString();
+                    selectedSerialNos.Add(serialNo);
+                    Console.WriteLine("Selected SerialNo: " + serialNo);
+
+                    // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
+                    rc.GetRetrievingSerial(new List<string> { serialNo });
+
+
+                }
+                else if (dataGridView1.SelectedRows.Count > 1)
+                {
+                    // If multiple rows are selected, store all their SerialNos
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        string serialNo = row.Cells["SerialNo"].Value.ToString();
+                        selectedSerialNos.Add(serialNo);
+                    }
+                    Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
+
+                    
+                    // Pass the list of serialNos to RightClick for multiple rows
+                    rc.GetRetrievingSerial(selectedSerialNos);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any unexpected errors
+                MessageBox.Show($"An error occurred while processing the selection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+
+
+
+
+
+
     }
 }

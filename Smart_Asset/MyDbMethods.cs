@@ -428,7 +428,127 @@ namespace Smart_Asset
             dataGridViewName.DataSource = allDocuments;
         }
 
+        public static async Task ReadAllInDatabase(string dbName, DataGridView dataGridViewName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
 
+            // Get all collection names in the database
+            var collectionNames = await database.ListCollectionNamesAsync();
+
+            // Create a list to hold all documents from all collections
+            var allDocuments = new List<Read_Model>();
+
+            // Iterate over all collections, except the ones we want to exclude
+            foreach (var collectionName in collectionNames.ToList())
+            {
+                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List")  // Skip excluded collections
+                {
+                    var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                    // Retrieve all documents from the current collection asynchronously
+                    var documents = await collection.Find(new BsonDocument()).ToListAsync();
+
+                    // Map BsonDocument results to Read_Model objects and add to the list
+                    var cpuList = documents.Select(doc =>
+                    {
+                        // Try to parse the purchase date, handle the case where it's not valid
+                        string purchaseDateString = doc.GetValue("PurchaseDate", "").AsString;
+                        DateTime purchaseDate;
+                        bool isDateValid = DateTime.TryParse(purchaseDateString, out purchaseDate);
+
+                        // Calculate the warranty status and usage only if the date is valid
+                        string warrantyStatus = isDateValid && !string.IsNullOrEmpty(doc.GetValue("Warranty", "").AsString)
+                            ? (MyMethods.IsWarrantyValid(purchaseDate, doc.GetValue("Warranty", "").AsString) ? "In Warranty" : "Out of Warranty")
+                            : "Unknown";
+
+                        string usage = isDateValid ? MyMethods.CalculateUsage(purchaseDate) : "Unknown";
+
+                        return new Read_Model
+                        {
+                            Id = doc["_id"].ToString(),
+                            Type = doc.GetValue("Type", "").AsString,
+                            Model = doc.GetValue("Model", "").AsString,
+                            SerialNo = doc.GetValue("SerialNo", "").AsString,
+                            Cost = doc.GetValue("Cost", "").AsString,
+                            Supplier = doc.GetValue("Supplier", "").AsString,
+                            Warranty = doc.GetValue("Warranty", "").AsString,
+                            WarrantyStatus = warrantyStatus,
+                            PurchaseDate = purchaseDateString,  // Keep the original string value
+                            Usage = usage,
+                            Location = collectionName
+                        };
+                    }).ToList();
+
+                    allDocuments.AddRange(cpuList);
+                }
+            }
+
+            // If no documents are found, show a message and clear the DataGridView
+            if (allDocuments.Count == 0)
+            {
+                MessageBox.Show("No records found in the specified collections.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            // Bind the list to the DataGridView
+            dataGridViewName.DataSource = allDocuments;
+        }
+
+        public static void ReadLocationWithNotes(string dbName, DataGridView dataGridViewName, string collectionName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            // Get the specified collection by name
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Retrieve all documents from the collection
+            var documents = collection.Find(new BsonDocument()).ToList();
+
+            var allDocuments = new List<Read_ModelWithNotes>();
+
+            // Map BsonDocument results to Read_ModelWithNotes objects
+            var myList = documents.Select(doc => new Read_ModelWithNotes
+            {
+                Id = doc["_id"].ToString(),
+                Type = doc.GetValue("Type", "").AsString,
+                Model = doc.GetValue("Model", "").AsString,
+                SerialNo = doc.GetValue("SerialNo", "").AsString,
+                Cost = doc.GetValue("Cost", "").AsString,
+                Supplier = doc.GetValue("Supplier", "").AsString,
+                Warranty = doc.GetValue("Warranty", "").AsString,
+
+                // Warranty status calculation
+                WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                PurchaseDate = doc.GetValue("PurchaseDate", "").AsString,
+
+                // Usage calculation
+                Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+
+                // Set the collection name
+                Location = collectionName,
+
+                // Safely retrieve the Notes field if it exists
+                Notes = doc.Contains("Notes") ? doc["Notes"].AsString : string.Empty
+
+            }).ToList();
+
+            allDocuments.AddRange(myList);
+
+            if (allDocuments.Count == 0)
+            {
+                // Display "not found" message
+                MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            // Bind the list to the DataGridView
+            dataGridViewName.DataSource = allDocuments;
+        }
 
         public static void SwapDocumentsByType(string dbName, string collection1Name, string collection2Name, string typeValue)
         {
@@ -822,8 +942,74 @@ namespace Smart_Asset
                     }
 
                     // Add the "Notes" field to the document
-                    document["notes"] = notes;
+                    document["Notes"] = notes;
 
+                    // Step 3: Insert the document into the transfer collection
+                    var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+                    await transferCollection.InsertOneAsync(document);
+
+                    // Step 4: Delete the document from the source collection
+                    var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+                    var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                    await sourceCollection.DeleteOneAsync(filter);
+
+                    MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
+
+
+        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNo)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+
+            BsonDocument document = null;
+            string sourceCollectionName = null;
+
+            using (var cursor = await database.ListCollectionNamesAsync())
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    foreach (var collectionName in cursor.Current)
+                    {
+                        if (!excludeCollections.Contains(collectionName))
+                        {
+                            var collection = database.GetCollection<BsonDocument>(collectionName);
+                            var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
+                            document = await collection.Find(filter).FirstOrDefaultAsync();
+
+                            if (document != null)
+                            {
+                                sourceCollectionName = collectionName;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (document != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (document != null && sourceCollectionName != null)
+            {
+                try
+                {
                     // Step 3: Insert the document into the transfer collection
                     var transferCollection = database.GetCollection<BsonDocument>(transferColl);
                     await transferCollection.InsertOneAsync(document);
@@ -880,7 +1066,7 @@ namespace Smart_Asset
                     document["OldLocation"] = sourceCollectionName;
 
                     // Add the "Notes" field to the document
-                    document["notes"] = notes;
+                    document["Notes"] = notes;
 
                     // Insert the document into the transfer collection
                     await transferCollection.InsertOneAsync(document);
@@ -896,6 +1082,137 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+        public static async Task TransferManyUsingSerialNo(string dbName, List<string> serialNos)
+        {
+            try
+            {
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+
+                // Retrieve all collection names
+                using (var collectionsCursor = await database.ListCollectionNamesAsync())
+                {
+                    while (await collectionsCursor.MoveNextAsync())
+                    {
+                        foreach (var collectionName in collectionsCursor.Current)
+                        {
+                            try
+                            {
+                                if (!excludeCollections.Contains(collectionName)) // Skip excluded collections
+                                {
+                                    var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                                    // Build a filter to find documents that match the given SerialNo list
+                                    var filter = Builders<BsonDocument>.Filter.In("SerialNo", serialNos);
+                                    var documents = await collection.Find(filter).ToListAsync();
+
+                                    if (documents.Count > 0)
+                                    {
+                                        foreach (var document in documents)
+                                        {
+                                            try
+                                            {
+                                                // Check if the document has an OldLocation field
+                                                if (document.Contains("OldLocation"))
+                                                {
+                                                    var oldLocation = document["OldLocation"].AsString;
+
+                                                    // Remove "OldLocation" and "notes" fields from the document
+                                                    document.Remove("OldLocation");
+                                                    document.Remove("Notes");
+
+                                                    // Ensure the target collection exists (based on OldLocation)
+                                                    var targetCollection = database.GetCollection<BsonDocument>(oldLocation);
+
+                                                    // Insert the document into the target collection
+                                                    await targetCollection.InsertOneAsync(document);
+
+                                                    // Remove the document from the original collection
+                                                    var idFilter = Builders<BsonDocument>.Filter.Eq("_id", document["_id"]);
+                                                    await collection.DeleteOneAsync(idFilter);
+
+                                                    Console.WriteLine($"Document with SerialNo: {document["SerialNo"]} transferred to {oldLocation}");
+                                                }
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                // Handle individual document-level errors
+                                                Console.WriteLine($"Error transferring document with SerialNo {document["SerialNo"]}: {ex.Message}");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                // Handle errors at the collection level
+                                Console.WriteLine($"Error processing collection '{collectionName}': {ex.Message}");
+                            }
+                        }
+                    }
+                }
+
+                // Operation completion message
+                MessageBox.Show("Retrieve operation completed.");
+            }
+            catch (Exception ex)
+            {
+                // Handle high-level errors (e.g., MongoDB connection issues)
+                MessageBox.Show($"An error occurred during the retrieve operation: {ex.Message}");
+                Console.WriteLine($"An error occurred during the retrieve operation: {ex}");
+            }
+        }
+
+
+        public static async Task TransferDocumentsByCollectionName(string dbName, string sourceCollectionName, string transferColl)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+
+            // Check if the source collection is in the excluded list
+            if (excludeCollections.Contains(sourceCollectionName))
+            {
+                MessageBox.Show($"The collection '{sourceCollectionName}' is excluded from transfers.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+            var documents = await sourceCollection.Find(new BsonDocument()).ToListAsync();
+
+            // Check if there are any documents to transfer
+            if (documents == null || !documents.Any())
+            {
+                MessageBox.Show($"No documents found in the collection '{sourceCollectionName}'.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+
+                foreach (var document in documents)
+                {
+                    // Insert the document into the transfer collection without modifying it
+                    await transferCollection.InsertOneAsync(document);
+                }
+
+                // After transferring all documents, delete them from the source collection
+                await sourceCollection.DeleteManyAsync(new BsonDocument());
+
+                MessageBox.Show($"All documents from '{sourceCollectionName}' successfully transferred to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
 
 
 

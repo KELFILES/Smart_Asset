@@ -35,10 +35,11 @@
             // 
             retrieve_Btn.Location = new Point(12, 12);
             retrieve_Btn.Name = "retrieve_Btn";
-            retrieve_Btn.Size = new Size(147, 34);
+            retrieve_Btn.Size = new Size(147, 25);
             retrieve_Btn.TabIndex = 0;
-            retrieve_Btn.Text = "Retrive";
+            retrieve_Btn.Text = "Retrive Selected";
             retrieve_Btn.UseVisualStyleBackColor = true;
+            retrieve_Btn.Click += retrieve_Btn_Click;
             // 
             // RightClick
             // 

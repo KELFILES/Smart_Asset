@@ -56,6 +56,22 @@ namespace Smart_Asset
             await MyDbMethods.LoadDatabase_SerialNo("SmartAssetDb", "Reserved_Hardwares", serialNo_Cmb, type_Cmb.Text);
         }
 
+        private Action _lastRefreshAction;
+
+        // Override ProcessCmdKey to handle Ctrl+R key press
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Check if the Ctrl + R key combination is pressed
+            if (keyData == (Keys.Control | Keys.R))
+            {
+                _lastRefreshAction?.Invoke(); // Invoke the last refresh action
+                MessageBox.Show("DATA HAS BEEN REFRESHED");
+                return true; // Indicate that the key press was handled
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private async void enter_Btn_Click(object sender, EventArgs e)
         {
             bool success = await MyDbMethods.MoveDocument(
@@ -70,6 +86,9 @@ namespace Smart_Asset
                 MessageBox.Show($"{type_Cmb.Text} : {serialNo_Cmb.Text} \n" +
                                 $"Has been Deployed to \n" +
                                 $"{location_Cmb.Text} : {unit_Cmb.Text}");
+
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
             }
             else
             {

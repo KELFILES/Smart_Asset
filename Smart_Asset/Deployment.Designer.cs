@@ -42,8 +42,11 @@
             addLocation_Btn = new Button();
             label2 = new Label();
             label1 = new Label();
+            dataGridView1 = new DataGridView();
             panel1.SuspendLayout();
+            panel3.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -63,8 +66,10 @@
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.BackColor = SystemColors.WindowFrame;
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(dataGridView1);
             panel3.Location = new Point(12, 273);
             panel3.Name = "panel3";
+            panel3.Padding = new Padding(10);
             panel3.Size = new Size(1085, 476);
             panel3.TabIndex = 1;
             // 
@@ -217,6 +222,16 @@
             label1.TabIndex = 0;
             label1.Text = "Location:";
             // 
+            // dataGridView1
+            // 
+            dataGridView1.BackgroundColor = Color.DarkGray;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(10, 10);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(1063, 454);
+            dataGridView1.TabIndex = 0;
+            // 
             // Deployment
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -227,8 +242,10 @@
             Name = "Deployment";
             Text = "Deployment";
             panel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -248,5 +265,6 @@
         private ComboBox location_Cmb;
         private ComboBox type_Cmb;
         private TextBox serialNo_Cmb;
+        private DataGridView dataGridView1;
     }
 }

@@ -36,10 +36,12 @@
             panel1 = new Panel();
             panel2 = new Panel();
             panel7 = new Panel();
+            borrowedHardwares_Btn = new Button();
             cleaningHardwares_Btn = new Button();
+            disposedHardwares_Btn = new Button();
             repairingHardwares_Btn = new Button();
             panel5 = new Panel();
-            disposed_Btn = new Button();
+            showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
             panel4 = new Panel();
             show1_Btn = new Button();
@@ -48,7 +50,7 @@
             panel6 = new Panel();
             location_Cmb = new ComboBox();
             label1 = new Label();
-            button1 = new Button();
+            show2_Btn = new Button();
             unit_Cmb = new ComboBox();
             label2 = new Label();
             panel3.SuspendLayout();
@@ -70,14 +72,14 @@
             panel3.Dock = DockStyle.Bottom;
             panel3.Location = new Point(8, 688);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1173, 104);
+            panel3.Size = new Size(1272, 104);
             panel3.TabIndex = 9;
             // 
             // exportTo_Cb
             // 
             exportTo_Cb.Anchor = AnchorStyles.Top;
             exportTo_Cb.FormattingEnabled = true;
-            exportTo_Cb.Location = new Point(546, 30);
+            exportTo_Cb.Location = new Point(596, 30);
             exportTo_Cb.Name = "exportTo_Cb";
             exportTo_Cb.Size = new Size(133, 23);
             exportTo_Cb.TabIndex = 8;
@@ -86,7 +88,7 @@
             // export_Btn
             // 
             export_Btn.Anchor = AnchorStyles.Top;
-            export_Btn.Location = new Point(567, 59);
+            export_Btn.Location = new Point(617, 59);
             export_Btn.Name = "export_Btn";
             export_Btn.Size = new Size(88, 23);
             export_Btn.TabIndex = 7;
@@ -98,7 +100,7 @@
             // 
             exportTo_Lbl.Anchor = AnchorStyles.Top;
             exportTo_Lbl.AutoSize = true;
-            exportTo_Lbl.Location = new Point(481, 33);
+            exportTo_Lbl.Location = new Point(531, 33);
             exportTo_Lbl.Name = "exportTo_Lbl";
             exportTo_Lbl.Size = new Size(59, 15);
             exportTo_Lbl.TabIndex = 5;
@@ -113,25 +115,28 @@
             dataGridView1.Location = new Point(8, 235);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(1173, 453);
+            dataGridView1.Size = new Size(1272, 453);
             dataGridView1.TabIndex = 4;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            dataGridView1.MouseDown += dataGridView1_MouseDown;
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.AutoScroll = true;
             panel1.BackColor = Color.FromArgb(10, 18, 45);
             panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(panel3);
-            panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(8, 55, 8, 8);
-            panel1.Size = new Size(1189, 800);
+            panel1.Size = new Size(1288, 800);
             panel1.TabIndex = 8;
             // 
             // panel2
             // 
+            panel2.AutoScroll = true;
             panel2.BackColor = Color.DimGray;
             panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel5);
@@ -140,31 +145,57 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(8, 55);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1173, 180);
+            panel2.Size = new Size(1272, 180);
             panel2.TabIndex = 8;
             // 
             // panel7
             // 
             panel7.Anchor = AnchorStyles.Top;
             panel7.BackColor = Color.Gray;
+            panel7.Controls.Add(borrowedHardwares_Btn);
             panel7.Controls.Add(cleaningHardwares_Btn);
+            panel7.Controls.Add(disposedHardwares_Btn);
             panel7.Controls.Add(repairingHardwares_Btn);
-            panel7.Location = new Point(965, 40);
+            panel7.Location = new Point(997, 40);
             panel7.Name = "panel7";
-            panel7.Size = new Size(136, 120);
+            panel7.Size = new Size(265, 120);
             panel7.TabIndex = 23;
+            // 
+            // borrowedHardwares_Btn
+            // 
+            borrowedHardwares_Btn.Anchor = AnchorStyles.Top;
+            borrowedHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            borrowedHardwares_Btn.Location = new Point(134, 63);
+            borrowedHardwares_Btn.Name = "borrowedHardwares_Btn";
+            borrowedHardwares_Btn.Size = new Size(121, 48);
+            borrowedHardwares_Btn.TabIndex = 12;
+            borrowedHardwares_Btn.Text = "BORROWED HARDWARES";
+            borrowedHardwares_Btn.UseVisualStyleBackColor = true;
+            borrowedHardwares_Btn.Click += borrowedHardwares_Btn_Click;
             // 
             // cleaningHardwares_Btn
             // 
             cleaningHardwares_Btn.Anchor = AnchorStyles.Top;
             cleaningHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cleaningHardwares_Btn.Location = new Point(7, 63);
+            cleaningHardwares_Btn.Location = new Point(134, 9);
             cleaningHardwares_Btn.Name = "cleaningHardwares_Btn";
             cleaningHardwares_Btn.Size = new Size(121, 48);
             cleaningHardwares_Btn.TabIndex = 11;
             cleaningHardwares_Btn.Text = "CLEANING HARDWARES";
             cleaningHardwares_Btn.UseVisualStyleBackColor = true;
             cleaningHardwares_Btn.Click += cleaningHardwares_Btn_Click;
+            // 
+            // disposedHardwares_Btn
+            // 
+            disposedHardwares_Btn.Anchor = AnchorStyles.Top;
+            disposedHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            disposedHardwares_Btn.Location = new Point(7, 63);
+            disposedHardwares_Btn.Name = "disposedHardwares_Btn";
+            disposedHardwares_Btn.Size = new Size(121, 48);
+            disposedHardwares_Btn.TabIndex = 11;
+            disposedHardwares_Btn.Text = "DISPOSED HARDWARES";
+            disposedHardwares_Btn.UseVisualStyleBackColor = true;
+            disposedHardwares_Btn.Click += disposedHardwares_Btn_Click;
             // 
             // repairingHardwares_Btn
             // 
@@ -182,30 +213,30 @@
             // 
             panel5.Anchor = AnchorStyles.Top;
             panel5.BackColor = Color.Gray;
-            panel5.Controls.Add(disposed_Btn);
+            panel5.Controls.Add(showAllHardwares_Btn);
             panel5.Controls.Add(reservedHardwares_Btn);
-            panel5.Location = new Point(75, 40);
+            panel5.Location = new Point(14, 40);
             panel5.Name = "panel5";
-            panel5.Size = new Size(136, 120);
+            panel5.Size = new Size(265, 120);
             panel5.TabIndex = 22;
             // 
-            // disposed_Btn
+            // showAllHardwares_Btn
             // 
-            disposed_Btn.Anchor = AnchorStyles.Top;
-            disposed_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            disposed_Btn.Location = new Point(8, 63);
-            disposed_Btn.Name = "disposed_Btn";
-            disposed_Btn.Size = new Size(121, 48);
-            disposed_Btn.TabIndex = 11;
-            disposed_Btn.Text = "DISPOSED HARDWARES";
-            disposed_Btn.UseVisualStyleBackColor = true;
-            disposed_Btn.Click += disposed_Btn_Click;
+            showAllHardwares_Btn.Anchor = AnchorStyles.Top;
+            showAllHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            showAllHardwares_Btn.Location = new Point(7, 9);
+            showAllHardwares_Btn.Name = "showAllHardwares_Btn";
+            showAllHardwares_Btn.Size = new Size(121, 48);
+            showAllHardwares_Btn.TabIndex = 12;
+            showAllHardwares_Btn.Text = "SHOW ALL HARDWARES";
+            showAllHardwares_Btn.UseVisualStyleBackColor = true;
+            showAllHardwares_Btn.Click += showAllHardwares_Btn_Click;
             // 
             // reservedHardwares_Btn
             // 
             reservedHardwares_Btn.Anchor = AnchorStyles.Top;
             reservedHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            reservedHardwares_Btn.Location = new Point(8, 9);
+            reservedHardwares_Btn.Location = new Point(134, 9);
             reservedHardwares_Btn.Name = "reservedHardwares_Btn";
             reservedHardwares_Btn.Size = new Size(121, 48);
             reservedHardwares_Btn.TabIndex = 10;
@@ -220,17 +251,17 @@
             panel4.Controls.Add(show1_Btn);
             panel4.Controls.Add(serialNo_Cmb);
             panel4.Controls.Add(label4);
-            panel4.Location = new Point(217, 40);
+            panel4.Location = new Point(285, 40);
             panel4.Name = "panel4";
-            panel4.Size = new Size(368, 120);
+            panel4.Size = new Size(350, 120);
             panel4.TabIndex = 29;
             // 
             // show1_Btn
             // 
             show1_Btn.Anchor = AnchorStyles.Top;
-            show1_Btn.Location = new Point(150, 62);
+            show1_Btn.Location = new Point(157, 63);
             show1_Btn.Name = "show1_Btn";
-            show1_Btn.Size = new Size(88, 23);
+            show1_Btn.Size = new Size(74, 23);
             show1_Btn.TabIndex = 19;
             show1_Btn.Text = "SHOW";
             show1_Btn.UseVisualStyleBackColor = true;
@@ -242,9 +273,9 @@
             serialNo_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             serialNo_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             serialNo_Cmb.FormattingEnabled = true;
-            serialNo_Cmb.Location = new Point(69, 33);
+            serialNo_Cmb.Location = new Point(76, 34);
             serialNo_Cmb.Name = "serialNo_Cmb";
-            serialNo_Cmb.Size = new Size(275, 23);
+            serialNo_Cmb.Size = new Size(261, 23);
             serialNo_Cmb.TabIndex = 23;
             serialNo_Cmb.KeyPress += serialNo_Cmb_KeyPress;
             serialNo_Cmb.MouseEnter += serialNo_Cmb_MouseEnter;
@@ -253,7 +284,7 @@
             // 
             label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
-            label4.Location = new Point(7, 36);
+            label4.Location = new Point(14, 37);
             label4.Name = "label4";
             label4.Size = new Size(60, 15);
             label4.TabIndex = 24;
@@ -265,12 +296,12 @@
             panel6.BackColor = Color.Gray;
             panel6.Controls.Add(location_Cmb);
             panel6.Controls.Add(label1);
-            panel6.Controls.Add(button1);
+            panel6.Controls.Add(show2_Btn);
             panel6.Controls.Add(unit_Cmb);
             panel6.Controls.Add(label2);
-            panel6.Location = new Point(591, 40);
+            panel6.Location = new Point(641, 40);
             panel6.Name = "panel6";
-            panel6.Size = new Size(368, 120);
+            panel6.Size = new Size(350, 120);
             panel6.TabIndex = 30;
             // 
             // location_Cmb
@@ -280,9 +311,9 @@
             location_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             location_Cmb.FormattingEnabled = true;
-            location_Cmb.Location = new Point(80, 8);
+            location_Cmb.Location = new Point(80, 24);
             location_Cmb.Name = "location_Cmb";
-            location_Cmb.Size = new Size(275, 23);
+            location_Cmb.Size = new Size(255, 23);
             location_Cmb.TabIndex = 25;
             location_Cmb.DropDown += location_Cmb_DropDown_1;
             // 
@@ -291,22 +322,22 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Gray;
-            label1.Location = new Point(18, 11);
+            label1.Location = new Point(18, 27);
             label1.Name = "label1";
             label1.Size = new Size(56, 15);
             label1.TabIndex = 24;
             label1.Text = "Location:";
             // 
-            // button1
+            // show2_Btn
             // 
-            button1.Anchor = AnchorStyles.Top;
-            button1.Location = new Point(178, 66);
-            button1.Name = "button1";
-            button1.Size = new Size(88, 23);
-            button1.TabIndex = 28;
-            button1.Text = "SHOW";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            show2_Btn.Anchor = AnchorStyles.Top;
+            show2_Btn.Location = new Point(174, 82);
+            show2_Btn.Name = "show2_Btn";
+            show2_Btn.Size = new Size(68, 23);
+            show2_Btn.TabIndex = 28;
+            show2_Btn.Text = "SHOW";
+            show2_Btn.UseVisualStyleBackColor = true;
+            show2_Btn.Click += Show2_Click_1;
             // 
             // unit_Cmb
             // 
@@ -315,9 +346,9 @@
             unit_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             unit_Cmb.FormattingEnabled = true;
-            unit_Cmb.Location = new Point(80, 37);
+            unit_Cmb.Location = new Point(80, 53);
             unit_Cmb.Name = "unit_Cmb";
-            unit_Cmb.Size = new Size(275, 23);
+            unit_Cmb.Size = new Size(255, 23);
             unit_Cmb.TabIndex = 26;
             unit_Cmb.DropDown += unit_Cmb_DropDown_1;
             // 
@@ -326,7 +357,7 @@
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.BackColor = Color.Gray;
-            label2.Location = new Point(18, 40);
+            label2.Location = new Point(18, 56);
             label2.Name = "label2";
             label2.Size = new Size(32, 15);
             label2.TabIndex = 27;
@@ -337,7 +368,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1189, 800);
+            ClientSize = new Size(1288, 800);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Read";
@@ -375,13 +406,15 @@
         private ComboBox location_Cmb;
         private Label label1;
         private Label label2;
-        private Button button1;
+        private Button show2_Btn;
         private ComboBox unit_Cmb;
         private Panel panel4;
         private Panel panel6;
         private Panel panel7;
         private Button repairingHardwares_Btn;
-        private Button disposed_Btn;
+        private Button disposedHardwares_Btn;
         private Button cleaningHardwares_Btn;
+        private Button showAllHardwares_Btn;
+        private Button borrowedHardwares_Btn;
     }
 }

@@ -120,6 +120,7 @@
             label10.Anchor = AnchorStyles.None;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.White;
             label10.Location = new Point(262, 145);
             label10.Name = "label10";
             label10.Size = new Size(199, 30);
@@ -141,6 +142,7 @@
             label12.Anchor = AnchorStyles.None;
             label12.AutoSize = true;
             label12.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label12.ForeColor = Color.White;
             label12.Location = new Point(262, 214);
             label12.Name = "label12";
             label12.Size = new Size(87, 20);
@@ -279,10 +281,12 @@
             cost_Tb.Name = "cost_Tb";
             cost_Tb.Size = new Size(901, 27);
             cost_Tb.TabIndex = 63;
+            cost_Tb.KeyPress += cost_Tb_KeyPress;
             // 
             // serial_Tb
             // 
             serial_Tb.Anchor = AnchorStyles.Top;
+            serial_Tb.CharacterCasing = CharacterCasing.Upper;
             serial_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
             serial_Tb.Location = new Point(227, 207);
             serial_Tb.Name = "serial_Tb";
@@ -292,6 +296,7 @@
             // model_Tb
             // 
             model_Tb.Anchor = AnchorStyles.Top;
+            model_Tb.CharacterCasing = CharacterCasing.Upper;
             model_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
             model_Tb.Location = new Point(227, 174);
             model_Tb.Name = "model_Tb";

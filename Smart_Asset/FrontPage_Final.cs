@@ -50,6 +50,8 @@ namespace Smart_Asset
 
             // To show the dashboard first
             dashboard_Btn.PerformClick();
+
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void customizeDesign()
@@ -183,7 +185,7 @@ namespace Smart_Asset
         private void dashboard_Btn_Click(object sender, EventArgs e)
         {
             crud_Panel.Visible = false;
-            showFormSelected(ref db, "ASSET MANAGEMENT: DASHBOARD");
+            showFormSelected(ref db, "DASHBOARD");
         }
 
         private void deployment_Btn_Click(object sender, EventArgs e)
@@ -288,7 +290,7 @@ namespace Smart_Asset
             ButtonLeaveColor(fileMaintenance_Btn);
         }
 
-        
+
 
         private void artificialIntelligence_Btn_MouseEnter(object sender, EventArgs e)
         {
@@ -300,7 +302,7 @@ namespace Smart_Asset
             ButtonLeaveColor(artificialIntelligence_Btn);
         }
 
-        
+
 
         private void questionMark_Btn_Click(object sender, EventArgs e)
         {
@@ -356,18 +358,34 @@ namespace Smart_Asset
             qm.Show();
 
             // Check header_Lbl.Text for specific actions
-            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: DASHBOARD"))
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: IMPORT HARDWARES DATA"))
             {
                 qm.Text = "MANUAL FOR " + header_Lbl.Text;
             }
-            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: CREATE"))
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: MONITOR HARDWARES DATA"))
             {
                 qm.Text = "MANUAL FOR " + header_Lbl.Text;
             }
-
-
-
-
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: MODIFY HARDWARES DATA"))
+            {
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
+            }
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: TRANSFER HARDWARES DATA"))
+            {
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
+            }
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: DEPLOY HARDWARES"))
+            {
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
+            }
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: SWAP HARDWARES"))
+            {
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
+            }
+            if (header_Lbl.Text.Equals("ASSET MANAGEMENT: RECYCLE BIN"))
+            {
+                qm.Text = "MANUAL FOR " + header_Lbl.Text;
+            }
 
 
         }
@@ -378,7 +396,7 @@ namespace Smart_Asset
 
             //SHOW FIRST CREATE IN PANEL
             create_Rdb.Select();
-            showFormSelected(ref cr, "ASSET MANAGEMENT: CREATE");
+            showFormSelected(ref cr, "ASSET MANAGEMENT: IMPORT HARDWARES DATA");
 
         }
 
@@ -386,7 +404,7 @@ namespace Smart_Asset
         {
             if (create_Rdb.Checked)
             {
-                showFormSelected(ref cr, "ASSET MANAGEMENT: CREATE");
+                showFormSelected(ref cr, "ASSET MANAGEMENT: IMPORT HARDWARES DATA");
             }
         }
 
@@ -394,7 +412,7 @@ namespace Smart_Asset
         {
             if (read_Rdb.Checked)
             {
-                showFormSelected(ref rd, "ASSET MANAGEMENT: READ");
+                showFormSelected(ref rd, "ASSET MANAGEMENT: MONITOR HARDWARES DATA");
             }
         }
 
@@ -402,7 +420,7 @@ namespace Smart_Asset
         {
             if (update_Rdb.Checked)
             {
-                showFormSelected(ref ud, "ASSET MANAGEMENT: UPDATE");
+                showFormSelected(ref ud, "ASSET MANAGEMENT: MODIFY HARDWARES DATA");
             }
         }
 
@@ -410,7 +428,7 @@ namespace Smart_Asset
         {
             if (transfer_Rdb.Checked)
             {
-                showFormSelected(ref del, "ASSET MANAGEMENT: TRANSFER");
+                showFormSelected(ref del, "ASSET MANAGEMENT: TRANSFER HARDWARES DATA");
             }
         }
 
@@ -418,7 +436,7 @@ namespace Smart_Asset
         {
             if (deployment_Rdb.Checked)
             {
-                showFormSelected(ref dp, "ASSET MANAGEMENT: DEPLOYMENT");
+                showFormSelected(ref dp, "ASSET MANAGEMENT: DEPLOY HARDWARES");
             }
         }
 
@@ -426,27 +444,52 @@ namespace Smart_Asset
         {
             if (swap_Rdb.Checked)
             {
-                showFormSelected(ref sw, "ASSET MANAGEMENT: SWAP");
+                showFormSelected(ref sw, "ASSET MANAGEMENT: SWAP HARDWARES");
             }
         }
 
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
 
+        private void artificialIntelligence_Btn_Click_1(object sender, EventArgs e)
+        {
+            crud_Panel.Visible = false;
+            showFormSelected(ref db, "DASHBOARD");
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
+        private void ManageRoles_Btn_Click_1(object sender, EventArgs e)
+        {
+            crud_Panel.Visible = false;
+            //showFormSelected(ref mngrl, "MANAGE ROLES");
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
 
+        private void createReport_Btn_Click_1(object sender, EventArgs e)
+        {
+            crud_Panel.Visible = false;
+            //showFormSelected(ref mngrl, "CREATE REPORT");
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
 
+        private void logout_Btn_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+        private void recycleBin_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (recycleBin_Rdb.Checked)
+            {
+                MessageBox.Show("STILL ON PROGRESS!");
+            }
+        }
 
 
     }

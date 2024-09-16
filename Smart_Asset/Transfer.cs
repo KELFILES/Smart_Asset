@@ -60,10 +60,19 @@ namespace Smart_Asset
             {
                 selectedTransfer = "borrow";
             }
-            else if (delete_RadBtn.Checked)
+            else if (reservedHardwares_RadBtn.Checked)
+            {
+                selectedTransfer = "reservedHardwares";
+            }
+            else if (remove_RadBtn.Checked)
             {
                 selectedTransfer = "delete";
             }
+            else if (location_Rdb.Checked)
+            {
+                selectedTransfer = "location";
+            }
+
 
             switch (selectedTransfer)
             {
@@ -82,8 +91,14 @@ namespace Smart_Asset
                 case "borrow":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "BorrowedItems", $"{serialNo_Cmb.Text}", notes_Tb.Text);
                     break;
+                case "reservedHardwares":
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Reserved_Hardwares", $"{serialNo_Cmb.Text}");
+                    break;
                 case "delete":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Delete", $"{serialNo_Cmb.Text}", notes_Tb.Text);
+                    break;
+                case "location":
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{locationType_Cmb.Text}_{unitType_Cmb.Text}", $"{serialNo_Cmb.Text}");
                     break;
             }
 
@@ -155,9 +170,17 @@ namespace Smart_Asset
             {
                 selectedTransfer2 = "borrow";
             }
-            else if (delete2_RadBtn.Checked)
+            else if (reservedHardwares2_RadBtn.Checked)
+            {
+                selectedTransfer2 = "reservedHardwares";
+            }
+            else if (remove2_RadBtn.Checked)
             {
                 selectedTransfer2 = "delete";
+            }
+            else if (location2_Rdb.Checked)
+            {
+                selectedTransfer2 = "location2";
             }
 
             switch (selectedTransfer2)
@@ -177,8 +200,14 @@ namespace Smart_Asset
                 case "borrow":
                     await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", "BorrowedItems", notes2_Tb.Text);
                     break;
+                case "reservedHardwares":
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", $"{serialNo_Cmb.Text}");
+                    break;
                 case "delete":
                     await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", "Delete", notes2_Tb.Text);
+                    break;
+                case "location2":
+                    await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", $"{locationType2_Cmb.Text}_{unitType2_Cmb.Text}");
                     break;
             }
 
@@ -189,14 +218,68 @@ namespace Smart_Asset
         }
 
 
+        private void location_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (location_Rdb.Checked == true)
+            {
+                locationType_Cmb.Enabled = true;
+                unitType_Cmb.Enabled = true;
+            }
+            else
+            {
+                // Clear selection in ComboBox by setting SelectedIndex to -1
+                locationType_Cmb.SelectedIndex = -1;
+                unitType_Cmb.SelectedIndex = -1;
 
+                locationType_Cmb.Enabled = false;
+                unitType_Cmb.Enabled = false;
+            }
+        }
 
+        private void location2_Rdb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (location2_Rdb.Checked)
+            {
+                locationType2_Cmb.Enabled = true;
+                unitType2_Cmb.Enabled = true;
+            }
+            else
+            {
+                // Clear selection in ComboBox by setting SelectedIndex to -1
+                locationType2_Cmb.SelectedIndex = -1;
+                unitType2_Cmb.SelectedIndex = -1;
 
+                locationType2_Cmb.Enabled = false;
+                unitType2_Cmb.Enabled = false;
+            }
+        }
 
+        private async void locationType_Cmb_DropDown(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Location_List", locationType_Cmb);
+            Cursor = Cursors.Arrow;
+        }
 
+        private async void unitType_Cmb_DropDown(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unitType_Cmb);
+            Cursor = Cursors.Arrow;
+        }
 
+        private async void locationType2_Cmb_DropDown(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Location_List", locationType2_Cmb);
+            Cursor = Cursors.Arrow;
+        }
 
-
-
+        private async void unitType2_Cmb_DropDown(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unitType2_Cmb);
+            Cursor = Cursors.Arrow;
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace Smart_Asset
                 MessageBox.Show("Registered Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Clear or reset fields after registration
-                if (!autoFill_checkBox.Checked) ClearText();
+                if (!autoFill_Cb.Checked) ClearText();
                 else serial_Tb.Text = string.Empty;
             }
             catch (Exception ex)
@@ -174,6 +174,11 @@ namespace Smart_Asset
             {
                 e.Handled = true; // Ignore space key
             }
+        }
+
+        private void Create_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

@@ -10,6 +10,7 @@ using MongoDB.Driver;
 using System.Windows.Forms;
 using MongoDB.Bson;
 using static Smart_Asset.Read;
+using static System.Windows.Forms.DataFormats;
 
 
 namespace Smart_Asset
@@ -18,12 +19,15 @@ namespace Smart_Asset
     {
 
         //FIELD
-        string selectedButton = "";
+        public static string selectedButton = "";
+        RightClick rc = new RightClick();
 
         public Read()
         {
             InitializeComponent();
         }
+
+
 
         private void Read_Load(object sender, EventArgs e)
         {
@@ -81,6 +85,7 @@ namespace Smart_Asset
 
         private void reservedHardwares_Btn_Click_1(object sender, EventArgs e)
         {
+            selectedButton = "reservedHardwares";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
         }
@@ -120,13 +125,14 @@ namespace Smart_Asset
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // Check if the Ctrl + R key combination is pressed
-            if (keyData == (Keys.Control | Keys.R))
+            if (keyData == (Keys.Control | Keys.R) || keyData == Keys.F5)
             {
                 // Check if the selected button is "repairingHardwares"
                 if (selectedButton == "repairingHardwares")
                 {
                     // Ensure the correct button is selected before invoking the action
                     repairingHardwares_Btn.PerformClick();
+
 
                     // Show confirmation
                     MessageBox.Show("Repairing Hardwares HAS BEEN REFRESHED");
@@ -165,6 +171,10 @@ namespace Smart_Asset
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void Refresh_Btn_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void Show2_Click_1(object sender, EventArgs e)
         {
@@ -176,22 +186,22 @@ namespace Smart_Asset
         private void disposedHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "disposedHardwares";
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
         }
 
-        private void repairingHardwares_Btn_Click(object sender, EventArgs e)
+        public void repairingHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "repairingHardwares";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
         }
 
         private void cleaningHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "cleaningHardwares";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
         }
 
         private async void showAllHardwares_Btn_Click(object sender, EventArgs e)
@@ -203,48 +213,38 @@ namespace Smart_Asset
         private void borrowedHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "borrowedHardwares";
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed");
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
         }
 
         private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if there are any selected rows before proceeding
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                Console.WriteLine("No row is selected. Right-click context menu will not be shown.");
-                return; // Exit the method if no row is selected
-            }
-
             if (selectedButton.Equals("repairingHardwares"))
             {
                 if (e.Button == MouseButtons.Right)
                 {
-                    // Avoid multiple form instances
-                    RightClick rc = new RightClick();
+                    // Dispose of the previous form if it's still open
+                    if (rc != null)
+                    {
+                        rc.Dispose();
+                        rc = null;
+                    }
+
+                    // Always pass the current instance of `Read` to the `RightClick` form
+                    rc = new RightClick(this);  // Pass 'this' to ensure form1 is initialized
 
                     // Convert the mouse position to screen coordinates
                     Point screenPoint = dataGridView1.PointToScreen(e.Location);
 
-                    // Adjust for window borders and toolbars if needed (if the form has non-client areas)
                     rc.StartPosition = FormStartPosition.Manual;
                     rc.Location = screenPoint;  // Directly set to the screen position
 
-                    // Ensure the form is not minimized when clicking the button
-                    rc.TopMost = true;  // This ensures that the form stays on top of other windows
-
-                    // Set up an event handler to close the form when clicking outside of it
                     rc.Deactivate += (s, ev) =>
                     {
-                        rc.Dispose();
-                        rc = null; // Set to null when disposed
+                        rc.Hide();  // Just hide instead of disposing
                     };
 
-                    // Show the new form without minimizing the main form
-                    rc.ShowDialog();  // ShowDialog keeps focus on the current form until the dialog is closed
-
-                    // After dialog is closed, ensure the main form stays in Normal state
-                    this.WindowState = FormWindowState.Normal;  // Ensure the main form doesn't minimize
+                    rc.Show();
                 }
             }
 
@@ -256,81 +256,105 @@ namespace Smart_Asset
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (selectedButton.Equals("repairingHardwares"))
-            {
-                try
-                {
-                    // Check if DataGridView has any rows
-                    if (dataGridView1.Rows.Count == 0)
-                    {
-                        Console.WriteLine("No data available in the DataGridView.");
-                        return; // Exit if no data is present in the DataGridView
-                    }
-
-                    // Initialize RightClick before accessing it
-                    RightClick rc = new RightClick();
-
-                    // Initialize selectedSerialNos if it's null
-                    if (selectedSerialNos == null)
-                    {
-                        selectedSerialNos = new List<string>();
-                    }
-
-                    // If no rows are selected, clear selectedSerialNos and return
-                    if (dataGridView1.SelectedRows.Count == 0)
-                    {
-                        selectedSerialNos.Clear();
-                        Console.WriteLine("No rows selected.");
-                        rc.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
-                        return;
-                    }
-
-                    // Clear the previous data from the list
-                    selectedSerialNos.Clear();
-
-                    if (dataGridView1.SelectedRows.Count == 1)
-                    {
-                        // If only one row is selected, store the SerialNo of that row
-                        string serialNo = dataGridView1.SelectedRows[0].Cells["SerialNo"].Value?.ToString();
-                        if (!string.IsNullOrEmpty(serialNo))
-                        {
-                            selectedSerialNos.Add(serialNo);
-                            Console.WriteLine("Selected SerialNo: " + serialNo);
-
-                            // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
-                            rc.GetRetrievingSerial(new List<string> { serialNo });
-                        }
-                        else
-                        {
-                            Console.WriteLine("SerialNo is null or empty.");
-                        }
-                    }
-                    else if (dataGridView1.SelectedRows.Count > 1)
-                    {
-                        // If multiple rows are selected, store all their SerialNos
-                        foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                        {
-                            string serialNo = row.Cells["SerialNo"].Value?.ToString();
-                            if (!string.IsNullOrEmpty(serialNo))
-                            {
-                                selectedSerialNos.Add(serialNo);
-                            }
-                        }
-
-                        Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
-
-                        // Pass the list of serialNos to RightClick for multiple rows
-                        rc.GetRetrievingSerial(selectedSerialNos);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Handle any unexpected errors
-                    MessageBox.Show($"An error occurred while processing the selection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
-                }
-            }
+             try
+    {
+        // Initialize selectedSerialNos if it's null
+        if (selectedSerialNos == null)
+        {
+            selectedSerialNos = new List<string>();
         }
+
+        // If no rows are selected, set selectedSerialNos to null
+        if (dataGridView1.SelectedRows.Count == 0)
+        {
+            selectedSerialNos = null;
+            Console.WriteLine("No rows selected. selectedSerialNos is now null.");
+
+            // Check if rc is null before using it
+            if (rc == null)
+            {
+                rc = new RightClick(this); // Reinitialize rc if it was disposed
+            }
+            rc.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
+            return;
+        }
+
+        // Clear the previous data from the list
+        selectedSerialNos.Clear();
+
+        if (dataGridView1.SelectedRows.Count == 1)
+        {
+            // If only one row is selected, store the SerialNo of that row
+            string serialNo = dataGridView1.SelectedRows[0].Cells["SerialNo"].Value.ToString();
+            selectedSerialNos.Add(serialNo);
+            Console.WriteLine("Selected SerialNo: " + serialNo);
+
+            // Reinitialize rc if it's null
+            if (rc == null)
+            {
+                rc = new RightClick(this); // Reinitialize rc if it was disposed
+            }
+
+            // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
+            rc.GetRetrievingSerial(new List<string> { serialNo });
+        }
+        else if (dataGridView1.SelectedRows.Count > 1)
+        {
+            // If multiple rows are selected, store all their SerialNos
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                string serialNo = row.Cells["SerialNo"].Value.ToString();
+                selectedSerialNos.Add(serialNo);
+            }
+            Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
+
+            // Reinitialize rc if it's null
+            if (rc == null)
+            {
+                rc = new RightClick(this); // Reinitialize rc if it was disposed
+            }
+
+            // Pass the list of serialNos to RightClick for multiple rows
+            rc.GetRetrievingSerial(selectedSerialNos);
+        }
+    }
+    catch (Exception ex)
+    {
+        // Handle any unexpected errors
+        MessageBox.Show($"An error occurred while processing the selection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+    }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Create cr = new Create();
+            cr.Show();
+        }
+
+        private void edit_Btn_Click(object sender, EventArgs e)
+        {
+            EditPage ep = new EditPage();
+            ep.Show();
+        }
+
+
+        private void recycleBin_Btn_Click(object sender, EventArgs e)
+        {
+            selectedButton = "recycleBin";
+            rc.SendClickBtnInfo(selectedButton);
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Recycle_Bin");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Recycle_Bin");
+        }
+
+        // Method to refresh the DataGridView
+        public void RefreshDataGridView()
+        {
+            repairingHardwares_Btn.PerformClick();
+        }
+
+
+
 
 
 

@@ -35,12 +35,16 @@
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             panel2 = new Panel();
+            edit_Btn = new Button();
+            label3 = new Label();
+            button2 = new Button();
             panel7 = new Panel();
             borrowedHardwares_Btn = new Button();
             cleaningHardwares_Btn = new Button();
             disposedHardwares_Btn = new Button();
             repairingHardwares_Btn = new Button();
             panel5 = new Panel();
+            recycleBin_Btn = new Button();
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
             panel4 = new Panel();
@@ -65,21 +69,22 @@
             // 
             // panel3
             // 
+            panel3.AutoScroll = true;
             panel3.BackColor = Color.DimGray;
             panel3.Controls.Add(exportTo_Cb);
             panel3.Controls.Add(export_Btn);
             panel3.Controls.Add(exportTo_Lbl);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(8, 688);
+            panel3.Location = new Point(8, 968);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1272, 104);
+            panel3.Size = new Size(1904, 104);
             panel3.TabIndex = 9;
             // 
             // exportTo_Cb
             // 
             exportTo_Cb.Anchor = AnchorStyles.Top;
             exportTo_Cb.FormattingEnabled = true;
-            exportTo_Cb.Location = new Point(596, 30);
+            exportTo_Cb.Location = new Point(885, 42);
             exportTo_Cb.Name = "exportTo_Cb";
             exportTo_Cb.Size = new Size(133, 23);
             exportTo_Cb.TabIndex = 8;
@@ -88,7 +93,7 @@
             // export_Btn
             // 
             export_Btn.Anchor = AnchorStyles.Top;
-            export_Btn.Location = new Point(617, 59);
+            export_Btn.Location = new Point(906, 71);
             export_Btn.Name = "export_Btn";
             export_Btn.Size = new Size(88, 23);
             export_Btn.TabIndex = 7;
@@ -100,7 +105,7 @@
             // 
             exportTo_Lbl.Anchor = AnchorStyles.Top;
             exportTo_Lbl.AutoSize = true;
-            exportTo_Lbl.Location = new Point(531, 33);
+            exportTo_Lbl.Location = new Point(922, 24);
             exportTo_Lbl.Name = "exportTo_Lbl";
             exportTo_Lbl.Size = new Size(59, 15);
             exportTo_Lbl.TabIndex = 5;
@@ -115,29 +120,32 @@
             dataGridView1.Location = new Point(8, 235);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(1272, 453);
+            dataGridView1.Size = new Size(1904, 733);
             dataGridView1.TabIndex = 4;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.AutoScroll = true;
             panel1.BackColor = Color.FromArgb(10, 18, 45);
             panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(panel3);
+            panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(8, 55, 8, 8);
-            panel1.Size = new Size(1288, 800);
+            panel1.Size = new Size(1920, 1080);
             panel1.TabIndex = 8;
             // 
             // panel2
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.DimGray;
+            panel2.Controls.Add(edit_Btn);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(button2);
             panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
@@ -145,8 +153,50 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(8, 55);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1272, 180);
+            panel2.Size = new Size(1904, 180);
             panel2.TabIndex = 8;
+            // 
+            // edit_Btn
+            // 
+            edit_Btn.Anchor = AnchorStyles.Top;
+            edit_Btn.BackColor = Color.LightGray;
+            edit_Btn.FlatStyle = FlatStyle.Flat;
+            edit_Btn.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            edit_Btn.Location = new Point(362, 142);
+            edit_Btn.Name = "edit_Btn";
+            edit_Btn.Size = new Size(28, 27);
+            edit_Btn.TabIndex = 33;
+            edit_Btn.Text = "E";
+            edit_Btn.UseVisualStyleBackColor = false;
+            edit_Btn.Click += edit_Btn_Click;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top;
+            label3.AutoSize = true;
+            label3.BackColor = Color.Gray;
+            label3.FlatStyle = FlatStyle.Flat;
+            label3.Font = new Font("Trebuchet MS", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(870, 139);
+            label3.Name = "label3";
+            label3.Size = new Size(159, 35);
+            label3.TabIndex = 32;
+            label3.Text = "ASSET LISTS";
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Top;
+            button2.BackColor = Color.LightGray;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(328, 142);
+            button2.Name = "button2";
+            button2.Size = new Size(28, 27);
+            button2.TabIndex = 31;
+            button2.Text = "+";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // panel7
             // 
@@ -156,7 +206,7 @@
             panel7.Controls.Add(cleaningHardwares_Btn);
             panel7.Controls.Add(disposedHardwares_Btn);
             panel7.Controls.Add(repairingHardwares_Btn);
-            panel7.Location = new Point(997, 40);
+            panel7.Location = new Point(1311, 13);
             panel7.Name = "panel7";
             panel7.Size = new Size(265, 120);
             panel7.TabIndex = 23;
@@ -213,12 +263,25 @@
             // 
             panel5.Anchor = AnchorStyles.Top;
             panel5.BackColor = Color.Gray;
+            panel5.Controls.Add(recycleBin_Btn);
             panel5.Controls.Add(showAllHardwares_Btn);
             panel5.Controls.Add(reservedHardwares_Btn);
-            panel5.Location = new Point(14, 40);
+            panel5.Location = new Point(328, 13);
             panel5.Name = "panel5";
             panel5.Size = new Size(265, 120);
             panel5.TabIndex = 22;
+            // 
+            // recycleBin_Btn
+            // 
+            recycleBin_Btn.Anchor = AnchorStyles.Top;
+            recycleBin_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            recycleBin_Btn.Location = new Point(7, 63);
+            recycleBin_Btn.Name = "recycleBin_Btn";
+            recycleBin_Btn.Size = new Size(121, 48);
+            recycleBin_Btn.TabIndex = 13;
+            recycleBin_Btn.Text = "RECYCLE BIN";
+            recycleBin_Btn.UseVisualStyleBackColor = true;
+            recycleBin_Btn.Click += recycleBin_Btn_Click;
             // 
             // showAllHardwares_Btn
             // 
@@ -251,7 +314,7 @@
             panel4.Controls.Add(show1_Btn);
             panel4.Controls.Add(serialNo_Cmb);
             panel4.Controls.Add(label4);
-            panel4.Location = new Point(285, 40);
+            panel4.Location = new Point(599, 13);
             panel4.Name = "panel4";
             panel4.Size = new Size(350, 120);
             panel4.TabIndex = 29;
@@ -299,7 +362,7 @@
             panel6.Controls.Add(show2_Btn);
             panel6.Controls.Add(unit_Cmb);
             panel6.Controls.Add(label2);
-            panel6.Location = new Point(641, 40);
+            panel6.Location = new Point(955, 13);
             panel6.Name = "panel6";
             panel6.Size = new Size(350, 120);
             panel6.TabIndex = 30;
@@ -368,7 +431,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1288, 800);
+            ClientSize = new Size(1920, 1080);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Read";
@@ -380,6 +443,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             panel7.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -395,7 +459,6 @@
         private ComboBox exportTo_Cb;
         private Button export_Btn;
         private Label exportTo_Lbl;
-        private DataGridView dataGridView1;
         private Panel panel1;
         private Button show1_Btn;
         private Panel panel2;
@@ -411,10 +474,15 @@
         private Panel panel4;
         private Panel panel6;
         private Panel panel7;
-        private Button repairingHardwares_Btn;
         private Button disposedHardwares_Btn;
         private Button cleaningHardwares_Btn;
         private Button showAllHardwares_Btn;
         private Button borrowedHardwares_Btn;
+        private Button recycleBin_Btn;
+        private Button button2;
+        private Label label3;
+        private Button edit_Btn;
+        public Button repairingHardwares_Btn;
+        public DataGridView dataGridView1;
     }
 }

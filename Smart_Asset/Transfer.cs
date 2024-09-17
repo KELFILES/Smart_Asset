@@ -85,11 +85,11 @@ namespace Smart_Asset
                     break;
 
                 case "disposal":
-                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Disposal", $"{serialNo_Cmb.Text}", notes_Tb.Text);
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Disposed_Hardwares", $"{serialNo_Cmb.Text}", notes_Tb.Text);
                     break;
 
                 case "borrow":
-                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "BorrowedItems", $"{serialNo_Cmb.Text}", notes_Tb.Text);
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Borrowed_Hardwares", $"{serialNo_Cmb.Text}", notes_Tb.Text);
                     break;
                 case "reservedHardwares":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Reserved_Hardwares", $"{serialNo_Cmb.Text}");
@@ -194,11 +194,11 @@ namespace Smart_Asset
                     break;
 
                 case "disposal":
-                    await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", "Disposal", notes2_Tb.Text);
+                    await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", "Disposed_Hardwares", notes2_Tb.Text);
                     break;
 
                 case "borrow":
-                    await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", "BorrowedItems", notes2_Tb.Text);
+                    await MyDbMethods.TransferDocumentsByCollectionName("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", "Borrowed_Hardwares", notes2_Tb.Text);
                     break;
                 case "reservedHardwares":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{location_Cmb.Text}_{unit_Cmb.Text}", $"{serialNo_Cmb.Text}");

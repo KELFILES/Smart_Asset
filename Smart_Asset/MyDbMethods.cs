@@ -934,7 +934,7 @@ namespace Smart_Asset
                 try
                 {
                     // Step 2: Conditionally add the "OldLocation" field to the document
-                    var exemptLocations = new[] { "Repairing", "Cleaning", "Disposal", "BorrowedItems", "Delete" };
+                    var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
 
                     if (!exemptLocations.Contains(sourceCollectionName))
                     {

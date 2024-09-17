@@ -110,10 +110,7 @@ namespace Smart_Asset
 
         #region File Maintenance
 
-        private void fileMaintenance_Btn_Click(object sender, EventArgs e)
-        {
-            showSubMenu(fileMaintenance_SubMenuPanel);
-        }
+
 
 
         private void showFormSelected<T>(ref T formName, string headerText) where T : Form, new()
@@ -184,13 +181,7 @@ namespace Smart_Asset
 
         private void dashboard_Btn_Click(object sender, EventArgs e)
         {
-            crud_Panel.Visible = false;
             showFormSelected(ref db, "DASHBOARD");
-        }
-
-        private void deployment_Btn_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void swap_Btn_Click(object sender, EventArgs e)
@@ -266,10 +257,6 @@ namespace Smart_Asset
             btnName.BackColor = SubOriginalBackColor;
         }
 
-
-
-
-
         private void dashboard_Btn_MouseEnter(object sender, EventArgs e)
         {
             ButtonEnterColor(dashboard_Btn);
@@ -282,15 +269,13 @@ namespace Smart_Asset
 
         private void fileMaintenance_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(fileMaintenance_Btn);
+            ButtonEnterColor(ManageAsset_Btn);
         }
 
         private void fileMaintenance_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(fileMaintenance_Btn);
+            ButtonLeaveColor(ManageAsset_Btn);
         }
-
-
 
         private void artificialIntelligence_Btn_MouseEnter(object sender, EventArgs e)
         {
@@ -301,8 +286,6 @@ namespace Smart_Asset
         {
             ButtonLeaveColor(artificialIntelligence_Btn);
         }
-
-
 
         private void questionMark_Btn_Click(object sender, EventArgs e)
         {
@@ -390,63 +373,6 @@ namespace Smart_Asset
 
         }
 
-        private void assetManagement_Btn_Click(object sender, EventArgs e)
-        {
-            crud_Panel.Visible = true;
-
-            //SHOW FIRST CREATE IN PANEL
-            create_Rdb.Select();
-            showFormSelected(ref cr, "ASSET MANAGEMENT: IMPORT HARDWARES DATA");
-
-        }
-
-        private void create_Rdb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (create_Rdb.Checked)
-            {
-                showFormSelected(ref cr, "ASSET MANAGEMENT: IMPORT HARDWARES DATA");
-            }
-        }
-
-        private void read_Rdb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (read_Rdb.Checked)
-            {
-                showFormSelected(ref rd, "ASSET MANAGEMENT: MONITOR HARDWARES DATA");
-            }
-        }
-
-        private void update_Rdb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (update_Rdb.Checked)
-            {
-                showFormSelected(ref ud, "ASSET MANAGEMENT: MODIFY HARDWARES DATA");
-            }
-        }
-
-        private void transfer_Rdb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (transfer_Rdb.Checked)
-            {
-                showFormSelected(ref del, "ASSET MANAGEMENT: TRANSFER HARDWARES DATA");
-            }
-        }
-
-        private void deployment_Rdb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (deployment_Rdb.Checked)
-            {
-                showFormSelected(ref dp, "ASSET MANAGEMENT: DEPLOY HARDWARES");
-            }
-        }
-
-        private void swap_Rdb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (swap_Rdb.Checked)
-            {
-                showFormSelected(ref sw, "ASSET MANAGEMENT: SWAP HARDWARES");
-            }
-        }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
@@ -455,20 +381,17 @@ namespace Smart_Asset
 
         private void artificialIntelligence_Btn_Click_1(object sender, EventArgs e)
         {
-            crud_Panel.Visible = false;
             showFormSelected(ref db, "DASHBOARD");
             MessageBox.Show("STILL ON PROGRESS!");
         }
         private void ManageRoles_Btn_Click_1(object sender, EventArgs e)
         {
-            crud_Panel.Visible = false;
             //showFormSelected(ref mngrl, "MANAGE ROLES");
             MessageBox.Show("STILL ON PROGRESS!");
         }
 
         private void createReport_Btn_Click_1(object sender, EventArgs e)
         {
-            crud_Panel.Visible = false;
             //showFormSelected(ref mngrl, "CREATE REPORT");
             MessageBox.Show("STILL ON PROGRESS!");
         }
@@ -478,19 +401,14 @@ namespace Smart_Asset
             MessageBox.Show("STILL ON PROGRESS!");
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void ManageAsset_Btn_Click(object sender, EventArgs e)
         {
-
+            showSubMenu(fileMaintenance_SubMenuPanel);
         }
 
-        private void recycleBin_Rdb_CheckedChanged(object sender, EventArgs e)
+        private void asset_Btn_Click(object sender, EventArgs e)
         {
-            if (recycleBin_Rdb.Checked)
-            {
-                MessageBox.Show("STILL ON PROGRESS!");
-            }
+            showFormSelected(ref rd, "ASSET");
         }
-
-
     }
 }

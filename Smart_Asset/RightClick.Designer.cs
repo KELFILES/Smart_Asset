@@ -28,25 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            retrieve_Btn = new Button();
+            markAsRepaired_Btn = new Button();
+            refresh_Btn = new Button();
             SuspendLayout();
             // 
-            // retrieve_Btn
+            // markAsRepaired_Btn
             // 
-            retrieve_Btn.Location = new Point(12, 12);
-            retrieve_Btn.Name = "retrieve_Btn";
-            retrieve_Btn.Size = new Size(147, 25);
-            retrieve_Btn.TabIndex = 0;
-            retrieve_Btn.Text = "Retrive Selected";
-            retrieve_Btn.UseVisualStyleBackColor = true;
-            retrieve_Btn.Click += retrieve_Btn_Click;
+            markAsRepaired_Btn.Location = new Point(12, 12);
+            markAsRepaired_Btn.Name = "markAsRepaired_Btn";
+            markAsRepaired_Btn.Size = new Size(172, 31);
+            markAsRepaired_Btn.TabIndex = 0;
+            markAsRepaired_Btn.Text = "Mark as Repaired";
+            markAsRepaired_Btn.UseVisualStyleBackColor = true;
+            markAsRepaired_Btn.Click += markAsRepaired_Btn_Click;
+            // 
+            // refresh_Btn
+            // 
+            refresh_Btn.Location = new Point(12, 49);
+            refresh_Btn.Name = "refresh_Btn";
+            refresh_Btn.Size = new Size(172, 31);
+            refresh_Btn.TabIndex = 1;
+            refresh_Btn.Text = "Refresh";
+            refresh_Btn.UseVisualStyleBackColor = true;
+            refresh_Btn.Click += refresh_Btn_Click;
             // 
             // RightClick
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(171, 254);
-            Controls.Add(retrieve_Btn);
+            ClientSize = new Size(193, 262);
+            Controls.Add(refresh_Btn);
+            Controls.Add(markAsRepaired_Btn);
             FormBorderStyle = FormBorderStyle.None;
             Name = "RightClick";
             Text = "RightClick";
@@ -55,6 +67,7 @@
 
         #endregion
 
-        private Button retrieve_Btn;
+        private Button markAsRepaired_Btn;
+        public Button refresh_Btn;
     }
 }

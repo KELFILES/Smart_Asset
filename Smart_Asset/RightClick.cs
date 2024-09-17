@@ -7,14 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace Smart_Asset
 {
     public partial class RightClick : Form
     {
+
+        // Parameterless constructor (still needed by the designer)
         public RightClick()
         {
             InitializeComponent();
+        }
+
+
+        private Read form1;  // Reference to Form1 (Read)
+
+        // Constructor that accepts Form1 (Read) as a parameter
+        public RightClick(Read form1)
+        {
+            InitializeComponent();
+            this.form1 = form1;
+        }
+
+
+
+
+        //FOR GETTING DATA FROM READ.CS
+        static string getClickBtnInfo;
+        public void SendClickBtnInfo(string data)
+        {
+            getClickBtnInfo = data;
         }
 
         // Change getData to be a list of serial numbers
@@ -26,25 +49,23 @@ namespace Smart_Asset
             getData = data;
         }
 
-        private async void retrieve_Btn_Click(object sender, EventArgs e)
+
+        private async void markAsRepaired_Btn_Click(object sender, EventArgs e)
         {
             try
             {
                 if (getData == null || getData.Count == 0)
                 {
-                    MessageBox.Show("No SerialNos selected. Please select at least one SerialNo.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Log the selected SerialNos for debugging purposes
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
-
-                // Ask the user for confirmation before proceeding
-                var result = MessageBox.Show($"Do you want to retrieve data for these SerialNos?\n{string.Join(", ", getData)}", "Retrieve Data", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-
                 await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData);
 
+                // Call the method to refresh the DataGridView in Form1
+                form1.RefreshDataGridView();
             }
             catch (Exception ex)
             {
@@ -54,13 +75,21 @@ namespace Smart_Asset
             }
             finally
             {
-                // Close the form after the operation is complete
-                this.Close();
-                this.Dispose();
+                // Hide the form instead of closing it to avoid minimizing the main form
+                this.Hide();
             }
         }
 
 
+        private void refresh_Btn_Click(object sender, EventArgs e)
+        {
+            // Call the method to refresh the DataGridView in Form1
+            form1.RefreshDataGridView();
+
+            // Close the form after the operation is complete
+            this.Close();
+            this.Dispose();
+        }
 
 
 

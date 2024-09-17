@@ -36,9 +36,11 @@
             ManageRoles_Btn = new Button();
             artificialIntelligence_Btn = new Button();
             fileMaintenance_SubMenuPanel = new Panel();
-            button3 = new Button();
-            assetManagement_Btn = new Button();
-            fileMaintenance_Btn = new Button();
+            backupData_Btn = new Button();
+            AssetCategories_Btn = new Button();
+            AssetHistory_Btn = new Button();
+            asset_Btn = new Button();
+            ManageAsset_Btn = new Button();
             dashboard_Btn = new Button();
             logo_Panel = new Panel();
             pictureBox1 = new PictureBox();
@@ -47,14 +49,6 @@
             qmark_Btn = new Button();
             header_Lbl = new Label();
             mainPanel = new Panel();
-            crud_Panel = new Panel();
-            recycleBin_Rdb = new RadioButton();
-            swap_Rdb = new RadioButton();
-            deployment_Rdb = new RadioButton();
-            transfer_Rdb = new RadioButton();
-            update_Rdb = new RadioButton();
-            read_Rdb = new RadioButton();
-            create_Rdb = new RadioButton();
             sideMenu_Panel.SuspendLayout();
             logout_Panel.SuspendLayout();
             panel5.SuspendLayout();
@@ -63,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
-            crud_Panel.SuspendLayout();
             SuspendLayout();
             // 
             // sideMenu_Panel
@@ -114,7 +107,7 @@
             panel5.Controls.Add(ManageRoles_Btn);
             panel5.Controls.Add(artificialIntelligence_Btn);
             panel5.Controls.Add(fileMaintenance_SubMenuPanel);
-            panel5.Controls.Add(fileMaintenance_Btn);
+            panel5.Controls.Add(ManageAsset_Btn);
             panel5.Controls.Add(dashboard_Btn);
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 100);
@@ -128,7 +121,7 @@
             createReport_Btn.FlatAppearance.BorderSize = 0;
             createReport_Btn.FlatStyle = FlatStyle.Flat;
             createReport_Btn.ForeColor = Color.Gainsboro;
-            createReport_Btn.Location = new Point(0, 266);
+            createReport_Btn.Location = new Point(0, 425);
             createReport_Btn.Name = "createReport_Btn";
             createReport_Btn.Padding = new Padding(10, 0, 0, 0);
             createReport_Btn.Size = new Size(246, 45);
@@ -144,12 +137,12 @@
             ManageRoles_Btn.FlatAppearance.BorderSize = 0;
             ManageRoles_Btn.FlatStyle = FlatStyle.Flat;
             ManageRoles_Btn.ForeColor = Color.Gainsboro;
-            ManageRoles_Btn.Location = new Point(0, 221);
+            ManageRoles_Btn.Location = new Point(0, 380);
             ManageRoles_Btn.Name = "ManageRoles_Btn";
             ManageRoles_Btn.Padding = new Padding(10, 0, 0, 0);
             ManageRoles_Btn.Size = new Size(246, 45);
             ManageRoles_Btn.TabIndex = 37;
-            ManageRoles_Btn.Text = "Manage Roles";
+            ManageRoles_Btn.Text = "Manage Users";
             ManageRoles_Btn.TextAlign = ContentAlignment.MiddleLeft;
             ManageRoles_Btn.UseVisualStyleBackColor = true;
             ManageRoles_Btn.Click += ManageRoles_Btn_Click_1;
@@ -160,7 +153,7 @@
             artificialIntelligence_Btn.FlatAppearance.BorderSize = 0;
             artificialIntelligence_Btn.FlatStyle = FlatStyle.Flat;
             artificialIntelligence_Btn.ForeColor = Color.Gainsboro;
-            artificialIntelligence_Btn.Location = new Point(0, 176);
+            artificialIntelligence_Btn.Location = new Point(0, 335);
             artificialIntelligence_Btn.Name = "artificialIntelligence_Btn";
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
             artificialIntelligence_Btn.Size = new Size(246, 45);
@@ -175,64 +168,96 @@
             // fileMaintenance_SubMenuPanel
             // 
             fileMaintenance_SubMenuPanel.BackColor = Color.FromArgb(35, 32, 39);
-            fileMaintenance_SubMenuPanel.Controls.Add(button3);
-            fileMaintenance_SubMenuPanel.Controls.Add(assetManagement_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(backupData_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(AssetCategories_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(AssetHistory_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(asset_Btn);
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
             fileMaintenance_SubMenuPanel.Name = "fileMaintenance_SubMenuPanel";
-            fileMaintenance_SubMenuPanel.Size = new Size(246, 86);
+            fileMaintenance_SubMenuPanel.Size = new Size(246, 245);
             fileMaintenance_SubMenuPanel.TabIndex = 23;
             // 
-            // button3
+            // backupData_Btn
             // 
-            button3.Dock = DockStyle.Top;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.ForeColor = Color.Gainsboro;
-            button3.Location = new Point(0, 40);
-            button3.Name = "button3";
-            button3.Padding = new Padding(35, 0, 0, 0);
-            button3.Size = new Size(246, 40);
-            button3.TabIndex = 5;
-            button3.Text = "Backup Data";
-            button3.TextAlign = ContentAlignment.MiddleLeft;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click_1;
+            backupData_Btn.Dock = DockStyle.Top;
+            backupData_Btn.FlatAppearance.BorderSize = 0;
+            backupData_Btn.FlatStyle = FlatStyle.Flat;
+            backupData_Btn.ForeColor = Color.Gainsboro;
+            backupData_Btn.Location = new Point(0, 120);
+            backupData_Btn.Name = "backupData_Btn";
+            backupData_Btn.Padding = new Padding(35, 0, 0, 0);
+            backupData_Btn.Size = new Size(246, 40);
+            backupData_Btn.TabIndex = 7;
+            backupData_Btn.Text = "Backup Data";
+            backupData_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            backupData_Btn.UseVisualStyleBackColor = true;
             // 
-            // assetManagement_Btn
+            // AssetCategories_Btn
             // 
-            assetManagement_Btn.Dock = DockStyle.Top;
-            assetManagement_Btn.FlatAppearance.BorderSize = 0;
-            assetManagement_Btn.FlatStyle = FlatStyle.Flat;
-            assetManagement_Btn.ForeColor = Color.Gainsboro;
-            assetManagement_Btn.Location = new Point(0, 0);
-            assetManagement_Btn.Name = "assetManagement_Btn";
-            assetManagement_Btn.Padding = new Padding(35, 0, 0, 0);
-            assetManagement_Btn.Size = new Size(246, 40);
-            assetManagement_Btn.TabIndex = 4;
-            assetManagement_Btn.Text = "Asset Management";
-            assetManagement_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            assetManagement_Btn.UseVisualStyleBackColor = true;
-            assetManagement_Btn.Click += assetManagement_Btn_Click;
+            AssetCategories_Btn.Dock = DockStyle.Top;
+            AssetCategories_Btn.FlatAppearance.BorderSize = 0;
+            AssetCategories_Btn.FlatStyle = FlatStyle.Flat;
+            AssetCategories_Btn.ForeColor = Color.Gainsboro;
+            AssetCategories_Btn.Location = new Point(0, 80);
+            AssetCategories_Btn.Name = "AssetCategories_Btn";
+            AssetCategories_Btn.Padding = new Padding(35, 0, 0, 0);
+            AssetCategories_Btn.Size = new Size(246, 40);
+            AssetCategories_Btn.TabIndex = 6;
+            AssetCategories_Btn.Text = "Asset Categories";
+            AssetCategories_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            AssetCategories_Btn.UseVisualStyleBackColor = true;
             // 
-            // fileMaintenance_Btn
+            // AssetHistory_Btn
             // 
-            fileMaintenance_Btn.Dock = DockStyle.Top;
-            fileMaintenance_Btn.FlatAppearance.BorderSize = 0;
-            fileMaintenance_Btn.FlatStyle = FlatStyle.Flat;
-            fileMaintenance_Btn.ForeColor = Color.Gainsboro;
-            fileMaintenance_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            fileMaintenance_Btn.Location = new Point(0, 45);
-            fileMaintenance_Btn.Name = "fileMaintenance_Btn";
-            fileMaintenance_Btn.Padding = new Padding(10, 0, 0, 0);
-            fileMaintenance_Btn.Size = new Size(246, 45);
-            fileMaintenance_Btn.TabIndex = 13;
-            fileMaintenance_Btn.Text = "File Maintenance";
-            fileMaintenance_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            fileMaintenance_Btn.UseVisualStyleBackColor = true;
-            fileMaintenance_Btn.Click += fileMaintenance_Btn_Click;
-            fileMaintenance_Btn.MouseEnter += fileMaintenance_Btn_MouseEnter;
-            fileMaintenance_Btn.MouseLeave += fileMaintenance_Btn_MouseLeave;
+            AssetHistory_Btn.Dock = DockStyle.Top;
+            AssetHistory_Btn.FlatAppearance.BorderSize = 0;
+            AssetHistory_Btn.FlatStyle = FlatStyle.Flat;
+            AssetHistory_Btn.ForeColor = Color.Gainsboro;
+            AssetHistory_Btn.Location = new Point(0, 40);
+            AssetHistory_Btn.Name = "AssetHistory_Btn";
+            AssetHistory_Btn.Padding = new Padding(35, 0, 0, 0);
+            AssetHistory_Btn.Size = new Size(246, 40);
+            AssetHistory_Btn.TabIndex = 5;
+            AssetHistory_Btn.Text = "Asset History";
+            AssetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            AssetHistory_Btn.UseVisualStyleBackColor = true;
+            AssetHistory_Btn.Click += button3_Click_1;
+            // 
+            // asset_Btn
+            // 
+            asset_Btn.Dock = DockStyle.Top;
+            asset_Btn.FlatAppearance.BorderSize = 0;
+            asset_Btn.FlatStyle = FlatStyle.Flat;
+            asset_Btn.ForeColor = Color.Gainsboro;
+            asset_Btn.Location = new Point(0, 0);
+            asset_Btn.Name = "asset_Btn";
+            asset_Btn.Padding = new Padding(35, 0, 0, 0);
+            asset_Btn.Size = new Size(246, 40);
+            asset_Btn.TabIndex = 4;
+            asset_Btn.Text = "Asset";
+            asset_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            asset_Btn.UseVisualStyleBackColor = true;
+            asset_Btn.Click += asset_Btn_Click;
+            // 
+            // ManageAsset_Btn
+            // 
+            ManageAsset_Btn.Dock = DockStyle.Top;
+            ManageAsset_Btn.FlatAppearance.BorderSize = 0;
+            ManageAsset_Btn.FlatStyle = FlatStyle.Flat;
+            ManageAsset_Btn.ForeColor = Color.Gainsboro;
+            ManageAsset_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            ManageAsset_Btn.Location = new Point(0, 45);
+            ManageAsset_Btn.Name = "ManageAsset_Btn";
+            ManageAsset_Btn.Padding = new Padding(10, 0, 0, 0);
+            ManageAsset_Btn.Size = new Size(246, 45);
+            ManageAsset_Btn.TabIndex = 13;
+            ManageAsset_Btn.Text = "Manage Asset";
+            ManageAsset_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            ManageAsset_Btn.UseVisualStyleBackColor = true;
+            ManageAsset_Btn.Click += ManageAsset_Btn_Click;
+            ManageAsset_Btn.MouseEnter += fileMaintenance_Btn_MouseEnter;
+            ManageAsset_Btn.MouseLeave += fileMaintenance_Btn_MouseLeave;
             // 
             // dashboard_Btn
             // 
@@ -339,136 +364,11 @@
             mainPanel.Size = new Size(1650, 982);
             mainPanel.TabIndex = 4;
             // 
-            // crud_Panel
-            // 
-            crud_Panel.AutoScroll = true;
-            crud_Panel.BackColor = Color.DimGray;
-            crud_Panel.Controls.Add(recycleBin_Rdb);
-            crud_Panel.Controls.Add(swap_Rdb);
-            crud_Panel.Controls.Add(deployment_Rdb);
-            crud_Panel.Controls.Add(transfer_Rdb);
-            crud_Panel.Controls.Add(update_Rdb);
-            crud_Panel.Controls.Add(read_Rdb);
-            crud_Panel.Controls.Add(create_Rdb);
-            crud_Panel.Dock = DockStyle.Top;
-            crud_Panel.Location = new Point(252, 57);
-            crud_Panel.Margin = new Padding(3, 3, 10, 3);
-            crud_Panel.Name = "crud_Panel";
-            crud_Panel.Padding = new Padding(8, 0, 8, 0);
-            crud_Panel.Size = new Size(1650, 47);
-            crud_Panel.TabIndex = 7;
-            // 
-            // recycleBin_Rdb
-            // 
-            recycleBin_Rdb.AutoSize = true;
-            recycleBin_Rdb.Dock = DockStyle.Left;
-            recycleBin_Rdb.ForeColor = Color.White;
-            recycleBin_Rdb.Location = new Point(1274, 0);
-            recycleBin_Rdb.Name = "recycleBin_Rdb";
-            recycleBin_Rdb.Padding = new Padding(50, 0, 0, 0);
-            recycleBin_Rdb.Size = new Size(138, 47);
-            recycleBin_Rdb.TabIndex = 9;
-            recycleBin_Rdb.TabStop = true;
-            recycleBin_Rdb.Text = "Recyle Bin";
-            recycleBin_Rdb.UseVisualStyleBackColor = true;
-            recycleBin_Rdb.CheckedChanged += recycleBin_Rdb_CheckedChanged;
-            // 
-            // swap_Rdb
-            // 
-            swap_Rdb.AutoSize = true;
-            swap_Rdb.Dock = DockStyle.Left;
-            swap_Rdb.ForeColor = Color.White;
-            swap_Rdb.Location = new Point(1096, 0);
-            swap_Rdb.Name = "swap_Rdb";
-            swap_Rdb.Padding = new Padding(50, 0, 0, 0);
-            swap_Rdb.Size = new Size(178, 47);
-            swap_Rdb.TabIndex = 5;
-            swap_Rdb.TabStop = true;
-            swap_Rdb.Text = "Swap Hardwares";
-            swap_Rdb.UseVisualStyleBackColor = true;
-            swap_Rdb.CheckedChanged += swap_Rdb_CheckedChanged;
-            // 
-            // deployment_Rdb
-            // 
-            deployment_Rdb.AutoSize = true;
-            deployment_Rdb.Dock = DockStyle.Left;
-            deployment_Rdb.ForeColor = Color.White;
-            deployment_Rdb.Location = new Point(907, 0);
-            deployment_Rdb.Name = "deployment_Rdb";
-            deployment_Rdb.Padding = new Padding(50, 0, 0, 0);
-            deployment_Rdb.Size = new Size(189, 47);
-            deployment_Rdb.TabIndex = 4;
-            deployment_Rdb.TabStop = true;
-            deployment_Rdb.Text = "Deploy Hardwares";
-            deployment_Rdb.UseVisualStyleBackColor = true;
-            deployment_Rdb.CheckedChanged += deployment_Rdb_CheckedChanged;
-            // 
-            // transfer_Rdb
-            // 
-            transfer_Rdb.AutoSize = true;
-            transfer_Rdb.Dock = DockStyle.Left;
-            transfer_Rdb.ForeColor = Color.White;
-            transfer_Rdb.Location = new Point(680, 0);
-            transfer_Rdb.Name = "transfer_Rdb";
-            transfer_Rdb.Padding = new Padding(50, 0, 0, 0);
-            transfer_Rdb.Size = new Size(227, 47);
-            transfer_Rdb.TabIndex = 3;
-            transfer_Rdb.TabStop = true;
-            transfer_Rdb.Text = "Transfer Hardwares Data";
-            transfer_Rdb.UseVisualStyleBackColor = true;
-            transfer_Rdb.CheckedChanged += transfer_Rdb_CheckedChanged;
-            // 
-            // update_Rdb
-            // 
-            update_Rdb.AutoSize = true;
-            update_Rdb.Dock = DockStyle.Left;
-            update_Rdb.ForeColor = Color.White;
-            update_Rdb.Location = new Point(458, 0);
-            update_Rdb.Name = "update_Rdb";
-            update_Rdb.Padding = new Padding(50, 0, 0, 0);
-            update_Rdb.Size = new Size(222, 47);
-            update_Rdb.TabIndex = 2;
-            update_Rdb.TabStop = true;
-            update_Rdb.Text = "Modify Hardwares Data";
-            update_Rdb.UseVisualStyleBackColor = true;
-            update_Rdb.CheckedChanged += update_Rdb_CheckedChanged;
-            // 
-            // read_Rdb
-            // 
-            read_Rdb.AutoSize = true;
-            read_Rdb.Dock = DockStyle.Left;
-            read_Rdb.ForeColor = Color.White;
-            read_Rdb.Location = new Point(229, 0);
-            read_Rdb.Name = "read_Rdb";
-            read_Rdb.Padding = new Padding(50, 0, 0, 0);
-            read_Rdb.Size = new Size(229, 47);
-            read_Rdb.TabIndex = 1;
-            read_Rdb.TabStop = true;
-            read_Rdb.Text = "Monitor Hardwares Data";
-            read_Rdb.UseVisualStyleBackColor = true;
-            read_Rdb.CheckedChanged += read_Rdb_CheckedChanged;
-            // 
-            // create_Rdb
-            // 
-            create_Rdb.AutoSize = true;
-            create_Rdb.Dock = DockStyle.Left;
-            create_Rdb.ForeColor = Color.White;
-            create_Rdb.Location = new Point(8, 0);
-            create_Rdb.Name = "create_Rdb";
-            create_Rdb.Padding = new Padding(50, 0, 0, 0);
-            create_Rdb.Size = new Size(221, 47);
-            create_Rdb.TabIndex = 0;
-            create_Rdb.TabStop = true;
-            create_Rdb.Text = "Import Hardwares Data";
-            create_Rdb.UseVisualStyleBackColor = true;
-            create_Rdb.CheckedChanged += create_Rdb_CheckedChanged;
-            // 
             // FrontPage_Final
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(crud_Panel);
             Controls.Add(mainPanel);
             Controls.Add(panel3);
             Controls.Add(sideMenu_Panel);
@@ -488,8 +388,6 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
-            crud_Panel.ResumeLayout(false);
-            crud_Panel.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -499,27 +397,21 @@
         private Panel logo_Panel;
         private Panel panel5;
         private Panel fileMaintenance_SubMenuPanel;
-        private Button fileMaintenance_Btn;
+        private Button ManageAsset_Btn;
         private Button dashboard_Btn;
         private Button artificialIntelligence_Btn;
         private Button qmark_Btn;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         public Label header_Lbl;
-        private Button assetManagement_Btn;
+        private Button asset_Btn;
         private Panel mainPanel;
-        private Panel crud_Panel;
-        private RadioButton transfer_Rdb;
-        private RadioButton update_Rdb;
-        private RadioButton create_Rdb;
-        private RadioButton deployment_Rdb;
-        private RadioButton swap_Rdb;
         private PictureBox pictureBox1;
         private Panel logout_Panel;
         private Button logout_Btn;
         private Button createReport_Btn;
         private Button ManageRoles_Btn;
-        private RadioButton recycleBin_Rdb;
-        private Button button3;
-        private RadioButton read_Rdb;
+        private Button AssetHistory_Btn;
+        private Button backupData_Btn;
+        private Button AssetCategories_Btn;
     }
 }

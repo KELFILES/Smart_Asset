@@ -115,9 +115,9 @@
             // 
             // mainPanel
             // 
-            mainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             mainPanel.AutoScroll = true;
             mainPanel.BackColor = Color.FromArgb(30, 30, 45);
+            mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(0, 47);
             mainPanel.Name = "mainPanel";
             mainPanel.Size = new Size(1584, 814);

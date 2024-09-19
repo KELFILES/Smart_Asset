@@ -57,6 +57,8 @@ namespace Smart_Asset
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
             public string Location { get; set; }
+
+            public string Controls { get; set; }
         }
 
         public class Read_ModelWithNotes
@@ -73,6 +75,8 @@ namespace Smart_Asset
             public string Usage { get; set; }
             public string Location { get; set; }
             public string Notes { get; set; }
+
+            public string Controls { get; set; }
         }
 
 
@@ -256,74 +260,74 @@ namespace Smart_Asset
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-             try
-    {
-        // Initialize selectedSerialNos if it's null
-        if (selectedSerialNos == null)
-        {
-            selectedSerialNos = new List<string>();
-        }
-
-        // If no rows are selected, set selectedSerialNos to null
-        if (dataGridView1.SelectedRows.Count == 0)
-        {
-            selectedSerialNos = null;
-            Console.WriteLine("No rows selected. selectedSerialNos is now null.");
-
-            // Check if rc is null before using it
-            if (rc == null)
+            try
             {
-                rc = new RightClick(this); // Reinitialize rc if it was disposed
+                // Initialize selectedSerialNos if it's null
+                if (selectedSerialNos == null)
+                {
+                    selectedSerialNos = new List<string>();
+                }
+
+                // If no rows are selected, set selectedSerialNos to null
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    selectedSerialNos = null;
+                    Console.WriteLine("No rows selected. selectedSerialNos is now null.");
+
+                    // Check if rc is null before using it
+                    if (rc == null)
+                    {
+                        rc = new RightClick(this); // Reinitialize rc if it was disposed
+                    }
+                    rc.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
+                    return;
+                }
+
+                // Clear the previous data from the list
+                selectedSerialNos.Clear();
+
+                if (dataGridView1.SelectedRows.Count == 1)
+                {
+                    // If only one row is selected, store the SerialNo of that row
+                    string serialNo = dataGridView1.SelectedRows[0].Cells["SerialNo"].Value.ToString();
+                    selectedSerialNos.Add(serialNo);
+                    Console.WriteLine("Selected SerialNo: " + serialNo);
+
+                    // Reinitialize rc if it's null
+                    if (rc == null)
+                    {
+                        rc = new RightClick(this); // Reinitialize rc if it was disposed
+                    }
+
+                    // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
+                    rc.GetRetrievingSerial(new List<string> { serialNo });
+                }
+                else if (dataGridView1.SelectedRows.Count > 1)
+                {
+                    // If multiple rows are selected, store all their SerialNos
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        string serialNo = row.Cells["SerialNo"].Value.ToString();
+                        selectedSerialNos.Add(serialNo);
+                    }
+                    Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
+
+                    // Reinitialize rc if it's null
+                    if (rc == null)
+                    {
+                        rc = new RightClick(this); // Reinitialize rc if it was disposed
+                    }
+
+                    // Pass the list of serialNos to RightClick for multiple rows
+                    rc.GetRetrievingSerial(selectedSerialNos);
+                }
             }
-            rc.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
-            return;
-        }
-
-        // Clear the previous data from the list
-        selectedSerialNos.Clear();
-
-        if (dataGridView1.SelectedRows.Count == 1)
-        {
-            // If only one row is selected, store the SerialNo of that row
-            string serialNo = dataGridView1.SelectedRows[0].Cells["SerialNo"].Value.ToString();
-            selectedSerialNos.Add(serialNo);
-            Console.WriteLine("Selected SerialNo: " + serialNo);
-
-            // Reinitialize rc if it's null
-            if (rc == null)
+            catch (Exception ex)
             {
-                rc = new RightClick(this); // Reinitialize rc if it was disposed
+                // Handle any unexpected errors
+                MessageBox.Show($"An error occurred while processing the selection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
-
-            // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
-            rc.GetRetrievingSerial(new List<string> { serialNo });
-        }
-        else if (dataGridView1.SelectedRows.Count > 1)
-        {
-            // If multiple rows are selected, store all their SerialNos
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                string serialNo = row.Cells["SerialNo"].Value.ToString();
-                selectedSerialNos.Add(serialNo);
-            }
-            Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
-
-            // Reinitialize rc if it's null
-            if (rc == null)
-            {
-                rc = new RightClick(this); // Reinitialize rc if it was disposed
-            }
-
-            // Pass the list of serialNos to RightClick for multiple rows
-            rc.GetRetrievingSerial(selectedSerialNos);
-        }
-    }
-    catch (Exception ex)
-    {
-        // Handle any unexpected errors
-        MessageBox.Show($"An error occurred while processing the selection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
-    }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -352,14 +356,6 @@ namespace Smart_Asset
         {
             repairingHardwares_Btn.PerformClick();
         }
-
-
-
-
-
-
-
-
 
 
 

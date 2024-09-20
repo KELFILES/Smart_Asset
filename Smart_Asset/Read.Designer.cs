@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel3 = new Panel();
             exportTo_Cb = new ComboBox();
             export_Btn = new Button();
@@ -70,7 +71,7 @@
             // panel3
             // 
             panel3.AutoScroll = true;
-            panel3.BackColor = Color.DimGray;
+            panel3.BackColor = SystemColors.WindowFrame;
             panel3.Controls.Add(exportTo_Cb);
             panel3.Controls.Add(export_Btn);
             panel3.Controls.Add(exportTo_Lbl);
@@ -116,10 +117,22 @@
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.BackgroundColor = Color.Black;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.GridColor = Color.White;
             dataGridView1.Location = new Point(8, 235);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridView1.RowTemplate.Height = 50;
             dataGridView1.Size = new Size(1904, 733);
             dataGridView1.TabIndex = 4;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
@@ -142,7 +155,7 @@
             // panel2
             // 
             panel2.AutoScroll = true;
-            panel2.BackColor = Color.DimGray;
+            panel2.BackColor = SystemColors.WindowFrame;
             panel2.Controls.Add(edit_Btn);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(button2);
@@ -214,49 +227,69 @@
             // borrowedHardwares_Btn
             // 
             borrowedHardwares_Btn.Anchor = AnchorStyles.Top;
-            borrowedHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            borrowedHardwares_Btn.BackColor = Color.LightGray;
+            borrowedHardwares_Btn.FlatAppearance.BorderColor = Color.White;
+            borrowedHardwares_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            borrowedHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            borrowedHardwares_Btn.FlatStyle = FlatStyle.Flat;
+            borrowedHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
             borrowedHardwares_Btn.Location = new Point(134, 63);
             borrowedHardwares_Btn.Name = "borrowedHardwares_Btn";
             borrowedHardwares_Btn.Size = new Size(121, 48);
             borrowedHardwares_Btn.TabIndex = 12;
             borrowedHardwares_Btn.Text = "BORROWED HARDWARES";
-            borrowedHardwares_Btn.UseVisualStyleBackColor = true;
+            borrowedHardwares_Btn.UseVisualStyleBackColor = false;
             borrowedHardwares_Btn.Click += borrowedHardwares_Btn_Click;
             // 
             // cleaningHardwares_Btn
             // 
             cleaningHardwares_Btn.Anchor = AnchorStyles.Top;
-            cleaningHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cleaningHardwares_Btn.BackColor = Color.LightGray;
+            cleaningHardwares_Btn.FlatAppearance.BorderColor = Color.White;
+            cleaningHardwares_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            cleaningHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            cleaningHardwares_Btn.FlatStyle = FlatStyle.Flat;
+            cleaningHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
             cleaningHardwares_Btn.Location = new Point(134, 9);
             cleaningHardwares_Btn.Name = "cleaningHardwares_Btn";
             cleaningHardwares_Btn.Size = new Size(121, 48);
             cleaningHardwares_Btn.TabIndex = 11;
             cleaningHardwares_Btn.Text = "CLEANING HARDWARES";
-            cleaningHardwares_Btn.UseVisualStyleBackColor = true;
+            cleaningHardwares_Btn.UseVisualStyleBackColor = false;
             cleaningHardwares_Btn.Click += cleaningHardwares_Btn_Click;
             // 
             // disposedHardwares_Btn
             // 
             disposedHardwares_Btn.Anchor = AnchorStyles.Top;
-            disposedHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            disposedHardwares_Btn.BackColor = Color.LightGray;
+            disposedHardwares_Btn.FlatAppearance.BorderColor = Color.White;
+            disposedHardwares_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            disposedHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            disposedHardwares_Btn.FlatStyle = FlatStyle.Flat;
+            disposedHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
             disposedHardwares_Btn.Location = new Point(7, 63);
             disposedHardwares_Btn.Name = "disposedHardwares_Btn";
             disposedHardwares_Btn.Size = new Size(121, 48);
             disposedHardwares_Btn.TabIndex = 11;
             disposedHardwares_Btn.Text = "DISPOSED HARDWARES";
-            disposedHardwares_Btn.UseVisualStyleBackColor = true;
+            disposedHardwares_Btn.UseVisualStyleBackColor = false;
             disposedHardwares_Btn.Click += disposedHardwares_Btn_Click;
             // 
             // repairingHardwares_Btn
             // 
             repairingHardwares_Btn.Anchor = AnchorStyles.Top;
-            repairingHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            repairingHardwares_Btn.BackColor = Color.LightGray;
+            repairingHardwares_Btn.FlatAppearance.BorderColor = Color.White;
+            repairingHardwares_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            repairingHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            repairingHardwares_Btn.FlatStyle = FlatStyle.Flat;
+            repairingHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
             repairingHardwares_Btn.Location = new Point(7, 9);
             repairingHardwares_Btn.Name = "repairingHardwares_Btn";
             repairingHardwares_Btn.Size = new Size(121, 48);
             repairingHardwares_Btn.TabIndex = 10;
             repairingHardwares_Btn.Text = "REPAIRING HARDWARES";
-            repairingHardwares_Btn.UseVisualStyleBackColor = true;
+            repairingHardwares_Btn.UseVisualStyleBackColor = false;
             repairingHardwares_Btn.Click += repairingHardwares_Btn_Click;
             // 
             // panel5
@@ -274,37 +307,52 @@
             // recycleBin_Btn
             // 
             recycleBin_Btn.Anchor = AnchorStyles.Top;
-            recycleBin_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            recycleBin_Btn.BackColor = Color.LightGray;
+            recycleBin_Btn.FlatAppearance.BorderColor = Color.White;
+            recycleBin_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            recycleBin_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            recycleBin_Btn.FlatStyle = FlatStyle.Flat;
+            recycleBin_Btn.Font = new Font("Times New Roman", 9.75F);
             recycleBin_Btn.Location = new Point(7, 63);
             recycleBin_Btn.Name = "recycleBin_Btn";
             recycleBin_Btn.Size = new Size(121, 48);
             recycleBin_Btn.TabIndex = 13;
             recycleBin_Btn.Text = "RECYCLE BIN";
-            recycleBin_Btn.UseVisualStyleBackColor = true;
+            recycleBin_Btn.UseVisualStyleBackColor = false;
             recycleBin_Btn.Click += recycleBin_Btn_Click;
             // 
             // showAllHardwares_Btn
             // 
             showAllHardwares_Btn.Anchor = AnchorStyles.Top;
-            showAllHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            showAllHardwares_Btn.BackColor = Color.LightGray;
+            showAllHardwares_Btn.FlatAppearance.BorderColor = Color.White;
+            showAllHardwares_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            showAllHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            showAllHardwares_Btn.FlatStyle = FlatStyle.Flat;
+            showAllHardwares_Btn.Font = new Font("Times New Roman", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             showAllHardwares_Btn.Location = new Point(7, 9);
             showAllHardwares_Btn.Name = "showAllHardwares_Btn";
             showAllHardwares_Btn.Size = new Size(121, 48);
             showAllHardwares_Btn.TabIndex = 12;
             showAllHardwares_Btn.Text = "SHOW ALL HARDWARES";
-            showAllHardwares_Btn.UseVisualStyleBackColor = true;
+            showAllHardwares_Btn.UseVisualStyleBackColor = false;
             showAllHardwares_Btn.Click += showAllHardwares_Btn_Click;
             // 
             // reservedHardwares_Btn
             // 
             reservedHardwares_Btn.Anchor = AnchorStyles.Top;
-            reservedHardwares_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            reservedHardwares_Btn.BackColor = Color.LightGray;
+            reservedHardwares_Btn.FlatAppearance.BorderColor = Color.White;
+            reservedHardwares_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            reservedHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            reservedHardwares_Btn.FlatStyle = FlatStyle.Flat;
+            reservedHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
             reservedHardwares_Btn.Location = new Point(134, 9);
             reservedHardwares_Btn.Name = "reservedHardwares_Btn";
             reservedHardwares_Btn.Size = new Size(121, 48);
             reservedHardwares_Btn.TabIndex = 10;
             reservedHardwares_Btn.Text = "RESERVED HARDWARES";
-            reservedHardwares_Btn.UseVisualStyleBackColor = true;
+            reservedHardwares_Btn.UseVisualStyleBackColor = false;
             reservedHardwares_Btn.Click += reservedHardwares_Btn_Click_1;
             // 
             // panel4

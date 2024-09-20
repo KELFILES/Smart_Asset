@@ -29,9 +29,19 @@ namespace Smart_Asset
 
         private void submit_Btn_Click_1(object sender, EventArgs e)
         {
-            FrontPage_Final pff = new FrontPage_Final();
-            pff.Show();
-            this.Hide();
+            if (username_Tb.Text.Equals("Admin") && password_Tb.Text.Equals("Admin123"))
+            {
+                MessageBox.Show("Login Successful");
+
+                FrontPage_Final pff = new FrontPage_Final();
+                pff.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Wrong Username or Password");
+            }
+            Console.WriteLine(password_Lbl.Text);
         }
 
         private void Login_Shown(object sender, EventArgs e)
@@ -57,8 +67,32 @@ namespace Smart_Asset
             };
         }
 
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                submit_Btn.PerformClick();
+            }
 
+        }
+
+        private void password_Tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                submit_Btn.PerformClick();
+            }
+        }
+
+        private void username_Tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                submit_Btn.PerformClick();
+            }
+        }
     }
+
     public class DoubleBufferedPanel : Panel
     {
         public DoubleBufferedPanel()

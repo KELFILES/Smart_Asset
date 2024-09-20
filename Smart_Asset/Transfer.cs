@@ -95,7 +95,7 @@ namespace Smart_Asset
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Reserved_Hardwares", $"{serialNo_Cmb.Text}");
                     break;
                 case "delete":
-                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Delete", $"{serialNo_Cmb.Text}", notes_Tb.Text);
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Recycle_Bin", $"{serialNo_Cmb.Text}", notes_Tb.Text);
                     break;
                 case "location":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{locationType_Cmb.Text}_{unitType_Cmb.Text}", $"{serialNo_Cmb.Text}");

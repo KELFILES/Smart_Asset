@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            title_Lbl = new Label();
+            pictureBox1 = new PictureBox();
             start_Btn = new Button();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(title_Lbl);
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(start_Btn);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -44,27 +45,34 @@
             panel1.Size = new Size(1109, 681);
             panel1.TabIndex = 0;
             // 
-            // title_Lbl
+            // pictureBox1
             // 
-            title_Lbl.Anchor = AnchorStyles.None;
-            title_Lbl.AutoSize = true;
-            title_Lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            title_Lbl.Location = new Point(189, 120);
-            title_Lbl.Name = "title_Lbl";
-            title_Lbl.Size = new Size(730, 45);
-            title_Lbl.TabIndex = 4;
-            title_Lbl.Text = "SMART ASSET MANAGEMENT - STI MUNOZ EDSA";
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.BackgroundImageLayout = ImageLayout.None;
+            pictureBox1.Image = Properties.Resources.startupLogo_Image;
+            pictureBox1.Location = new Point(332, 67);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(453, 308);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
             // 
             // start_Btn
             // 
             start_Btn.Anchor = AnchorStyles.None;
+            start_Btn.BackColor = Color.Transparent;
             start_Btn.Cursor = Cursors.Hand;
-            start_Btn.Location = new Point(461, 515);
+            start_Btn.FlatAppearance.MouseDownBackColor = Color.OrangeRed;
+            start_Btn.FlatAppearance.MouseOverBackColor = Color.DeepSkyBlue;
+            start_Btn.FlatStyle = FlatStyle.Flat;
+            start_Btn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            start_Btn.ForeColor = Color.White;
+            start_Btn.Location = new Point(488, 511);
             start_Btn.Name = "start_Btn";
             start_Btn.Size = new Size(135, 46);
             start_Btn.TabIndex = 3;
             start_Btn.Text = "START";
-            start_Btn.UseVisualStyleBackColor = true;
+            start_Btn.UseVisualStyleBackColor = false;
             start_Btn.Click += start_Btn_Click_1;
             // 
             // Startup
@@ -79,14 +87,14 @@
             Load += Form1_Load;
             Shown += Startup_Shown;
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
-        private Label title_Lbl;
         private Button start_Btn;
+        private PictureBox pictureBox1;
     }
 }

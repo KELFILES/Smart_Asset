@@ -196,7 +196,6 @@
             repairing_Btn.TabIndex = 5;
             repairing_Btn.Text = "REPAIRING";
             repairing_Btn.UseVisualStyleBackColor = true;
-            repairing_Btn.Click += repairing_Btn_Click;
             // 
             // archive_Btn
             // 

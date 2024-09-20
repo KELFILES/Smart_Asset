@@ -84,7 +84,7 @@
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel3.BackColor = Color.DarkGray;
+            panel3.BackColor = Color.Gray;
             panel3.Controls.Add(locationType_Cmb);
             panel3.Controls.Add(unitType_Cmb);
             panel3.Controls.Add(location_Rdb);

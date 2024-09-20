@@ -30,6 +30,7 @@
         {
             panel1 = new Panel();
             panel3 = new Panel();
+            dataGridView1 = new DataGridView();
             panel2 = new Panel();
             serialNo_Cmb = new TextBox();
             label4 = new Label();
@@ -42,11 +43,10 @@
             addLocation_Btn = new Button();
             label2 = new Label();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -73,10 +73,22 @@
             panel3.Size = new Size(1085, 476);
             panel3.TabIndex = 1;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.BackgroundColor = Color.Black;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(10, 10);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(1063, 454);
+            dataGridView1.TabIndex = 0;
+            // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.BackColor = SystemColors.ControlDark;
+            panel2.BackColor = Color.DimGray;
             panel2.Controls.Add(serialNo_Cmb);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
@@ -222,16 +234,6 @@
             label1.TabIndex = 0;
             label1.Text = "Location:";
             // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = Color.DarkGray;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(10, 10);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1063, 454);
-            dataGridView1.TabIndex = 0;
-            // 
             // Deployment
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -243,9 +245,9 @@
             Text = "Deployment";
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 

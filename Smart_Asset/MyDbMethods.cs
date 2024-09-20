@@ -298,12 +298,12 @@ namespace Smart_Asset
                     Warranty = doc["Warranty"].AsString,
 
                     // Calculate warranty status if still valid
-                    WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+                    WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
 
                     PurchaseDate = doc["PurchaseDate"].AsString,
 
                     // Calculate usage as years, months, and days
-                    Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+                    Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
 
                     // Set the collection name
                     Location = collectionName
@@ -402,12 +402,12 @@ namespace Smart_Asset
                 Warranty = doc["Warranty"].AsString,
 
                 // Calculate warranty status if still valid
-                WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+                WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
 
                 PurchaseDate = doc["PurchaseDate"].AsString,
 
                 // Calculate usage as years, months, and days
-                Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+                Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
 
                 // Set the collection name
                 Location = collectionName
@@ -459,10 +459,10 @@ namespace Smart_Asset
 
                         // Calculate the warranty status and usage only if the date is valid
                         string warrantyStatus = isDateValid && !string.IsNullOrEmpty(doc.GetValue("Warranty", "").AsString)
-                            ? (MyMethods.IsWarrantyValid(purchaseDate, doc.GetValue("Warranty", "").AsString) ? "In Warranty" : "Out of Warranty")
+                            ? (MyCalculations.IsWarrantyValid(purchaseDate, doc.GetValue("Warranty", "").AsString) ? "In Warranty" : "Out of Warranty")
                             : "Unknown";
 
-                        string usage = isDateValid ? MyMethods.CalculateUsage(purchaseDate) : "Unknown";
+                        string usage = isDateValid ? MyCalculations.CalculateUsage(purchaseDate) : "Unknown";
 
                         return new Read_Model
                         {
@@ -521,12 +521,12 @@ namespace Smart_Asset
                 Warranty = doc.GetValue("Warranty", "").AsString,
 
                 // Warranty status calculation
-                WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+                WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
 
                 PurchaseDate = doc.GetValue("PurchaseDate", "").AsString,
 
                 // Usage calculation
-                Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+                Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
 
                 // Set the collection name
                 Location = collectionName,
@@ -638,9 +638,9 @@ namespace Smart_Asset
                 Cost = doc["Cost"].AsString,
                 Supplier = doc["Supplier"].AsString,
                 Warranty = doc["Warranty"].AsString,
-                WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+                WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
                 PurchaseDate = doc["PurchaseDate"].AsString,
-                Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+                Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
                 Location = collectionName
             }).ToList();
 
@@ -684,9 +684,9 @@ namespace Smart_Asset
                     Cost = doc["Cost"].AsString,
                     Supplier = doc["Supplier"].AsString,
                     Warranty = doc["Warranty"].AsString,
-                    WarrantyStatus = MyMethods.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+                    WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
                     PurchaseDate = doc["PurchaseDate"].AsString,
-                    Usage = MyMethods.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+                    Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
                     Location = collectionName // Store the collection name
                 }).ToList();
 

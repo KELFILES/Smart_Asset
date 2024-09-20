@@ -38,6 +38,8 @@
             qr_pictureBox = new PictureBox();
             label12 = new Label();
             panel4 = new Panel();
+            clear2_Btn = new Button();
+            autoFill_Cb = new CheckBox();
             Clear_Btn = new Button();
             register_Btn = new Button();
             autoFill_checkBox = new CheckBox();
@@ -62,9 +64,8 @@
             Model_Lbl = new Label();
             type_Lbl = new Label();
             panel5 = new Panel();
+            qmark_Btn = new Button();
             label1 = new Label();
-            autoFill_Cb = new CheckBox();
-            clear2_Btn = new Button();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -183,7 +184,7 @@
             // 
             panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel4.AutoScroll = true;
-            panel4.BackColor = Color.DarkGray;
+            panel4.BackColor = Color.Gray;
             panel4.Controls.Add(clear2_Btn);
             panel4.Controls.Add(autoFill_Cb);
             panel4.Controls.Add(Clear_Btn);
@@ -214,6 +215,26 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(1566, 399);
             panel4.TabIndex = 52;
+            // 
+            // clear2_Btn
+            // 
+            clear2_Btn.Location = new Point(1284, 49);
+            clear2_Btn.Name = "clear2_Btn";
+            clear2_Btn.Size = new Size(75, 23);
+            clear2_Btn.TabIndex = 73;
+            clear2_Btn.Text = "CLEAR";
+            clear2_Btn.UseVisualStyleBackColor = true;
+            clear2_Btn.Click += Clear_Btn_Click;
+            // 
+            // autoFill_Cb
+            // 
+            autoFill_Cb.AutoSize = true;
+            autoFill_Cb.Location = new Point(1284, 24);
+            autoFill_Cb.Name = "autoFill_Cb";
+            autoFill_Cb.Size = new Size(70, 19);
+            autoFill_Cb.TabIndex = 72;
+            autoFill_Cb.Text = "Auto Fill";
+            autoFill_Cb.UseVisualStyleBackColor = true;
             // 
             // Clear_Btn
             // 
@@ -463,12 +484,26 @@
             // 
             // panel5
             // 
+            panel5.Controls.Add(qmark_Btn);
             panel5.Controls.Add(label1);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(8, 8);
             panel5.Name = "panel5";
             panel5.Size = new Size(1566, 40);
             panel5.TabIndex = 54;
+            // 
+            // qmark_Btn
+            // 
+            qmark_Btn.FlatStyle = FlatStyle.Flat;
+            qmark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            qmark_Btn.ForeColor = SystemColors.ButtonFace;
+            qmark_Btn.Location = new Point(1537, 9);
+            qmark_Btn.Name = "qmark_Btn";
+            qmark_Btn.Size = new Size(21, 21);
+            qmark_Btn.TabIndex = 57;
+            qmark_Btn.Text = "?";
+            qmark_Btn.UseVisualStyleBackColor = true;
+            qmark_Btn.Click += qmark_Btn_Click;
             // 
             // label1
             // 
@@ -481,26 +516,6 @@
             label1.Size = new Size(194, 40);
             label1.TabIndex = 56;
             label1.Text = "INSERT DATA";
-            // 
-            // autoFill_Cb
-            // 
-            autoFill_Cb.AutoSize = true;
-            autoFill_Cb.Location = new Point(1284, 24);
-            autoFill_Cb.Name = "autoFill_Cb";
-            autoFill_Cb.Size = new Size(70, 19);
-            autoFill_Cb.TabIndex = 72;
-            autoFill_Cb.Text = "Auto Fill";
-            autoFill_Cb.UseVisualStyleBackColor = true;
-            // 
-            // clear2_Btn
-            // 
-            clear2_Btn.Location = new Point(1284, 49);
-            clear2_Btn.Name = "clear2_Btn";
-            clear2_Btn.Size = new Size(75, 23);
-            clear2_Btn.TabIndex = 73;
-            clear2_Btn.Text = "CLEAR";
-            clear2_Btn.UseVisualStyleBackColor = true;
-            clear2_Btn.Click += Clear_Btn_Click;
             // 
             // Create
             // 
@@ -567,5 +582,6 @@
         private Label label1;
         private Button clear2_Btn;
         private CheckBox autoFill_Cb;
+        private Button qmark_Btn;
     }
 }

@@ -58,10 +58,12 @@
             // 
             manageUsers_Lbl.Anchor = AnchorStyles.None;
             manageUsers_Lbl.AutoSize = true;
+            manageUsers_Lbl.BackColor = Color.Transparent;
             manageUsers_Lbl.Cursor = Cursors.Hand;
             manageUsers_Lbl.FlatStyle = FlatStyle.Flat;
             manageUsers_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
-            manageUsers_Lbl.Location = new Point(528, 604);
+            manageUsers_Lbl.ForeColor = Color.White;
+            manageUsers_Lbl.Location = new Point(528, 605);
             manageUsers_Lbl.Name = "manageUsers_Lbl";
             manageUsers_Lbl.Size = new Size(81, 15);
             manageUsers_Lbl.TabIndex = 13;
@@ -70,23 +72,31 @@
             // submit_Btn
             // 
             submit_Btn.Anchor = AnchorStyles.None;
+            submit_Btn.BackColor = Color.Transparent;
             submit_Btn.Cursor = Cursors.Hand;
-            submit_Btn.Location = new Point(534, 529);
+            submit_Btn.FlatAppearance.MouseDownBackColor = Color.OrangeRed;
+            submit_Btn.FlatAppearance.MouseOverBackColor = Color.Gray;
+            submit_Btn.FlatStyle = FlatStyle.Flat;
+            submit_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            submit_Btn.ForeColor = Color.White;
+            submit_Btn.Location = new Point(518, 527);
             submit_Btn.Name = "submit_Btn";
-            submit_Btn.Size = new Size(75, 23);
+            submit_Btn.Size = new Size(98, 36);
             submit_Btn.TabIndex = 12;
             submit_Btn.Text = "SUBMIT";
-            submit_Btn.UseVisualStyleBackColor = true;
+            submit_Btn.UseVisualStyleBackColor = false;
             submit_Btn.Click += submit_Btn_Click_1;
             // 
             // forgotPassword_Lbl
             // 
             forgotPassword_Lbl.Anchor = AnchorStyles.None;
             forgotPassword_Lbl.AutoSize = true;
+            forgotPassword_Lbl.BackColor = Color.Transparent;
             forgotPassword_Lbl.Cursor = Cursors.Hand;
             forgotPassword_Lbl.FlatStyle = FlatStyle.Flat;
             forgotPassword_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
-            forgotPassword_Lbl.Location = new Point(518, 577);
+            forgotPassword_Lbl.ForeColor = Color.White;
+            forgotPassword_Lbl.Location = new Point(518, 578);
             forgotPassword_Lbl.Name = "forgotPassword_Lbl";
             forgotPassword_Lbl.Size = new Size(101, 15);
             forgotPassword_Lbl.TabIndex = 11;
@@ -98,8 +108,10 @@
             password_Tb.Cursor = Cursors.IBeam;
             password_Tb.Location = new Point(464, 489);
             password_Tb.Name = "password_Tb";
+            password_Tb.PasswordChar = '*';
             password_Tb.Size = new Size(224, 23);
             password_Tb.TabIndex = 10;
+            password_Tb.KeyDown += password_Tb_KeyDown;
             // 
             // username_Tb
             // 
@@ -109,11 +121,14 @@
             username_Tb.Name = "username_Tb";
             username_Tb.Size = new Size(224, 23);
             username_Tb.TabIndex = 9;
+            username_Tb.KeyDown += username_Tb_KeyDown;
             // 
             // password_Lbl
             // 
             password_Lbl.Anchor = AnchorStyles.None;
             password_Lbl.AutoSize = true;
+            password_Lbl.BackColor = Color.Transparent;
+            password_Lbl.ForeColor = Color.White;
             password_Lbl.Location = new Point(395, 492);
             password_Lbl.Name = "password_Lbl";
             password_Lbl.Size = new Size(60, 15);
@@ -124,6 +139,8 @@
             // 
             username_Lbl.Anchor = AnchorStyles.None;
             username_Lbl.AutoSize = true;
+            username_Lbl.BackColor = Color.Transparent;
+            username_Lbl.ForeColor = Color.White;
             username_Lbl.Location = new Point(395, 456);
             username_Lbl.Name = "username_Lbl";
             username_Lbl.Size = new Size(63, 15);
@@ -141,6 +158,7 @@
             WindowState = FormWindowState.Maximized;
             FormClosed += Login_FormClosed;
             Shown += Login_Shown;
+            KeyDown += Login_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

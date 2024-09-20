@@ -180,5 +180,29 @@ namespace Smart_Asset
         {
             this.Dispose();
         }
+
+        private void qmark_Btn_Click(object sender, EventArgs e)
+        {
+            //EXAMPLE ONLY CREATE MANUAL FORM
+            // Check if an instance of QuestionMark is already open and close it
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is QuestionMark)
+                {
+                    openForm.Close();
+                    break; // Exit the loop after closing the form
+                }
+            }
+
+            // Now create a new instance of QuestionMark
+            QuestionMark qm = new QuestionMark();
+            qm.Size = new Size(this.Width / 2, this.Height / 2);
+
+            // Optionally center Form2 on the screen or relative to Form1
+            qm.StartPosition = FormStartPosition.Manual;
+            qm.Location = new Point(this.Location.X + this.Width / 4, this.Location.Y + this.Height / 4); // Center relative to Form1
+
+            qm.Show();
+        }
     }
 }

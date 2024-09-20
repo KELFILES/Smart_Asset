@@ -15,6 +15,8 @@ namespace Smart_Asset
         {
             this.ControlBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+
+            pictureBox1.BackColor = Color.FromArgb(200, Color.Black); // Set BackColor
         }
 
 

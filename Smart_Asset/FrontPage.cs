@@ -33,7 +33,6 @@ namespace Smart_Asset
         Dashboard db = new Dashboard();
         Deployment dp = new Deployment();
         Swap sw = new Swap();
-        Repairing rep = new Repairing();
 
         private void cREATEToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -52,7 +51,6 @@ namespace Smart_Asset
                 dp.Hide();
                 db.Hide();
                 sw.Hide();
-                rep.Hide();
             }
             else
             {
@@ -77,7 +75,6 @@ namespace Smart_Asset
                 dp.Hide();
                 db.Hide();
                 sw.Hide();
-                rep.Hide();
             }
             else
             {
@@ -102,7 +99,6 @@ namespace Smart_Asset
                 dp.Hide();
                 db.Hide();
                 sw.Hide();
-                rep.Hide();
             }
             else
             {
@@ -127,7 +123,6 @@ namespace Smart_Asset
                 dp.Hide();
                 db.Hide();
                 sw.Hide();
-                rep.Hide();
             }
             else
             {
@@ -153,7 +148,6 @@ namespace Smart_Asset
                 dp.Hide();
                 db.Show();
                 sw.Hide();
-                rep.Hide();
             }
             else
             {
@@ -178,7 +172,6 @@ namespace Smart_Asset
                 db.Hide();
                 dp.Show();
                 sw.Hide();
-                rep.Hide();
             }
             else
             {
@@ -203,7 +196,6 @@ namespace Smart_Asset
                 db.Hide();
                 dp.Hide();
                 sw.Show();
-                rep.Hide();
             }
             else
             {
@@ -211,32 +203,7 @@ namespace Smart_Asset
             }
         }
 
-        private void repairing_Btn_Click(object sender, EventArgs e)
-        {
-            this.Refresh();
 
-            header_Lbl.Text = "ASSET MANAGEMENT: REPAIRING";
-            if (dashboard_Btn.Enabled)
-            {
-                rep.TopLevel = false;
-                rep.FormBorderStyle = FormBorderStyle.None;
-                rep.Dock = DockStyle.Fill;
-                mainPanel.Controls.Add(rep);
-
-                cr.Hide();
-                rd.Hide();
-                ud.Hide();
-                del.Hide();
-                db.Hide();
-                dp.Hide();
-                sw.Hide();
-                rep.Show();
-            }
-            else
-            {
-                rep.Dispose();
-            }
-        }
 
 
 

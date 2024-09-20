@@ -33,7 +33,6 @@ namespace Smart_Asset
         Dashboard db;
         Deployment dp;
         Swap sw;
-        Repairing rep;
 
         // Declare a variable to store the original background color
         private Color originalBackColor;
@@ -52,6 +51,32 @@ namespace Smart_Asset
             dashboard_Btn.PerformClick();
 
             this.WindowState = FormWindowState.Maximized;
+
+
+            //SET BUTTONS ICON IMAGE
+            dashboard_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
+            dashboard_Btn.Padding = new Padding(10, 0, 20, 0);
+
+            asset_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            asset_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            AssetHistory_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
+            AssetHistory_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            AssetCategories_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
+            AssetCategories_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            backupData_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
+            backupData_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            artificialIntelligence_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
+            artificialIntelligence_Btn.Padding = new Padding(10, 0, 20, 0);
+
+            ManageUsers_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "manageUsers_Icon.ico"));
+            ManageUsers_Btn.Padding = new Padding(10, 0, 20, 0);
+
+            createReport_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "createReport_Icon.ico"));
+            createReport_Btn.Padding = new Padding(10, 0, 20, 0);
         }
 
         private void customizeDesign()
@@ -182,6 +207,7 @@ namespace Smart_Asset
         private void dashboard_Btn_Click(object sender, EventArgs e)
         {
             showFormSelected(ref db, "DASHBOARD");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
         }
 
         private void swap_Btn_Click(object sender, EventArgs e)
@@ -216,9 +242,11 @@ namespace Smart_Asset
             hideSubMenu();
         }
 
-        private void manageRoles_Btn_Click(object sender, EventArgs e)
+        private void ManageUsers_Btn_Click_1(object sender, EventArgs e)
         {
-            hideSubMenu();
+            //showFormSelected(ref mngrl, "MANAGE ROLES");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "manageUsers_Icon.ico"));
+            MessageBox.Show("STILL ON PROGRESS!");
         }
 
         private void createReport_Btn_Click(object sender, EventArgs e)
@@ -270,11 +298,16 @@ namespace Smart_Asset
         private void fileMaintenance_Btn_MouseEnter(object sender, EventArgs e)
         {
             ButtonEnterColor(ManageAsset_Btn);
+
+            ManageAsset_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "arrow_Icon.ico"));
+            ManageAsset_Btn.Padding = new Padding(10, 0, 100, 0);
         }
 
         private void fileMaintenance_Btn_MouseLeave(object sender, EventArgs e)
         {
             ButtonLeaveColor(ManageAsset_Btn);
+
+            ManageAsset_Btn.Image = null;
         }
 
         private void artificialIntelligence_Btn_MouseEnter(object sender, EventArgs e)
@@ -374,14 +407,17 @@ namespace Smart_Asset
         }
 
 
-        private void button3_Click_1(object sender, EventArgs e)
+        private void AssetHistory_Button_Click(object sender, EventArgs e)
         {
+            //showFormSelected(ref rd, "ASSET HISTORY");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
             MessageBox.Show("STILL ON PROGRESS!");
         }
 
         private void artificialIntelligence_Btn_Click_1(object sender, EventArgs e)
         {
-            showFormSelected(ref db, "DASHBOARD");
+            //showFormSelected(ref db, "DASHBOARD");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
             MessageBox.Show("STILL ON PROGRESS!");
         }
         private void ManageRoles_Btn_Click_1(object sender, EventArgs e)
@@ -393,6 +429,7 @@ namespace Smart_Asset
         private void createReport_Btn_Click_1(object sender, EventArgs e)
         {
             //showFormSelected(ref mngrl, "CREATE REPORT");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "createReport_Icon.ico"));
             MessageBox.Show("STILL ON PROGRESS!");
         }
 
@@ -409,6 +446,43 @@ namespace Smart_Asset
         private void asset_Btn_Click(object sender, EventArgs e)
         {
             showFormSelected(ref rd, "ASSET");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
+
+        private void AssetCategories_Btn_Click(object sender, EventArgs e)
+        {
+            //showFormSelected(ref rd, "ASSET CATEGORIES");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
+
+        private void backupData_Btn_Click(object sender, EventArgs e)
+        {
+            //showFormSelected(ref rd, "BACKUP DATA");
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
+            MessageBox.Show("STILL ON PROGRESS!");
+        }
+
+        private void ManageUsers_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonEnterColor(ManageUsers_Btn);
+        }
+
+        private void createReport_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonEnterColor(createReport_Btn);
+        }
+
+        private void ManageUsers_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonLeaveColor(ManageUsers_Btn);
+        }
+
+        private void createReport_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonLeaveColor(createReport_Btn);
+        }
+
+
     }
 }

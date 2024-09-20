@@ -10,7 +10,7 @@ using MongoDB.Bson;
 
 namespace Smart_Asset
 {
-    public class MyMethods
+    public class MyCalculations
     {
 
         public static string CalculateUsage(DateTime purchaseDate)

@@ -118,10 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dashboard_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\dashboard_Icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frontPage_Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\frontPage_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sti_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\sti_Image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Dashboard_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Dashboard_Image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="startupLogo_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\startupLogo_Image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dashboardIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\dashboardIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="dashboardIcon_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\dashboardIcon_Image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frontPage_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\frontPage_Logo.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="questionMark_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\questionMark_Icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

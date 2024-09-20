@@ -13,8 +13,8 @@ namespace Smart_Asset
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Run your main form
-            Application.Run(new FrontPage_Final());
-            //Application.Run(new Startup());
+            //Application.Run(new FrontPage_Final());
+            Application.Run(new Startup());
         }
     }
 }

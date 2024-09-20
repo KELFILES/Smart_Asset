@@ -101,6 +101,7 @@
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.Black;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridView1.Location = new Point(29, 28);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(572, 295);
@@ -115,6 +116,7 @@
             Name = "Deployment_Unit_List";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Unit";
+            Load += Deployment_Unit_List_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

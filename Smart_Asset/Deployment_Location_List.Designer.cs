@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
             button1 = new Button();
             add_Btn = new Button();
@@ -101,9 +102,13 @@
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.Black;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.GridColor = SystemColors.WindowText;
+            dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dataGridView1.GridColor = Color.Black;
             dataGridView1.Location = new Point(29, 28);
             dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.Size = new Size(572, 295);
             dataGridView1.TabIndex = 0;
             // 
@@ -116,6 +121,7 @@
             Name = "Deployment_Location_List";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Location";
+            Load += Deployment_Location_List_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

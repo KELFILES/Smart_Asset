@@ -27,11 +27,22 @@ namespace Smart_Asset
             };
 
             MyDbMethods.InsertDocument("SmartAssetDb", "Deployment_Location_List", fields);
+
+            //show again the list
+            MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Removed successfully");
+
+            //show again the list
+            MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
+        }
+
+        private void Deployment_Location_List_Load(object sender, EventArgs e)
+        {
+            MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
         }
     }
 }

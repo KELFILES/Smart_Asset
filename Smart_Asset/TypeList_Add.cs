@@ -27,11 +27,20 @@ namespace Smart_Asset
             };
 
             MyDbMethods.InsertDocument("SmartAssetDb", "Type_List", fields);
+
+            MyDbMethods.showAllItemsInDb("SmartAssetDb", "Type_List", dataGridView1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Removed successfully");
+
+            MyDbMethods.showAllItemsInDb("SmartAssetDb", "Type_List", dataGridView1);
+        }
+
+        private void TypeList_Add_Load(object sender, EventArgs e)
+        {
+            MyDbMethods.showAllItemsInDb("SmartAssetDb", "Type_List", dataGridView1);
         }
     }
 }

@@ -74,8 +74,8 @@
             submit_Btn.Anchor = AnchorStyles.None;
             submit_Btn.BackColor = Color.Transparent;
             submit_Btn.Cursor = Cursors.Hand;
-            submit_Btn.FlatAppearance.MouseDownBackColor = Color.OrangeRed;
-            submit_Btn.FlatAppearance.MouseOverBackColor = Color.Gray;
+            submit_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            submit_Btn.FlatAppearance.MouseOverBackColor = Color.DeepSkyBlue;
             submit_Btn.FlatStyle = FlatStyle.Flat;
             submit_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             submit_Btn.ForeColor = Color.White;

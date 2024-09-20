@@ -37,7 +37,7 @@
             panel1 = new Panel();
             panel2 = new Panel();
             edit_Btn = new Button();
-            label3 = new Label();
+            title_Lbl = new Label();
             button2 = new Button();
             panel7 = new Panel();
             borrowedHardwares_Btn = new Button();
@@ -157,7 +157,7 @@
             panel2.AutoScroll = true;
             panel2.BackColor = SystemColors.WindowFrame;
             panel2.Controls.Add(edit_Btn);
-            panel2.Controls.Add(label3);
+            panel2.Controls.Add(title_Lbl);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel5);
@@ -183,19 +183,19 @@
             edit_Btn.UseVisualStyleBackColor = false;
             edit_Btn.Click += edit_Btn_Click;
             // 
-            // label3
+            // title_Lbl
             // 
-            label3.Anchor = AnchorStyles.Top;
-            label3.AutoSize = true;
-            label3.BackColor = Color.Gray;
-            label3.FlatStyle = FlatStyle.Flat;
-            label3.Font = new Font("Trebuchet MS", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(870, 139);
-            label3.Name = "label3";
-            label3.Size = new Size(159, 35);
-            label3.TabIndex = 32;
-            label3.Text = "ASSET LISTS";
+            title_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            title_Lbl.AutoSize = true;
+            title_Lbl.BackColor = Color.Gray;
+            title_Lbl.FlatStyle = FlatStyle.Flat;
+            title_Lbl.Font = new Font("Trebuchet MS", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            title_Lbl.ForeColor = Color.White;
+            title_Lbl.Location = new Point(718, 138);
+            title_Lbl.Name = "title_Lbl";
+            title_Lbl.Size = new Size(159, 35);
+            title_Lbl.TabIndex = 32;
+            title_Lbl.Text = "ASSET LISTS";
             // 
             // button2
             // 
@@ -528,7 +528,7 @@
         private Button borrowedHardwares_Btn;
         private Button recycleBin_Btn;
         private Button button2;
-        private Label label3;
+        private Label title_Lbl;
         private Button edit_Btn;
         public Button repairingHardwares_Btn;
         public DataGridView dataGridView1;

@@ -1214,7 +1214,42 @@ namespace Smart_Asset
 
 
 
+        public static async Task showAllItemsInDb(string dbName, string collName, DataGridView dataGridName)
+        {
+            try
+            {
+                // Initialize MongoDB client and get the database and collection
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var collection = database.GetCollection<Type_List_Items>(collName);
 
+                // Fetch all documents from the collection
+                var documents = await collection.Find(FilterDefinition<Type_List_Items>.Empty).ToListAsync();
+
+                // Bind the documents to the DataGridView
+                dataGridName.DataSource = documents;
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show("The operation timed out. Please check your network connection or server status.\n" + ex.Message, "Timeout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (MongoConnectionException ex)
+            {
+                MessageBox.Show("Failed to connect to the MongoDB server. Please check the connection string and server status.\n" + ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (MongoCommandException ex)
+            {
+                MessageBox.Show("An error occurred while executing a MongoDB command. Please check your query or command.\n" + ex.Message, "Command Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (MongoException ex)
+            {
+                MessageBox.Show("An unexpected MongoDB error occurred.\n" + ex.Message, "MongoDB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An unexpected error occurred.\n" + ex.Message, "Unknown Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
 

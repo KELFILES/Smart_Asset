@@ -90,6 +90,7 @@ namespace Smart_Asset
         private void reservedHardwares_Btn_Click_1(object sender, EventArgs e)
         {
             selectedButton = "reservedHardwares";
+            title_Lbl.Text = "RESERVED HARDWARE LISTS";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
         }
@@ -190,6 +191,7 @@ namespace Smart_Asset
         private void disposedHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "disposedHardwares";
+            title_Lbl.Text = "DISPOSED HARDWARE LISTS";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
         }
@@ -197,6 +199,7 @@ namespace Smart_Asset
         public void repairingHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "repairingHardwares";
+            title_Lbl.Text = "REPAIRING HARDWARE LISTS";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
         }
@@ -204,6 +207,7 @@ namespace Smart_Asset
         private void cleaningHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "cleaningHardwares";
+            title_Lbl.Text = "CLEANING HARDWARE LISTS";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
         }
@@ -212,11 +216,13 @@ namespace Smart_Asset
         {
             selectedButton = "showAllHardwares";
             await MyDbMethods.ReadAllInDatabase("SmartAssetDb", dataGridView1);
+            title_Lbl.Text = "ASSET LISTS";
         }
 
         private void borrowedHardwares_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "borrowedHardwares";
+            title_Lbl.Text = "BORROWED HARDWARE LISTS";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
         }
@@ -346,6 +352,7 @@ namespace Smart_Asset
         private void recycleBin_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "recycleBin";
+            title_Lbl.Text = "RECYCLE BIN LISTS";
             rc.SendClickBtnInfo(selectedButton);
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Recycle_Bin");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Recycle_Bin");

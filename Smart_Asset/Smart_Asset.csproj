@@ -75,6 +75,9 @@
     <None Update="Images\login_Image.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\login_Image2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\manageUsers_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -12,14 +12,14 @@ namespace Smart_Asset
 {
     public partial class Login : Form
     {
-
         // Declare the background image at the class level
         private Image backgroundImage;
-
 
         public Login()
         {
             InitializeComponent();
+            // Attach the Resize event handler
+            this.Resize += Login_Resize;
         }
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
@@ -46,11 +46,13 @@ namespace Smart_Asset
 
         private void Login_Shown(object sender, EventArgs e)
         {
+            bgBox.BackColor = Color.FromArgb(200, Color.Black); // Set BackColor
+
             // Construct the relative path to the image
             string imagePath = System.IO.Path.Combine(Application.StartupPath, "Images", "login_Image.jpg");
 
             // Load the image from the relative path
-            Image backgroundImage = Image.FromFile(imagePath);
+            backgroundImage = Image.FromFile(imagePath); // Use class-level backgroundImage
 
             // Assuming panel1 is of type DoubleBufferedPanel
             // Handle the panel's Paint event to draw the background image manually
@@ -65,6 +67,25 @@ namespace Smart_Asset
             {
                 panel1.Invalidate(); // This forces the panel to be redrawn
             };
+
+            // Adjust the initial location of bgBox
+            AdjustBgBox();
+        }
+
+        private void Login_Resize(object sender, EventArgs e)
+        {
+            // Adjust the location of bgBox when the form is resized
+            AdjustBgBox();
+        }
+
+        private void AdjustBgBox()
+        {
+            // Calculate the new location based on the form's size
+            int newX = (this.ClientSize.Width - bgBox.Width) / 2;
+            int newY = (this.ClientSize.Height - bgBox.Height) / 2;
+
+            // Set the new location of bgBox without changing its size
+            bgBox.Location = new Point(newX, newY);
         }
 
         private void Login_KeyDown(object sender, KeyEventArgs e)
@@ -73,7 +94,6 @@ namespace Smart_Asset
             {
                 submit_Btn.PerformClick();
             }
-
         }
 
         private void password_Tb_KeyDown(object sender, KeyEventArgs e)

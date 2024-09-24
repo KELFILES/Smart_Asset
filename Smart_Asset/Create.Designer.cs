@@ -497,11 +497,11 @@
             qmark_Btn.FlatStyle = FlatStyle.Flat;
             qmark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             qmark_Btn.ForeColor = SystemColors.ButtonFace;
+            qmark_Btn.Image = Properties.Resources.questionMark_Icon;
             qmark_Btn.Location = new Point(1537, 9);
             qmark_Btn.Name = "qmark_Btn";
             qmark_Btn.Size = new Size(21, 21);
             qmark_Btn.TabIndex = 57;
-            qmark_Btn.Text = "?";
             qmark_Btn.UseVisualStyleBackColor = true;
             qmark_Btn.Click += qmark_Btn_Click;
             // 

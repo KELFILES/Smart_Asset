@@ -34,6 +34,7 @@
             transfer_Rdb = new RadioButton();
             update_Rdb = new RadioButton();
             mainPanel = new Panel();
+            qmark_Btn = new Button();
             crud_Panel.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,6 +42,7 @@
             // 
             crud_Panel.AutoScroll = true;
             crud_Panel.BackColor = Color.DimGray;
+            crud_Panel.Controls.Add(qmark_Btn);
             crud_Panel.Controls.Add(swap_Rdb);
             crud_Panel.Controls.Add(deployment_Rdb);
             crud_Panel.Controls.Add(transfer_Rdb);
@@ -123,6 +125,18 @@
             mainPanel.Size = new Size(1584, 814);
             mainPanel.TabIndex = 9;
             // 
+            // qmark_Btn
+            // 
+            qmark_Btn.FlatStyle = FlatStyle.Flat;
+            qmark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            qmark_Btn.ForeColor = SystemColors.ButtonFace;
+            qmark_Btn.Image = Properties.Resources.questionMark_Icon;
+            qmark_Btn.Location = new Point(1551, 13);
+            qmark_Btn.Name = "qmark_Btn";
+            qmark_Btn.Size = new Size(21, 21);
+            qmark_Btn.TabIndex = 58;
+            qmark_Btn.UseVisualStyleBackColor = true;
+            // 
             // EditPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -146,5 +160,6 @@
         private RadioButton transfer_Rdb;
         private RadioButton update_Rdb;
         private Panel mainPanel;
+        private Button qmark_Btn;
     }
 }

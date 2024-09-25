@@ -57,8 +57,6 @@ namespace Smart_Asset
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
             public string Location { get; set; }
-
-            public string Controls { get; set; }
         }
 
         public class Read_ModelWithNotes
@@ -75,8 +73,6 @@ namespace Smart_Asset
             public string Usage { get; set; }
             public string Location { get; set; }
             public string Notes { get; set; }
-
-            public string Controls { get; set; }
         }
 
 
@@ -192,7 +188,7 @@ namespace Smart_Asset
         {
             selectedButton = "disposedHardwares";
             title_Lbl.Text = "DISPOSED HARDWARE LISTS";
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
         }
 
@@ -200,7 +196,7 @@ namespace Smart_Asset
         {
             selectedButton = "repairingHardwares";
             title_Lbl.Text = "REPAIRING HARDWARE LISTS";
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Repairing");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
         }
 
@@ -208,7 +204,7 @@ namespace Smart_Asset
         {
             selectedButton = "cleaningHardwares";
             title_Lbl.Text = "CLEANING HARDWARE LISTS";
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Cleaning");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
         }
 
@@ -223,7 +219,7 @@ namespace Smart_Asset
         {
             selectedButton = "borrowedHardwares";
             title_Lbl.Text = "BORROWED HARDWARE LISTS";
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
         }
 
@@ -240,7 +236,7 @@ namespace Smart_Asset
                         rc = null;
                     }
 
-                    // Always pass the current instance of `Read` to the `RightClick` form
+                    // Always pass the current instance of Read to the RightClick form
                     rc = new RightClick(this);  // Pass 'this' to ensure form1 is initialized
 
                     // Convert the mouse position to screen coordinates
@@ -364,9 +360,16 @@ namespace Smart_Asset
             repairingHardwares_Btn.PerformClick();
         }
 
-
-
-
-
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Modify")
+            {
+                MessageBox.Show("Modify this serialNo.");
+            }
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                MessageBox.Show("Delete this serialNo.");
+            }
+        }
     }
 }

@@ -207,6 +207,8 @@
             backupData_Btn.TextAlign = ContentAlignment.MiddleLeft;
             backupData_Btn.UseVisualStyleBackColor = true;
             backupData_Btn.Click += backupData_Btn_Click;
+            backupData_Btn.MouseEnter += backupData_Btn_MouseEnter;
+            backupData_Btn.MouseLeave += backupData_Btn_MouseLeave;
             // 
             // AssetCategories_Btn
             // 
@@ -225,6 +227,8 @@
             AssetCategories_Btn.TextAlign = ContentAlignment.MiddleLeft;
             AssetCategories_Btn.UseVisualStyleBackColor = true;
             AssetCategories_Btn.Click += AssetCategories_Btn_Click;
+            AssetCategories_Btn.MouseEnter += AssetCategories_Btn_MouseEnter;
+            AssetCategories_Btn.MouseLeave += AssetCategories_Btn_MouseLeave;
             // 
             // AssetHistory_Btn
             // 
@@ -243,6 +247,8 @@
             AssetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
             AssetHistory_Btn.UseVisualStyleBackColor = true;
             AssetHistory_Btn.Click += AssetHistory_Button_Click;
+            AssetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter;
+            AssetHistory_Btn.MouseLeave += AssetHistory_Btn_MouseLeave;
             // 
             // asset_Btn
             // 
@@ -261,6 +267,8 @@
             asset_Btn.TextAlign = ContentAlignment.MiddleLeft;
             asset_Btn.UseVisualStyleBackColor = true;
             asset_Btn.Click += asset_Btn_Click;
+            asset_Btn.MouseEnter += asset_Btn_MouseEnter;
+            asset_Btn.MouseLeave += asset_Btn_MouseLeave;
             // 
             // ManageAsset_Btn
             // 

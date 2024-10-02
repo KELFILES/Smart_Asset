@@ -483,6 +483,44 @@ namespace Smart_Asset
             ButtonLeaveColor(createReport_Btn);
         }
 
+        private void asset_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(asset_Btn);
+        }
 
+        private void asset_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(asset_Btn);
+        }
+
+        private void AssetHistory_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(AssetHistory_Btn);
+        }
+
+        private void AssetHistory_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(AssetHistory_Btn);
+        }
+
+        private void AssetCategories_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(AssetCategories_Btn);
+        }
+
+        private void AssetCategories_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(AssetCategories_Btn);
+        }
+
+        private void backupData_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(backupData_Btn);
+        }
+
+        private void backupData_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(backupData_Btn);
+        }
     }
 }

@@ -11,11 +11,11 @@ using static System.Windows.Forms.DataFormats;
 
 namespace Smart_Asset
 {
-    public partial class RightClick : Form
+    public partial class RightClick_RepairingHardwares : Form
     {
 
         // Parameterless constructor (still needed by the designer)
-        public RightClick()
+        public RightClick_RepairingHardwares()
         {
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace Smart_Asset
         private Read form1;  // Reference to Form1 (Read)
 
         // Constructor that accepts Form1 (Read) as a parameter
-        public RightClick(Read form1)
+        public RightClick_RepairingHardwares(Read form1)
         {
             InitializeComponent();
             this.form1 = form1;
@@ -65,7 +65,7 @@ namespace Smart_Asset
                 await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData);
 
                 // Call the method to refresh the DataGridView in Form1
-                form1.RefreshDataGridView();
+                form1.Refresh_RepairingHarwares();
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace Smart_Asset
         private void refresh_Btn_Click(object sender, EventArgs e)
         {
             // Call the method to refresh the DataGridView in Form1
-            form1.RefreshDataGridView();
+            form1.Refresh_RepairingHarwares();
 
             // Close the form after the operation is complete
             this.Close();

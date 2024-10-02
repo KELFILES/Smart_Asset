@@ -64,9 +64,9 @@ namespace Smart_Asset
             {
                 selectedTransfer = "reservedHardwares";
             }
-            else if (remove_RadBtn.Checked)
+            else if (archieve_RadBtn.Checked)
             {
-                selectedTransfer = "delete";
+                selectedTransfer = "archieve";
             }
             else if (location_Rdb.Checked)
             {
@@ -94,8 +94,8 @@ namespace Smart_Asset
                 case "reservedHardwares":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Reserved_Hardwares", $"{serialNo_Cmb.Text}");
                     break;
-                case "delete":
-                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Recycle_Bin", $"{serialNo_Cmb.Text}", notes_Tb.Text);
+                case "archieve":
+                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Archieve", $"{serialNo_Cmb.Text}", notes_Tb.Text);
                     break;
                 case "location":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{locationType_Cmb.Text}_{unitType_Cmb.Text}", $"{serialNo_Cmb.Text}");

@@ -13,7 +13,7 @@ namespace Smart_Asset
     public partial class Update : Form
     {
 
-        private RightClick rc = new RightClick();
+        private RightClick_RepairingHardwares rc = new RightClick_RepairingHardwares();
 
 
         public Update()
@@ -74,7 +74,7 @@ namespace Smart_Asset
                 }
 
                 // Create a new instance of RightClick form
-                rc = new RightClick();
+                rc = new RightClick_RepairingHardwares();
 
                 // Convert the mouse position to screen coordinates
                 Point screenPoint = dataGridView1.PointToScreen(e.Location);

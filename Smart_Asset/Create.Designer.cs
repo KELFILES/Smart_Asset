@@ -31,7 +31,7 @@
             panel2 = new Panel();
             panel1 = new Panel();
             panel3 = new Panel();
-            serial2_Tb = new TextBox();
+            serial2_Cb = new ComboBox();
             button3 = new Button();
             generate_Btn = new Button();
             label10 = new Label();
@@ -105,7 +105,7 @@
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.AutoScroll = true;
             panel3.BackColor = Color.DimGray;
-            panel3.Controls.Add(serial2_Tb);
+            panel3.Controls.Add(serial2_Cb);
             panel3.Controls.Add(button3);
             panel3.Controls.Add(generate_Btn);
             panel3.Controls.Add(label10);
@@ -116,14 +116,17 @@
             panel3.Size = new Size(1566, 398);
             panel3.TabIndex = 53;
             // 
-            // serial2_Tb
+            // serial2_Cb
             // 
-            serial2_Tb.Anchor = AnchorStyles.None;
-            serial2_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            serial2_Tb.Location = new Point(534, 157);
-            serial2_Tb.Name = "serial2_Tb";
-            serial2_Tb.Size = new Size(319, 27);
-            serial2_Tb.TabIndex = 27;
+            serial2_Cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            serial2_Cb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            serial2_Cb.FormattingEnabled = true;
+            serial2_Cb.Location = new Point(534, 157);
+            serial2_Cb.Name = "serial2_Cb";
+            serial2_Cb.Size = new Size(303, 23);
+            serial2_Cb.TabIndex = 27;
+            serial2_Cb.KeyPress += serial2_Cb_KeyPress;
+            serial2_Cb.MouseEnter += serial2_Cb_MouseEnter;
             // 
             // button3
             // 
@@ -576,7 +579,6 @@
         private Label Model_Lbl;
         private Label type_Lbl;
         private Panel panel3;
-        private TextBox serial2_Tb;
         private Button button3;
         private Button generate_Btn;
         private Label label10;
@@ -587,5 +589,6 @@
         private Button clear2_Btn;
         private CheckBox autoFill_Cb;
         private Button qmark_Btn;
+        private ComboBox serial2_Cb;
     }
 }

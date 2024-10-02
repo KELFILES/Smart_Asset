@@ -34,7 +34,7 @@
             unitType_Cmb = new ComboBox();
             location_Rdb = new RadioButton();
             reservedHardwares_RadBtn = new RadioButton();
-            remove_RadBtn = new RadioButton();
+            archieve_RadBtn = new RadioButton();
             transfer_Btn = new Button();
             borrow_RadBtn = new RadioButton();
             disposal_RadBtn = new RadioButton();
@@ -89,7 +89,7 @@
             panel3.Controls.Add(unitType_Cmb);
             panel3.Controls.Add(location_Rdb);
             panel3.Controls.Add(reservedHardwares_RadBtn);
-            panel3.Controls.Add(remove_RadBtn);
+            panel3.Controls.Add(archieve_RadBtn);
             panel3.Controls.Add(transfer_Btn);
             panel3.Controls.Add(borrow_RadBtn);
             panel3.Controls.Add(disposal_RadBtn);
@@ -150,7 +150,7 @@
             // 
             reservedHardwares_RadBtn.Anchor = AnchorStyles.Top;
             reservedHardwares_RadBtn.AutoSize = true;
-            reservedHardwares_RadBtn.Location = new Point(1052, 363);
+            reservedHardwares_RadBtn.Location = new Point(1043, 363);
             reservedHardwares_RadBtn.Name = "reservedHardwares_RadBtn";
             reservedHardwares_RadBtn.Size = new Size(151, 19);
             reservedHardwares_RadBtn.TabIndex = 31;
@@ -158,17 +158,17 @@
             reservedHardwares_RadBtn.Text = "RESERVED HARDWARES";
             reservedHardwares_RadBtn.UseVisualStyleBackColor = true;
             // 
-            // remove_RadBtn
+            // archieve_RadBtn
             // 
-            remove_RadBtn.Anchor = AnchorStyles.Top;
-            remove_RadBtn.AutoSize = true;
-            remove_RadBtn.Location = new Point(1225, 363);
-            remove_RadBtn.Name = "remove_RadBtn";
-            remove_RadBtn.Size = new Size(71, 19);
-            remove_RadBtn.TabIndex = 30;
-            remove_RadBtn.TabStop = true;
-            remove_RadBtn.Text = "REMOVE";
-            remove_RadBtn.UseVisualStyleBackColor = true;
+            archieve_RadBtn.Anchor = AnchorStyles.Top;
+            archieve_RadBtn.AutoSize = true;
+            archieve_RadBtn.Location = new Point(1216, 363);
+            archieve_RadBtn.Name = "archieve_RadBtn";
+            archieve_RadBtn.Size = new Size(79, 19);
+            archieve_RadBtn.TabIndex = 30;
+            archieve_RadBtn.TabStop = true;
+            archieve_RadBtn.Text = "ARCHIEVE";
+            archieve_RadBtn.UseVisualStyleBackColor = true;
             // 
             // transfer_Btn
             // 
@@ -185,7 +185,7 @@
             // 
             borrow_RadBtn.Anchor = AnchorStyles.Top;
             borrow_RadBtn.AutoSize = true;
-            borrow_RadBtn.Location = new Point(956, 363);
+            borrow_RadBtn.Location = new Point(947, 363);
             borrow_RadBtn.Name = "borrow_RadBtn";
             borrow_RadBtn.Size = new Size(75, 19);
             borrow_RadBtn.TabIndex = 28;
@@ -197,7 +197,7 @@
             // 
             disposal_RadBtn.Anchor = AnchorStyles.Top;
             disposal_RadBtn.AutoSize = true;
-            disposal_RadBtn.Location = new Point(859, 363);
+            disposal_RadBtn.Location = new Point(850, 363);
             disposal_RadBtn.Name = "disposal_RadBtn";
             disposal_RadBtn.Size = new Size(78, 19);
             disposal_RadBtn.TabIndex = 27;
@@ -209,7 +209,7 @@
             // 
             cleaning_RadBtn.Anchor = AnchorStyles.Top;
             cleaning_RadBtn.AutoSize = true;
-            cleaning_RadBtn.Location = new Point(761, 363);
+            cleaning_RadBtn.Location = new Point(752, 363);
             cleaning_RadBtn.Name = "cleaning_RadBtn";
             cleaning_RadBtn.Size = new Size(82, 19);
             cleaning_RadBtn.TabIndex = 26;
@@ -221,7 +221,7 @@
             // 
             repairing_RadBtn.Anchor = AnchorStyles.Top;
             repairing_RadBtn.AutoSize = true;
-            repairing_RadBtn.Location = new Point(662, 363);
+            repairing_RadBtn.Location = new Point(653, 363);
             repairing_RadBtn.Name = "repairing_RadBtn";
             repairing_RadBtn.Size = new Size(82, 19);
             repairing_RadBtn.TabIndex = 25;
@@ -361,7 +361,7 @@
             reservedHardwares2_RadBtn.Anchor = AnchorStyles.Top;
             reservedHardwares2_RadBtn.AutoSize = true;
             reservedHardwares2_RadBtn.ForeColor = Color.White;
-            reservedHardwares2_RadBtn.Location = new Point(1053, 376);
+            reservedHardwares2_RadBtn.Location = new Point(1032, 376);
             reservedHardwares2_RadBtn.Name = "reservedHardwares2_RadBtn";
             reservedHardwares2_RadBtn.Size = new Size(151, 19);
             reservedHardwares2_RadBtn.TabIndex = 36;
@@ -397,12 +397,12 @@
             remove2_RadBtn.Anchor = AnchorStyles.Top;
             remove2_RadBtn.AutoSize = true;
             remove2_RadBtn.ForeColor = Color.White;
-            remove2_RadBtn.Location = new Point(1226, 376);
+            remove2_RadBtn.Location = new Point(1205, 376);
             remove2_RadBtn.Name = "remove2_RadBtn";
-            remove2_RadBtn.Size = new Size(71, 19);
+            remove2_RadBtn.Size = new Size(79, 19);
             remove2_RadBtn.TabIndex = 33;
             remove2_RadBtn.TabStop = true;
-            remove2_RadBtn.Text = "REMOVE";
+            remove2_RadBtn.Text = "ARCHIEVE";
             remove2_RadBtn.UseVisualStyleBackColor = true;
             // 
             // borrow2_RadBtn
@@ -410,7 +410,7 @@
             borrow2_RadBtn.Anchor = AnchorStyles.Top;
             borrow2_RadBtn.AutoSize = true;
             borrow2_RadBtn.ForeColor = Color.White;
-            borrow2_RadBtn.Location = new Point(958, 376);
+            borrow2_RadBtn.Location = new Point(937, 376);
             borrow2_RadBtn.Name = "borrow2_RadBtn";
             borrow2_RadBtn.Size = new Size(75, 19);
             borrow2_RadBtn.TabIndex = 32;
@@ -436,7 +436,7 @@
             disposal2_RadBtn.Anchor = AnchorStyles.Top;
             disposal2_RadBtn.AutoSize = true;
             disposal2_RadBtn.ForeColor = Color.White;
-            disposal2_RadBtn.Location = new Point(861, 376);
+            disposal2_RadBtn.Location = new Point(840, 376);
             disposal2_RadBtn.Name = "disposal2_RadBtn";
             disposal2_RadBtn.Size = new Size(78, 19);
             disposal2_RadBtn.TabIndex = 31;
@@ -462,7 +462,7 @@
             cleaning2_RadBtn.Anchor = AnchorStyles.Top;
             cleaning2_RadBtn.AutoSize = true;
             cleaning2_RadBtn.ForeColor = Color.White;
-            cleaning2_RadBtn.Location = new Point(763, 376);
+            cleaning2_RadBtn.Location = new Point(742, 376);
             cleaning2_RadBtn.Name = "cleaning2_RadBtn";
             cleaning2_RadBtn.Size = new Size(82, 19);
             cleaning2_RadBtn.TabIndex = 30;
@@ -475,7 +475,7 @@
             repairing2_RadBtn.Anchor = AnchorStyles.Top;
             repairing2_RadBtn.AutoSize = true;
             repairing2_RadBtn.ForeColor = Color.White;
-            repairing2_RadBtn.Location = new Point(664, 376);
+            repairing2_RadBtn.Location = new Point(643, 376);
             repairing2_RadBtn.Name = "repairing2_RadBtn";
             repairing2_RadBtn.Size = new Size(82, 19);
             repairing2_RadBtn.TabIndex = 29;
@@ -576,7 +576,7 @@
         private RadioButton cleaning2_RadBtn;
         private RadioButton repairing2_RadBtn;
         private Button transfer_Btn;
-        private RadioButton remove_RadBtn;
+        private RadioButton archieve_RadBtn;
         private RadioButton remove2_RadBtn;
         private Button transfer2_Btn;
         private Label label4;

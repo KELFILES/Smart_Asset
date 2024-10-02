@@ -27,6 +27,9 @@
     <Compile Update="Deployment_Location_List.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="RightClick_ShowAllHardwares.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

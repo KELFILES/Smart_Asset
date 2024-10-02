@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel3 = new Panel();
             exportTo_Cb = new ComboBox();
             export_Btn = new Button();
@@ -45,7 +45,7 @@
             disposedHardwares_Btn = new Button();
             repairingHardwares_Btn = new Button();
             panel5 = new Panel();
-            recycleBin_Btn = new Button();
+            archieve_Btn = new Button();
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
             panel4 = new Panel();
@@ -119,14 +119,14 @@
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.Black;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.GridColor = Color.White;
             dataGridView1.Location = new Point(8, 235);
@@ -135,7 +135,6 @@
             dataGridView1.RowTemplate.Height = 50;
             dataGridView1.Size = new Size(1904, 733);
             dataGridView1.TabIndex = 4;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
             // 
@@ -297,7 +296,7 @@
             // 
             panel5.Anchor = AnchorStyles.Top;
             panel5.BackColor = Color.Gray;
-            panel5.Controls.Add(recycleBin_Btn);
+            panel5.Controls.Add(archieve_Btn);
             panel5.Controls.Add(showAllHardwares_Btn);
             panel5.Controls.Add(reservedHardwares_Btn);
             panel5.Location = new Point(328, 13);
@@ -305,22 +304,22 @@
             panel5.Size = new Size(265, 120);
             panel5.TabIndex = 22;
             // 
-            // recycleBin_Btn
+            // archieve_Btn
             // 
-            recycleBin_Btn.Anchor = AnchorStyles.Top;
-            recycleBin_Btn.BackColor = Color.LightGray;
-            recycleBin_Btn.FlatAppearance.BorderColor = Color.White;
-            recycleBin_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            recycleBin_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
-            recycleBin_Btn.FlatStyle = FlatStyle.Flat;
-            recycleBin_Btn.Font = new Font("Times New Roman", 9.75F);
-            recycleBin_Btn.Location = new Point(7, 63);
-            recycleBin_Btn.Name = "recycleBin_Btn";
-            recycleBin_Btn.Size = new Size(121, 48);
-            recycleBin_Btn.TabIndex = 13;
-            recycleBin_Btn.Text = "RECYCLE BIN";
-            recycleBin_Btn.UseVisualStyleBackColor = false;
-            recycleBin_Btn.Click += recycleBin_Btn_Click;
+            archieve_Btn.Anchor = AnchorStyles.Top;
+            archieve_Btn.BackColor = Color.LightGray;
+            archieve_Btn.FlatAppearance.BorderColor = Color.White;
+            archieve_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            archieve_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            archieve_Btn.FlatStyle = FlatStyle.Flat;
+            archieve_Btn.Font = new Font("Times New Roman", 9.75F);
+            archieve_Btn.Location = new Point(7, 63);
+            archieve_Btn.Name = "archieve_Btn";
+            archieve_Btn.Size = new Size(121, 48);
+            archieve_Btn.TabIndex = 13;
+            archieve_Btn.Text = "ARCHIEVED";
+            archieve_Btn.UseVisualStyleBackColor = false;
+            archieve_Btn.Click += recycleBin_Btn_Click;
             // 
             // showAllHardwares_Btn
             // 
@@ -527,7 +526,7 @@
         private Button cleaningHardwares_Btn;
         private Button showAllHardwares_Btn;
         private Button borrowedHardwares_Btn;
-        private Button recycleBin_Btn;
+        private Button archieve_Btn;
         private Button button2;
         private Label title_Lbl;
         private Button edit_Btn;

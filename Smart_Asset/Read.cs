@@ -20,7 +20,8 @@ namespace Smart_Asset
 
         //FIELD
         public static string selectedButton = "";
-        RightClick rc = new RightClick();
+        RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
+        RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
 
         public Read()
         {
@@ -230,27 +231,57 @@ namespace Smart_Asset
                 if (e.Button == MouseButtons.Right)
                 {
                     // Dispose of the previous form if it's still open
-                    if (rc != null)
+                    if (rh != null)
                     {
-                        rc.Dispose();
-                        rc = null;
+                        rh.Dispose();
+                        rh = null;
                     }
 
                     // Always pass the current instance of Read to the RightClick form
-                    rc = new RightClick(this);  // Pass 'this' to ensure form1 is initialized
+                    rh = new RightClick_RepairingHardwares(this);  // Pass 'this' to ensure form1 is initialized
 
                     // Convert the mouse position to screen coordinates
                     Point screenPoint = dataGridView1.PointToScreen(e.Location);
 
-                    rc.StartPosition = FormStartPosition.Manual;
-                    rc.Location = screenPoint;  // Directly set to the screen position
+                    rh.StartPosition = FormStartPosition.Manual;
+                    rh.Location = screenPoint;  // Directly set to the screen position
 
-                    rc.Deactivate += (s, ev) =>
+                    rh.Deactivate += (s, ev) =>
                     {
-                        rc.Hide();  // Just hide instead of disposing
+                        rh.Hide();  // Just hide instead of disposing
                     };
 
-                    rc.Show();
+                    rh.Show();
+                }
+            }
+
+
+            if (selectedButton.Equals("showAllHardwares"))
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    // Dispose of the previous form if it's still open
+                    if (sah != null)
+                    {
+                        sah.Dispose();
+                        sah = null;
+                    }
+
+                    // Always pass the current instance of Read to the RightClick form
+                    sah = new RightClick_ShowAllHardwares(this);  // Pass 'this' to ensure form1 is initialized
+
+                    // Convert the mouse position to screen coordinates
+                    Point screenPoint = dataGridView1.PointToScreen(e.Location);
+
+                    sah.StartPosition = FormStartPosition.Manual;
+                    sah.Location = screenPoint;  // Directly set to the screen position
+
+                    sah.Deactivate += (s, ev) =>
+                    {
+                        sah.Hide();  // Just hide instead of disposing
+                    };
+
+                    sah.Show();
                 }
             }
 
@@ -276,12 +307,12 @@ namespace Smart_Asset
                     selectedSerialNos = null;
                     Console.WriteLine("No rows selected. selectedSerialNos is now null.");
 
-                    // Check if rc is null before using it
-                    if (rc == null)
+                    // Check if rh is null before using it
+                    if (rh == null)
                     {
-                        rc = new RightClick(this); // Reinitialize rc if it was disposed
+                        rh = new RightClick_RepairingHardwares(this); // Reinitialize rc if it was disposed
                     }
-                    rc.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
+                    rh.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
                     return;
                 }
 
@@ -295,14 +326,14 @@ namespace Smart_Asset
                     selectedSerialNos.Add(serialNo);
                     Console.WriteLine("Selected SerialNo: " + serialNo);
 
-                    // Reinitialize rc if it's null
-                    if (rc == null)
+                    // Reinitialize rh if it's null
+                    if (rh == null)
                     {
-                        rc = new RightClick(this); // Reinitialize rc if it was disposed
+                        rh = new RightClick_RepairingHardwares(this); // Reinitialize rc if it was disposed
                     }
 
                     // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
-                    rc.GetRetrievingSerial(new List<string> { serialNo });
+                    rh.GetRetrievingSerial(new List<string> { serialNo });
                 }
                 else if (dataGridView1.SelectedRows.Count > 1)
                 {
@@ -314,14 +345,14 @@ namespace Smart_Asset
                     }
                     Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
 
-                    // Reinitialize rc if it's null
-                    if (rc == null)
+                    // Reinitialize rh if it's null
+                    if (rh == null)
                     {
-                        rc = new RightClick(this); // Reinitialize rc if it was disposed
+                        rh = new RightClick_RepairingHardwares(this); // Reinitialize rh if it was disposed
                     }
 
                     // Pass the list of serialNos to RightClick for multiple rows
-                    rc.GetRetrievingSerial(selectedSerialNos);
+                    rh.GetRetrievingSerial(selectedSerialNos);
                 }
             }
             catch (Exception ex)
@@ -347,29 +378,22 @@ namespace Smart_Asset
 
         private void recycleBin_Btn_Click(object sender, EventArgs e)
         {
-            selectedButton = "recycleBin";
-            title_Lbl.Text = "RECYCLE BIN LISTS";
-            rc.SendClickBtnInfo(selectedButton);
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Recycle_Bin");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Recycle_Bin");
+            selectedButton = "archieve";
+            title_Lbl.Text = "ARCHIEVE LISTS";
+            rh.SendClickBtnInfo(selectedButton);
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archieve");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archieve");
         }
 
         // Method to refresh the DataGridView
-        public void RefreshDataGridView()
+        public void Refresh_RepairingHarwares()
         {
             repairingHardwares_Btn.PerformClick();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void Refresh_ShowAllHardwares()
         {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Modify")
-            {
-                MessageBox.Show("Modify this serialNo.");
-            }
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Delete")
-            {
-                MessageBox.Show("Delete this serialNo.");
-            }
+            showAllHardwares_Btn.PerformClick();
         }
     }
 }

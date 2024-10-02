@@ -1,6 +1,6 @@
 ﻿namespace Smart_Asset
 {
-    partial class RightClick
+    partial class RightClick_RepairingHardwares
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             // 
             // markAsRepaired_Btn
             // 
-            markAsRepaired_Btn.Location = new Point(12, 12);
+            markAsRepaired_Btn.Location = new Point(12, 49);
             markAsRepaired_Btn.Name = "markAsRepaired_Btn";
             markAsRepaired_Btn.Size = new Size(172, 31);
             markAsRepaired_Btn.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // refresh_Btn
             // 
-            refresh_Btn.Location = new Point(12, 49);
+            refresh_Btn.Location = new Point(12, 12);
             refresh_Btn.Name = "refresh_Btn";
             refresh_Btn.Size = new Size(172, 31);
             refresh_Btn.TabIndex = 1;
@@ -52,7 +52,7 @@
             refresh_Btn.UseVisualStyleBackColor = true;
             refresh_Btn.Click += refresh_Btn_Click;
             // 
-            // RightClick
+            // RightClick_RepairingHardwares
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -60,7 +60,7 @@
             Controls.Add(refresh_Btn);
             Controls.Add(markAsRepaired_Btn);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "RightClick";
+            Name = "RightClick_RepairingHardwares";
             Text = "RightClick";
             ResumeLayout(false);
         }

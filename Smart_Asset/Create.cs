@@ -118,15 +118,15 @@ namespace Smart_Asset
 
             MessageBox.Show("Registered Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Clear or reset fields after registration
-                if (!autoFill_Cb.Checked) ClearText();
-                else serial_Tb.Text = string.Empty;
+            // Clear or reset fields after registration
+            if (!autoFill_Cb.Checked) ClearText();
+            else serial_Tb.Text = string.Empty;
 
 
 
 
 
-                
+
 
 
         }
@@ -267,7 +267,7 @@ namespace Smart_Asset
             }
 
             // The text or URL to encode in the QR code (directly using a string here)
-            string textToEncode = serial2_Tb.Text; // Replace with the URL or text to encode
+            string textToEncode = serial2_Cb.Text; // Replace with the URL or text to encode
 
             // Get the dimensions from the PictureBox
             int width = qr_pictureBox.Width;
@@ -292,6 +292,16 @@ namespace Smart_Asset
                 // Handle any errors that may occur
                 MessageBox.Show($"Error: {ex.Message}", "QR Code Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void serial2_Cb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void serial2_Cb_MouseEnter(object sender, EventArgs e)
+        {
+            MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serial2_Cb);
         }
     }
 }

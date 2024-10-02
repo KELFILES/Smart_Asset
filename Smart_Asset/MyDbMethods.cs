@@ -550,6 +550,71 @@ namespace Smart_Asset
             dataGridViewName.DataSource = allDocuments;
         }
 
+
+        //OVERLOADING METHOD FOR BORROWED HARDWARES
+        public static void ReadLocationWithNotes(string dbName, DataGridView dataGridViewName, string collectionName, bool isForBorrow)
+        {
+            if(isForBorrow == true)
+            {
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+
+                // Get the specified collection by name
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                // Retrieve all documents from the collection
+                var documents = collection.Find(new BsonDocument()).ToList();
+
+                var allDocuments = new List<Read_ModelWithNotes_ForBorrow>();
+
+                // Map BsonDocument results to Read_ModelWithNotes objects
+                var myList = documents.Select(doc => new Read_ModelWithNotes_ForBorrow
+                {
+                    Id = doc["_id"].ToString(),
+                    Type = doc.GetValue("Type", "").AsString,
+                    Model = doc.GetValue("Model", "").AsString,
+                    SerialNo = doc.GetValue("SerialNo", "").AsString,
+                    Cost = doc.GetValue("Cost", "").AsString,
+                    Supplier = doc.GetValue("Supplier", "").AsString,
+                    Warranty = doc.GetValue("Warranty", "").AsString,
+
+                    // Warranty status calculation
+                    WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                    PurchaseDate = doc.GetValue("PurchaseDate", "").AsString,
+
+                    // Usage calculation
+                    Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+
+                    // Set the collection name
+                    Location = collectionName,
+
+                    // Set the name of borrower
+                    Name = doc.GetValue("Name", "").AsString,
+
+                    // Set the returnDate of borrower
+                    ReturnDate = doc.GetValue("ReturnDate", "").AsString,
+
+                    // Safely retrieve the Notes field if it exists
+                    Notes = doc.Contains("Notes") ? doc["Notes"].AsString : string.Empty
+
+                }).ToList();
+
+                allDocuments.AddRange(myList);
+
+                if (allDocuments.Count == 0)
+                {
+                    // Display "not found" message
+                    MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridViewName.DataSource = null;
+                    return;
+                }
+
+                // Bind the list to the DataGridView
+                dataGridViewName.DataSource = allDocuments;
+            }
+        }
+
         public static void SwapDocumentsByType(string dbName, string collection1Name, string collection2Name, string typeValue)
         {
             var client = new MongoClient(DefaultConnectionString);
@@ -658,13 +723,25 @@ namespace Smart_Asset
             dataGridViewName.CellClick += DataGridView_CellClick;
         }
 
-        // FOR UPDATING USING SERIALNO
-        public static void UpdateUsingSerialNo(string dbName, DataGridView dataGridViewName, string serialNo)
+        // FOR UPDATING USING SERIALNOS
+        public static void UpdateUsingSerialNo(string dbName, DataGridView dataGridViewName, string serialNos)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
 
             var allDocuments = new List<Read_Model>();
+
+            // Split the input by commas and trim spaces
+            var serialNoList = serialNos.Split(',')
+                                        .Select(s => s.Trim())
+                                        .Where(s => !string.IsNullOrEmpty(s))
+                                        .ToList();
+
+            if (serialNoList.Count == 0)
+            {
+                MessageBox.Show("Please provide valid SerialNo(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             var collectionNames = database.ListCollectionNames().ToList();
 
@@ -672,7 +749,8 @@ namespace Smart_Asset
             {
                 var collection = database.GetCollection<BsonDocument>(collectionName);
 
-                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                // Use In filter to match any of the provided serial numbers
+                var filter = Builders<BsonDocument>.Filter.In("SerialNo", serialNoList);
                 var documents = collection.Find(filter).ToList();
 
                 var cpuList = documents.Select(doc => new Read_Model
@@ -695,7 +773,7 @@ namespace Smart_Asset
 
             if (allDocuments.Count == 0)
             {
-                MessageBox.Show($"No records found with SerialNo: {serialNo}", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"No records found with the provided SerialNos.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridViewName.DataSource = null;
                 return;
             }
@@ -892,146 +970,267 @@ namespace Smart_Asset
 
 
 
-        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNo, string notes)
+        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNos, string notes)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
             var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
 
-            BsonDocument document = null;
-            string sourceCollectionName = null;
+            // Split the input by commas and trim spaces
+            var serialNoList = serialNos.Split(',')
+                                        .Select(s => s.Trim())
+                                        .Where(s => !string.IsNullOrEmpty(s))
+                                        .ToList();
 
-            using (var cursor = await database.ListCollectionNamesAsync())
+            if (serialNoList.Count == 0)
             {
-                while (await cursor.MoveNextAsync())
+                MessageBox.Show("Please provide valid SerialNo(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            foreach (var serialNo in serialNoList)
+            {
+                BsonDocument document = null;
+                string sourceCollectionName = null;
+
+                using (var cursor = await database.ListCollectionNamesAsync())
                 {
-                    foreach (var collectionName in cursor.Current)
+                    while (await cursor.MoveNextAsync())
                     {
-                        if (!excludeCollections.Contains(collectionName))
+                        foreach (var collectionName in cursor.Current)
                         {
-                            var collection = database.GetCollection<BsonDocument>(collectionName);
-                            var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
-
-                            document = await collection.Find(filter).FirstOrDefaultAsync();
-
-                            if (document != null)
+                            if (!excludeCollections.Contains(collectionName))
                             {
-                                sourceCollectionName = collectionName;
-                                break;
+                                var collection = database.GetCollection<BsonDocument>(collectionName);
+                                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
+                                document = await collection.Find(filter).FirstOrDefaultAsync();
+
+                                if (document != null)
+                                {
+                                    sourceCollectionName = collectionName;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    if (document != null)
-                    {
-                        break;
+                        if (document != null)
+                        {
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (document != null && sourceCollectionName != null)
-            {
-                try
+                if (document != null && sourceCollectionName != null)
                 {
-                    // Step 2: Conditionally add the "OldLocation" field to the document
-                    var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
-
-                    if (!exemptLocations.Contains(sourceCollectionName))
+                    try
                     {
-                        document["OldLocation"] = sourceCollectionName;
+                        // Step 2: Conditionally add the "OldLocation" field to the document
+                        var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
+
+                        if (!exemptLocations.Contains(sourceCollectionName))
+                        {
+                            document["OldLocation"] = sourceCollectionName;
+                        }
+
+                        // Add the "Notes" field to the document
+                        document["Notes"] = notes;
+
+                        // Step 3: Insert the document into the transfer collection
+                        var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+                        await transferCollection.InsertOneAsync(document);
+
+                        // Step 4: Delete the document from the source collection
+                        var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+                        var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                        await sourceCollection.DeleteOneAsync(filter);
+
+                        MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
-                    // Add the "Notes" field to the document
-                    document["Notes"] = notes;
-
-                    // Step 3: Insert the document into the transfer collection
-                    var transferCollection = database.GetCollection<BsonDocument>(transferColl);
-                    await transferCollection.InsertOneAsync(document);
-
-                    // Step 4: Delete the document from the source collection
-                    var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
-                    var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
-                    await sourceCollection.DeleteOneAsync(filter);
-
-                    MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred during the transfer of SerialNo '{serialNo}': {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            else
-            {
-                MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
 
 
-
-        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNo)
+        //OVERLOADING METHOD
+        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNos)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
             var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
 
-            BsonDocument document = null;
-            string sourceCollectionName = null;
+            // Split the input by commas and trim spaces
+            var serialNoList = serialNos.Split(',')
+                                        .Select(s => s.Trim())
+                                        .Where(s => !string.IsNullOrEmpty(s))
+                                        .ToList();
 
-            using (var cursor = await database.ListCollectionNamesAsync())
+            if (serialNoList.Count == 0)
             {
-                while (await cursor.MoveNextAsync())
+                MessageBox.Show("Please provide valid SerialNo(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            foreach (var serialNo in serialNoList)
+            {
+                BsonDocument document = null;
+                string sourceCollectionName = null;
+
+                using (var cursor = await database.ListCollectionNamesAsync())
                 {
-                    foreach (var collectionName in cursor.Current)
+                    while (await cursor.MoveNextAsync())
                     {
-                        if (!excludeCollections.Contains(collectionName))
+                        foreach (var collectionName in cursor.Current)
                         {
-                            var collection = database.GetCollection<BsonDocument>(collectionName);
-                            var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
-
-                            document = await collection.Find(filter).FirstOrDefaultAsync();
-
-                            if (document != null)
+                            if (!excludeCollections.Contains(collectionName))
                             {
-                                sourceCollectionName = collectionName;
-                                break;
+                                var collection = database.GetCollection<BsonDocument>(collectionName);
+                                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
+                                document = await collection.Find(filter).FirstOrDefaultAsync();
+
+                                if (document != null)
+                                {
+                                    sourceCollectionName = collectionName;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    if (document != null)
+                        if (document != null)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (document != null && sourceCollectionName != null)
+                {
+                    try
                     {
-                        break;
+                        // Step 3: Insert the document into the transfer collection
+                        var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+                        await transferCollection.InsertOneAsync(document);
+
+                        // Step 4: Delete the document from the source collection
+                        var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+                        var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                        await sourceCollection.DeleteOneAsync(filter);
+
+                        MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred during the transfer of SerialNo '{serialNo}': {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }
-
-            if (document != null && sourceCollectionName != null)
-            {
-                try
+                else
                 {
-                    // Step 3: Insert the document into the transfer collection
-                    var transferCollection = database.GetCollection<BsonDocument>(transferColl);
-                    await transferCollection.InsertOneAsync(document);
-
-                    // Step 4: Delete the document from the source collection
-                    var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
-                    var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
-                    await sourceCollection.DeleteOneAsync(filter);
-
-                    MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
+        //OVERLOADING METHOD FOR BORROW HARDWARE
+        public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNos, string notes, string name, string returnDate)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+
+            // Split the input by commas and trim spaces
+            var serialNoList = serialNos.Split(',')
+                                        .Select(s => s.Trim())
+                                        .Where(s => !string.IsNullOrEmpty(s))
+                                        .ToList();
+
+            if (serialNoList.Count == 0)
+            {
+                MessageBox.Show("Please provide valid SerialNo(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            foreach (var serialNo in serialNoList)
+            {
+                BsonDocument document = null;
+                string sourceCollectionName = null;
+
+                using (var cursor = await database.ListCollectionNamesAsync())
+                {
+                    while (await cursor.MoveNextAsync())
+                    {
+                        foreach (var collectionName in cursor.Current)
+                        {
+                            if (!excludeCollections.Contains(collectionName))
+                            {
+                                var collection = database.GetCollection<BsonDocument>(collectionName);
+                                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
+                                document = await collection.Find(filter).FirstOrDefaultAsync();
+
+                                if (document != null)
+                                {
+                                    sourceCollectionName = collectionName;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (document != null)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (document != null && sourceCollectionName != null)
+                {
+                    try
+                    {
+                        // Step 2: Conditionally add the "OldLocation" field to the document
+                        var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
+
+                        if (!exemptLocations.Contains(sourceCollectionName))
+                        {
+                            document["OldLocation"] = sourceCollectionName;
+                        }
+
+                        // Add the "Notes" field to the document
+                        document["Notes"] = notes;
+                        document["Name"] = name;
+                        document["ReturnDate"] = returnDate;
+
+                        // Step 3: Insert the document into the transfer collection
+                        var transferCollection = database.GetCollection<BsonDocument>(transferColl);
+                        await transferCollection.InsertOneAsync(document);
+
+                        // Step 4: Delete the document from the source collection
+                        var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+                        var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+                        await sourceCollection.DeleteOneAsync(filter);
+
+                        MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred during the transfer of SerialNo '{serialNo}': {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
 
 
 
@@ -1089,6 +1288,18 @@ namespace Smart_Asset
         {
             try
             {
+                // Join the SerialNos into a readable format, separated by new lines
+                string serialNosDisplay = string.Join(", ", serialNos);
+
+                // Show a MessageBox asking the user if they want to proceed
+                var result = MessageBox.Show($"Do you want to proceed operation for this Serial No? \n{serialNosDisplay}" , "Confirm Transfer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If the user clicks 'No', exit the method
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+
                 var client = new MongoClient(DefaultConnectionString);
                 var database = client.GetDatabase(dbName);
                 var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
@@ -1157,7 +1368,7 @@ namespace Smart_Asset
                 }
 
                 // Operation completion message
-                MessageBox.Show("Retrieve operation completed.");
+                MessageBox.Show("Operation completed.");
             }
             catch (Exception ex)
             {
@@ -1166,6 +1377,101 @@ namespace Smart_Asset
                 Console.WriteLine($"An error occurred during the retrieve operation: {ex}");
             }
         }
+
+        // OVERLOADED METHOD
+        public static async Task TransferManyUsingSerialNo(string dbName, List<string> serialNos, string targetCollectionName)
+        {
+            try
+            {
+                // Join the SerialNos into a readable format, separated by new lines
+                string serialNosDisplay = string.Join(", ", serialNos);
+
+                // Show a MessageBox asking the user if they want to proceed
+                var result = MessageBox.Show($"Do you want to proceed operation for this Serial No? \n{serialNosDisplay}", "Confirm Transfer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If the user clicks 'No', exit the method
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+
+                // Retrieve all collection names
+                using (var collectionsCursor = await database.ListCollectionNamesAsync())
+                {
+                    while (await collectionsCursor.MoveNextAsync())
+                    {
+                        foreach (var collectionName in collectionsCursor.Current)
+                        {
+                            try
+                            {
+                                if (!excludeCollections.Contains(collectionName)) // Skip excluded collections
+                                {
+                                    var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                                    // Build a filter to find documents that match the given SerialNo list
+                                    var filter = Builders<BsonDocument>.Filter.In("SerialNo", serialNos);
+                                    var documents = await collection.Find(filter).ToListAsync();
+
+                                    if (documents.Count > 0)
+                                    {
+                                        foreach (var document in documents)
+                                        {
+                                            try
+                                            {
+                                                // Add or update the OldLocation field to store the original collection name
+                                                document["OldLocation"] = collectionName;
+
+                                                // Remove "Notes" field from the document if it exists
+                                                if (document.Contains("Notes"))
+                                                {
+                                                    document.Remove("Notes");
+                                                }
+
+                                                // Ensure the target collection exists (based on the passed parameter)
+                                                var targetCollection = database.GetCollection<BsonDocument>(targetCollectionName);
+
+                                                // Insert the document into the target collection
+                                                await targetCollection.InsertOneAsync(document);
+
+                                                // Remove the document from the original collection
+                                                var idFilter = Builders<BsonDocument>.Filter.Eq("_id", document["_id"]);
+                                                await collection.DeleteOneAsync(idFilter);
+
+                                                Console.WriteLine($"Document with SerialNo: {document["SerialNo"]} transferred to {targetCollectionName}");
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                // Handle individual document-level errors
+                                                Console.WriteLine($"Error transferring document with SerialNo {document["SerialNo"]}: {ex.Message}");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                // Handle errors at the collection level
+                                Console.WriteLine($"Error processing collection '{collectionName}': {ex.Message}");
+                            }
+                        }
+                    }
+                }
+
+                // Operation completion message
+                MessageBox.Show("Operation completed.");
+            }
+            catch (Exception ex)
+            {
+                // Handle high-level errors (e.g., MongoDB connection issues)
+                MessageBox.Show($"An error occurred during the retrieve operation: {ex.Message}");
+                Console.WriteLine($"An error occurred during the retrieve operation: {ex}");
+            }
+        }
+
 
 
         public static async Task TransferDocumentsByCollectionName(string dbName, string sourceCollectionName, string transferColl)

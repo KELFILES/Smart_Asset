@@ -22,6 +22,12 @@ namespace Smart_Asset
             int months = currentDate.Month - purchaseDate.Month;
             int days = currentDate.Day - purchaseDate.Day;
 
+            // Check if usage is less than 1 day
+            if (currentDate.Date == purchaseDate.Date)
+            {
+                return "Less than 1 day";
+            }
+
             // Adjust if the current month/day is less than the purchase month/day
             if (days < 0)
             {

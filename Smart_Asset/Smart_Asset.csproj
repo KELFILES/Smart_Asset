@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -28,6 +28,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RightClick_ShowAllHardwares.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Borrow.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

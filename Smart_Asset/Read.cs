@@ -76,6 +76,24 @@ namespace Smart_Asset
             public string Notes { get; set; }
         }
 
+        public class Read_ModelWithNotes_ForBorrow
+        {
+            public string Id { get; set; }
+            public string Type { get; set; }
+            public string Model { get; set; }
+            public string SerialNo { get; set; }
+            public string Cost { get; set; }
+            public string Supplier { get; set; }
+            public string Warranty { get; set; }
+            public string WarrantyStatus { get; set; }
+            public string PurchaseDate { get; set; }
+            public string Usage { get; set; }
+            public string Location { get; set; }
+            public string Name { get; set; }
+            public string ReturnDate { get; set; }
+            public string Notes { get; set; }
+        }
+
 
         private void show1_Btn_Click(object sender, EventArgs e)
         {
@@ -220,7 +238,7 @@ namespace Smart_Asset
         {
             selectedButton = "borrowedHardwares";
             title_Lbl.Text = "BORROWED HARDWARE LISTS";
-            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Borrowed_Hardwares", true);
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
         }
 
@@ -313,6 +331,14 @@ namespace Smart_Asset
                         rh = new RightClick_RepairingHardwares(this); // Reinitialize rc if it was disposed
                     }
                     rh.GetRetrievingSerial(null);  // Pass null to handle no selection case in RightClick
+
+                    // Check if sah is null before using it
+                    if (sah == null)
+                    {
+                        sah = new RightClick_ShowAllHardwares(this); // Reinitialize rc if it was disposed
+                    }
+                    sah.GetRetrievingSerial(null);
+                    
                     return;
                 }
 
@@ -334,6 +360,15 @@ namespace Smart_Asset
 
                     // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
                     rh.GetRetrievingSerial(new List<string> { serialNo });
+
+                    // Reinitialize sah if it's null
+                    if (sah == null)
+                    {
+                        sah = new RightClick_ShowAllHardwares(this); // Reinitialize rc if it was disposed
+                    }
+
+                    // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
+                    sah.GetRetrievingSerial(new List<string> { serialNo });
                 }
                 else if (dataGridView1.SelectedRows.Count > 1)
                 {
@@ -353,6 +388,15 @@ namespace Smart_Asset
 
                     // Pass the list of serialNos to RightClick for multiple rows
                     rh.GetRetrievingSerial(selectedSerialNos);
+
+                    // Reinitialize sah if it's null
+                    if (sah == null)
+                    {
+                        sah = new RightClick_ShowAllHardwares(this); // Reinitialize rh if it was disposed
+                    }
+
+                    // Pass the list of serialNos to RightClick for multiple rows
+                    sah.GetRetrievingSerial(selectedSerialNos);
                 }
             }
             catch (Exception ex)
@@ -381,6 +425,7 @@ namespace Smart_Asset
             selectedButton = "archieve";
             title_Lbl.Text = "ARCHIEVE LISTS";
             rh.SendClickBtnInfo(selectedButton);
+            sah.SendClickBtnInfo(selectedButton);
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archieve");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archieve");
         }
@@ -394,6 +439,11 @@ namespace Smart_Asset
         public void Refresh_ShowAllHardwares()
         {
             showAllHardwares_Btn.PerformClick();
+        }
+
+        public void Refresh_Archieve()
+        {
+            archieve_Btn.PerformClick();
         }
     }
 }

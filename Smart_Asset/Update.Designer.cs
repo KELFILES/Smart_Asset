@@ -232,8 +232,8 @@
         private Button button1;
         private Button show_Btn;
         private Panel panel3;
-        private Button show2_Btn;
-        private ComboBox serialNo_Cmb;
         private Label label3;
+        public ComboBox serialNo_Cmb;
+        public Button show2_Btn;
     }
 }

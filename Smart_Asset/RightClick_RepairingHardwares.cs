@@ -64,6 +64,12 @@ namespace Smart_Asset
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
                 await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData);
 
+                FrontPage_Final pfp = new FrontPage_Final();
+                pfp.Show();
+
+                // Reactivate the main form after the MessageBox
+                Application.OpenForms[0].Activate();
+
                 // Call the method to refresh the DataGridView in Form1
                 form1.Refresh_RepairingHarwares();
             }
@@ -72,11 +78,6 @@ namespace Smart_Asset
                 // Handle any exceptions and display an error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
-            }
-            finally
-            {
-                // Hide the form instead of closing it to avoid minimizing the main form
-                this.Hide();
             }
         }
 

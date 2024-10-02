@@ -117,7 +117,7 @@
             locationType_Cmb.Name = "locationType_Cmb";
             locationType_Cmb.Size = new Size(209, 23);
             locationType_Cmb.TabIndex = 35;
-            locationType_Cmb.DropDown += locationType_Cmb_DropDown;
+            locationType_Cmb.DropDown += this.locationType_Cmb_DropDown;
             // 
             // unitType_Cmb
             // 
@@ -131,7 +131,7 @@
             unitType_Cmb.Name = "unitType_Cmb";
             unitType_Cmb.Size = new Size(209, 23);
             unitType_Cmb.TabIndex = 36;
-            unitType_Cmb.DropDown += unitType_Cmb_DropDown;
+            unitType_Cmb.DropDown += this.unitType_Cmb_DropDown;
             // 
             // location_Rdb
             // 
@@ -144,7 +144,7 @@
             location_Rdb.TabStop = true;
             location_Rdb.Text = "LOCATION";
             location_Rdb.UseVisualStyleBackColor = true;
-            location_Rdb.CheckedChanged += location_Rdb_CheckedChanged;
+            location_Rdb.CheckedChanged += this.location_Rdb_CheckedChanged;
             // 
             // reservedHardwares_RadBtn
             // 
@@ -179,7 +179,7 @@
             transfer_Btn.TabIndex = 29;
             transfer_Btn.Text = "TRANSFER";
             transfer_Btn.UseVisualStyleBackColor = true;
-            transfer_Btn.Click += transfer_Btn_Click;
+            transfer_Btn.Click += this.transfer_Btn_Click;
             // 
             // borrow_RadBtn
             // 
@@ -239,8 +239,8 @@
             serialNo_Cmb.Name = "serialNo_Cmb";
             serialNo_Cmb.Size = new Size(715, 23);
             serialNo_Cmb.TabIndex = 24;
-            serialNo_Cmb.KeyPress += serialNo_Cmb_KeyPress;
-            serialNo_Cmb.MouseEnter += serialNo_Cmb_MouseEnter;
+            serialNo_Cmb.KeyPress += this.serialNo_Cmb_KeyPress;
+            serialNo_Cmb.MouseEnter += this.serialNo_Cmb_MouseEnter;
             // 
             // label7
             // 
@@ -326,7 +326,7 @@
             locationType2_Cmb.Name = "locationType2_Cmb";
             locationType2_Cmb.Size = new Size(209, 23);
             locationType2_Cmb.TabIndex = 38;
-            locationType2_Cmb.DropDown += locationType2_Cmb_DropDown;
+            locationType2_Cmb.DropDown += this.locationType2_Cmb_DropDown;
             // 
             // unitType2_Cmb
             // 
@@ -340,7 +340,7 @@
             unitType2_Cmb.Name = "unitType2_Cmb";
             unitType2_Cmb.Size = new Size(209, 23);
             unitType2_Cmb.TabIndex = 39;
-            unitType2_Cmb.DropDown += unitType2_Cmb_DropDown;
+            unitType2_Cmb.DropDown += this.unitType2_Cmb_DropDown;
             // 
             // location2_Rdb
             // 
@@ -354,7 +354,7 @@
             location2_Rdb.TabStop = true;
             location2_Rdb.Text = "LOCATION";
             location2_Rdb.UseVisualStyleBackColor = true;
-            location2_Rdb.CheckedChanged += location2_Rdb_CheckedChanged;
+            location2_Rdb.CheckedChanged += this.location2_Rdb_CheckedChanged;
             // 
             // reservedHardwares2_RadBtn
             // 
@@ -390,7 +390,7 @@
             transfer2_Btn.TabIndex = 34;
             transfer2_Btn.Text = "TRANSFER";
             transfer2_Btn.UseVisualStyleBackColor = true;
-            transfer2_Btn.Click += transfer2_Btn_Click_1;
+            transfer2_Btn.Click += this.transfer2_Btn_Click_1;
             // 
             // remove2_RadBtn
             // 
@@ -429,7 +429,7 @@
             location_Cmb.Name = "location_Cmb";
             location_Cmb.Size = new Size(715, 23);
             location_Cmb.TabIndex = 18;
-            location_Cmb.DropDown += location_Cmb_DropDown;
+            location_Cmb.DropDown += this.location_Cmb_DropDown;
             // 
             // disposal2_RadBtn
             // 
@@ -455,7 +455,7 @@
             unit_Cmb.Name = "unit_Cmb";
             unit_Cmb.Size = new Size(715, 23);
             unit_Cmb.TabIndex = 19;
-            unit_Cmb.DropDown += unit_Cmb_DropDown;
+            unit_Cmb.DropDown += this.unit_Cmb_DropDown;
             // 
             // cleaning2_RadBtn
             // 
@@ -566,7 +566,6 @@
         private RichTextBox notes_Tb;
         private Label label5;
         private Label label8;
-        private ComboBox serialNo_Cmb;
         private RadioButton cleaning_RadBtn;
         private RadioButton repairing_RadBtn;
         private RadioButton borrow_RadBtn;
@@ -588,5 +587,6 @@
         private ComboBox locationType2_Cmb;
         private ComboBox unitType2_Cmb;
         private RadioButton location2_Rdb;
+        public ComboBox serialNo_Cmb;
     }
 }

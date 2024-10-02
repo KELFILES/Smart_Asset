@@ -397,7 +397,7 @@
             Name = "FrontPage_Final";
             Padding = new Padding(2);
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrontPage_Final";
+            Text = "FrontPage";
             Load += FrontPage_Final_Load;
             sideMenu_Panel.ResumeLayout(false);
             logout_Panel.ResumeLayout(false);

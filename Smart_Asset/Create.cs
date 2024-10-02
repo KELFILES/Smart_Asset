@@ -67,16 +67,68 @@ namespace Smart_Asset
                 // Insert the document into the database
                 await MyDbMethods.InsertDocument("SmartAssetDb", "Reserved_Hardwares", fields);
 
-                MessageBox.Show("Registered Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Clear or reset fields after registration
-                if (!autoFill_Cb.Checked) ClearText();
-                else serial_Tb.Text = string.Empty;
+
+
+
+                //CREATE QR CODE
+                // Clear the previous image from the PictureBox
+                if (qr_pictureBox.Image != null)
+                {
+                    qr_pictureBox.Image.Dispose(); // Dispose of the previous image to free resources
+                    qr_pictureBox.Image = null; // Remove the reference to the old image
+                }
+
+                // The text or URL to encode in the QR code (directly using a string here)
+                string textToEncode = serial_Tb.Text; // Replace with the URL or text to encode
+
+                // Get the dimensions from the PictureBox
+                int width = qr_pictureBox.Width;
+                int height = qr_pictureBox.Height;
+
+                try
+                {
+                    // Generate the QR code and display it in the PictureBox asynchronously
+                    var qrCodeImage = await MyOtherMethods.GenerateQRCodeAsync(textToEncode, width, height);
+
+                    if (qrCodeImage != null)
+                    {
+                        qr_pictureBox.Image = qrCodeImage; // Assign the generated QR code image to the PictureBox
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to generate the QR code.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors that may occur
+                    MessageBox.Show($"Error: {ex.Message}", "QR Code Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
+
+
+            MessageBox.Show("Registered Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Clear or reset fields after registration
+                if (!autoFill_Cb.Checked) ClearText();
+                else serial_Tb.Text = string.Empty;
+
+
+
+
+
+                
+
+
         }
 
         private bool IsFieldEmpty(string field, string fieldName)
@@ -203,6 +255,43 @@ namespace Smart_Asset
             qm.Location = new Point(this.Location.X + this.Width / 4, this.Location.Y + this.Height / 4); // Center relative to Form1
 
             qm.Show();
+        }
+
+        private async void generate_Btn_Click(object sender, EventArgs e)
+        {
+            // Clear the previous image from the PictureBox
+            if (qr_pictureBox.Image != null)
+            {
+                qr_pictureBox.Image.Dispose(); // Dispose of the previous image to free resources
+                qr_pictureBox.Image = null; // Remove the reference to the old image
+            }
+
+            // The text or URL to encode in the QR code (directly using a string here)
+            string textToEncode = serial2_Tb.Text; // Replace with the URL or text to encode
+
+            // Get the dimensions from the PictureBox
+            int width = qr_pictureBox.Width;
+            int height = qr_pictureBox.Height;
+
+            try
+            {
+                // Generate the QR code and display it in the PictureBox asynchronously
+                var qrCodeImage = await MyOtherMethods.GenerateQRCodeAsync(textToEncode, width, height);
+
+                if (qrCodeImage != null)
+                {
+                    qr_pictureBox.Image = qrCodeImage; // Assign the generated QR code image to the PictureBox
+                }
+                else
+                {
+                    MessageBox.Show("Failed to generate the QR code.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that may occur
+                MessageBox.Show($"Error: {ex.Message}", "QR Code Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -145,6 +145,7 @@
             generate_Btn.TabIndex = 25;
             generate_Btn.Text = "Generate";
             generate_Btn.UseVisualStyleBackColor = true;
+            generate_Btn.Click += generate_Btn_Click;
             // 
             // label10
             // 
@@ -165,6 +166,7 @@
             qr_pictureBox.Location = new Point(876, 60);
             qr_pictureBox.Name = "qr_pictureBox";
             qr_pictureBox.Size = new Size(250, 250);
+            qr_pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             qr_pictureBox.TabIndex = 24;
             qr_pictureBox.TabStop = false;
             // 
@@ -218,6 +220,7 @@
             // 
             // clear2_Btn
             // 
+            clear2_Btn.Anchor = AnchorStyles.Top;
             clear2_Btn.Location = new Point(1284, 49);
             clear2_Btn.Name = "clear2_Btn";
             clear2_Btn.Size = new Size(75, 23);
@@ -228,6 +231,7 @@
             // 
             // autoFill_Cb
             // 
+            autoFill_Cb.Anchor = AnchorStyles.Top;
             autoFill_Cb.AutoSize = true;
             autoFill_Cb.Location = new Point(1284, 24);
             autoFill_Cb.Name = "autoFill_Cb";

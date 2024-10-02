@@ -118,6 +118,7 @@
             // 
             // serial2_Cb
             // 
+            serial2_Cb.Anchor = AnchorStyles.None;
             serial2_Cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             serial2_Cb.AutoCompleteSource = AutoCompleteSource.ListItems;
             serial2_Cb.FormattingEnabled = true;

@@ -160,7 +160,6 @@ namespace Smart_Asset
         }
 
 
-
         public static async Task LoadDatabase_SerialNo(string dbName, string collName, System.Windows.Forms.ComboBox comboBox, string val)
         {
             try

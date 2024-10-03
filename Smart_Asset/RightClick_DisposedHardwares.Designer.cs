@@ -1,6 +1,6 @@
 ﻿namespace Smart_Asset
 {
-    partial class RightClick_RepairingHardwares
+    partial class RightClick_DisposedHardwares
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,7 @@
             refresh_Btn.UseVisualStyleBackColor = true;
             refresh_Btn.Click += refresh_Btn_Click;
             // 
-            // RightClick_RepairingHardwares
+            // RightClick_DisposedHardwares
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -60,9 +60,9 @@
             Controls.Add(refresh_Btn);
             Controls.Add(markAs_Btn);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "RightClick_RepairingHardwares";
+            Name = "RightClick_DisposedHardwares";
             Text = "RightClick";
-            Load += RightClick_RepairingHardwares_Load;
+            Load += RightClick_DisposedHardwares_Load;
             ResumeLayout(false);
         }
 

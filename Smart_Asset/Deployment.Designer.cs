@@ -109,6 +109,7 @@
             // 
             serialNo_Cmb.Anchor = AnchorStyles.Top;
             serialNo_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            serialNo_Cmb.CharacterCasing = CharacterCasing.Upper;
             serialNo_Cmb.Location = new Point(608, 111);
             serialNo_Cmb.Name = "serialNo_Cmb";
             serialNo_Cmb.Size = new Size(271, 23);

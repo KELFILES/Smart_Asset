@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dispose_Window.cs" />
+    <Compile Update="Repair_Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Deployment_Unit_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -25,6 +29,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Deployment_Location_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RightClick_DisposedHardwares.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RightClick_ShowAllHardwares.cs">
@@ -43,6 +50,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Images\add_Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\add_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\arrow_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -74,6 +87,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\dashboard_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\edit_Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\edit_Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\frontPage_Logo.ico">

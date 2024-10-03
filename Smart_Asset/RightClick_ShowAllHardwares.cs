@@ -25,6 +25,8 @@ namespace Smart_Asset
         Update up = new Update();
         Transfer tf = new Transfer();
         Borrow br = new Borrow();
+        Repair_Window rp = new Repair_Window();
+        Dispose_Window dp = new Dispose_Window();
 
         // Constructor that accepts Form1 (Read) as a parameter
         public RightClick_ShowAllHardwares(Read form1)
@@ -55,8 +57,43 @@ namespace Smart_Asset
 
         private void refresh_Btn_Click(object sender, EventArgs e)
         {
-            // Call the method to refresh the DataGridView in Form1
-            form1.Refresh_ShowAllHardwares();
+            switch (getClickBtnInfo)
+            {
+                case "showAllHardwares":
+                    form1.Refresh_ShowAllHardwares();
+                    break;
+                case "archieve":
+                    form1.Refresh_Archieve();
+                    break;
+                case "reservedHardwares":
+                    form1.Refresh_ReservedHardwares();
+                    break;
+                case "show1":
+                    form1.Refresh_show1();
+                    break;
+                case "show2":
+                    form1.Refresh_show2();
+                    break;
+                case "repairingHardwares":
+                    form1.Refresh_RepairingHarwares();
+                    break;
+                case "disposedHardwares":
+                    form1.Refresh_DisposedHardwares();
+                    break;
+                case "cleaningHardwares":
+                    form1.Refresh_Cleaning();
+                    break;
+                case "borrowedHardwares":
+                    form1.Refresh_Borrowed();
+                    break;
+            }
+
+            /* if (getClickBtnInfo.Equals("showAllHardwares"))
+            {
+                // Call the method to refresh the DataGridView in Form1
+                form1.Refresh_ShowAllHardwares();
+            }
+            */
 
             // Close the form after the operation is complete
             this.Close();
@@ -156,10 +193,11 @@ namespace Smart_Asset
 
                 // Log the selected SerialNos for debugging purposes
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
-                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData, "Repairing");
 
-                // Call the method to refresh the DataGridView in Form1
-                form1.Refresh_ShowAllHardwares();
+                rp.FormBorderStyle = FormBorderStyle.FixedSingle;
+                rp.StartPosition = FormStartPosition.CenterScreen;
+                rp.serialNo_Cmb.Text = string.Join(", ", getData);
+                rp.Show();
             }
             catch (Exception ex)
             {
@@ -181,10 +219,11 @@ namespace Smart_Asset
 
                 // Log the selected SerialNos for debugging purposes
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
-                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData, "Disposed_Hardwares");
 
-                // Call the method to refresh the DataGridView in Form1
-                form1.Refresh_ShowAllHardwares();
+                dp.FormBorderStyle = FormBorderStyle.FixedSingle;
+                dp.StartPosition = FormStartPosition.CenterScreen;
+                dp.serialNo_Cmb.Text = string.Join(", ", getData);
+                dp.Show();
             }
             catch (Exception ex)
             {

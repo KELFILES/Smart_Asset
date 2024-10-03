@@ -20,6 +20,11 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        private void RightClick_RepairingHardwares_Load(object sender, EventArgs e)
+        {
+            markAs_Btn.Text = "Mark As Repaired";
+        }
+
 
         private Read form1;  // Reference to Form1 (Read)
 
@@ -64,9 +69,6 @@ namespace Smart_Asset
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
                 await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData);
 
-                FrontPage_Final pfp = new FrontPage_Final();
-                pfp.Show();
-
                 // Reactivate the main form after the MessageBox
                 Application.OpenForms[0].Activate();
 
@@ -91,7 +93,6 @@ namespace Smart_Asset
             this.Close();
             this.Dispose();
         }
-
 
 
     }

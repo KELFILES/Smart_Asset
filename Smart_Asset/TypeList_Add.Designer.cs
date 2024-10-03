@@ -76,6 +76,7 @@
             // item_Tb
             // 
             item_Tb.Anchor = AnchorStyles.Top;
+            item_Tb.CharacterCasing = CharacterCasing.Upper;
             item_Tb.Font = new Font("Segoe UI", 13F);
             item_Tb.Location = new Point(130, 358);
             item_Tb.Multiline = true;

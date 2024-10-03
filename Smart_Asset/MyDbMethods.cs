@@ -272,13 +272,16 @@ namespace Smart_Asset
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
 
+            // Split the input serial numbers by commas and remove any extra spaces
+            var serialNoList = serialNoVal.Split(',').Select(s => s.Trim()).ToList();
+
             // Get all collection names
             var collectionNames = database.ListCollectionNames().ToList();
 
             var allDocuments = new List<Read_Model>();
 
-            // Define the filter
-            var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNoVal);
+            // Define the filter for multiple serial numbers
+            var filter = Builders<BsonDocument>.Filter.In("SerialNo", serialNoList);
 
             // Iterate over each collection and apply the filter
             foreach (var collectionName in collectionNames)
@@ -565,10 +568,10 @@ namespace Smart_Asset
                 // Retrieve all documents from the collection
                 var documents = collection.Find(new BsonDocument()).ToList();
 
-                var allDocuments = new List<Read_ModelWithNotes_ForBorrow>();
+                var allDocuments = new List<Read_Model_ForBorrow>();
 
                 // Map BsonDocument results to Read_ModelWithNotes objects
-                var myList = documents.Select(doc => new Read_ModelWithNotes_ForBorrow
+                var myList = documents.Select(doc => new Read_Model_ForBorrow
                 {
                     Id = doc["_id"].ToString(),
                     Type = doc.GetValue("Type", "").AsString,
@@ -988,6 +991,9 @@ namespace Smart_Asset
                 return;
             }
 
+            var successfulTransfers = new List<string>();
+            var failedTransfers = new List<string>();
+
             foreach (var serialNo in serialNoList)
             {
                 BsonDocument document = null;
@@ -1025,7 +1031,7 @@ namespace Smart_Asset
                 {
                     try
                     {
-                        // Step 2: Conditionally add the "OldLocation" field to the document
+                        // Conditionally add the "OldLocation" field to the document
                         var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
 
                         if (!exemptLocations.Contains(sourceCollectionName))
@@ -1036,39 +1042,48 @@ namespace Smart_Asset
                         // Add the "Notes" field to the document
                         document["Notes"] = notes;
 
-                        // Step 3: Insert the document into the transfer collection
+                        // Insert the document into the transfer collection
                         var transferCollection = database.GetCollection<BsonDocument>(transferColl);
                         await transferCollection.InsertOneAsync(document);
 
-                        // Step 4: Delete the document from the source collection
+                        // Delete the document from the source collection
                         var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
                         var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
                         await sourceCollection.DeleteOneAsync(filter);
 
-                        MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Add to success list
+                        successfulTransfers.Add(serialNo);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"An error occurred during the transfer of SerialNo '{serialNo}': {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        failedTransfers.Add($"{serialNo}: {ex.Message}");
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    failedTransfers.Add($"{serialNo}: Not found in any collection.");
                 }
+            }
+
+            // Display success message once
+            if (successfulTransfers.Count > 0)
+            {
+                MessageBox.Show($"Documents with the following SerialNos were successfully transferred:\n{string.Join(", ", successfulTransfers)}", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // Display failure message once
+            if (failedTransfers.Count > 0)
+            {
+                MessageBox.Show($"The following SerialNos failed to transfer:\n{string.Join("\n", failedTransfers)}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-
-
-        //OVERLOADING METHOD
         public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNos)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
             var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
 
-            // Split the input by commas and trim spaces
             var serialNoList = serialNos.Split(',')
                                         .Select(s => s.Trim())
                                         .Where(s => !string.IsNullOrEmpty(s))
@@ -1079,6 +1094,9 @@ namespace Smart_Asset
                 MessageBox.Show("Please provide valid SerialNo(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            var successfulTransfers = new List<string>();
+            var failedTransfers = new List<string>();
 
             foreach (var serialNo in serialNoList)
             {
@@ -1117,37 +1135,43 @@ namespace Smart_Asset
                 {
                     try
                     {
-                        // Step 3: Insert the document into the transfer collection
                         var transferCollection = database.GetCollection<BsonDocument>(transferColl);
                         await transferCollection.InsertOneAsync(document);
 
-                        // Step 4: Delete the document from the source collection
                         var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
                         var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
                         await sourceCollection.DeleteOneAsync(filter);
 
-                        MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        successfulTransfers.Add(serialNo);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"An error occurred during the transfer of SerialNo '{serialNo}': {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        failedTransfers.Add($"{serialNo}: {ex.Message}");
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    failedTransfers.Add($"{serialNo}: Not found in any collection.");
                 }
+            }
+
+            if (successfulTransfers.Count > 0)
+            {
+                MessageBox.Show($"Documents with the following SerialNos were successfully transferred:\n{string.Join(", ", successfulTransfers)}", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            if (failedTransfers.Count > 0)
+            {
+                MessageBox.Show($"The following SerialNos failed to transfer:\n{string.Join("\n", failedTransfers)}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        //OVERLOADING METHOD FOR BORROW HARDWARE
         public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNos, string notes, string name, string returnDate)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
             var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
 
-            // Split the input by commas and trim spaces
             var serialNoList = serialNos.Split(',')
                                         .Select(s => s.Trim())
                                         .Where(s => !string.IsNullOrEmpty(s))
@@ -1158,6 +1182,9 @@ namespace Smart_Asset
                 MessageBox.Show("Please provide valid SerialNo(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            var successfulTransfers = new List<string>();
+            var failedTransfers = new List<string>();
 
             foreach (var serialNo in serialNoList)
             {
@@ -1196,39 +1223,39 @@ namespace Smart_Asset
                 {
                     try
                     {
-                        // Step 2: Conditionally add the "OldLocation" field to the document
-                        var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
-
-                        if (!exemptLocations.Contains(sourceCollectionName))
-                        {
-                            document["OldLocation"] = sourceCollectionName;
-                        }
-
-                        // Add the "Notes" field to the document
+                        document["OldLocation"] = sourceCollectionName;
                         document["Notes"] = notes;
                         document["Name"] = name;
                         document["ReturnDate"] = returnDate;
 
-                        // Step 3: Insert the document into the transfer collection
                         var transferCollection = database.GetCollection<BsonDocument>(transferColl);
                         await transferCollection.InsertOneAsync(document);
 
-                        // Step 4: Delete the document from the source collection
                         var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
                         var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
                         await sourceCollection.DeleteOneAsync(filter);
 
-                        MessageBox.Show($"Document with SerialNo '{serialNo}' successfully transferred from '{sourceCollectionName}' to '{transferColl}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        successfulTransfers.Add(serialNo);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"An error occurred during the transfer of SerialNo '{serialNo}': {ex.Message}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        failedTransfers.Add($"{serialNo}: {ex.Message}");
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Document with SerialNo '{serialNo}' not found in any collection.", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    failedTransfers.Add($"{serialNo}: Not found in any collection.");
                 }
+            }
+
+            if (successfulTransfers.Count > 0)
+            {
+                MessageBox.Show($"Documents with the following SerialNos were successfully transferred:\n{string.Join(", ", successfulTransfers)}", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            if (failedTransfers.Count > 0)
+            {
+                MessageBox.Show($"The following SerialNos failed to transfer:\n{string.Join("\n", failedTransfers)}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

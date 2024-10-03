@@ -39,7 +39,7 @@
             panel2 = new Panel();
             edit_Btn = new Button();
             title_Lbl = new Label();
-            button2 = new Button();
+            add_Btn = new Button();
             panel7 = new Panel();
             borrowedHardwares_Btn = new Button();
             cleaningHardwares_Btn = new Button();
@@ -167,7 +167,7 @@
             panel2.BackColor = SystemColors.WindowFrame;
             panel2.Controls.Add(edit_Btn);
             panel2.Controls.Add(title_Lbl);
-            panel2.Controls.Add(button2);
+            panel2.Controls.Add(add_Btn);
             panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
@@ -181,14 +181,13 @@
             // edit_Btn
             // 
             edit_Btn.Anchor = AnchorStyles.Top;
-            edit_Btn.BackColor = Color.LightGray;
+            edit_Btn.BackColor = Color.DimGray;
             edit_Btn.FlatStyle = FlatStyle.Flat;
             edit_Btn.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            edit_Btn.Location = new Point(362, 142);
+            edit_Btn.Location = new Point(377, 139);
             edit_Btn.Name = "edit_Btn";
-            edit_Btn.Size = new Size(28, 27);
+            edit_Btn.Size = new Size(37, 32);
             edit_Btn.TabIndex = 33;
-            edit_Btn.Text = "E";
             edit_Btn.UseVisualStyleBackColor = false;
             edit_Btn.Click += edit_Btn_Click;
             // 
@@ -206,19 +205,18 @@
             title_Lbl.TabIndex = 32;
             title_Lbl.Text = "ASSET LISTS";
             // 
-            // button2
+            // add_Btn
             // 
-            button2.Anchor = AnchorStyles.Top;
-            button2.BackColor = Color.LightGray;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(328, 142);
-            button2.Name = "button2";
-            button2.Size = new Size(28, 27);
-            button2.TabIndex = 31;
-            button2.Text = "+";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            add_Btn.Anchor = AnchorStyles.Top;
+            add_Btn.BackColor = Color.DimGray;
+            add_Btn.FlatStyle = FlatStyle.Flat;
+            add_Btn.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            add_Btn.Location = new Point(334, 139);
+            add_Btn.Name = "add_Btn";
+            add_Btn.Size = new Size(37, 32);
+            add_Btn.TabIndex = 31;
+            add_Btn.UseVisualStyleBackColor = false;
+            add_Btn.Click += button2_Click;
             // 
             // panel7
             // 
@@ -536,7 +534,7 @@
         private Button showAllHardwares_Btn;
         private Button borrowedHardwares_Btn;
         private Button archieve_Btn;
-        private Button button2;
+        private Button add_Btn;
         private Label title_Lbl;
         private Button edit_Btn;
         public Button repairingHardwares_Btn;

@@ -63,6 +63,16 @@ namespace Smart_Asset.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_Icon {
+            get {
+                object obj = ResourceManager.GetObject("add_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dashboard_Icon {
             get {
                 object obj = ResourceManager.GetObject("dashboard_Icon", resourceCulture);
@@ -96,6 +106,16 @@ namespace Smart_Asset.Properties {
         internal static System.Drawing.Bitmap dashboardIcon_Image {
             get {
                 object obj = ResourceManager.GetObject("dashboardIcon_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_Icon {
+            get {
+                object obj = ResourceManager.GetObject("edit_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

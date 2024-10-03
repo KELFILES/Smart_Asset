@@ -32,7 +32,6 @@
             bgBox = new Panel();
             label1 = new Label();
             submit_Btn = new Button();
-            manageUsers_Lbl = new Label();
             forgotPassword_Lbl = new Label();
             password_Tb = new TextBox();
             username_Tb = new TextBox();
@@ -55,7 +54,6 @@
             // 
             bgBox.Controls.Add(label1);
             bgBox.Controls.Add(submit_Btn);
-            bgBox.Controls.Add(manageUsers_Lbl);
             bgBox.Controls.Add(forgotPassword_Lbl);
             bgBox.Controls.Add(password_Tb);
             bgBox.Controls.Add(username_Tb);
@@ -73,7 +71,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(109, 49);
+            label1.Location = new Point(95, 73);
             label1.Name = "label1";
             label1.Size = new Size(224, 21);
             label1.TabIndex = 33;
@@ -89,7 +87,7 @@
             submit_Btn.FlatStyle = FlatStyle.Flat;
             submit_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             submit_Btn.ForeColor = Color.White;
-            submit_Btn.Location = new Point(174, 182);
+            submit_Btn.Location = new Point(160, 206);
             submit_Btn.Name = "submit_Btn";
             submit_Btn.Size = new Size(98, 36);
             submit_Btn.TabIndex = 32;
@@ -97,21 +95,6 @@
             submit_Btn.UseVisualStyleBackColor = false;
             submit_Btn.Click += submit_Btn_Click_1;
             submit_Btn.KeyDown += Login_KeyDown;
-            // 
-            // manageUsers_Lbl
-            // 
-            manageUsers_Lbl.Anchor = AnchorStyles.None;
-            manageUsers_Lbl.AutoSize = true;
-            manageUsers_Lbl.BackColor = Color.Transparent;
-            manageUsers_Lbl.Cursor = Cursors.Hand;
-            manageUsers_Lbl.FlatStyle = FlatStyle.Flat;
-            manageUsers_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
-            manageUsers_Lbl.ForeColor = Color.White;
-            manageUsers_Lbl.Location = new Point(183, 263);
-            manageUsers_Lbl.Name = "manageUsers_Lbl";
-            manageUsers_Lbl.Size = new Size(81, 15);
-            manageUsers_Lbl.TabIndex = 27;
-            manageUsers_Lbl.Text = "Manage Users";
             // 
             // forgotPassword_Lbl
             // 
@@ -122,7 +105,7 @@
             forgotPassword_Lbl.FlatStyle = FlatStyle.Flat;
             forgotPassword_Lbl.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
             forgotPassword_Lbl.ForeColor = Color.White;
-            forgotPassword_Lbl.Location = new Point(174, 233);
+            forgotPassword_Lbl.Location = new Point(160, 257);
             forgotPassword_Lbl.Name = "forgotPassword_Lbl";
             forgotPassword_Lbl.Size = new Size(101, 15);
             forgotPassword_Lbl.TabIndex = 31;
@@ -132,7 +115,7 @@
             // 
             password_Tb.Anchor = AnchorStyles.None;
             password_Tb.Cursor = Cursors.IBeam;
-            password_Tb.Location = new Point(129, 140);
+            password_Tb.Location = new Point(115, 164);
             password_Tb.Name = "password_Tb";
             password_Tb.PasswordChar = '*';
             password_Tb.Size = new Size(224, 23);
@@ -143,7 +126,7 @@
             // 
             username_Tb.Anchor = AnchorStyles.None;
             username_Tb.Cursor = Cursors.IBeam;
-            username_Tb.Location = new Point(129, 104);
+            username_Tb.Location = new Point(115, 128);
             username_Tb.Name = "username_Tb";
             username_Tb.Size = new Size(224, 23);
             username_Tb.TabIndex = 29;
@@ -155,7 +138,7 @@
             password_Lbl.AutoSize = true;
             password_Lbl.BackColor = Color.Transparent;
             password_Lbl.ForeColor = Color.White;
-            password_Lbl.Location = new Point(60, 143);
+            password_Lbl.Location = new Point(46, 167);
             password_Lbl.Name = "password_Lbl";
             password_Lbl.Size = new Size(60, 15);
             password_Lbl.TabIndex = 28;
@@ -167,7 +150,7 @@
             username_Lbl.AutoSize = true;
             username_Lbl.BackColor = Color.Transparent;
             username_Lbl.ForeColor = Color.White;
-            username_Lbl.Location = new Point(60, 107);
+            username_Lbl.Location = new Point(46, 131);
             username_Lbl.Name = "username_Lbl";
             username_Lbl.Size = new Size(63, 15);
             username_Lbl.TabIndex = 27;
@@ -194,14 +177,13 @@
         #endregion
 
         private DoubleBufferedPanel panel1;
-        private Label manageUsers_Lbl;
         private Panel bgBox;
         private Button submit_Btn;
-        private Label forgotPassword_Lbl;
         private TextBox password_Tb;
         private TextBox username_Tb;
         private Label password_Lbl;
         private Label username_Lbl;
         private Label label1;
+        private Label forgotPassword_Lbl;
     }
 }

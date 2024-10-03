@@ -30,7 +30,7 @@
         {
             refresh_Btn = new Button();
             edit_Btn = new Button();
-            archieve_Btn = new Button();
+            archive_Btn = new Button();
             add_Btn = new Button();
             Transfer = new Button();
             reserve_Btn = new Button();
@@ -60,15 +60,15 @@
             edit_Btn.UseVisualStyleBackColor = true;
             edit_Btn.Click += edit_Btn_Click;
             // 
-            // archieve_Btn
+            // archive_Btn
             // 
-            archieve_Btn.Location = new Point(12, 345);
-            archieve_Btn.Name = "archieve_Btn";
-            archieve_Btn.Size = new Size(172, 31);
-            archieve_Btn.TabIndex = 3;
-            archieve_Btn.Text = "Archieve";
-            archieve_Btn.UseVisualStyleBackColor = true;
-            archieve_Btn.Click += archieve_Btn_Click;
+            archive_Btn.Location = new Point(12, 345);
+            archive_Btn.Name = "archive_Btn";
+            archive_Btn.Size = new Size(172, 31);
+            archive_Btn.TabIndex = 3;
+            archive_Btn.Text = "Archive";
+            archive_Btn.UseVisualStyleBackColor = true;
+            archive_Btn.Click += archieve_Btn_Click;
             // 
             // add_Btn
             // 
@@ -152,7 +152,7 @@
             Controls.Add(reserve_Btn);
             Controls.Add(Transfer);
             Controls.Add(add_Btn);
-            Controls.Add(archieve_Btn);
+            Controls.Add(archive_Btn);
             Controls.Add(edit_Btn);
             Controls.Add(refresh_Btn);
             FormBorderStyle = FormBorderStyle.None;
@@ -164,7 +164,7 @@
         #endregion
         public Button refresh_Btn;
         public Button edit_Btn;
-        public Button archieve_Btn;
+        public Button archive_Btn;
         public Button add_Btn;
         public Button Transfer;
         public Button reserve_Btn;

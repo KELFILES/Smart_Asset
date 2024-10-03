@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel3 = new Panel();
             exportTo_Cb = new ComboBox();
             export_Btn = new Button();
@@ -46,7 +46,7 @@
             disposedHardwares_Btn = new Button();
             repairingHardwares_Btn = new Button();
             panel5 = new Panel();
-            archieve_Btn = new Button();
+            archive_Btn = new Button();
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
             panel4 = new Panel();
@@ -119,23 +119,23 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.Black;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.ColumnHeadersHeight = 35;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.Black;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.GridColor = Color.White;
             dataGridView1.Location = new Point(8, 235);
@@ -303,7 +303,7 @@
             // 
             panel5.Anchor = AnchorStyles.Top;
             panel5.BackColor = Color.Gray;
-            panel5.Controls.Add(archieve_Btn);
+            panel5.Controls.Add(archive_Btn);
             panel5.Controls.Add(showAllHardwares_Btn);
             panel5.Controls.Add(reservedHardwares_Btn);
             panel5.Location = new Point(328, 13);
@@ -311,22 +311,22 @@
             panel5.Size = new Size(265, 120);
             panel5.TabIndex = 22;
             // 
-            // archieve_Btn
+            // archive_Btn
             // 
-            archieve_Btn.Anchor = AnchorStyles.Top;
-            archieve_Btn.BackColor = Color.LightGray;
-            archieve_Btn.FlatAppearance.BorderColor = Color.White;
-            archieve_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            archieve_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
-            archieve_Btn.FlatStyle = FlatStyle.Flat;
-            archieve_Btn.Font = new Font("Times New Roman", 9.75F);
-            archieve_Btn.Location = new Point(7, 63);
-            archieve_Btn.Name = "archieve_Btn";
-            archieve_Btn.Size = new Size(121, 48);
-            archieve_Btn.TabIndex = 13;
-            archieve_Btn.Text = "ARCHIEVED";
-            archieve_Btn.UseVisualStyleBackColor = false;
-            archieve_Btn.Click += recycleBin_Btn_Click;
+            archive_Btn.Anchor = AnchorStyles.Top;
+            archive_Btn.BackColor = Color.LightGray;
+            archive_Btn.FlatAppearance.BorderColor = Color.White;
+            archive_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            archive_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
+            archive_Btn.FlatStyle = FlatStyle.Flat;
+            archive_Btn.Font = new Font("Times New Roman", 9.75F);
+            archive_Btn.Location = new Point(7, 63);
+            archive_Btn.Name = "archive_Btn";
+            archive_Btn.Size = new Size(121, 48);
+            archive_Btn.TabIndex = 13;
+            archive_Btn.Text = "ARCHIVED";
+            archive_Btn.UseVisualStyleBackColor = false;
+            archive_Btn.Click += recycleBin_Btn_Click;
             // 
             // showAllHardwares_Btn
             // 
@@ -533,7 +533,7 @@
         private Button cleaningHardwares_Btn;
         private Button showAllHardwares_Btn;
         private Button borrowedHardwares_Btn;
-        private Button archieve_Btn;
+        private Button archive_Btn;
         private Button add_Btn;
         private Label title_Lbl;
         private Button edit_Btn;

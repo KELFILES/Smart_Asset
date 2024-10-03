@@ -200,7 +200,14 @@ namespace Smart_Asset
 
                     // Show confirmation
                     MessageBox.Show("Borrowed Hardwares HAS BEEN REFRESHED");
+                }
+                else if (selectedButton == "archive")
+                {
+                    // Ensure the correct button is selected before invoking the action
+                    archive_Btn.PerformClick();
 
+                    // Show confirmation
+                    MessageBox.Show("Borrowed Hardwares HAS BEEN REFRESHED");
                 }
             }
 
@@ -341,7 +348,7 @@ namespace Smart_Asset
             }
 
             if (selectedButton.Equals("disposedHardwares") ||
-                selectedButton.Equals("archieve") ||
+                selectedButton.Equals("archive") ||
                 selectedButton.Equals("cleaningHardwares") ||
                 selectedButton.Equals("borrowedHardwares"))
             {
@@ -520,13 +527,13 @@ namespace Smart_Asset
 
         private void recycleBin_Btn_Click(object sender, EventArgs e)
         {
-            selectedButton = "archieve";
-            title_Lbl.Text = "ARCHIEVE LISTS";
+            selectedButton = "archive";
+            title_Lbl.Text = "ARCHIVE LISTS";
 
             SendButtonInfo();
 
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archieve");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archieve");
+            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archive");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Archive");
         }
 
         // Method to refresh the DataGridView
@@ -537,9 +544,9 @@ namespace Smart_Asset
             showAllHardwares_Btn.PerformClick();
         }
 
-        public void Refresh_Archieve()
+        public void Refresh_Archive()
         {
-            archieve_Btn.PerformClick();
+            archive_Btn.PerformClick();
         }
 
         public void Refresh_ReservedHardwares()

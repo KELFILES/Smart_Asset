@@ -62,8 +62,8 @@ namespace Smart_Asset
                 case "showAllHardwares":
                     form1.Refresh_ShowAllHardwares();
                     break;
-                case "archieve":
-                    form1.Refresh_Archieve();
+                case "archive":
+                    form1.Refresh_Archive();
                     break;
                 case "reservedHardwares":
                     form1.Refresh_ReservedHardwares();
@@ -143,7 +143,7 @@ namespace Smart_Asset
 
                 // Log the selected SerialNos for debugging purposes
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
-                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData, "Archieve");
+                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData, "Archive");
 
                 // Call the method to refresh the DataGridView in Form1
                 form1.Refresh_ShowAllHardwares();

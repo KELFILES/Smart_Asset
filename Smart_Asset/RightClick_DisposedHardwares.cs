@@ -42,7 +42,7 @@ namespace Smart_Asset
                 // Call the method to refresh the DataGridView in Form1
                 markAs_Btn.Text = "Mark As Returned";
             }
-            else if (getClickBtnInfo.Equals("archieve"))
+            else if (getClickBtnInfo.Equals("archive"))
             {
                 // Call the method to refresh the DataGridView in Form1
                 markAs_Btn.Text = "Retrieve";
@@ -119,11 +119,11 @@ namespace Smart_Asset
                     markAs_Btn.Text = "Mark As Returned";
                     form1.Refresh_Borrowed();
                 }
-                else if (getClickBtnInfo.Equals("archieve"))
+                else if (getClickBtnInfo.Equals("archive"))
                 {
                     // Call the method to refresh the DataGridView in Form1
                     markAs_Btn.Text = "Retrieve";
-                    form1.Refresh_Borrowed();
+                    form1.Refresh_Archive();
                 }
 
             }
@@ -138,10 +138,10 @@ namespace Smart_Asset
 
         private void refresh_Btn_Click(object sender, EventArgs e)
         {
-            if (getClickBtnInfo.Equals("archieve"))
+            if (getClickBtnInfo.Equals("archive"))
             {
                 // Call the method to refresh the DataGridView in Form1
-                form1.Refresh_Archieve();
+                form1.Refresh_Archive();
             }
             else if (getClickBtnInfo.Equals("disposedHardwares"))
             {

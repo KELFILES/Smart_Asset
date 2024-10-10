@@ -28,6 +28,7 @@ namespace Smart_Asset
         Repair_Window rp = new Repair_Window();
         Dispose_Window dp = new Dispose_Window();
 
+
         // Constructor that accepts Form1 (Read) as a parameter
         public RightClick_ShowAllHardwares(Read form1)
         {
@@ -57,6 +58,8 @@ namespace Smart_Asset
 
         private void refresh_Btn_Click(object sender, EventArgs e)
         {
+            Read rd = new Read();
+
             switch (getClickBtnInfo)
             {
                 case "showAllHardwares":

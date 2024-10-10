@@ -317,7 +317,8 @@ namespace Smart_Asset
             if (allDocuments.Count == 0)
             {
                 // Display "not found" message
-                MessageBox.Show("No records found matching the criteria.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 // Optionally, clear the DataGridView or set it to an empty state
                 dataGridViewName.DataSource = null;
                 return;
@@ -419,8 +420,6 @@ namespace Smart_Asset
 
             if (allDocuments.Count == 0)
             {
-                // Display "not found" message
-                MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Optionally, clear the DataGridView or set it to an empty state
                 dataGridViewName.DataSource = null;
                 return;
@@ -542,8 +541,6 @@ namespace Smart_Asset
 
             if (allDocuments.Count == 0)
             {
-                // Display "not found" message
-                MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridViewName.DataSource = null;
                 return;
             }
@@ -606,8 +603,6 @@ namespace Smart_Asset
 
                 if (allDocuments.Count == 0)
                 {
-                    // Display "not found" message
-                    MessageBox.Show("No records found in the specified collection.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridViewName.DataSource = null;
                     return;
                 }

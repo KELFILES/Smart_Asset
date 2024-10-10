@@ -33,11 +33,8 @@ namespace Smart_Asset
 
         private void Read_Load(object sender, EventArgs e)
         {
-            add_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "add_Icon.png"));
-            add_Btn.Padding = new Padding(0, 0, 0, 0);
 
-            edit_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "edit_Icon.png"));
-            edit_Btn.Padding = new Padding(0, 0, 0, 0);
+
         }
 
         private void Read_Resize(object sender, EventArgs e)
@@ -122,7 +119,6 @@ namespace Smart_Asset
 
             SendButtonInfo();
 
-            title_Lbl.Text = "RESERVED HARDWARE LISTS";
             MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Reserved_Hardwares");
         }
@@ -236,7 +232,6 @@ namespace Smart_Asset
 
             SendButtonInfo();
 
-            title_Lbl.Text = "DISPOSED HARDWARE LISTS";
             MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Disposed_Hardwares");
         }
@@ -247,7 +242,6 @@ namespace Smart_Asset
 
             SendButtonInfo();
 
-            title_Lbl.Text = "REPAIRING HARDWARE LISTS";
             MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Repairing");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
         }
@@ -258,7 +252,6 @@ namespace Smart_Asset
 
             SendButtonInfo();
 
-            title_Lbl.Text = "CLEANING HARDWARE LISTS";
             MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Cleaning");
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Cleaning");
         }
@@ -270,7 +263,6 @@ namespace Smart_Asset
             SendButtonInfo();
 
             await MyDbMethods.ReadAllInDatabase("SmartAssetDb", dataGridView1);
-            title_Lbl.Text = "ASSET LISTS";
         }
 
         private void borrowedHardwares_Btn_Click(object sender, EventArgs e)
@@ -279,7 +271,6 @@ namespace Smart_Asset
 
             SendButtonInfo();
 
-            title_Lbl.Text = "BORROWED HARDWARE LISTS";
             MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Borrowed_Hardwares", true);
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
         }
@@ -512,23 +503,10 @@ namespace Smart_Asset
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Create cr = new Create();
-            cr.Show();
-        }
-
-        private void edit_Btn_Click(object sender, EventArgs e)
-        {
-            EditPage ep = new EditPage();
-            ep.Show();
-        }
-
 
         private void recycleBin_Btn_Click(object sender, EventArgs e)
         {
             selectedButton = "archive";
-            title_Lbl.Text = "ARCHIVE LISTS";
 
             SendButtonInfo();
 
@@ -541,48 +519,102 @@ namespace Smart_Asset
 
         public void Refresh_ShowAllHardwares()
         {
+            panel5.Show();
+            panel7.Show();
+
             showAllHardwares_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_Archive()
         {
+            panel5.Show();
+            panel7.Show();
+
             archive_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_ReservedHardwares()
         {
+            panel5.Show();
+            panel7.Show();
+
             reservedHardwares_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_show1()
         {
-            show1_Btn.PerformClick();
+            panel5.Show();
+            panel7.Show();
+
+            search1_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_show2()
         {
-            show2_Btn.PerformClick();
+            panel5.Show();
+            panel7.Show();
+
+            search2_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
 
         public void Refresh_RepairingHarwares()
         {
+            panel5.Show();
+            panel7.Show();
+
             repairingHardwares_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_DisposedHardwares()
         {
+            panel5.Show();
+            panel7.Show();
+
             disposedHardwares_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_Cleaning()
         {
+            panel5.Show();
+            panel7.Show();
+
             cleaningHardwares_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
         public void Refresh_Borrowed()
         {
+            panel5.Show();
+            panel7.Show();
+
             borrowedHardwares_Btn.PerformClick();
+
+            panel5.Hide();
+            panel7.Hide();
         }
 
     }

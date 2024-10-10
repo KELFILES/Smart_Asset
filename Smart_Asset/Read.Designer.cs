@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel3 = new Panel();
             exportTo_Cb = new ComboBox();
             export_Btn = new Button();
@@ -37,9 +37,6 @@
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             panel2 = new Panel();
-            edit_Btn = new Button();
-            title_Lbl = new Label();
-            add_Btn = new Button();
             panel7 = new Panel();
             borrowedHardwares_Btn = new Button();
             cleaningHardwares_Btn = new Button();
@@ -50,13 +47,13 @@
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
             panel4 = new Panel();
-            show1_Btn = new Button();
+            search1_Btn = new Button();
             serialNo_Cmb = new ComboBox();
             label4 = new Label();
             panel6 = new Panel();
             location_Cmb = new ComboBox();
             label1 = new Label();
-            show2_Btn = new Button();
+            search2_Btn = new Button();
             unit_Cmb = new ComboBox();
             label2 = new Label();
             panel3.SuspendLayout();
@@ -119,30 +116,30 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.Black;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 35;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Black;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.GridColor = Color.White;
-            dataGridView1.Location = new Point(8, 235);
+            dataGridView1.Location = new Point(8, 197);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 50;
-            dataGridView1.Size = new Size(1904, 733);
+            dataGridView1.Size = new Size(1904, 771);
             dataGridView1.TabIndex = 4;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
@@ -165,9 +162,6 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = SystemColors.WindowFrame;
-            panel2.Controls.Add(edit_Btn);
-            panel2.Controls.Add(title_Lbl);
-            panel2.Controls.Add(add_Btn);
             panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
@@ -175,60 +169,20 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(8, 55);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1904, 180);
+            panel2.Size = new Size(1904, 142);
             panel2.TabIndex = 8;
-            // 
-            // edit_Btn
-            // 
-            edit_Btn.Anchor = AnchorStyles.Top;
-            edit_Btn.BackColor = Color.DimGray;
-            edit_Btn.FlatStyle = FlatStyle.Flat;
-            edit_Btn.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            edit_Btn.Location = new Point(377, 139);
-            edit_Btn.Name = "edit_Btn";
-            edit_Btn.Size = new Size(37, 32);
-            edit_Btn.TabIndex = 33;
-            edit_Btn.UseVisualStyleBackColor = false;
-            edit_Btn.Click += edit_Btn_Click;
-            // 
-            // title_Lbl
-            // 
-            title_Lbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            title_Lbl.AutoSize = true;
-            title_Lbl.BackColor = Color.Gray;
-            title_Lbl.FlatStyle = FlatStyle.Flat;
-            title_Lbl.Font = new Font("Trebuchet MS", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            title_Lbl.ForeColor = Color.White;
-            title_Lbl.Location = new Point(718, 138);
-            title_Lbl.Name = "title_Lbl";
-            title_Lbl.Size = new Size(159, 35);
-            title_Lbl.TabIndex = 32;
-            title_Lbl.Text = "ASSET LISTS";
-            // 
-            // add_Btn
-            // 
-            add_Btn.Anchor = AnchorStyles.Top;
-            add_Btn.BackColor = Color.DimGray;
-            add_Btn.FlatStyle = FlatStyle.Flat;
-            add_Btn.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            add_Btn.Location = new Point(334, 139);
-            add_Btn.Name = "add_Btn";
-            add_Btn.Size = new Size(37, 32);
-            add_Btn.TabIndex = 31;
-            add_Btn.UseVisualStyleBackColor = false;
-            add_Btn.Click += button2_Click;
             // 
             // panel7
             // 
             panel7.Anchor = AnchorStyles.Top;
-            panel7.BackColor = Color.Gray;
+            panel7.BackColor = SystemColors.WindowFrame;
             panel7.Controls.Add(borrowedHardwares_Btn);
             panel7.Controls.Add(cleaningHardwares_Btn);
             panel7.Controls.Add(disposedHardwares_Btn);
             panel7.Controls.Add(repairingHardwares_Btn);
-            panel7.Location = new Point(1311, 13);
+            panel7.Location = new Point(1890, 13);
             panel7.Name = "panel7";
-            panel7.Size = new Size(265, 120);
+            panel7.Size = new Size(10, 10);
             panel7.TabIndex = 23;
             // 
             // borrowedHardwares_Btn
@@ -240,7 +194,7 @@
             borrowedHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             borrowedHardwares_Btn.FlatStyle = FlatStyle.Flat;
             borrowedHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
-            borrowedHardwares_Btn.Location = new Point(134, 63);
+            borrowedHardwares_Btn.Location = new Point(7, 63);
             borrowedHardwares_Btn.Name = "borrowedHardwares_Btn";
             borrowedHardwares_Btn.Size = new Size(121, 48);
             borrowedHardwares_Btn.TabIndex = 12;
@@ -257,7 +211,7 @@
             cleaningHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             cleaningHardwares_Btn.FlatStyle = FlatStyle.Flat;
             cleaningHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
-            cleaningHardwares_Btn.Location = new Point(134, 9);
+            cleaningHardwares_Btn.Location = new Point(7, 9);
             cleaningHardwares_Btn.Name = "cleaningHardwares_Btn";
             cleaningHardwares_Btn.Size = new Size(121, 48);
             cleaningHardwares_Btn.TabIndex = 11;
@@ -274,7 +228,7 @@
             disposedHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             disposedHardwares_Btn.FlatStyle = FlatStyle.Flat;
             disposedHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
-            disposedHardwares_Btn.Location = new Point(7, 63);
+            disposedHardwares_Btn.Location = new Point(-120, 63);
             disposedHardwares_Btn.Name = "disposedHardwares_Btn";
             disposedHardwares_Btn.Size = new Size(121, 48);
             disposedHardwares_Btn.TabIndex = 11;
@@ -291,7 +245,7 @@
             repairingHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             repairingHardwares_Btn.FlatStyle = FlatStyle.Flat;
             repairingHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
-            repairingHardwares_Btn.Location = new Point(7, 9);
+            repairingHardwares_Btn.Location = new Point(-120, 9);
             repairingHardwares_Btn.Name = "repairingHardwares_Btn";
             repairingHardwares_Btn.Size = new Size(121, 48);
             repairingHardwares_Btn.TabIndex = 10;
@@ -302,13 +256,13 @@
             // panel5
             // 
             panel5.Anchor = AnchorStyles.Top;
-            panel5.BackColor = Color.Gray;
+            panel5.BackColor = SystemColors.WindowFrame;
             panel5.Controls.Add(archive_Btn);
             panel5.Controls.Add(showAllHardwares_Btn);
             panel5.Controls.Add(reservedHardwares_Btn);
-            panel5.Location = new Point(328, 13);
+            panel5.Location = new Point(13, 13);
             panel5.Name = "panel5";
-            panel5.Size = new Size(265, 120);
+            panel5.Size = new Size(10, 10);
             panel5.TabIndex = 22;
             // 
             // archive_Btn
@@ -320,7 +274,7 @@
             archive_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             archive_Btn.FlatStyle = FlatStyle.Flat;
             archive_Btn.Font = new Font("Times New Roman", 9.75F);
-            archive_Btn.Location = new Point(7, 63);
+            archive_Btn.Location = new Point(-120, 63);
             archive_Btn.Name = "archive_Btn";
             archive_Btn.Size = new Size(121, 48);
             archive_Btn.TabIndex = 13;
@@ -337,7 +291,7 @@
             showAllHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             showAllHardwares_Btn.FlatStyle = FlatStyle.Flat;
             showAllHardwares_Btn.Font = new Font("Times New Roman", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showAllHardwares_Btn.Location = new Point(7, 9);
+            showAllHardwares_Btn.Location = new Point(-120, 9);
             showAllHardwares_Btn.Name = "showAllHardwares_Btn";
             showAllHardwares_Btn.Size = new Size(121, 48);
             showAllHardwares_Btn.TabIndex = 12;
@@ -354,7 +308,7 @@
             reservedHardwares_Btn.FlatAppearance.MouseOverBackColor = Color.Turquoise;
             reservedHardwares_Btn.FlatStyle = FlatStyle.Flat;
             reservedHardwares_Btn.Font = new Font("Times New Roman", 9.75F);
-            reservedHardwares_Btn.Location = new Point(134, 9);
+            reservedHardwares_Btn.Location = new Point(7, 9);
             reservedHardwares_Btn.Name = "reservedHardwares_Btn";
             reservedHardwares_Btn.Size = new Size(121, 48);
             reservedHardwares_Btn.TabIndex = 10;
@@ -366,24 +320,24 @@
             // 
             panel4.Anchor = AnchorStyles.Top;
             panel4.BackColor = Color.Gray;
-            panel4.Controls.Add(show1_Btn);
+            panel4.Controls.Add(search1_Btn);
             panel4.Controls.Add(serialNo_Cmb);
             panel4.Controls.Add(label4);
-            panel4.Location = new Point(599, 13);
+            panel4.Location = new Point(608, 13);
             panel4.Name = "panel4";
             panel4.Size = new Size(350, 120);
             panel4.TabIndex = 29;
             // 
-            // show1_Btn
+            // search1_Btn
             // 
-            show1_Btn.Anchor = AnchorStyles.Top;
-            show1_Btn.Location = new Point(157, 63);
-            show1_Btn.Name = "show1_Btn";
-            show1_Btn.Size = new Size(74, 23);
-            show1_Btn.TabIndex = 19;
-            show1_Btn.Text = "SHOW";
-            show1_Btn.UseVisualStyleBackColor = true;
-            show1_Btn.Click += show1_Btn_Click;
+            search1_Btn.Anchor = AnchorStyles.Top;
+            search1_Btn.Location = new Point(149, 63);
+            search1_Btn.Name = "search1_Btn";
+            search1_Btn.Size = new Size(88, 28);
+            search1_Btn.TabIndex = 19;
+            search1_Btn.Text = "SEARCH";
+            search1_Btn.UseVisualStyleBackColor = true;
+            search1_Btn.Click += show1_Btn_Click;
             // 
             // serialNo_Cmb
             // 
@@ -414,10 +368,10 @@
             panel6.BackColor = Color.Gray;
             panel6.Controls.Add(location_Cmb);
             panel6.Controls.Add(label1);
-            panel6.Controls.Add(show2_Btn);
+            panel6.Controls.Add(search2_Btn);
             panel6.Controls.Add(unit_Cmb);
             panel6.Controls.Add(label2);
-            panel6.Location = new Point(955, 13);
+            panel6.Location = new Point(964, 13);
             panel6.Name = "panel6";
             panel6.Size = new Size(350, 120);
             panel6.TabIndex = 30;
@@ -446,16 +400,16 @@
             label1.TabIndex = 24;
             label1.Text = "Location:";
             // 
-            // show2_Btn
+            // search2_Btn
             // 
-            show2_Btn.Anchor = AnchorStyles.Top;
-            show2_Btn.Location = new Point(174, 82);
-            show2_Btn.Name = "show2_Btn";
-            show2_Btn.Size = new Size(68, 23);
-            show2_Btn.TabIndex = 28;
-            show2_Btn.Text = "SHOW";
-            show2_Btn.UseVisualStyleBackColor = true;
-            show2_Btn.Click += Show2_Click_1;
+            search2_Btn.Anchor = AnchorStyles.Top;
+            search2_Btn.Location = new Point(177, 82);
+            search2_Btn.Name = "search2_Btn";
+            search2_Btn.Size = new Size(84, 29);
+            search2_Btn.TabIndex = 28;
+            search2_Btn.Text = "SEARCH";
+            search2_Btn.UseVisualStyleBackColor = true;
+            search2_Btn.Click += Show2_Click_1;
             // 
             // unit_Cmb
             // 
@@ -498,7 +452,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             panel7.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -515,29 +468,26 @@
         private Button export_Btn;
         private Label exportTo_Lbl;
         private Panel panel1;
-        private Button show1_Btn;
-        private Panel panel2;
+        private Button search1_Btn;
         private Label label4;
         private ComboBox serialNo_Cmb;
-        private Panel panel5;
-        private Button reservedHardwares_Btn;
         private ComboBox location_Cmb;
         private Label label1;
         private Label label2;
-        private Button show2_Btn;
+        private Button search2_Btn;
         private ComboBox unit_Cmb;
-        private Panel panel4;
-        private Panel panel6;
-        private Panel panel7;
-        private Button disposedHardwares_Btn;
-        private Button cleaningHardwares_Btn;
-        private Button showAllHardwares_Btn;
-        private Button borrowedHardwares_Btn;
-        private Button archive_Btn;
-        private Button add_Btn;
-        private Label title_Lbl;
-        private Button edit_Btn;
         public Button repairingHardwares_Btn;
         public DataGridView dataGridView1;
+        public Button reservedHardwares_Btn;
+        public Button disposedHardwares_Btn;
+        public Button cleaningHardwares_Btn;
+        public Button showAllHardwares_Btn;
+        public Button borrowedHardwares_Btn;
+        public Button archive_Btn;
+        public Panel panel5;
+        public Panel panel7;
+        public Panel panel4;
+        public Panel panel6;
+        public Panel panel2;
     }
 }

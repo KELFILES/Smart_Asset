@@ -30,6 +30,8 @@ namespace Smart_Asset
         private async void transfer_Btn_Click(object sender, EventArgs e)
         {
             await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Disposed_Hardwares", $"{serialNo_Cmb.Text}", notes_Tb.Text);
+
+            this.Dispose();
         }
 
     }

@@ -33,6 +33,8 @@ namespace Smart_Asset
         Dashboard db;
         Deployment dp;
         Swap sw;
+        RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
+
 
         // Declare a variable to store the original background color
         private Color originalBackColor;
@@ -57,17 +59,14 @@ namespace Smart_Asset
             dashboard_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
             dashboard_Btn.Padding = new Padding(10, 0, 20, 0);
 
-            asset_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
-            asset_Btn.Padding = new Padding(35, 0, 20, 0);
+            assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            assets_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            AssetHistory_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
-            AssetHistory_Btn.Padding = new Padding(35, 0, 20, 0);
+            assetHistory_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
+            assetHistory_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            AssetCategories_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
-            AssetCategories_Btn.Padding = new Padding(35, 0, 20, 0);
-
-            backupData_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
-            backupData_Btn.Padding = new Padding(35, 0, 20, 0);
+            reserved_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
+            reserved_Btn.Padding = new Padding(35, 0, 20, 0);
 
             artificialIntelligence_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 20, 0);
@@ -77,6 +76,9 @@ namespace Smart_Asset
 
             createReport_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "createReport_Icon.ico"));
             createReport_Btn.Padding = new Padding(10, 0, 20, 0);
+
+            backupData_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
+            backupData_Btn.Padding = new Padding(10, 0, 20, 0);
         }
 
         private void customizeDesign()
@@ -445,7 +447,17 @@ namespace Smart_Asset
 
         private void asset_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref rd, "ASSET");
+            sah.SendClickBtnInfo("ASSETS");
+
+            showFormSelected(ref rd, "ASSETS");
+            rd.showAllHardwares_Btn.PerformClick();
+
+            rd.panel5.Visible = false;
+            rd.panel7.Visible = false;
+
+
+
+
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
 
@@ -485,42 +497,285 @@ namespace Smart_Asset
 
         private void asset_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(asset_Btn);
+            SubButtonEnterColor(assets_Btn);
         }
 
         private void asset_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(asset_Btn);
+            SubButtonLeaveColor(assets_Btn);
         }
 
         private void AssetHistory_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(AssetHistory_Btn);
+            SubButtonEnterColor(assetHistory_Btn);
         }
 
         private void AssetHistory_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(AssetHistory_Btn);
+            SubButtonLeaveColor(assetHistory_Btn);
         }
 
         private void AssetCategories_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(AssetCategories_Btn);
+            SubButtonEnterColor(reserved_Btn);
         }
 
         private void AssetCategories_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(AssetCategories_Btn);
+            SubButtonLeaveColor(reserved_Btn);
         }
 
         private void backupData_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(backupData_Btn);
+            ButtonEnterColor(backupData_Btn);
         }
 
         private void backupData_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(backupData_Btn);
+            ButtonLeaveColor(backupData_Btn);
+        }
+
+        private void repairingHardwares_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(repairing_Btn);
+        }
+
+        private void repairingHardwares_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(repairing_Btn);
+        }
+
+        private void cleaning_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(cleaning_Btn);
+        }
+
+        private void cleaning_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(cleaning_Btn);
+        }
+
+        private void disposed_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(disposed_Btn);
+        }
+
+        private void disposed_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(disposed_Btn);
+        }
+
+        private void borrowed_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(borrowed_Btn);
+        }
+
+        private void borrowed_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(borrowed_Btn);
+        }
+
+        private void reserved_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(reserved_Btn);
+        }
+
+        private void reserved_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(reserved_Btn);
+        }
+
+        private void archived_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(archived_Btn);
+        }
+
+        private void archived_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(archived_Btn);
+        }
+
+        private void AssetHistory_Btn_MouseEnter_1(object sender, EventArgs e)
+        {
+            SubButtonEnterColor(assetHistory_Btn);
+        }
+
+        private void assetHistory_Btn_MouseLeave_1(object sender, EventArgs e)
+        {
+            SubButtonLeaveColor(assetHistory_Btn);
+        }
+
+
+
+        private void repairing_Btn_Click(object sender, EventArgs e)
+        {
+
+
+            showFormSelected(ref rd, "REPAIRING");
+
+            rd.repairingHardwares_Btn.PerformClick();
+            rd.panel5.Hide();
+            rd.panel6.Hide();
+            rd.panel7.Hide();
+
+
+            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
+            {
+                // Calculate the new X position to center panel4 in panelMain (horizontally)
+                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
+
+                // Keep the Y position unchanged
+                int yPosition = rd.panel4.Location.Y;
+
+                // Set panel4's new location
+                rd.panel4.Location = new Point(xPosition, yPosition);
+            }
+
+
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+        }
+
+        private void cleaning_Btn_Click_1(object sender, EventArgs e)
+        {
+
+
+            showFormSelected(ref rd, "CLEANING");
+
+            rd.cleaningHardwares_Btn.PerformClick();
+            rd.panel5.Hide();
+            rd.panel6.Hide();
+            rd.panel7.Hide();
+
+            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
+            {
+                // Calculate the new X position to center panel4 in panelMain (horizontally)
+                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
+
+                // Keep the Y position unchanged
+                int yPosition = rd.panel4.Location.Y;
+
+                // Set panel4's new location
+                rd.panel4.Location = new Point(xPosition, yPosition);
+            }
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+        }
+
+        private void disposed_Btn_Click_1(object sender, EventArgs e)
+        {
+            showFormSelected(ref rd, "DISPOSED");
+
+
+            rd.disposedHardwares_Btn.PerformClick();
+            rd.panel5.Hide();
+            rd.panel6.Hide();
+            rd.panel7.Hide();
+
+
+
+            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
+            {
+                // Calculate the new X position to center panel4 in panelMain (horizontally)
+                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
+
+                // Keep the Y position unchanged
+                int yPosition = rd.panel4.Location.Y;
+
+                // Set panel4's new location
+                rd.panel4.Location = new Point(xPosition, yPosition);
+            }
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+        }
+
+        private void borrowed_Btn_Click(object sender, EventArgs e)
+        {
+            showFormSelected(ref rd, "BORROWED");
+
+
+
+            rd.borrowedHardwares_Btn.PerformClick();
+            rd.panel5.Hide();
+            rd.panel6.Hide();
+            rd.panel7.Hide();
+            rd.panel5.Visible = false;
+            rd.panel6.Visible = false;
+            rd.panel7.Visible = false;
+
+            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
+            {
+                // Calculate the new X position to center panel4 in panelMain (horizontally)
+                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
+
+                // Keep the Y position unchanged
+                int yPosition = rd.panel4.Location.Y;
+
+                // Set panel4's new location
+                rd.panel4.Location = new Point(xPosition, yPosition);
+            }
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+        }
+
+        private async void reserved_Btn_Click(object sender, EventArgs e)
+        {
+            showFormSelected(ref rd, "RESERVED");
+
+            rd.reservedHardwares_Btn.PerformClick();
+
+            rd.panel5.Visible = false;
+            rd.panel6.Visible = false;
+            rd.panel7.Visible = false;
+
+
+
+            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
+            {
+                // Calculate the new X position to center panel4 in panelMain (horizontally)
+                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
+
+                // Keep the Y position unchanged
+                int yPosition = rd.panel4.Location.Y;
+
+                // Set panel4's new location
+                rd.panel4.Location = new Point(xPosition, yPosition);
+            }
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+        }
+
+        private void archived_Btn_Click(object sender, EventArgs e)
+        {
+            showFormSelected(ref rd, "ARCHIVE");
+
+            rd.archive_Btn.PerformClick();
+            rd.panel5.Hide();
+            rd.panel6.Hide();
+            rd.panel7.Hide();
+
+            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
+            {
+                // Calculate the new X position to center panel4 in panelMain (horizontally)
+                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
+
+                // Keep the Y position unchanged
+                int yPosition = rd.panel4.Location.Y;
+
+                // Set panel4's new location
+                rd.panel4.Location = new Point(xPosition, yPosition);
+            }
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
     }
+
+
+
 }

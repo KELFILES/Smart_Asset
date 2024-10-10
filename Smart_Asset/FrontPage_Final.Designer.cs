@@ -32,14 +32,19 @@
             logout_Panel = new Panel();
             logout_Btn = new Button();
             panel5 = new Panel();
+            backupData_Btn = new Button();
             createReport_Btn = new Button();
             ManageUsers_Btn = new Button();
             artificialIntelligence_Btn = new Button();
             fileMaintenance_SubMenuPanel = new Panel();
-            backupData_Btn = new Button();
-            AssetCategories_Btn = new Button();
-            AssetHistory_Btn = new Button();
-            asset_Btn = new Button();
+            assetHistory_Btn = new Button();
+            archived_Btn = new Button();
+            reserved_Btn = new Button();
+            borrowed_Btn = new Button();
+            disposed_Btn = new Button();
+            cleaning_Btn = new Button();
+            repairing_Btn = new Button();
+            assets_Btn = new Button();
             ManageAsset_Btn = new Button();
             dashboard_Btn = new Button();
             logo_Panel = new Panel();
@@ -105,6 +110,7 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(11, 8, 20);
+            panel5.Controls.Add(backupData_Btn);
             panel5.Controls.Add(createReport_Btn);
             panel5.Controls.Add(ManageUsers_Btn);
             panel5.Controls.Add(artificialIntelligence_Btn);
@@ -117,6 +123,26 @@
             panel5.Size = new Size(246, 933);
             panel5.TabIndex = 49;
             // 
+            // backupData_Btn
+            // 
+            backupData_Btn.Dock = DockStyle.Top;
+            backupData_Btn.FlatAppearance.BorderSize = 0;
+            backupData_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            backupData_Btn.FlatStyle = FlatStyle.Flat;
+            backupData_Btn.ForeColor = Color.Gainsboro;
+            backupData_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            backupData_Btn.Location = new Point(0, 547);
+            backupData_Btn.Name = "backupData_Btn";
+            backupData_Btn.Padding = new Padding(10, 0, 0, 0);
+            backupData_Btn.Size = new Size(246, 45);
+            backupData_Btn.TabIndex = 39;
+            backupData_Btn.Text = "Backup Data";
+            backupData_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            backupData_Btn.UseVisualStyleBackColor = true;
+            backupData_Btn.Click += createReport_Btn_Click_1;
+            backupData_Btn.MouseEnter += backupData_Btn_MouseEnter;
+            backupData_Btn.MouseLeave += backupData_Btn_MouseLeave;
+            // 
             // createReport_Btn
             // 
             createReport_Btn.Dock = DockStyle.Top;
@@ -125,7 +151,7 @@
             createReport_Btn.FlatStyle = FlatStyle.Flat;
             createReport_Btn.ForeColor = Color.Gainsboro;
             createReport_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            createReport_Btn.Location = new Point(0, 353);
+            createReport_Btn.Location = new Point(0, 502);
             createReport_Btn.Name = "createReport_Btn";
             createReport_Btn.Padding = new Padding(10, 0, 0, 0);
             createReport_Btn.Size = new Size(246, 45);
@@ -145,7 +171,7 @@
             ManageUsers_Btn.FlatStyle = FlatStyle.Flat;
             ManageUsers_Btn.ForeColor = Color.Gainsboro;
             ManageUsers_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            ManageUsers_Btn.Location = new Point(0, 308);
+            ManageUsers_Btn.Location = new Point(0, 457);
             ManageUsers_Btn.Name = "ManageUsers_Btn";
             ManageUsers_Btn.Padding = new Padding(10, 0, 0, 0);
             ManageUsers_Btn.Size = new Size(246, 45);
@@ -165,7 +191,7 @@
             artificialIntelligence_Btn.FlatStyle = FlatStyle.Flat;
             artificialIntelligence_Btn.ForeColor = Color.Gainsboro;
             artificialIntelligence_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            artificialIntelligence_Btn.Location = new Point(0, 263);
+            artificialIntelligence_Btn.Location = new Point(0, 412);
             artificialIntelligence_Btn.Name = "artificialIntelligence_Btn";
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
             artificialIntelligence_Btn.Size = new Size(246, 45);
@@ -180,95 +206,179 @@
             // fileMaintenance_SubMenuPanel
             // 
             fileMaintenance_SubMenuPanel.BackColor = Color.FromArgb(35, 32, 39);
-            fileMaintenance_SubMenuPanel.Controls.Add(backupData_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(AssetCategories_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(AssetHistory_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(asset_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(assetHistory_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(archived_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(reserved_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(borrowed_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(disposed_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(cleaning_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(repairing_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(assets_Btn);
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
             fileMaintenance_SubMenuPanel.Name = "fileMaintenance_SubMenuPanel";
-            fileMaintenance_SubMenuPanel.Size = new Size(246, 173);
+            fileMaintenance_SubMenuPanel.Size = new Size(246, 322);
             fileMaintenance_SubMenuPanel.TabIndex = 23;
             // 
-            // backupData_Btn
+            // assetHistory_Btn
             // 
-            backupData_Btn.Dock = DockStyle.Top;
-            backupData_Btn.FlatAppearance.BorderSize = 0;
-            backupData_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            backupData_Btn.FlatStyle = FlatStyle.Flat;
-            backupData_Btn.ForeColor = Color.Gainsboro;
-            backupData_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            backupData_Btn.Location = new Point(0, 120);
-            backupData_Btn.Name = "backupData_Btn";
-            backupData_Btn.Padding = new Padding(35, 0, 0, 0);
-            backupData_Btn.Size = new Size(246, 40);
-            backupData_Btn.TabIndex = 7;
-            backupData_Btn.Text = "Backup Data";
-            backupData_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            backupData_Btn.UseVisualStyleBackColor = true;
-            backupData_Btn.Click += backupData_Btn_Click;
-            backupData_Btn.MouseEnter += backupData_Btn_MouseEnter;
-            backupData_Btn.MouseLeave += backupData_Btn_MouseLeave;
+            assetHistory_Btn.Dock = DockStyle.Top;
+            assetHistory_Btn.FlatAppearance.BorderSize = 0;
+            assetHistory_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            assetHistory_Btn.FlatStyle = FlatStyle.Flat;
+            assetHistory_Btn.ForeColor = Color.Gainsboro;
+            assetHistory_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            assetHistory_Btn.Location = new Point(0, 280);
+            assetHistory_Btn.Name = "assetHistory_Btn";
+            assetHistory_Btn.Padding = new Padding(35, 0, 0, 0);
+            assetHistory_Btn.Size = new Size(246, 40);
+            assetHistory_Btn.TabIndex = 14;
+            assetHistory_Btn.Text = "Asset History";
+            assetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            assetHistory_Btn.UseVisualStyleBackColor = true;
+            assetHistory_Btn.Click += AssetHistory_Button_Click;
+            assetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter_1;
+            assetHistory_Btn.MouseLeave += assetHistory_Btn_MouseLeave_1;
             // 
-            // AssetCategories_Btn
+            // archived_Btn
             // 
-            AssetCategories_Btn.Dock = DockStyle.Top;
-            AssetCategories_Btn.FlatAppearance.BorderSize = 0;
-            AssetCategories_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            AssetCategories_Btn.FlatStyle = FlatStyle.Flat;
-            AssetCategories_Btn.ForeColor = Color.Gainsboro;
-            AssetCategories_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            AssetCategories_Btn.Location = new Point(0, 80);
-            AssetCategories_Btn.Name = "AssetCategories_Btn";
-            AssetCategories_Btn.Padding = new Padding(35, 0, 0, 0);
-            AssetCategories_Btn.Size = new Size(246, 40);
-            AssetCategories_Btn.TabIndex = 6;
-            AssetCategories_Btn.Text = "Asset Categories";
-            AssetCategories_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            AssetCategories_Btn.UseVisualStyleBackColor = true;
-            AssetCategories_Btn.Click += AssetCategories_Btn_Click;
-            AssetCategories_Btn.MouseEnter += AssetCategories_Btn_MouseEnter;
-            AssetCategories_Btn.MouseLeave += AssetCategories_Btn_MouseLeave;
+            archived_Btn.Dock = DockStyle.Top;
+            archived_Btn.FlatAppearance.BorderSize = 0;
+            archived_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            archived_Btn.FlatStyle = FlatStyle.Flat;
+            archived_Btn.ForeColor = Color.Gainsboro;
+            archived_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            archived_Btn.Location = new Point(0, 240);
+            archived_Btn.Name = "archived_Btn";
+            archived_Btn.Padding = new Padding(35, 0, 0, 0);
+            archived_Btn.Size = new Size(246, 40);
+            archived_Btn.TabIndex = 13;
+            archived_Btn.Text = "Archived";
+            archived_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            archived_Btn.UseVisualStyleBackColor = true;
+            archived_Btn.Click += archived_Btn_Click;
+            archived_Btn.MouseEnter += archived_Btn_MouseEnter;
+            archived_Btn.MouseLeave += archived_Btn_MouseLeave;
             // 
-            // AssetHistory_Btn
+            // reserved_Btn
             // 
-            AssetHistory_Btn.Dock = DockStyle.Top;
-            AssetHistory_Btn.FlatAppearance.BorderSize = 0;
-            AssetHistory_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            AssetHistory_Btn.FlatStyle = FlatStyle.Flat;
-            AssetHistory_Btn.ForeColor = Color.Gainsboro;
-            AssetHistory_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            AssetHistory_Btn.Location = new Point(0, 40);
-            AssetHistory_Btn.Name = "AssetHistory_Btn";
-            AssetHistory_Btn.Padding = new Padding(35, 0, 0, 0);
-            AssetHistory_Btn.Size = new Size(246, 40);
-            AssetHistory_Btn.TabIndex = 5;
-            AssetHistory_Btn.Text = "Asset History";
-            AssetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            AssetHistory_Btn.UseVisualStyleBackColor = true;
-            AssetHistory_Btn.Click += AssetHistory_Button_Click;
-            AssetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter;
-            AssetHistory_Btn.MouseLeave += AssetHistory_Btn_MouseLeave;
+            reserved_Btn.Dock = DockStyle.Top;
+            reserved_Btn.FlatAppearance.BorderSize = 0;
+            reserved_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            reserved_Btn.FlatStyle = FlatStyle.Flat;
+            reserved_Btn.ForeColor = Color.Gainsboro;
+            reserved_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            reserved_Btn.Location = new Point(0, 200);
+            reserved_Btn.Name = "reserved_Btn";
+            reserved_Btn.Padding = new Padding(35, 0, 0, 0);
+            reserved_Btn.Size = new Size(246, 40);
+            reserved_Btn.TabIndex = 12;
+            reserved_Btn.Text = "Reserved";
+            reserved_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            reserved_Btn.UseVisualStyleBackColor = true;
+            reserved_Btn.Click += reserved_Btn_Click;
+            reserved_Btn.MouseEnter += reserved_Btn_MouseEnter;
+            reserved_Btn.MouseLeave += reserved_Btn_MouseLeave;
             // 
-            // asset_Btn
+            // borrowed_Btn
             // 
-            asset_Btn.Dock = DockStyle.Top;
-            asset_Btn.FlatAppearance.BorderSize = 0;
-            asset_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            asset_Btn.FlatStyle = FlatStyle.Flat;
-            asset_Btn.ForeColor = Color.Gainsboro;
-            asset_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            asset_Btn.Location = new Point(0, 0);
-            asset_Btn.Name = "asset_Btn";
-            asset_Btn.Padding = new Padding(35, 0, 0, 0);
-            asset_Btn.Size = new Size(246, 40);
-            asset_Btn.TabIndex = 4;
-            asset_Btn.Text = "Asset";
-            asset_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            asset_Btn.UseVisualStyleBackColor = true;
-            asset_Btn.Click += asset_Btn_Click;
-            asset_Btn.MouseEnter += asset_Btn_MouseEnter;
-            asset_Btn.MouseLeave += asset_Btn_MouseLeave;
+            borrowed_Btn.Dock = DockStyle.Top;
+            borrowed_Btn.FlatAppearance.BorderSize = 0;
+            borrowed_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            borrowed_Btn.FlatStyle = FlatStyle.Flat;
+            borrowed_Btn.ForeColor = Color.Gainsboro;
+            borrowed_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            borrowed_Btn.Location = new Point(0, 160);
+            borrowed_Btn.Name = "borrowed_Btn";
+            borrowed_Btn.Padding = new Padding(35, 0, 0, 0);
+            borrowed_Btn.Size = new Size(246, 40);
+            borrowed_Btn.TabIndex = 11;
+            borrowed_Btn.Text = "Borrowed";
+            borrowed_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            borrowed_Btn.UseVisualStyleBackColor = true;
+            borrowed_Btn.Click += borrowed_Btn_Click;
+            borrowed_Btn.MouseEnter += borrowed_Btn_MouseEnter;
+            borrowed_Btn.MouseLeave += borrowed_Btn_MouseLeave;
+            // 
+            // disposed_Btn
+            // 
+            disposed_Btn.Dock = DockStyle.Top;
+            disposed_Btn.FlatAppearance.BorderSize = 0;
+            disposed_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            disposed_Btn.FlatStyle = FlatStyle.Flat;
+            disposed_Btn.ForeColor = Color.Gainsboro;
+            disposed_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            disposed_Btn.Location = new Point(0, 120);
+            disposed_Btn.Name = "disposed_Btn";
+            disposed_Btn.Padding = new Padding(35, 0, 0, 0);
+            disposed_Btn.Size = new Size(246, 40);
+            disposed_Btn.TabIndex = 10;
+            disposed_Btn.Text = "Disposed";
+            disposed_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            disposed_Btn.UseVisualStyleBackColor = true;
+            disposed_Btn.Click += disposed_Btn_Click_1;
+            disposed_Btn.MouseEnter += disposed_Btn_MouseEnter;
+            disposed_Btn.MouseLeave += disposed_Btn_MouseLeave;
+            // 
+            // cleaning_Btn
+            // 
+            cleaning_Btn.Dock = DockStyle.Top;
+            cleaning_Btn.FlatAppearance.BorderSize = 0;
+            cleaning_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            cleaning_Btn.FlatStyle = FlatStyle.Flat;
+            cleaning_Btn.ForeColor = Color.Gainsboro;
+            cleaning_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            cleaning_Btn.Location = new Point(0, 80);
+            cleaning_Btn.Name = "cleaning_Btn";
+            cleaning_Btn.Padding = new Padding(35, 0, 0, 0);
+            cleaning_Btn.Size = new Size(246, 40);
+            cleaning_Btn.TabIndex = 9;
+            cleaning_Btn.Text = "Cleaning";
+            cleaning_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            cleaning_Btn.UseVisualStyleBackColor = true;
+            cleaning_Btn.Click += cleaning_Btn_Click_1;
+            cleaning_Btn.MouseEnter += cleaning_Btn_MouseEnter;
+            cleaning_Btn.MouseLeave += cleaning_Btn_MouseLeave;
+            // 
+            // repairing_Btn
+            // 
+            repairing_Btn.Dock = DockStyle.Top;
+            repairing_Btn.FlatAppearance.BorderSize = 0;
+            repairing_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            repairing_Btn.FlatStyle = FlatStyle.Flat;
+            repairing_Btn.ForeColor = Color.Gainsboro;
+            repairing_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            repairing_Btn.Location = new Point(0, 40);
+            repairing_Btn.Name = "repairing_Btn";
+            repairing_Btn.Padding = new Padding(35, 0, 0, 0);
+            repairing_Btn.Size = new Size(246, 40);
+            repairing_Btn.TabIndex = 8;
+            repairing_Btn.Text = "Repairing";
+            repairing_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            repairing_Btn.UseVisualStyleBackColor = true;
+            repairing_Btn.Click += repairing_Btn_Click;
+            repairing_Btn.MouseEnter += repairingHardwares_Btn_MouseEnter;
+            repairing_Btn.MouseLeave += repairingHardwares_Btn_MouseLeave;
+            // 
+            // assets_Btn
+            // 
+            assets_Btn.Dock = DockStyle.Top;
+            assets_Btn.FlatAppearance.BorderSize = 0;
+            assets_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            assets_Btn.FlatStyle = FlatStyle.Flat;
+            assets_Btn.ForeColor = Color.Gainsboro;
+            assets_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            assets_Btn.Location = new Point(0, 0);
+            assets_Btn.Name = "assets_Btn";
+            assets_Btn.Padding = new Padding(35, 0, 0, 0);
+            assets_Btn.Size = new Size(246, 40);
+            assets_Btn.TabIndex = 4;
+            assets_Btn.Text = "Assets";
+            assets_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            assets_Btn.UseVisualStyleBackColor = true;
+            assets_Btn.Click += asset_Btn_Click;
+            assets_Btn.MouseEnter += asset_Btn_MouseEnter;
+            assets_Btn.MouseLeave += asset_Btn_MouseLeave;
             // 
             // ManageAsset_Btn
             // 
@@ -430,17 +540,22 @@
         private Button dashboard_Btn;
         private Button artificialIntelligence_Btn;
         private Button qmark_Btn;
-        private Button asset_Btn;
+        private Button assets_Btn;
         private Panel mainPanel;
         private PictureBox pictureBox1;
         private Panel logout_Panel;
         private Button logout_Btn;
-        private Button createReport_Btn;
         private Button ManageUsers_Btn;
-        private Button AssetHistory_Btn;
-        private Button backupData_Btn;
-        private Button AssetCategories_Btn;
         private PictureBox headerPicture_Pb;
         public Label header_Lbl;
+        private Button repairing_Btn;
+        private Button disposed_Btn;
+        private Button cleaning_Btn;
+        private Button borrowed_Btn;
+        private Button assetHistory_Btn;
+        private Button archived_Btn;
+        private Button reserved_Btn;
+        private Button backupData_Btn;
+        private Button createReport_Btn;
     }
 }

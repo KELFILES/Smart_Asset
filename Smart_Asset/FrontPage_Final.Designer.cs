@@ -393,7 +393,7 @@
             ManageAsset_Btn.Padding = new Padding(10, 0, 0, 0);
             ManageAsset_Btn.Size = new Size(246, 45);
             ManageAsset_Btn.TabIndex = 13;
-            ManageAsset_Btn.Text = "Inventory";
+            ManageAsset_Btn.Text = "Manage Asset";
             ManageAsset_Btn.TextAlign = ContentAlignment.MiddleLeft;
             ManageAsset_Btn.UseVisualStyleBackColor = true;
             ManageAsset_Btn.Click += ManageAsset_Btn_Click;

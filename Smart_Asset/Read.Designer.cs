@@ -342,7 +342,7 @@
             // serialNo_Cmb
             // 
             serialNo_Cmb.Anchor = AnchorStyles.Top;
-            serialNo_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            serialNo_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
             serialNo_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             serialNo_Cmb.FormattingEnabled = true;
             serialNo_Cmb.Location = new Point(76, 34);
@@ -379,7 +379,7 @@
             // location_Cmb
             // 
             location_Cmb.Anchor = AnchorStyles.Top;
-            location_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            location_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
             location_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             location_Cmb.FormattingEnabled = true;
@@ -414,7 +414,7 @@
             // unit_Cmb
             // 
             unit_Cmb.Anchor = AnchorStyles.Top;
-            unit_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            unit_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
             unit_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             unit_Cmb.FormattingEnabled = true;

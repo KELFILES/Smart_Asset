@@ -49,7 +49,6 @@ namespace Smart_Asset
 
         public class Read_Model
         {
-            public string Id { get; set; }
             public string Type { get; set; }
             public string Model { get; set; }
             public string SerialNo { get; set; }
@@ -64,7 +63,6 @@ namespace Smart_Asset
 
         public class Read_ModelWithNotes
         {
-            public string Id { get; set; }
             public string Type { get; set; }
             public string Model { get; set; }
             public string SerialNo { get; set; }
@@ -80,7 +78,6 @@ namespace Smart_Asset
 
         public class Read_Model_ForBorrow
         {
-            public string Id { get; set; }
             public string Type { get; set; }
             public string Model { get; set; }
             public string SerialNo { get; set; }

@@ -291,7 +291,6 @@ namespace Smart_Asset
                 // Map BsonDocument results to Read_Model objects with collection name
                 var cpuList = documents.Select(doc => new Read_Model
                 {
-                    Id = doc["_id"].ToString(),
                     Type = doc["Type"].AsString,
                     Model = doc["Model"].AsString,
                     SerialNo = doc["SerialNo"].AsString,
@@ -396,7 +395,6 @@ namespace Smart_Asset
             // Map BsonDocument results to Read_Model objects
             var cpuList = documents.Select(doc => new Read_Model
             {
-                Id = doc["_id"].ToString(),
                 Type = doc["Type"].AsString,
                 Model = doc["Model"].AsString,
                 SerialNo = doc["SerialNo"].AsString,
@@ -459,7 +457,6 @@ namespace Smart_Asset
                     // Map BsonDocument results to Read_Model objects
                     var cpuList = documents.Select(doc => new Read_Model
                     {
-                        Id = doc["_id"].ToString(),
                         Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
                         Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
                         SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
@@ -493,7 +490,6 @@ namespace Smart_Asset
                 // Map BsonDocument results to Read_Model objects
                 var cpuList = documents.Select(doc => new Read_Model
                 {
-                    Id = doc["_id"].ToString(),
                     Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
                     Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
                     SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
@@ -567,7 +563,6 @@ namespace Smart_Asset
 
                         return new Read_Model
                         {
-                            Id = doc["_id"].ToString(),
                             Type = doc.GetValue("Type", "").AsString,
                             Model = doc.GetValue("Model", "").AsString,
                             SerialNo = doc.GetValue("SerialNo", "").AsString,
@@ -617,7 +612,6 @@ namespace Smart_Asset
             // Map BsonDocument results to Read_ModelWithNotes objects
             var myList = documents.Select(doc => new Read_ModelWithNotes
             {
-                Id = doc["_id"].ToString(),
                 Type = doc.GetValue("Type", "").AsString,
                 Model = doc.GetValue("Model", "").AsString,
                 SerialNo = doc.GetValue("SerialNo", "").AsString,
@@ -673,7 +667,6 @@ namespace Smart_Asset
                 // Map BsonDocument results to Read_ModelWithNotes objects
                 var myList = documents.Select(doc => new Read_Model_ForBorrow
                 {
-                    Id = doc["_id"].ToString(),
                     Type = doc.GetValue("Type", "").AsString,
                     Model = doc.GetValue("Model", "").AsString,
                     SerialNo = doc.GetValue("SerialNo", "").AsString,
@@ -797,7 +790,6 @@ namespace Smart_Asset
 
             var allDocuments = documents.Select(doc => new Read_Model
             {
-                Id = doc["_id"].ToString(),
                 Type = doc["Type"].AsString,
                 Model = doc["Model"].AsString,
                 SerialNo = doc["SerialNo"].AsString,
@@ -856,7 +848,6 @@ namespace Smart_Asset
 
                 var cpuList = documents.Select(doc => new Read_Model
                 {
-                    Id = doc["_id"].ToString(),
                     Type = doc["Type"].AsString,
                     Model = doc["Model"].AsString,
                     SerialNo = doc["SerialNo"].AsString,

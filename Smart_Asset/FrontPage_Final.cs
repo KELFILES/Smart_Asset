@@ -65,6 +65,18 @@ namespace Smart_Asset
             repairing_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
             repairing_Btn.Padding = new Padding(35, 0, 20, 0);
 
+            cleaning_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
+            cleaning_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            disposed_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "disposed_Icon.ico"));
+            disposed_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            borrowed_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "borrowed_Icon.ico"));
+            borrowed_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            borrowed_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "archive_Icon.ico"));
+            borrowed_Btn.Padding = new Padding(35, 0, 20, 0);
+
             assetHistory_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
             assetHistory_Btn.Padding = new Padding(35, 0, 20, 0);
 

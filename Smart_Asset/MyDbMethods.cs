@@ -973,17 +973,19 @@ namespace Smart_Asset
             {
                 if (row.IsNewRow) continue;
 
-                var id = row.Cells["Id"].Value?.ToString();
-                if (string.IsNullOrEmpty(id)) continue;
+                // Assuming SerialNo is unique. If not, use other fields or a combination for a unique filter.
+                var serialNo = row.Cells["SerialNo"].Value?.ToString();
+                if (string.IsNullOrEmpty(serialNo)) continue;
 
                 var docCollectionName = row.Cells["Location"].Value?.ToString(); // Get the original collection name
                 var collection = database.GetCollection<BsonDocument>(docCollectionName); // Use the correct collection
 
-                var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+                // Use SerialNo as the filter for updating the document
+                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
                 var update = Builders<BsonDocument>.Update
                     .Set("Type", row.Cells["Type"].Value?.ToString())
                     .Set("Model", row.Cells["Model"].Value?.ToString())
-                    .Set("SerialNo", row.Cells["SerialNo"].Value?.ToString())
                     .Set("Cost", row.Cells["Cost"].Value?.ToString())
                     .Set("Supplier", row.Cells["Supplier"].Value?.ToString())
                     .Set("Warranty", row.Cells["Warranty"].Value?.ToString())

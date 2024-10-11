@@ -59,8 +59,11 @@ namespace Smart_Asset
             dashboard_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
             dashboard_Btn.Padding = new Padding(10, 0, 20, 0);
 
-            assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
             assets_Btn.Padding = new Padding(35, 0, 20, 0);
+
+            repairing_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            repairing_Btn.Padding = new Padding(35, 0, 20, 0);
 
             assetHistory_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
             assetHistory_Btn.Padding = new Padding(35, 0, 20, 0);

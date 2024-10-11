@@ -403,7 +403,7 @@
             // search2_Btn
             // 
             search2_Btn.Anchor = AnchorStyles.Top;
-            search2_Btn.Location = new Point(177, 82);
+            search2_Btn.Location = new Point(163, 82);
             search2_Btn.Name = "search2_Btn";
             search2_Btn.Size = new Size(84, 29);
             search2_Btn.TabIndex = 28;

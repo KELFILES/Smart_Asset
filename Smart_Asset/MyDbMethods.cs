@@ -429,6 +429,106 @@ namespace Smart_Asset
             dataGridViewName.DataSource = allDocuments;
         }
 
+
+
+
+        //OVERLOADED FOR N/A UNIT
+        public static void ReadLocation(string dbName, DataGridView dataGridViewName, string collectionName, bool isNA)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            var allDocuments = new List<Read_Model>();
+
+            if (isNA)
+            {
+                // Get all collection names in the database
+                var collections = database.ListCollectionNames().ToList();
+
+                // Filter the collections that contain collectionName in their names
+                var filteredCollections = collections.Where(name => name.Contains(collectionName)).ToList();
+
+                foreach (var filteredCollection in filteredCollections)
+                {
+                    // Get the collection by name
+                    var collection = database.GetCollection<BsonDocument>(filteredCollection);
+
+                    // Retrieve all documents from the collection
+                    var documents = collection.Find(new BsonDocument()).ToList();
+
+                    // Map BsonDocument results to Read_Model objects
+                    var cpuList = documents.Select(doc => new Read_Model
+                    {
+                        Id = doc["_id"].ToString(),
+                        Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                        Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                        SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                        Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
+                        Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
+                        Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+
+                        // Calculate warranty status if still valid
+                        WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                        PurchaseDate = doc["PurchaseDate"].AsString,
+
+                        // Calculate usage as years, months, and days
+                        Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+
+                        // Set the collection name as the location
+                        Location = filteredCollection
+                    }).ToList();
+
+                    allDocuments.AddRange(cpuList);
+                }
+            }
+            else
+            {
+                // Get the specified collection by name
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                // Retrieve all documents from the collection
+                var documents = collection.Find(new BsonDocument()).ToList();
+
+                // Map BsonDocument results to Read_Model objects
+                var cpuList = documents.Select(doc => new Read_Model
+                {
+                    Id = doc["_id"].ToString(),
+                    Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                    Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                    SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                    Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
+                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
+                    Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+
+                    // Calculate warranty status if still valid
+                    WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                    PurchaseDate = doc["PurchaseDate"].AsString,
+
+                    // Calculate usage as years, months, and days
+                    Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+
+                    // Set the collection name as the location
+                    Location = collectionName
+                }).ToList();
+
+                allDocuments.AddRange(cpuList);
+            }
+
+            if (allDocuments.Count == 0)
+            {
+                // Optionally, clear the DataGridView or set it to an empty state
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            // Bind the list to the DataGridView
+            dataGridViewName.DataSource = allDocuments;
+        }
+
+
+
         public static async Task ReadAllInDatabase(string dbName, DataGridView dataGridViewName)
         {
             var client = new MongoClient(DefaultConnectionString);
@@ -496,6 +596,10 @@ namespace Smart_Asset
             // Bind the list to the DataGridView
             dataGridViewName.DataSource = allDocuments;
         }
+
+
+
+
 
         public static void ReadLocationWithNotes(string dbName, DataGridView dataGridViewName, string collectionName)
         {

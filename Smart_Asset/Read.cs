@@ -133,9 +133,15 @@ namespace Smart_Asset
 
         private async void unit_Cmb_DropDown_1(object sender, EventArgs e)
         {
+            // Clear existing items and load from database
+            unit_Cmb.Items.Clear();
+
             Cursor = Cursors.WaitCursor;
             await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unit_Cmb);
             Cursor = Cursors.Arrow;
+
+            // Insert "N/A" at the first position
+            unit_Cmb.Items.Insert(0, "N/A");
         }
 
         private void serialNo_Cmb_MouseEnter(object sender, EventArgs e)
@@ -218,12 +224,27 @@ namespace Smart_Asset
 
         private void Show2_Click_1(object sender, EventArgs e)
         {
-            selectedButton = "show2";
+            if (!string.IsNullOrWhiteSpace(location_Cmb.Text) && !string.IsNullOrWhiteSpace(unit_Cmb.Text))
+            {
+                selectedButton = "show2";
 
-            SendButtonInfo();
+                SendButtonInfo();
 
-            MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+                if (unit_Cmb.Text.Equals("N/A"))
+                {
+                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
+                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
+                }
+                else
+                {
+                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+                }
+            }
+            else 
+            {
+                MessageBox.Show("SELECT LOCATION AND UNIT PROPERLY!");
+            }
         }
 
         private void disposedHardwares_Btn_Click(object sender, EventArgs e)

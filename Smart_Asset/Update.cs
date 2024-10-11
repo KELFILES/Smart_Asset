@@ -29,7 +29,14 @@ namespace Smart_Asset
 
         private void show_Btn_Click(object sender, EventArgs e)
         {
-            MyDbMethods.UpdateUsingLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+            if (!string.IsNullOrWhiteSpace(location_Cmb.Text) && !string.IsNullOrWhiteSpace(unit_Cmb.Text))
+            {
+                MyDbMethods.UpdateUsingLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+            }
+            else 
+            {
+                MessageBox.Show("SELECT LOCATION AND UNIT PROPERLY!");
+            }
         }
 
         private async void location_Cmb_DropDown(object sender, EventArgs e)

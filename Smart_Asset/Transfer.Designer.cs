@@ -254,7 +254,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 612);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Transfer";
             Text = "Transfer";
             panel1.ResumeLayout(false);
@@ -280,9 +280,9 @@
         private RadioButton disposal_RadBtn;
         private Button transfer_Btn;
         private RadioButton reserved_RadBtn;
-        private RadioButton location_Rdb;
         private ComboBox locationType_Cmb;
         private ComboBox unitType_Cmb;
         public ComboBox serialNo_Cmb;
+        public RadioButton location_Rdb;
     }
 }

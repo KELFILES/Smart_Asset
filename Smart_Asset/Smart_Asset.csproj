@@ -125,6 +125,9 @@
     <None Update="Images\questionMark_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\repairing_Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\startupLogo_Image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

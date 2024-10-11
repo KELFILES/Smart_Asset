@@ -32,6 +32,9 @@ namespace Smart_Asset
         }
 
 
+        //FIELDS
+        Transfer tf = new Transfer();
+
         private void Create_Resize(object sender, EventArgs e)
         {
 
@@ -67,11 +70,7 @@ namespace Smart_Asset
                 // Insert the document into the database
                 await MyDbMethods.InsertDocument("SmartAssetDb", "Reserved_Hardwares", fields);
 
-
-
-
-
-                //CREATE QR CODE
+                // CREATE QR CODE
                 // Clear the previous image from the PictureBox
                 if (qr_pictureBox.Image != null)
                 {
@@ -98,37 +97,35 @@ namespace Smart_Asset
                     else
                     {
                         MessageBox.Show("Failed to generate the QR code.");
+                        return;
                     }
                 }
                 catch (Exception ex)
                 {
                     // Handle any errors that may occur
                     MessageBox.Show($"Error: {ex.Message}", "QR Code Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
+                // After all operations are successful, show the MessageBox with Yes and No
+                DialogResult result = MessageBox.Show("Do you want to deploy it now?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    tf.Show();
+                    tf.StartPosition = FormStartPosition.CenterParent;
+                    tf.location_Rdb.PerformClick();
+                    tf.serialNo_Cmb.Text = serial_Tb.Text;
+                }
+                else if (result == DialogResult.No)
+                {
+                    Console.WriteLine("Don't go");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
-
-
-            MessageBox.Show("Registered Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // Clear or reset fields after registration
-            if (!autoFill_Cb.Checked) ClearText();
-            else serial_Tb.Text = string.Empty;
-
-
-
-
-
-
-
-
         }
 
         private bool IsFieldEmpty(string field, string fieldName)

@@ -633,8 +633,8 @@ namespace Smart_Asset
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-
-            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            /*
+            // CENTER SERIAL NO.
             if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
             {
                 // Calculate the new X position to center panel4 in panelMain (horizontally)
@@ -646,6 +646,12 @@ namespace Smart_Asset
                 // Set panel4's new location
                 rd.panel4.Location = new Point(xPosition, yPosition);
             }
+            */
+
+
+            rd.panel4.Anchor = AnchorStyles.Left;
+            rd.panel4.Dock = DockStyle.Left;
+            rd.panel2.Padding = new Padding(10,10,0,10);
 
 
 
@@ -663,7 +669,8 @@ namespace Smart_Asset
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            /*
+            // CENTER SERIAL NO.
             if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
             {
                 // Calculate the new X position to center panel4 in panelMain (horizontally)
@@ -675,6 +682,12 @@ namespace Smart_Asset
                 // Set panel4's new location
                 rd.panel4.Location = new Point(xPosition, yPosition);
             }
+            */
+
+
+            rd.panel4.Anchor = AnchorStyles.Left;
+            rd.panel4.Dock = DockStyle.Left;
+            rd.panel2.Padding = new Padding(10,10,0,10);
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
@@ -691,7 +704,8 @@ namespace Smart_Asset
 
 
 
-            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            /*
+            // CENTER SERIAL NO.
             if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
             {
                 // Calculate the new X position to center panel4 in panelMain (horizontally)
@@ -703,6 +717,12 @@ namespace Smart_Asset
                 // Set panel4's new location
                 rd.panel4.Location = new Point(xPosition, yPosition);
             }
+            */
+
+
+            rd.panel4.Anchor = AnchorStyles.Left;
+            rd.panel4.Dock = DockStyle.Left;
+            rd.panel2.Padding = new Padding(10,10,0,10);
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
@@ -721,7 +741,8 @@ namespace Smart_Asset
             rd.panel6.Visible = false;
             rd.panel7.Visible = false;
 
-            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            /*
+            // CENTER SERIAL NO.
             if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
             {
                 // Calculate the new X position to center panel4 in panelMain (horizontally)
@@ -733,6 +754,12 @@ namespace Smart_Asset
                 // Set panel4's new location
                 rd.panel4.Location = new Point(xPosition, yPosition);
             }
+            */
+
+
+            rd.panel4.Anchor = AnchorStyles.Left;
+            rd.panel4.Dock = DockStyle.Left;
+            rd.panel2.Padding = new Padding(10,10,0,10);
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
@@ -749,7 +776,8 @@ namespace Smart_Asset
 
 
 
-            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            /*
+            // CENTER SERIAL NO.
             if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
             {
                 // Calculate the new X position to center panel4 in panelMain (horizontally)
@@ -761,6 +789,12 @@ namespace Smart_Asset
                 // Set panel4's new location
                 rd.panel4.Location = new Point(xPosition, yPosition);
             }
+            */
+
+
+            rd.panel4.Anchor = AnchorStyles.Left;
+            rd.panel4.Dock = DockStyle.Left;
+            rd.panel2.Padding = new Padding(10,10,0,10);
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }
@@ -774,7 +808,8 @@ namespace Smart_Asset
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-            // Ensure that panel4 is smaller than panelMain, otherwise, centering won't be possible
+            /*
+            // CENTER SERIAL NO.
             if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
             {
                 // Calculate the new X position to center panel4 in panelMain (horizontally)
@@ -786,6 +821,12 @@ namespace Smart_Asset
                 // Set panel4's new location
                 rd.panel4.Location = new Point(xPosition, yPosition);
             }
+            */
+
+
+            rd.panel4.Anchor = AnchorStyles.Left;
+            rd.panel4.Dock = DockStyle.Left;
+            rd.panel2.Padding = new Padding(10,10,0,10);
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
         }

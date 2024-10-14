@@ -260,7 +260,7 @@
             panel5.Controls.Add(archive_Btn);
             panel5.Controls.Add(showAllHardwares_Btn);
             panel5.Controls.Add(reservedHardwares_Btn);
-            panel5.Location = new Point(13, 13);
+            panel5.Location = new Point(4, 3);
             panel5.Name = "panel5";
             panel5.Size = new Size(10, 10);
             panel5.TabIndex = 22;
@@ -318,12 +318,11 @@
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Top;
             panel4.BackColor = Color.Gray;
             panel4.Controls.Add(search1_Btn);
             panel4.Controls.Add(serialNo_Cmb);
             panel4.Controls.Add(label4);
-            panel4.Location = new Point(608, 13);
+            panel4.Location = new Point(11, 13);
             panel4.Name = "panel4";
             panel4.Size = new Size(350, 120);
             panel4.TabIndex = 29;
@@ -364,14 +363,13 @@
             // 
             // panel6
             // 
-            panel6.Anchor = AnchorStyles.Top;
             panel6.BackColor = Color.Gray;
             panel6.Controls.Add(location_Cmb);
             panel6.Controls.Add(label1);
             panel6.Controls.Add(search2_Btn);
             panel6.Controls.Add(unit_Cmb);
             panel6.Controls.Add(label2);
-            panel6.Location = new Point(964, 13);
+            panel6.Location = new Point(367, 12);
             panel6.Name = "panel6";
             panel6.Size = new Size(350, 120);
             panel6.TabIndex = 30;

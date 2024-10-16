@@ -62,8 +62,8 @@ namespace Smart_Asset
             assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
             assets_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            repairing_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "repairing_Icon.ico"));
-            repairing_Btn.Padding = new Padding(35, 0, 20, 0);
+            replacement_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "repairing_Icon.ico"));
+            replacement_Btn.Padding = new Padding(35, 0, 20, 0);
 
             cleaning_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
             cleaning_Btn.Padding = new Padding(35, 0, 20, 0);
@@ -552,12 +552,12 @@ namespace Smart_Asset
 
         private void repairingHardwares_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(repairing_Btn);
+            SubButtonEnterColor(replacement_Btn);
         }
 
         private void repairingHardwares_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(repairing_Btn);
+            SubButtonLeaveColor(replacement_Btn);
         }
 
         private void cleaning_Btn_MouseEnter(object sender, EventArgs e)

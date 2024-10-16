@@ -43,7 +43,7 @@
             borrowed_Btn = new Button();
             disposed_Btn = new Button();
             cleaning_Btn = new Button();
-            repairing_Btn = new Button();
+            replacement_Btn = new Button();
             assets_Btn = new Button();
             ManageAsset_Btn = new Button();
             dashboard_Btn = new Button();
@@ -212,7 +212,7 @@
             fileMaintenance_SubMenuPanel.Controls.Add(borrowed_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(disposed_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(cleaning_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(repairing_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(replacement_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(assets_Btn);
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
@@ -340,25 +340,25 @@
             cleaning_Btn.MouseEnter += cleaning_Btn_MouseEnter;
             cleaning_Btn.MouseLeave += cleaning_Btn_MouseLeave;
             // 
-            // repairing_Btn
+            // replacement_Btn
             // 
-            repairing_Btn.Dock = DockStyle.Top;
-            repairing_Btn.FlatAppearance.BorderSize = 0;
-            repairing_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            repairing_Btn.FlatStyle = FlatStyle.Flat;
-            repairing_Btn.ForeColor = Color.Gainsboro;
-            repairing_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            repairing_Btn.Location = new Point(0, 40);
-            repairing_Btn.Name = "repairing_Btn";
-            repairing_Btn.Padding = new Padding(35, 0, 0, 0);
-            repairing_Btn.Size = new Size(246, 40);
-            repairing_Btn.TabIndex = 8;
-            repairing_Btn.Text = "Repairing";
-            repairing_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            repairing_Btn.UseVisualStyleBackColor = true;
-            repairing_Btn.Click += repairing_Btn_Click;
-            repairing_Btn.MouseEnter += repairingHardwares_Btn_MouseEnter;
-            repairing_Btn.MouseLeave += repairingHardwares_Btn_MouseLeave;
+            replacement_Btn.Dock = DockStyle.Top;
+            replacement_Btn.FlatAppearance.BorderSize = 0;
+            replacement_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            replacement_Btn.FlatStyle = FlatStyle.Flat;
+            replacement_Btn.ForeColor = Color.Gainsboro;
+            replacement_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            replacement_Btn.Location = new Point(0, 40);
+            replacement_Btn.Name = "replacement_Btn";
+            replacement_Btn.Padding = new Padding(35, 0, 0, 0);
+            replacement_Btn.Size = new Size(246, 40);
+            replacement_Btn.TabIndex = 8;
+            replacement_Btn.Text = "Replacement";
+            replacement_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            replacement_Btn.UseVisualStyleBackColor = true;
+            replacement_Btn.Click += repairing_Btn_Click;
+            replacement_Btn.MouseEnter += repairingHardwares_Btn_MouseEnter;
+            replacement_Btn.MouseLeave += repairingHardwares_Btn_MouseLeave;
             // 
             // assets_Btn
             // 
@@ -548,7 +548,7 @@
         private Button ManageUsers_Btn;
         private PictureBox headerPicture_Pb;
         public Label header_Lbl;
-        private Button repairing_Btn;
+        private Button replacement_Btn;
         private Button disposed_Btn;
         private Button cleaning_Btn;
         private Button borrowed_Btn;

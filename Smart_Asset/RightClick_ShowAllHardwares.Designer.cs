@@ -33,6 +33,7 @@
             archive_Btn = new Button();
             add_Btn = new Button();
             Transfer = new Button();
+            replace_Btn = new Button();
             SuspendLayout();
             // 
             // refresh_Btn
@@ -57,7 +58,7 @@
             // 
             // archive_Btn
             // 
-            archive_Btn.Location = new Point(12, 160);
+            archive_Btn.Location = new Point(12, 197);
             archive_Btn.Name = "archive_Btn";
             archive_Btn.Size = new Size(172, 31);
             archive_Btn.TabIndex = 3;
@@ -77,7 +78,7 @@
             // 
             // Transfer
             // 
-            Transfer.Location = new Point(12, 123);
+            Transfer.Location = new Point(12, 160);
             Transfer.Name = "Transfer";
             Transfer.Size = new Size(172, 31);
             Transfer.TabIndex = 5;
@@ -85,11 +86,21 @@
             Transfer.UseVisualStyleBackColor = true;
             Transfer.Click += Transfer_Click;
             // 
+            // replace_Btn
+            // 
+            replace_Btn.Location = new Point(12, 123);
+            replace_Btn.Name = "replace_Btn";
+            replace_Btn.Size = new Size(172, 31);
+            replace_Btn.TabIndex = 6;
+            replace_Btn.Text = "Replace";
+            replace_Btn.UseVisualStyleBackColor = true;
+            // 
             // RightClick_ShowAllHardwares
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(193, 262);
+            Controls.Add(replace_Btn);
             Controls.Add(Transfer);
             Controls.Add(add_Btn);
             Controls.Add(archive_Btn);
@@ -107,5 +118,6 @@
         public Button archive_Btn;
         public Button add_Btn;
         public Button Transfer;
+        public Button replace_Btn;
     }
 }

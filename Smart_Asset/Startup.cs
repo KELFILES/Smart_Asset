@@ -8,8 +8,29 @@ namespace Smart_Asset
         public Startup()
         {
             InitializeComponent();
+
+            // Enable double buffering for the entire form
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();;
+
             MyDbMethods.TestMongoDBConnection();
         }
+
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {

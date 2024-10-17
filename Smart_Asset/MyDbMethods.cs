@@ -113,13 +113,49 @@ namespace Smart_Asset
 
         public static async Task InsertDocument(string dbName, string collName, Dictionary<string, string> fields)
         {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collName);
-            var document = new BsonDocument(fields);
+            try
+            {
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var collection = database.GetCollection<BsonDocument>(collName);
+                var document = new BsonDocument(fields);
 
-            await collection.InsertOneAsync(document);
-            Console.WriteLine("Document inserted successfully.");
+                await collection.InsertOneAsync(document);
+
+                // Show success message
+                MessageBox.Show("Document inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Show error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        //OVERLOADING METHOD WITH MESSAGEBOX PARAMETER
+        public static async Task InsertDocument(string dbName, string collName, Dictionary<string, string> fields, bool showMessage)
+        {
+            try
+            {
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var collection = database.GetCollection<BsonDocument>(collName);
+                var document = new BsonDocument(fields);
+
+                await collection.InsertOneAsync(document);
+
+                // Show success message if showMessage is true
+                if (showMessage)
+                {
+                    MessageBox.Show("Document inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Show error message regardless of showMessage
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public static async Task LoadDatabase_TypeList(string dbName, string collName, System.Windows.Forms.ComboBox comboBox)
@@ -524,6 +560,104 @@ namespace Smart_Asset
         }
 
 
+        //OVERLOADING FOR READING ONLY SPECIFIC FIELDNAME AND TYPE FIELDVALUE.
+        public static void ReadLocation(string dbName, DataGridView dataGridViewName, string collectionName, bool isNA, string typeName, string typeValue)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            var allDocuments = new List<Read_Model>();
+
+            // Create a filter to only include documents where "Type" is "CPU"
+            var filter = Builders<BsonDocument>.Filter.Eq(typeName, typeValue);
+
+            if (isNA)
+            {
+                // Get all collection names in the database
+                var collections = database.ListCollectionNames().ToList();
+
+                // Filter the collections that contain collectionName in their names
+                var filteredCollections = collections.Where(name => name.Contains(collectionName)).ToList();
+
+                foreach (var filteredCollection in filteredCollections)
+                {
+                    // Get the collection by name
+                    var collection = database.GetCollection<BsonDocument>(filteredCollection);
+
+                    // Retrieve all documents from the collection where "Type" is "CPU"
+                    var documents = collection.Find(filter).ToList();
+
+                    // Map BsonDocument results to Read_Model objects
+                    var cpuList = documents.Select(doc => new Read_Model
+                    {
+                        Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                        Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                        SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                        Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
+                        Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
+                        Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+
+                        // Calculate warranty status if still valid
+                        WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                        PurchaseDate = doc["PurchaseDate"].AsString,
+
+                        // Calculate usage as years, months, and days
+                        Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+
+                        // Set the collection name as the location
+                        Location = filteredCollection
+                    }).ToList();
+
+                    allDocuments.AddRange(cpuList);
+                }
+            }
+            else
+            {
+                // Get the specified collection by name
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                // Retrieve all documents from the collection where "Type" is "CPU"
+                var documents = collection.Find(filter).ToList();
+
+                // Map BsonDocument results to Read_Model objects
+                var cpuList = documents.Select(doc => new Read_Model
+                {
+                    Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                    Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                    SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                    Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
+                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
+                    Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+
+                    // Calculate warranty status if still valid
+                    WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                    PurchaseDate = doc["PurchaseDate"].AsString,
+
+                    // Calculate usage as years, months, and days
+                    Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
+
+                    // Set the collection name as the location
+                    Location = collectionName
+                }).ToList();
+
+                allDocuments.AddRange(cpuList);
+            }
+
+            if (allDocuments.Count == 0)
+            {
+                // Optionally, clear the DataGridView or set it to an empty state
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            // Bind the list to the DataGridView
+            dataGridViewName.DataSource = allDocuments;
+        }
+
+
+
 
         public static async Task ReadAllInDatabase(string dbName, DataGridView dataGridViewName)
         {
@@ -539,7 +673,7 @@ namespace Smart_Asset
             // Iterate over all collections, except the ones we want to exclude
             foreach (var collectionName in collectionNames.ToList())
             {
-                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List")  // Skip excluded collections
+                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List")  // Skip excluded collections
                 {
                     var collection = database.GetCollection<BsonDocument>(collectionName);
 
@@ -591,8 +725,6 @@ namespace Smart_Asset
             // Bind the list to the DataGridView
             dataGridViewName.DataSource = allDocuments;
         }
-
-
 
 
 
@@ -1674,6 +1806,36 @@ namespace Smart_Asset
                 MessageBox.Show("An unexpected error occurred.\n" + ex.Message, "Unknown Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+
+        public static async Task<bool> CheckIfCollValueExists(string dbName, string collectionName, string fieldName, string valueToCheck)
+        {
+            var client = new MongoClient(DefaultConnectionString);  // Using your provided initialization
+            var database = client.GetDatabase(dbName);
+
+            // Access the specific collection
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Build the filter to check if a document has the field with the specific value
+            var filter = Builders<BsonDocument>.Filter.Eq(fieldName, valueToCheck);
+
+            // Check if there are any matching documents
+            var matchingDocument = await collection.Find(filter).FirstOrDefaultAsync();
+
+            // If a matching document is found, return true
+            if (matchingDocument != null)
+            {
+                return true;
+            }
+
+            // If no matching document is found, return false
+            return false;
+        }
+
+
 
 
 

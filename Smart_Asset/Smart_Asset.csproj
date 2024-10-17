@@ -34,6 +34,9 @@
     <Compile Update="RightClick_DisposedHardwares.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="RightClick_Replacement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RightClick_ShowAllHardwares.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +129,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\repairing_Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\replacement_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\startupLogo_Image.png">

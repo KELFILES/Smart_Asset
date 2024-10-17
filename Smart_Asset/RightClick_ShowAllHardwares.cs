@@ -20,6 +20,17 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         //Fields
         private Read form1;  // Reference to Form1 (Read)
         Update up = new Update();
@@ -27,6 +38,7 @@ namespace Smart_Asset
         Borrow br = new Borrow();
         Repair_Window rp = new Repair_Window();
         Dispose_Window dp = new Dispose_Window();
+        Replacement rpl = new Replacement();
 
 
         // Constructor that accepts Form1 (Read) as a parameter
@@ -77,8 +89,8 @@ namespace Smart_Asset
                 case "show2":
                     form1.Refresh_show2();
                     break;
-                case "repairingHardwares":
-                    form1.Refresh_RepairingHarwares();
+                case "replacement":
+                    form1.Refresh_ReplacementHarwares();
                     break;
                 case "disposedHardwares":
                     form1.Refresh_DisposedHardwares();
@@ -86,7 +98,7 @@ namespace Smart_Asset
                 case "cleaningHardwares":
                     form1.Refresh_Cleaning();
                     break;
-                case "borrowedHardwares":
+                case "Borrowed":
                     form1.Refresh_Borrowed();
                     break;
             }
@@ -159,7 +171,7 @@ namespace Smart_Asset
             }
         }
 
-        
+
 
         private async void edit_Btn_Click(object sender, EventArgs e)
         {
@@ -206,6 +218,56 @@ namespace Smart_Asset
                 tf.StartPosition = FormStartPosition.CenterScreen;
                 tf.serialNo_Cmb.Text = string.Join(", ", getData);
                 tf.Show();
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions and display an error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private void replace_Btn_Click(object sender, EventArgs e)
+        {
+            if (getData == null || getData.Count == 0)
+            {
+                MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (getData.Count > 1)
+            {
+                MessageBox.Show("Please Select 1 Row only to Replace.", "Multiple Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Log the selected SerialNos for debugging purposes
+            Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
+
+            rpl.FormBorderStyle = FormBorderStyle.FixedSingle;
+            rpl.StartPosition = FormStartPosition.CenterScreen;
+            rpl.serialNoFrom_Cmb.Text = string.Join(", ", getData);
+            rpl.Show();
+
+
+        }
+
+        private void borrow_Btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (getData == null || getData.Count == 0)
+                {
+                    MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Log the selected SerialNos for debugging purposes
+                Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
+
+                br.FormBorderStyle = FormBorderStyle.FixedSingle;
+                br.StartPosition = FormStartPosition.CenterScreen;
+                br.serialNo_Cmb.Text = string.Join(", ", getData);
+                br.Show();
             }
             catch (Exception ex)
             {

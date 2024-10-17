@@ -18,6 +18,17 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         private void serialNo_Cmb_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
@@ -31,11 +42,7 @@ namespace Smart_Asset
         private async void transfer_Btn_Click(object sender, EventArgs e)
         {
             string selectedTransfer = string.Empty;
-            if (repairing_RadBtn.Checked)
-            {
-                selectedTransfer = "repairing";
-            }
-            else if (cleaning_RadBtn.Checked)
+            if (cleaning_RadBtn.Checked)
             {
                 selectedTransfer = "cleaning";
             }
@@ -46,6 +53,7 @@ namespace Smart_Asset
             else if (reserved_RadBtn.Checked)
             {
                 selectedTransfer = "reservedHardwares";
+                notes_Tb.Text = "";
             }
             else if (location_Rdb.Checked)
             {
@@ -55,10 +63,6 @@ namespace Smart_Asset
 
             switch (selectedTransfer)
             {
-                case "repairing":
-                    await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Repairing", $"{serialNo_Cmb.Text}", notes_Tb.Text);
-                    break;
-
                 case "cleaning":
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Cleaning", $"{serialNo_Cmb.Text}", notes_Tb.Text);
                     break;
@@ -80,8 +84,6 @@ namespace Smart_Asset
                     await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{locationType_Cmb.Text}_{unitType_Cmb.Text}", $"{serialNo_Cmb.Text}");
                     break;
             }
-
-            repairing_RadBtn.Checked = false;
             cleaning_RadBtn.Checked = false;
             disposal_RadBtn.Checked = false;
         }
@@ -142,6 +144,8 @@ namespace Smart_Asset
 
             if (location_Rdb.Checked)
             {
+                notes_Tb.Text = "NOTES NOT AVAILABLE AT LOCATION";
+
                 notes_Tb.ReadOnly = true;
                 notes_Tb.BackColor = Color.DarkGray;
             }
@@ -171,22 +175,11 @@ namespace Smart_Asset
         private void cleaning_RadBtn_CheckedChanged(object sender, EventArgs e)
         {
             notes_Tb.Text = "";
-
-            if (cleaning_RadBtn.Checked)
-            {
-                notes_Tb.ReadOnly = true;
-                notes_Tb.BackColor = Color.DarkGray;
-            }
-            else
-            {
-                notes_Tb.ReadOnly = false;
-                notes_Tb.BackColor = Color.Silver;
-            }
         }
 
         private void reserved_RadBtn_CheckedChanged(object sender, EventArgs e)
         {
-            notes_Tb.Text = "";
+            notes_Tb.Text = "NOTES NOT AVAILABLE AT RESERVED";
 
             if (reserved_RadBtn.Checked)
             {

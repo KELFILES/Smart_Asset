@@ -17,6 +17,17 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         private async void location_Cmb_DropDown(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;

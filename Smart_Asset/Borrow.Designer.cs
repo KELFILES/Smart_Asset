@@ -30,16 +30,16 @@
         {
             panel1 = new Panel();
             panel3 = new Panel();
+            returnDate_Dtp = new DateTimePicker();
+            label2 = new Label();
+            name_Tb = new TextBox();
+            label1 = new Label();
             borrow_Btn = new Button();
             serialNo_Cmb = new ComboBox();
             label7 = new Label();
             label5 = new Label();
             label8 = new Label();
             notes_Tb = new RichTextBox();
-            label1 = new Label();
-            name_Tb = new TextBox();
-            label2 = new Label();
-            returnDate_Dtp = new DateTimePicker();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -74,6 +74,42 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1176, 685);
             panel3.TabIndex = 7;
+            // 
+            // returnDate_Dtp
+            // 
+            returnDate_Dtp.Location = new Point(264, 215);
+            returnDate_Dtp.Name = "returnDate_Dtp";
+            returnDate_Dtp.Size = new Size(200, 23);
+            returnDate_Dtp.TabIndex = 33;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 14F);
+            label2.Location = new Point(143, 215);
+            label2.Name = "label2";
+            label2.Size = new Size(115, 25);
+            label2.TabIndex = 32;
+            label2.Text = "Return Date:";
+            // 
+            // name_Tb
+            // 
+            name_Tb.Location = new Point(264, 180);
+            name_Tb.Name = "name_Tb";
+            name_Tb.Size = new Size(715, 23);
+            name_Tb.TabIndex = 31;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14F);
+            label1.Location = new Point(143, 180);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 25);
+            label1.TabIndex = 30;
+            label1.Text = "Name:";
             // 
             // borrow_Btn
             // 
@@ -144,51 +180,15 @@
             notes_Tb.TabIndex = 11;
             notes_Tb.Text = "";
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14F);
-            label1.Location = new Point(143, 180);
-            label1.Name = "label1";
-            label1.Size = new Size(66, 25);
-            label1.TabIndex = 30;
-            label1.Text = "Name:";
-            // 
-            // name_Tb
-            // 
-            name_Tb.Location = new Point(264, 180);
-            name_Tb.Name = "name_Tb";
-            name_Tb.Size = new Size(715, 23);
-            name_Tb.TabIndex = 31;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top;
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14F);
-            label2.Location = new Point(143, 215);
-            label2.Name = "label2";
-            label2.Size = new Size(115, 25);
-            label2.TabIndex = 32;
-            label2.Text = "Return Date:";
-            // 
-            // returnDate_Dtp
-            // 
-            returnDate_Dtp.Location = new Point(264, 215);
-            returnDate_Dtp.Name = "returnDate_Dtp";
-            returnDate_Dtp.Size = new Size(200, 23);
-            returnDate_Dtp.TabIndex = 33;
-            // 
             // Borrow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1200, 764);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Borrow";
-            Text = "Delete";
+            Text = "Borrow";
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

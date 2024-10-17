@@ -11,28 +11,13 @@ using static System.Windows.Forms.DataFormats;
 
 namespace Smart_Asset
 {
-    public partial class RightClick_RepairingHardwares : Form
+    public partial class RightClick_Replacement : Form
     {
 
         // Parameterless constructor (still needed by the designer)
-        public RightClick_RepairingHardwares()
+        public RightClick_Replacement()
         {
             InitializeComponent();
-        }
-
-        private void RightClick_RepairingHardwares_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private Read form1;  // Reference to Form1 (Read)
-
-        // Constructor that accepts Form1 (Read) as a parameter
-        public RightClick_RepairingHardwares(Read form1)
-        {
-            InitializeComponent();
-            this.form1 = form1;
         }
 
         // Enable double buffering for the entire form
@@ -44,6 +29,21 @@ namespace Smart_Asset
                 cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
                 return cp;
             }
+        }
+
+        private void RightClick_RepairingHardwares_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private Read form1;  // Reference to Form1 (Read)
+
+        // Constructor that accepts Form1 (Read) as a parameter
+        public RightClick_Replacement(Read form1)
+        {
+            InitializeComponent();
+            this.form1 = form1;
         }
 
 
@@ -78,7 +78,7 @@ namespace Smart_Asset
 
                 // Log the selected SerialNos for debugging purposes
                 Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
-                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData);
+                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData, "Reserved_Hardwares");
 
                 // Reactivate the main form after the MessageBox
                 Application.OpenForms[0].Activate();
@@ -105,6 +105,32 @@ namespace Smart_Asset
             this.Dispose();
         }
 
+        private async void dispose_Btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (getData == null || getData.Count == 0)
+                {
+                    MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                // Log the selected SerialNos for debugging purposes
+                Console.WriteLine("Selected SerialNos: " + string.Join(", ", getData));
+                await MyDbMethods.TransferManyUsingSerialNo("SmartAssetDb", getData, "Disposed_Hardwares");
+
+                // Reactivate the main form after the MessageBox
+                Application.OpenForms[0].Activate();
+
+                // Call the method to refresh the DataGridView in Form1
+                form1.Refresh_ReplacementHarwares();
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions and display an error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
     }
 }

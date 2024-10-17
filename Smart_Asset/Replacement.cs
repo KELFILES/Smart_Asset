@@ -17,9 +17,20 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         private async void button1_Click(object sender, EventArgs e)
         {
-            await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Repairing", $"{serialNoFrom_Cmb.Text}", notes_Tb.Text);
+            await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Replacement", $"{serialNoFrom_Cmb.Text}", notes_Tb.Text);
         }
     }
 }

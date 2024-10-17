@@ -37,7 +37,6 @@
             transfer_Btn = new Button();
             disposal_RadBtn = new RadioButton();
             cleaning_RadBtn = new RadioButton();
-            repairing_RadBtn = new RadioButton();
             serialNo_Cmb = new ComboBox();
             label7 = new Label();
             label5 = new Label();
@@ -70,7 +69,6 @@
             panel3.Controls.Add(transfer_Btn);
             panel3.Controls.Add(disposal_RadBtn);
             panel3.Controls.Add(cleaning_RadBtn);
-            panel3.Controls.Add(repairing_RadBtn);
             panel3.Controls.Add(serialNo_Cmb);
             panel3.Controls.Add(label7);
             panel3.Controls.Add(label5);
@@ -128,7 +126,7 @@
             reserved_RadBtn.Anchor = AnchorStyles.Top;
             reserved_RadBtn.AutoSize = true;
             reserved_RadBtn.ForeColor = Color.White;
-            reserved_RadBtn.Location = new Point(677, 150);
+            reserved_RadBtn.Location = new Point(648, 143);
             reserved_RadBtn.Name = "reserved_RadBtn";
             reserved_RadBtn.Size = new Size(78, 19);
             reserved_RadBtn.TabIndex = 31;
@@ -153,7 +151,7 @@
             disposal_RadBtn.Anchor = AnchorStyles.Top;
             disposal_RadBtn.AutoSize = true;
             disposal_RadBtn.ForeColor = Color.White;
-            disposal_RadBtn.Location = new Point(482, 150);
+            disposal_RadBtn.Location = new Point(453, 143);
             disposal_RadBtn.Name = "disposal_RadBtn";
             disposal_RadBtn.Size = new Size(78, 19);
             disposal_RadBtn.TabIndex = 27;
@@ -166,7 +164,7 @@
             cleaning_RadBtn.Anchor = AnchorStyles.Top;
             cleaning_RadBtn.AutoSize = true;
             cleaning_RadBtn.ForeColor = Color.White;
-            cleaning_RadBtn.Location = new Point(577, 150);
+            cleaning_RadBtn.Location = new Point(548, 143);
             cleaning_RadBtn.Name = "cleaning_RadBtn";
             cleaning_RadBtn.Size = new Size(82, 19);
             cleaning_RadBtn.TabIndex = 26;
@@ -174,19 +172,6 @@
             cleaning_RadBtn.Text = "CLEANING";
             cleaning_RadBtn.UseVisualStyleBackColor = true;
             cleaning_RadBtn.CheckedChanged += cleaning_RadBtn_CheckedChanged;
-            // 
-            // repairing_RadBtn
-            // 
-            repairing_RadBtn.Anchor = AnchorStyles.Top;
-            repairing_RadBtn.AutoSize = true;
-            repairing_RadBtn.ForeColor = Color.White;
-            repairing_RadBtn.Location = new Point(381, 150);
-            repairing_RadBtn.Name = "repairing_RadBtn";
-            repairing_RadBtn.Size = new Size(82, 19);
-            repairing_RadBtn.TabIndex = 25;
-            repairing_RadBtn.TabStop = true;
-            repairing_RadBtn.Text = "REPAIRING";
-            repairing_RadBtn.UseVisualStyleBackColor = true;
             // 
             // serialNo_Cmb
             // 
@@ -276,7 +261,6 @@
         private Label label5;
         private Label label8;
         private RadioButton cleaning_RadBtn;
-        private RadioButton repairing_RadBtn;
         private RadioButton disposal_RadBtn;
         private Button transfer_Btn;
         private RadioButton reserved_RadBtn;

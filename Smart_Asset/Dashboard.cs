@@ -15,6 +15,23 @@ namespace Smart_Asset
         public Dashboard()
         {
             InitializeComponent();
+
+            // Enable double buffering for the entire form
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
+        }
+
+        // Alternatively, override CreateParams to enable double buffering
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void Dashboard_Load(object sender, EventArgs e)

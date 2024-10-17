@@ -32,6 +32,17 @@ namespace Smart_Asset
             MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Removed successfully");

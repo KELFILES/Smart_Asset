@@ -20,9 +20,20 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         private void RightClick_DisposedHardwares_Load(object sender, EventArgs e)
         {
-            if (getClickBtnInfo.Equals("repairingHardwares"))
+            if (getClickBtnInfo.Equals("replacement"))
             {
                 // Call the method to refresh the DataGridView in Form1
                 markAs_Btn.Text = "Mark As Repaired";
@@ -95,11 +106,11 @@ namespace Smart_Asset
                 // Reactivate the main form after the MessageBox
                 Application.OpenForms[0].Activate();
 
-                if (getClickBtnInfo.Equals("repairingHardwares"))
+                if (getClickBtnInfo.Equals("replacement"))
                 {
                     // Call the method to refresh the DataGridView in Form1
-                    markAs_Btn.Text = "Mark As Repaired";
-                    form1.Refresh_RepairingHarwares();
+                    markAs_Btn.Text = "Retrieve";
+                    form1.Refresh_ReplacementHarwares();
                 }
                 else if (getClickBtnInfo.Equals("disposedHardwares"))
                 {
@@ -125,7 +136,12 @@ namespace Smart_Asset
                     markAs_Btn.Text = "Retrieve";
                     form1.Refresh_Archive();
                 }
-
+                else if (getClickBtnInfo.Equals("replacement"))
+                {
+                    // Call the method to refresh the DataGridView in Form1
+                    markAs_Btn.Text = "Retrieve";
+                    form1.Refresh_ReplacementHarwares();
+                }
             }
             catch (Exception ex)
             {

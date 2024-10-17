@@ -26,6 +26,17 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         private void Create_Load(object sender, EventArgs e)
         {
 
@@ -42,90 +53,124 @@ namespace Smart_Asset
 
         private async void register_Btn_Click(object sender, EventArgs e)
         {
+
             try
             {
-                // Validate all required fields
-                if (IsFieldEmpty(type_Cmb.Text, "Type") ||
-                    IsFieldEmpty(model_Tb.Text, "Model") ||
-                    IsFieldEmpty(serial_Tb.Text, "Serial Number") ||
-                    IsFieldEmpty(cost_Tb.Text, "Cost") ||
-                    IsFieldEmpty(supplier_Tb.Text, "Supplier") ||
-                    IsFieldEmpty(purchaseDate_Dtp.Text, "Purchase Date"))
+                bool isExist = await MyDbMethods.CheckIfCollValueExists("SmartAssetDb", "Serial_List", "Serial" ,serial_Tb.Text);
+
+                if (isExist)
                 {
-                    return; // Stop execution if any field is empty
+                    MessageBox.Show("SERIAL NO. ALREADY USED!");
                 }
-
-                // Prepare the fields to be inserted
-                var fields = new Dictionary<string, string>
-        {
-            { "Type", type_Cmb.Text },
-            { "Model", model_Tb.Text },
-            { "SerialNo", serial_Tb.Text },
-            { "Cost", cost_Tb.Text },
-            { "Warranty", CalculateWarranty() },
-            { "Supplier", supplier_Tb.Text },
-            { "PurchaseDate", purchaseDate_Dtp.Text }
-        };
-
-                // Insert the document into the database
-                await MyDbMethods.InsertDocument("SmartAssetDb", "Reserved_Hardwares", fields);
-
-                // CREATE QR CODE
-                // Clear the previous image from the PictureBox
-                if (qr_pictureBox.Image != null)
+                else
                 {
-                    qr_pictureBox.Image.Dispose(); // Dispose of the previous image to free resources
-                    qr_pictureBox.Image = null; // Remove the reference to the old image
-                }
-
-                // The text or URL to encode in the QR code (directly using a string here)
-                string textToEncode = serial_Tb.Text; // Replace with the URL or text to encode
-
-                // Get the dimensions from the PictureBox
-                int width = qr_pictureBox.Width;
-                int height = qr_pictureBox.Height;
-
-                try
-                {
-                    // Generate the QR code and display it in the PictureBox asynchronously
-                    var qrCodeImage = await MyOtherMethods.GenerateQRCodeAsync(textToEncode, width, height);
-
-                    if (qrCodeImage != null)
+                    // Validate all required fields
+                    if (IsFieldEmpty(type_Cmb.Text, "Type") ||
+                        IsFieldEmpty(model_Tb.Text, "Model") ||
+                        IsFieldEmpty(serial_Tb.Text, "Serial Number") ||
+                        IsFieldEmpty(cost_Tb.Text, "Cost") ||
+                        IsFieldEmpty(supplier_Tb.Text, "Supplier") ||
+                        IsFieldEmpty(purchaseDate_Dtp.Text, "Purchase Date"))
                     {
-                        qr_pictureBox.Image = qrCodeImage; // Assign the generated QR code image to the PictureBox
+                        return; // Stop execution if any field is empty
                     }
-                    else
+
+                    // Prepare the fields to be inserted
+                    var fields = new Dictionary<string, string>
+                {
+                    { "Type", type_Cmb.Text },
+                    { "Model", model_Tb.Text },
+                    { "SerialNo", serial_Tb.Text },
+                    { "Cost", cost_Tb.Text },
+                    { "Warranty", CalculateWarranty() },
+                    { "Supplier", supplier_Tb.Text },
+                    { "PurchaseDate", purchaseDate_Dtp.Text }
+                };
+
+                    // Insert the document into the database
+                    await MyDbMethods.InsertDocument("SmartAssetDb", "Reserved_Hardwares", fields, true);
+
+                    // CREATE QR CODE
+                    // Clear the previous image from the PictureBox
+                    if (qr_pictureBox.Image != null)
                     {
-                        MessageBox.Show("Failed to generate the QR code.");
+                        qr_pictureBox.Image.Dispose(); // Dispose of the previous image to free resources
+                        qr_pictureBox.Image = null; // Remove the reference to the old image
+                    }
+
+                    // The text or URL to encode in the QR code (directly using a string here)
+                    string textToEncode = serial_Tb.Text; // Replace with the URL or text to encode
+
+                    // Get the dimensions from the PictureBox
+                    int width = qr_pictureBox.Width;
+                    int height = qr_pictureBox.Height;
+
+                    try
+                    {
+                        // Generate the QR code and display it in the PictureBox asynchronously
+                        var qrCodeImage = await MyOtherMethods.GenerateQRCodeAsync(textToEncode, width, height);
+
+                        if (qrCodeImage != null)
+                        {
+                            qr_pictureBox.Image = qrCodeImage; // Assign the generated QR code image to the PictureBox
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to generate the QR code.");
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any errors that may occur
+                        MessageBox.Show($"Error: {ex.Message}", "QR Code Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                }
-                catch (Exception ex)
-                {
-                    // Handle any errors that may occur
-                    MessageBox.Show($"Error: {ex.Message}", "QR Code Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+
+
+
+                    //ADD SERIAL TO SERIAL_LIST
+                    var serialFields = new Dictionary<string, string>
+                    {
+                        {"Serial", $"{serial_Tb.Text}"}
+                    };
+
+                    MyDbMethods.InsertDocument("SmartAssetDb", "Serial_List", serialFields, false);
+
+
+
+                    // After all operations are successful, show the MessageBox with Yes and No
+                    DialogResult result = MessageBox.Show("Do you want to deploy it now?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        tf.StartPosition = FormStartPosition.CenterScreen;
+                        tf.Show();
+                        tf.location_Rdb.PerformClick();
+                        tf.serialNo_Cmb.Text = serial_Tb.Text;
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        Console.WriteLine("Don't go");
+                    }
                 }
 
-                // After all operations are successful, show the MessageBox with Yes and No
-                DialogResult result = MessageBox.Show("Do you want to deploy it now?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    tf.Show();
-                    tf.StartPosition = FormStartPosition.CenterParent;
-                    tf.location_Rdb.PerformClick();
-                    tf.serialNo_Cmb.Text = serial_Tb.Text;
-                }
-                else if (result == DialogResult.No)
-                {
-                    Console.WriteLine("Don't go");
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
+
+
+
+
+
+
+
+
         }
 
         private bool IsFieldEmpty(string field, string fieldName)

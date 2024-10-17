@@ -34,6 +34,7 @@
             add_Btn = new Button();
             Transfer = new Button();
             replace_Btn = new Button();
+            borrow_Btn = new Button();
             SuspendLayout();
             // 
             // refresh_Btn
@@ -58,7 +59,7 @@
             // 
             // archive_Btn
             // 
-            archive_Btn.Location = new Point(12, 197);
+            archive_Btn.Location = new Point(12, 234);
             archive_Btn.Name = "archive_Btn";
             archive_Btn.Size = new Size(172, 31);
             archive_Btn.TabIndex = 3;
@@ -94,12 +95,24 @@
             replace_Btn.TabIndex = 6;
             replace_Btn.Text = "Replace";
             replace_Btn.UseVisualStyleBackColor = true;
+            replace_Btn.Click += replace_Btn_Click;
+            // 
+            // borrow_Btn
+            // 
+            borrow_Btn.Location = new Point(12, 197);
+            borrow_Btn.Name = "borrow_Btn";
+            borrow_Btn.Size = new Size(172, 31);
+            borrow_Btn.TabIndex = 7;
+            borrow_Btn.Text = "Borrow";
+            borrow_Btn.UseVisualStyleBackColor = true;
+            borrow_Btn.Click += borrow_Btn_Click;
             // 
             // RightClick_ShowAllHardwares
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(193, 262);
+            ClientSize = new Size(193, 277);
+            Controls.Add(borrow_Btn);
             Controls.Add(replace_Btn);
             Controls.Add(Transfer);
             Controls.Add(add_Btn);
@@ -119,5 +132,6 @@
         public Button add_Btn;
         public Button Transfer;
         public Button replace_Btn;
+        public Button borrow_Btn;
     }
 }

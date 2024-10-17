@@ -17,12 +17,33 @@ namespace Smart_Asset
         {
             InitializeComponent();
 
+
+            // Enable double buffering for the entire form
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
+
+
+
             // Store the original back color when the form loads
             originalBackColor = sideMenu_Panel.BackColor;
             SubOriginalBackColor = fileMaintenance_SubMenuPanel.BackColor;
 
 
             fileMaintenance_SubMenuPanel.Visible = false;
+        }
+
+
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         // Fields for forms
@@ -33,8 +54,21 @@ namespace Smart_Asset
         Dashboard db;
         Deployment dp;
         Swap sw;
-        RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
+        Borrow br = new Borrow();
 
+        public static string selectedButton = "";
+        RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
+        RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
+        RightClick_DisposedHardwares dsp = new RightClick_DisposedHardwares();
+
+        private Action _lastRefreshAction; // Action to store the last refresh operation
+
+        private void SendButtonInfo()
+        {
+            rh.SendClickBtnInfo(selectedButton);
+            sah.SendClickBtnInfo(selectedButton);
+            dsp.SendClickBtnInfo(selectedButton);
+        }
 
         // Declare a variable to store the original background color
         private Color originalBackColor;
@@ -62,7 +96,7 @@ namespace Smart_Asset
             assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
             assets_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            replacement_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "repairing_Icon.ico"));
+            replacement_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
             replacement_Btn.Padding = new Padding(35, 0, 20, 0);
 
             cleaning_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
@@ -424,12 +458,7 @@ namespace Smart_Asset
         }
 
 
-        private void AssetHistory_Button_Click(object sender, EventArgs e)
-        {
-            //showFormSelected(ref rd, "ASSET HISTORY");
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
-            MessageBox.Show("STILL ON PROGRESS!");
-        }
+
 
         private void artificialIntelligence_Btn_Click_1(object sender, EventArgs e)
         {
@@ -625,37 +654,23 @@ namespace Smart_Asset
         private void repairing_Btn_Click(object sender, EventArgs e)
         {
 
+            showFormSelected(ref rd, "REPLACEMENT");
 
-            showFormSelected(ref rd, "REPAIRING");
-
-            rd.repairingHardwares_Btn.PerformClick();
+            rd.replacement_Btn.PerformClick();
             rd.panel5.Hide();
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-            /*
-            // CENTER SERIAL NO.
-            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
-            {
-                // Calculate the new X position to center panel4 in panelMain (horizontally)
-                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
-
-                // Keep the Y position unchanged
-                int yPosition = rd.panel4.Location.Y;
-
-                // Set panel4's new location
-                rd.panel4.Location = new Point(xPosition, yPosition);
-            }
-            */
 
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10,10,0,10);
+            HideColumnIfExists("Location");
 
 
 
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
         }
 
         private void cleaning_Btn_Click_1(object sender, EventArgs e)
@@ -669,27 +684,13 @@ namespace Smart_Asset
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-            /*
-            // CENTER SERIAL NO.
-            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
-            {
-                // Calculate the new X position to center panel4 in panelMain (horizontally)
-                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
-
-                // Keep the Y position unchanged
-                int yPosition = rd.panel4.Location.Y;
-
-                // Set panel4's new location
-                rd.panel4.Location = new Point(xPosition, yPosition);
-            }
-            */
-
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10,10,0,10);
+            HideColumnIfExists("Location");
 
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
         }
 
         private void disposed_Btn_Click_1(object sender, EventArgs e)
@@ -702,36 +703,17 @@ namespace Smart_Asset
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-
-
-            /*
-            // CENTER SERIAL NO.
-            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
-            {
-                // Calculate the new X position to center panel4 in panelMain (horizontally)
-                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
-
-                // Keep the Y position unchanged
-                int yPosition = rd.panel4.Location.Y;
-
-                // Set panel4's new location
-                rd.panel4.Location = new Point(xPosition, yPosition);
-            }
-            */
-
-
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10,10,0,10);
+            HideColumnIfExists("Location");
 
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "disposed_Icon.ico"));
         }
 
         private void borrowed_Btn_Click(object sender, EventArgs e)
         {
             showFormSelected(ref rd, "BORROWED");
-
-
 
             rd.borrowedHardwares_Btn.PerformClick();
             rd.panel5.Hide();
@@ -741,27 +723,13 @@ namespace Smart_Asset
             rd.panel6.Visible = false;
             rd.panel7.Visible = false;
 
-            /*
-            // CENTER SERIAL NO.
-            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
-            {
-                // Calculate the new X position to center panel4 in panelMain (horizontally)
-                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
-
-                // Keep the Y position unchanged
-                int yPosition = rd.panel4.Location.Y;
-
-                // Set panel4's new location
-                rd.panel4.Location = new Point(xPosition, yPosition);
-            }
-            */
-
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10,10,0,10);
+            HideColumnIfExists("Location");
 
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "borrowed_Icon.ico"));
         }
 
         private async void reserved_Btn_Click(object sender, EventArgs e)
@@ -776,27 +744,12 @@ namespace Smart_Asset
 
 
 
-            /*
-            // CENTER SERIAL NO.
-            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
-            {
-                // Calculate the new X position to center panel4 in panelMain (horizontally)
-                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
-
-                // Keep the Y position unchanged
-                int yPosition = rd.panel4.Location.Y;
-
-                // Set panel4's new location
-                rd.panel4.Location = new Point(xPosition, yPosition);
-            }
-            */
-
-
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10,10,0,10);
+            HideColumnIfExists("Location");
 
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
         }
 
         private void archived_Btn_Click(object sender, EventArgs e)
@@ -808,30 +761,68 @@ namespace Smart_Asset
             rd.panel6.Hide();
             rd.panel7.Hide();
 
-            /*
-            // CENTER SERIAL NO.
-            if (rd.panel4.Width <= rd.panel2.Width && rd.panel4.Height <= rd.panel2.Height)
-            {
-                // Calculate the new X position to center panel4 in panelMain (horizontally)
-                int xPosition = (rd.panel2.Width - rd.panel4.Width) / 2;
-
-                // Keep the Y position unchanged
-                int yPosition = rd.panel4.Location.Y;
-
-                // Set panel4's new location
-                rd.panel4.Location = new Point(xPosition, yPosition);
-            }
-            */
-
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10,10,0,10);
+            HideColumnIfExists("Location");
 
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "archive_Icon.ico"));
         }
+
+
+        private void AssetHistory_Button_Click(object sender, EventArgs e)
+        {
+            //showFormSelected(ref rd, "ASSET HISTORY");
+            MessageBox.Show("STILL ON PROGRESS!");
+
+            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetHistory_Icon.ico"));
+        }
+
+
+        void HideColumnIfExists(string columnName)
+        {
+            if (rd.dataGridView1.Columns.Contains(columnName))
+            {
+                rd.dataGridView1.Columns[columnName].Visible = false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
 }

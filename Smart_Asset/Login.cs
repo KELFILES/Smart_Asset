@@ -18,8 +18,20 @@ namespace Smart_Asset
         public Login()
         {
             InitializeComponent();
+
             // Attach the Resize event handler
             this.Resize += Login_Resize;
+        }
+
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)

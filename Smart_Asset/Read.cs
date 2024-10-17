@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MongoDB.Bson;
 using static Smart_Asset.Read;
 using static System.Windows.Forms.DataFormats;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Smart_Asset
@@ -23,19 +24,55 @@ namespace Smart_Asset
         RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
         RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
         RightClick_DisposedHardwares dp = new RightClick_DisposedHardwares();
+        RightClick_Replacement rep = new RightClick_Replacement();
 
         public Read()
         {
             InitializeComponent();
+
+            // Enable double buffering for the entire form
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
+
+            //Double Buffering for DataGridView
+            EnableDoubleBuffering(dataGridView1);
         }
 
 
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
+
+
+        private void EnableDoubleBuffering(DataGridView dgv)
+        {
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null,
+                dgv,
+                new object[] { true });
+
+            dataGridView1.VirtualMode = true;
+            dataGridView1.EnableHeadersVisualStyles = false;
+        }
 
         private void Read_Load(object sender, EventArgs e)
         {
 
-
         }
+
 
         private void Read_Resize(object sender, EventArgs e)
         {
@@ -92,6 +129,7 @@ namespace Smart_Asset
             public string ReturnDate { get; set; }
             public string Notes { get; set; }
         }
+
 
         private void SendButtonInfo()
         {
@@ -163,15 +201,14 @@ namespace Smart_Asset
             // Check if the Ctrl + R key combination is pressed
             if (keyData == (Keys.Control | Keys.R) || keyData == Keys.F5)
             {
-                // Check if the selected button is "repairingHardwares"
-                if (selectedButton == "repairingHardwares")
+                if (selectedButton == "replacement")
                 {
                     // Ensure the correct button is selected before invoking the action
-                    repairingHardwares_Btn.PerformClick();
+                    replacement_Btn.PerformClick();
 
 
                     // Show confirmation
-                    MessageBox.Show("Repairing Hardwares HAS BEEN REFRESHED");
+                    MessageBox.Show("Replacement HAS BEEN REFRESHED");
 
                 }
                 else if (selectedButton == "cleaningHardwares")
@@ -180,7 +217,7 @@ namespace Smart_Asset
                     cleaningHardwares_Btn.PerformClick();
 
                     // Show confirmation
-                    MessageBox.Show("Cleaning Hardwares HAS BEEN REFRESHED");
+                    MessageBox.Show("Cleaning HAS BEEN REFRESHED");
 
                 }
                 else if (selectedButton == "disposedHardwares")
@@ -189,7 +226,7 @@ namespace Smart_Asset
                     disposedHardwares_Btn.PerformClick();
 
                     // Show confirmation
-                    MessageBox.Show("Disposed Hardwares HAS BEEN REFRESHED");
+                    MessageBox.Show("Disposed HAS BEEN REFRESHED");
 
                 }
                 else if (selectedButton == "borrowedHardwares")
@@ -198,7 +235,7 @@ namespace Smart_Asset
                     borrowedHardwares_Btn.PerformClick();
 
                     // Show confirmation
-                    MessageBox.Show("Borrowed Hardwares HAS BEEN REFRESHED");
+                    MessageBox.Show("Borrowed HAS BEEN REFRESHED");
                 }
                 else if (selectedButton == "archive")
                 {
@@ -206,7 +243,7 @@ namespace Smart_Asset
                     archive_Btn.PerformClick();
 
                     // Show confirmation
-                    MessageBox.Show("Borrowed Hardwares HAS BEEN REFRESHED");
+                    MessageBox.Show("Borrowed HAS BEEN REFRESHED");
                 }
             }
 
@@ -221,26 +258,62 @@ namespace Smart_Asset
 
         private void Show2_Click_1(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(unit_Cmb.Text) && !string.IsNullOrWhiteSpace(location_Cmb.Text))
+            {
+                unit_Cmb.Text = "N/A";
+            }
+
+            if (string.IsNullOrWhiteSpace(type_Cmb.Text) && !string.IsNullOrWhiteSpace(location_Cmb.Text))
+            {
+                type_Cmb.Text = "N/A";
+            }
+
+
             if (!string.IsNullOrWhiteSpace(location_Cmb.Text) && !string.IsNullOrWhiteSpace(unit_Cmb.Text))
             {
                 selectedButton = "show2";
 
                 SendButtonInfo();
 
-                if (unit_Cmb.Text.Equals("N/A"))
+
+
+                //GOODS
+                if (unit_Cmb.Text.Equals("N/A") && type_Cmb.Text.Equals("N/A"))
                 {
+                    //SHOW LOCATION
                     MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
                     _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
                 }
-                else
+
+                //GOODS
+                else if (type_Cmb.Text.Equals("N/A"))
                 {
+
+
+                    //SHOW LOCATION>UNIT
                     MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
                     _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+
                 }
+
+                else if (unit_Cmb.Text.Equals("N/A"))
+                {
+                    //SHOW ALL TYPE IN LOCATION
+                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
+                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
+                }
+
+                else
+                {
+                    //SHOW ALL TYPE IN LOCATION
+                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
+                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
+                }
+
             }
-            else 
+            else
             {
-                MessageBox.Show("SELECT LOCATION AND UNIT PROPERLY!");
+                MessageBox.Show("SELECT PROPERLY!");
             }
         }
 
@@ -256,12 +329,13 @@ namespace Smart_Asset
 
         public void repairingHardwares_Btn_Click(object sender, EventArgs e)
         {
-            selectedButton = "repairingHardwares";
+
+            selectedButton = "replacement";
 
             SendButtonInfo();
 
-            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Repairing");
-            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Repairing");
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Replacement");
+            _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "replacement");
         }
 
         private void cleaningHardwares_Btn_Click(object sender, EventArgs e)
@@ -289,15 +363,15 @@ namespace Smart_Asset
 
             SendButtonInfo();
 
-            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Borrowed_Hardwares", true);
+            MyDbMethods.ReadLocationWithNotes("SmartAssetDb", dataGridView1, "Borrowed", true);
             _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "Borrowed_Hardwares");
         }
 
         private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
         {
             if (selectedButton.Equals("showAllHardwares") ||
-                selectedButton.Equals("reservedHardwares")||
-                selectedButton.Equals("show1")||
+                selectedButton.Equals("reservedHardwares") ||
+                selectedButton.Equals("show1") ||
                 selectedButton.Equals("show2"))
             {
                 if (e.Button == MouseButtons.Right)
@@ -327,32 +401,32 @@ namespace Smart_Asset
                 }
             }
 
-            if (selectedButton.Equals("repairingHardwares"))
+            if (selectedButton.Equals("replacement"))
             {
                 if (e.Button == MouseButtons.Right)
                 {
                     // Dispose of the previous form if it's still open
-                    if (rh != null)
+                    if (rep != null)
                     {
-                        rh.Dispose();
-                        rh = null;
+                        rep.Dispose();
+                        rep = null;
                     }
 
                     // Always pass the current instance of Read to the RightClick form
-                    rh = new RightClick_RepairingHardwares(this);  // Pass 'this' to ensure form1 is initialized
+                    rep = new RightClick_Replacement(this);  // Pass 'this' to ensure form1 is initialized
 
                     // Convert the mouse position to screen coordinates
                     Point screenPoint = dataGridView1.PointToScreen(e.Location);
 
-                    rh.StartPosition = FormStartPosition.Manual;
-                    rh.Location = screenPoint;  // Directly set to the screen position
+                    rep.StartPosition = FormStartPosition.Manual;
+                    rep.Location = screenPoint;  // Directly set to the screen position
 
-                    rh.Deactivate += (s, ev) =>
+                    rep.Deactivate += (s, ev) =>
                     {
-                        rh.Hide();  // Just hide instead of disposing
+                        rep.Hide();  // Just hide instead of disposing
                     };
 
-                    rh.Show();
+                    rep.Show();
                 }
             }
 
@@ -431,9 +505,17 @@ namespace Smart_Asset
                         dp = new RightClick_DisposedHardwares(this); // Reinitialize rc if it was disposed
                     }
 
+                    // Check if dp is null before using it
+                    if (rep == null)
+                    {
+                        rep = new RightClick_Replacement(this); // Reinitialize rc if it was disposed
+                    }
+
+
                     rh.GetRetrievingSerial(null);
                     sah.GetRetrievingSerial(null);
                     dp.GetRetrievingSerial(null);
+                    rep.GetRetrievingSerial(null);
 
                     return;
                 }
@@ -469,10 +551,17 @@ namespace Smart_Asset
                         dp = new RightClick_DisposedHardwares(this); // Reinitialize rc if it was disposed
                     }
 
+                    // Reinitialize dp if it's null
+                    if (rep == null)
+                    {
+                        rep = new RightClick_Replacement(this); // Reinitialize rc if it was disposed
+                    }
+
                     // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
                     rh.GetRetrievingSerial(new List<string> { serialNo });
                     sah.GetRetrievingSerial(new List<string> { serialNo });
                     dp.GetRetrievingSerial(new List<string> { serialNo });
+                    rep.GetRetrievingSerial(new List<string> { serialNo });
                 }
                 else if (dataGridView1.SelectedRows.Count > 1)
                 {
@@ -490,11 +579,6 @@ namespace Smart_Asset
                         rh = new RightClick_RepairingHardwares(this); // Reinitialize rh if it was disposed
                     }
 
-                    // Pass the list of serialNos to RightClick for multiple rows
-                    rh.GetRetrievingSerial(selectedSerialNos);
-                    sah.GetRetrievingSerial(selectedSerialNos);
-                    dp.GetRetrievingSerial(selectedSerialNos);
-
                     // Reinitialize sah if it's null
                     if (sah == null)
                     {
@@ -506,10 +590,16 @@ namespace Smart_Asset
                         dp = new RightClick_DisposedHardwares(this); // Reinitialize rh if it was disposed
                     }
 
+                    if (rep == null)
+                    {
+                        rep = new RightClick_Replacement(this); // Reinitialize rc if it was disposed
+                    }
+
                     // Pass the list of serialNos to RightClick for multiple rows
                     rh.GetRetrievingSerial(selectedSerialNos);
                     sah.GetRetrievingSerial(selectedSerialNos);
                     dp.GetRetrievingSerial(selectedSerialNos);
+                    rep.GetRetrievingSerial(selectedSerialNos);
 
                 }
             }
@@ -591,12 +681,12 @@ namespace Smart_Asset
         }
 
 
-        public void Refresh_RepairingHarwares()
+        public void Refresh_ReplacementHarwares()
         {
             panel5.Show();
             panel7.Show();
 
-            repairingHardwares_Btn.PerformClick();
+            replacement_Btn.PerformClick();
 
             panel5.Hide();
             panel7.Hide();
@@ -635,5 +725,19 @@ namespace Smart_Asset
             panel7.Hide();
         }
 
+        private async void type_Cmb_DropDown(object sender, EventArgs e)
+        {
+            // Clear existing items and load from database
+            type_Cmb.Items.Clear();
+
+            Cursor = Cursors.WaitCursor;
+            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Type_List", type_Cmb);
+            Cursor = Cursors.Arrow;
+
+            // Insert "N/A" at the first position
+            type_Cmb.Items.Insert(0, "N/A");
+
+
+        }
     }
 }

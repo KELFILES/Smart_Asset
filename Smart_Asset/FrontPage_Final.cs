@@ -491,6 +491,10 @@ namespace Smart_Asset
 
         private void asset_Btn_Click(object sender, EventArgs e)
         {
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
+
+
             sah.SendClickBtnInfo("ASSETS");
 
             showFormSelected(ref rd, "ASSETS");
@@ -653,6 +657,8 @@ namespace Smart_Asset
 
         private void repairing_Btn_Click(object sender, EventArgs e)
         {
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "REPLACEMENT");
 
@@ -675,7 +681,8 @@ namespace Smart_Asset
 
         private void cleaning_Btn_Click_1(object sender, EventArgs e)
         {
-
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "CLEANING");
 
@@ -695,6 +702,9 @@ namespace Smart_Asset
 
         private void disposed_Btn_Click_1(object sender, EventArgs e)
         {
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
+
             showFormSelected(ref rd, "DISPOSED");
 
 
@@ -713,6 +723,9 @@ namespace Smart_Asset
 
         private void borrowed_Btn_Click(object sender, EventArgs e)
         {
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
+
             showFormSelected(ref rd, "BORROWED");
 
             rd.borrowedHardwares_Btn.PerformClick();
@@ -734,6 +747,9 @@ namespace Smart_Asset
 
         private async void reserved_Btn_Click(object sender, EventArgs e)
         {
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
+
             showFormSelected(ref rd, "RESERVED");
 
             rd.reservedHardwares_Btn.PerformClick();
@@ -754,6 +770,9 @@ namespace Smart_Asset
 
         private void archived_Btn_Click(object sender, EventArgs e)
         {
+            //RESET THE SERIALNO. SELECTED
+            Read.selectedSerialNos.Clear();
+
             showFormSelected(ref rd, "ARCHIVE");
 
             rd.archive_Btn.PerformClick();

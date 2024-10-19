@@ -489,7 +489,7 @@ namespace Smart_Asset
 
 
         // A list to store SerialNo values of selected rows
-        List<string> selectedSerialNos = new List<string>();
+        public static List<string> selectedSerialNos = new List<string>();
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {

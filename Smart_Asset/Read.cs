@@ -173,9 +173,17 @@ namespace Smart_Asset
 
         private async void location_Cmb_DropDown_1(object sender, EventArgs e)
         {
+
+
+            // Clear existing items and load from database
+            location_Cmb.Items.Clear();
+
             Cursor = Cursors.WaitCursor;
             await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Location_List", location_Cmb);
             Cursor = Cursors.Arrow;
+
+            // Insert "N/A" at the first position
+            location_Cmb.Items.Insert(0, "N/A");
         }
 
         private async void unit_Cmb_DropDown_1(object sender, EventArgs e)
@@ -268,66 +276,66 @@ namespace Smart_Asset
             throw new NotImplementedException();
         }
 
-        private void Show2_Click_1(object sender, EventArgs e)
+        private async void Show2_Click_1(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(unit_Cmb.Text) && !string.IsNullOrWhiteSpace(location_Cmb.Text))
+            // Check if all the combo boxes are empty or null
+            if (string.IsNullOrWhiteSpace(location_Cmb.Text) &&
+                string.IsNullOrWhiteSpace(unit_Cmb.Text) &&
+                string.IsNullOrWhiteSpace(type_Cmb.Text))
             {
-                unit_Cmb.Text = "N/A";
+                MessageBox.Show("Please select properly!");
+                return;
             }
 
-            if (string.IsNullOrWhiteSpace(type_Cmb.Text) && !string.IsNullOrWhiteSpace(location_Cmb.Text))
+            selectedButton = "show2";
+            SendButtonInfo();
+
+            // Case: Location is null/empty or "N/A", Unit is selected, Type is null/empty or "N/A"
+            if ((string.IsNullOrWhiteSpace(location_Cmb.Text) || location_Cmb.Text.Equals("N/A")) &&
+                !string.IsNullOrWhiteSpace(unit_Cmb.Text) &&
+                (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A")))
             {
-                type_Cmb.Text = "N/A";
+                // Call the async method to show documents based on unit
+                await MyDbMethods.ShowDocuContainsTextAsync("SmartAssetDb", dataGridView1, unit_Cmb.Text);
+                _lastRefreshAction = async () => await MyDbMethods.ShowDocuContainsTextAsync("SmartAssetDb", dataGridView1, unit_Cmb.Text);
             }
-
-
-
-
-            if (!string.IsNullOrWhiteSpace(location_Cmb.Text) && !string.IsNullOrWhiteSpace(unit_Cmb.Text))
+            // Case 1: Show location if both unit and type are "N/A" or empty/null, and location is set
+            else if ((string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A")) &&
+                (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A")) &&
+                !string.IsNullOrWhiteSpace(location_Cmb.Text))
             {
-                selectedButton = "show2";
-
-                SendButtonInfo();
-
-
-
-                //GOODS
-                if (unit_Cmb.Text.Equals("N/A") && type_Cmb.Text.Equals("N/A"))
-                {
-                    //SHOW LOCATION
-                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
-                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
-                }
-
-                //GOODS
-                else if (type_Cmb.Text.Equals("N/A"))
-                {
-
-
-                    //SHOW LOCATION>UNIT
-                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-
-                }
-
-                else if (unit_Cmb.Text.Equals("N/A"))
-                {
-                    //SHOW ALL TYPE IN LOCATION
-                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
-                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
-                }
-
-                else
-                {
-                    //SHOW ALL TYPE IN LOCATION
-                    MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
-                    _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
-                }
-
+                // Show location
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
+                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
             }
+            // Case 2: Show all types in all locations if unit is "N/A", location is "N/A" or empty, and type is selected
+            else if ((string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A")) &&
+                     (string.IsNullOrWhiteSpace(location_Cmb.Text) || location_Cmb.Text.Equals("N/A")) &&
+                     !string.IsNullOrWhiteSpace(type_Cmb.Text))
+            {
+                // Show all types across all locations for the selected type
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "", true, "Type", $"{type_Cmb.Text}");
+                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "", true, "Type", $"{type_Cmb.Text}");
+            }
+            // Case 3: Show location and unit if type is "N/A" or empty/null
+            else if (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A"))
+            {
+                // Show location and unit
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+            }
+            // Case 4: Show specific type in a location when unit is "N/A" or empty/null but type is selected
+            else if (string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A"))
+            {
+                // Show all items of the selected type (e.g., CPU) in the specific location (e.g., Laboratory1)
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
+                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
+            }
+            // Default case: Show specific location, unit, and type
             else
             {
-                MessageBox.Show("SELECT PROPERLY!");
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
+                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
             }
         }
 

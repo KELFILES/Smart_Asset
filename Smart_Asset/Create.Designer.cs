@@ -298,6 +298,7 @@
             siNumber_Tb.Name = "siNumber_Tb";
             siNumber_Tb.Size = new Size(695, 27);
             siNumber_Tb.TabIndex = 79;
+            siNumber_Tb.KeyPress += siNumber_Tb_KeyPress;
             // 
             // label4
             // 
@@ -319,6 +320,7 @@
             poNumber_Tb.Name = "poNumber_Tb";
             poNumber_Tb.Size = new Size(695, 27);
             poNumber_Tb.TabIndex = 77;
+            poNumber_Tb.KeyPress += poNumber_Tb_KeyPress;
             // 
             // label3
             // 

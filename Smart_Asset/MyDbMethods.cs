@@ -2039,7 +2039,74 @@ namespace Smart_Asset
             return null;
         }
 
+        public static async Task ShowDocuContainsTextAsync(string dbName, DataGridView dataGridViewName, string CollNameFind)
+        {
+            // Connect to MongoDB using the provided connection string
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
 
+            // Exclude these collections
+            var excludedCollections = new List<string> { "RecycleBin", "Deployment_Unit_List", "Type_List", "Deployment_Location_List", "Serial_List", "Images" };
+
+            // Get all collection names from the database
+            var collectionNames = await database.ListCollectionNames().ToListAsync();
+
+            // Filter collections that contain the unitText and exclude the specified collections
+            var matchingCollections = collectionNames
+                .Where(collectionName => collectionName.Contains(CollNameFind) && !excludedCollections.Contains(collectionName))
+                .ToList();
+
+            // Initialize a list to store all documents
+            var allDocuments = new List<Read_Model>();
+
+            // Loop through each matching collection
+            foreach (var collectionName in matchingCollections)
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                // Retrieve all documents from the collection
+                var documents = await collection.Find(new BsonDocument()).ToListAsync();
+
+                // Map BsonDocument results to Read_Model objects
+                var mappedDocuments = documents.Select(doc => new Read_Model
+                {
+                    Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                    Brand = doc.Contains("Brand") ? doc["Brand"].AsString : string.Empty,
+                    Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                    PropertyID = doc.Contains("PropertyID") ? doc["PropertyID"].AsString : string.Empty,
+                    SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                    PONumber = doc.Contains("PONumber") ? doc["PONumber"].AsString : string.Empty,
+                    SINumber = doc.Contains("SINumber") ? doc["SINumber"].AsString : string.Empty,
+                    Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
+                    Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
+
+                    // Calculate warranty status if still valid
+                    WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
+
+                    PurchaseDate = doc.Contains("PurchaseDate") ? doc["PurchaseDate"].AsString : string.Empty,
+
+                    // Calculate usage as years, months, and days
+                    Usage = doc.Contains("PurchaseDate") ? MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)) : string.Empty,
+
+                    // Set the collection name as location
+                    Location = collectionName
+                }).ToList();
+
+                allDocuments.AddRange(mappedDocuments);
+            }
+
+            // If no documents were found, clear the DataGridView and notify the user
+            if (allDocuments.Count == 0)
+            {
+                dataGridViewName.DataSource = null;
+                MessageBox.Show("No documents found in any matching collection.");
+                return;
+            }
+
+            // Bind the list to the DataGridView
+            dataGridViewName.DataSource = allDocuments;
+        }
 
 
     }

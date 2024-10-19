@@ -182,6 +182,24 @@ namespace Smart_Asset
                     {
                         Console.WriteLine("Don't go");
                     }
+
+
+
+                    //CLEAR TEXTBOX IF FILL IS ENABLED
+                    if (autoFill_Cb.Checked)
+                    {
+                        propertyID_Tb.Text = "";
+                        serial_Tb.Text = "";
+                        poNumber_Tb.Text = "";
+                        siNumber_Tb.Text = "";
+                    }
+                    else
+                    {
+                        clearAllField();
+                    }
+
+
+
                 }
 
             }
@@ -189,27 +207,6 @@ namespace Smart_Asset
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
-
-
-            //CLEAR TEXTBOX IF FILL IS ENABLED
-            if (autoFill_Cb.Checked)
-            {
-                propertyID_Tb.Text = "";
-                serial_Tb.Text = "";
-                poNumber_Tb.Text = "";
-                siNumber_Tb.Text = "";
-            }
-            else
-            {
-                clearAllField();
-            }
-
-
-
-
 
         }
 
@@ -299,31 +296,7 @@ namespace Smart_Asset
         private void cost_Tb_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
-
-            // Allow digits, control keys (backspace, etc.), and Ctrl+A
-            if (char.IsControl(e.KeyChar) || (e.KeyChar == (char)1)) // Ctrl+A is ASCII code 1
-            {
-                return; // Allow control keys
-            }
-
-            // Allow only digits and a single decimal point
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true; // Ignore if it's not a digit or decimal point
-            }
-
-            // Allow only one decimal point
-            if (e.KeyChar == '.' && textBox.Text.Contains('.'))
-            {
-                e.Handled = true; // Ignore if another decimal point is entered
-            }
-
-            // Disallow space
-            if (e.KeyChar == ' ')
-            {
-                e.Handled = true; // Ignore space key
-            }
+            PressNumberDotOnly(sender, e, false);
         }
 
         private void Create_FormClosed(object sender, FormClosedEventArgs e)
@@ -412,7 +385,51 @@ namespace Smart_Asset
                 uploadImage_Pb.Padding = new Padding(10, 0, 20, 0);
             }
 
-            
+
         }
+
+        private void poNumber_Tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PressNumberDotOnly(sender, e, true);
+        }
+
+        private void siNumber_Tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PressNumberDotOnly(sender, e, true);
+        }
+
+
+        private void PressNumberDotOnly(object sender, KeyPressEventArgs e, bool isMultipleDot)
+        {
+            // Cast the sender to a TextBox
+            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
+
+            // Allow control keys (like backspace, delete) and Ctrl+A (Select All)
+            if (char.IsControl(e.KeyChar) || (e.KeyChar == (char)1)) // Ctrl+A is ASCII code 1
+            {
+                return; // Allow control keys
+            }
+
+            // Allow only digits and decimal points
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true; // Block non-digit and non-decimal point characters
+            }
+
+            // Prevent entering more than one decimal point if isMultipleDot is false
+            if (!isMultipleDot && e.KeyChar == '.' && textBox.Text.Contains('.'))
+            {
+                e.Handled = true; // Block additional decimal points when only one is allowed
+            }
+
+            // Disallow space key
+            if (e.KeyChar == ' ')
+            {
+                e.Handled = true; // Block spaces
+            }
+        }
+
+
+
     }
 }

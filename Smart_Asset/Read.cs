@@ -87,11 +87,15 @@ namespace Smart_Asset
         public class Read_Model
         {
             public string Type { get; set; }
+            public string Brand { get; set; }
             public string Model { get; set; }
+            public string PropertyID { get; set; }
             public string SerialNo { get; set; }
+            public string PONumber { get; set; }
+            public string SINumber { get; set; }
             public string Cost { get; set; }
-            public string Supplier { get; set; }
             public string Warranty { get; set; }
+            public string Supplier { get; set; }
             public string WarrantyStatus { get; set; }
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
@@ -101,11 +105,15 @@ namespace Smart_Asset
         public class Read_ModelWithNotes
         {
             public string Type { get; set; }
+            public string Brand { get; set; }
             public string Model { get; set; }
+            public string PropertyID { get; set; }
             public string SerialNo { get; set; }
+            public string PONumber { get; set; }
+            public string SINumber { get; set; }
             public string Cost { get; set; }
-            public string Supplier { get; set; }
             public string Warranty { get; set; }
+            public string Supplier { get; set; }
             public string WarrantyStatus { get; set; }
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
@@ -116,11 +124,15 @@ namespace Smart_Asset
         public class Read_Model_ForBorrow
         {
             public string Type { get; set; }
+            public string Brand { get; set; }
             public string Model { get; set; }
+            public string PropertyID { get; set; }
             public string SerialNo { get; set; }
+            public string PONumber { get; set; }
+            public string SINumber { get; set; }
             public string Cost { get; set; }
-            public string Supplier { get; set; }
             public string Warranty { get; set; }
+            public string Supplier { get; set; }
             public string WarrantyStatus { get; set; }
             public string PurchaseDate { get; set; }
             public string Usage { get; set; }
@@ -267,6 +279,8 @@ namespace Smart_Asset
             {
                 type_Cmb.Text = "N/A";
             }
+
+
 
 
             if (!string.IsNullOrWhiteSpace(location_Cmb.Text) && !string.IsNullOrWhiteSpace(unit_Cmb.Text))

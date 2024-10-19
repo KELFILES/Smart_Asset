@@ -38,6 +38,16 @@
             qr_pictureBox = new PictureBox();
             label12 = new Label();
             panel4 = new Panel();
+            uploadImage_Pb = new PictureBox();
+            brand_Tb = new TextBox();
+            label5 = new Label();
+            button1 = new Button();
+            siNumber_Tb = new TextBox();
+            label4 = new Label();
+            poNumber_Tb = new TextBox();
+            label3 = new Label();
+            propertyID_Tb = new TextBox();
+            label2 = new Label();
             clear2_Btn = new Button();
             autoFill_Cb = new CheckBox();
             Clear_Btn = new Button();
@@ -71,6 +81,7 @@
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)qr_pictureBox).BeginInit();
             panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)uploadImage_Pb).BeginInit();
             ((System.ComponentModel.ISupportInitialize)days_numericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)months_numericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)years_numericUpDown).BeginInit();
@@ -111,9 +122,9 @@
             panel3.Controls.Add(label10);
             panel3.Controls.Add(qr_pictureBox);
             panel3.Controls.Add(label12);
-            panel3.Location = new Point(0, 405);
+            panel3.Location = new Point(0, 504);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1566, 398);
+            panel3.Size = new Size(1566, 299);
             panel3.TabIndex = 53;
             // 
             // serial2_Cb
@@ -122,7 +133,7 @@
             serial2_Cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             serial2_Cb.AutoCompleteSource = AutoCompleteSource.ListItems;
             serial2_Cb.FormattingEnabled = true;
-            serial2_Cb.Location = new Point(534, 157);
+            serial2_Cb.Location = new Point(534, 107);
             serial2_Cb.Name = "serial2_Cb";
             serial2_Cb.Size = new Size(303, 23);
             serial2_Cb.TabIndex = 27;
@@ -132,7 +143,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(961, 316);
+            button3.Location = new Point(961, 266);
             button3.Name = "button3";
             button3.Size = new Size(82, 23);
             button3.TabIndex = 26;
@@ -143,7 +154,7 @@
             // 
             generate_Btn.Anchor = AnchorStyles.None;
             generate_Btn.Font = new Font("Segoe UI", 14F);
-            generate_Btn.Location = new Point(618, 200);
+            generate_Btn.Location = new Point(618, 150);
             generate_Btn.Name = "generate_Btn";
             generate_Btn.Size = new Size(108, 36);
             generate_Btn.TabIndex = 25;
@@ -157,7 +168,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(441, 91);
+            label10.Location = new Point(441, 41);
             label10.Name = "label10";
             label10.Size = new Size(199, 30);
             label10.TabIndex = 22;
@@ -167,7 +178,7 @@
             // 
             qr_pictureBox.Anchor = AnchorStyles.None;
             qr_pictureBox.BackColor = Color.White;
-            qr_pictureBox.Location = new Point(876, 60);
+            qr_pictureBox.Location = new Point(876, 10);
             qr_pictureBox.Name = "qr_pictureBox";
             qr_pictureBox.Size = new Size(250, 250);
             qr_pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -180,7 +191,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Microsoft Sans Serif", 12.75F);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(441, 160);
+            label12.Location = new Point(441, 110);
             label12.Name = "label12";
             label12.Size = new Size(87, 20);
             label12.TabIndex = 23;
@@ -191,6 +202,16 @@
             panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel4.AutoScroll = true;
             panel4.BackColor = Color.Gray;
+            panel4.Controls.Add(uploadImage_Pb);
+            panel4.Controls.Add(brand_Tb);
+            panel4.Controls.Add(label5);
+            panel4.Controls.Add(button1);
+            panel4.Controls.Add(siNumber_Tb);
+            panel4.Controls.Add(label4);
+            panel4.Controls.Add(poNumber_Tb);
+            panel4.Controls.Add(label3);
+            panel4.Controls.Add(propertyID_Tb);
+            panel4.Controls.Add(label2);
             panel4.Controls.Add(clear2_Btn);
             panel4.Controls.Add(autoFill_Cb);
             panel4.Controls.Add(Clear_Btn);
@@ -219,13 +240,122 @@
             panel4.Location = new Point(0, 0);
             panel4.MinimumSize = new Size(200, 200);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1566, 399);
+            panel4.Size = new Size(1566, 498);
             panel4.TabIndex = 52;
+            // 
+            // uploadImage_Pb
+            // 
+            uploadImage_Pb.Anchor = AnchorStyles.Top;
+            uploadImage_Pb.Location = new Point(627, 399);
+            uploadImage_Pb.Name = "uploadImage_Pb";
+            uploadImage_Pb.Size = new Size(43, 30);
+            uploadImage_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            uploadImage_Pb.TabIndex = 84;
+            uploadImage_Pb.TabStop = false;
+            // 
+            // brand_Tb
+            // 
+            brand_Tb.Anchor = AnchorStyles.Top;
+            brand_Tb.CharacterCasing = CharacterCasing.Upper;
+            brand_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            brand_Tb.Location = new Point(450, 68);
+            brand_Tb.Name = "brand_Tb";
+            brand_Tb.Size = new Size(695, 27);
+            brand_Tb.TabIndex = 83;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Top;
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label5.Location = new Point(307, 73);
+            label5.Name = "label5";
+            label5.Size = new Size(59, 20);
+            label5.TabIndex = 82;
+            label5.Text = "Brand:";
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top;
+            button1.FlatAppearance.MouseDownBackColor = Color.Red;
+            button1.FlatAppearance.MouseOverBackColor = Color.Lime;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Microsoft Sans Serif", 12.75F);
+            button1.Location = new Point(451, 399);
+            button1.Name = "button1";
+            button1.Size = new Size(170, 30);
+            button1.TabIndex = 81;
+            button1.Text = "UPLOAD IMAGE";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // siNumber_Tb
+            // 
+            siNumber_Tb.Anchor = AnchorStyles.Top;
+            siNumber_Tb.CharacterCasing = CharacterCasing.Upper;
+            siNumber_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            siNumber_Tb.Location = new Point(450, 233);
+            siNumber_Tb.Name = "siNumber_Tb";
+            siNumber_Tb.Size = new Size(695, 27);
+            siNumber_Tb.TabIndex = 79;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top;
+            label4.AutoSize = true;
+            label4.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label4.Location = new Point(307, 240);
+            label4.Name = "label4";
+            label4.Size = new Size(97, 20);
+            label4.TabIndex = 78;
+            label4.Text = "S.I Number:";
+            // 
+            // poNumber_Tb
+            // 
+            poNumber_Tb.Anchor = AnchorStyles.Top;
+            poNumber_Tb.CharacterCasing = CharacterCasing.Upper;
+            poNumber_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            poNumber_Tb.Location = new Point(450, 200);
+            poNumber_Tb.Name = "poNumber_Tb";
+            poNumber_Tb.Size = new Size(695, 27);
+            poNumber_Tb.TabIndex = 77;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top;
+            label3.AutoSize = true;
+            label3.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label3.Location = new Point(307, 207);
+            label3.Name = "label3";
+            label3.Size = new Size(106, 20);
+            label3.TabIndex = 76;
+            label3.Text = "P.O Number:";
+            // 
+            // propertyID_Tb
+            // 
+            propertyID_Tb.Anchor = AnchorStyles.Top;
+            propertyID_Tb.CharacterCasing = CharacterCasing.Upper;
+            propertyID_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
+            propertyID_Tb.Location = new Point(450, 134);
+            propertyID_Tb.Name = "propertyID_Tb";
+            propertyID_Tb.Size = new Size(695, 27);
+            propertyID_Tb.TabIndex = 75;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top;
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label2.Location = new Point(307, 141);
+            label2.Name = "label2";
+            label2.Size = new Size(99, 20);
+            label2.TabIndex = 74;
+            label2.Text = "Property ID:";
             // 
             // clear2_Btn
             // 
             clear2_Btn.Anchor = AnchorStyles.Top;
-            clear2_Btn.Location = new Point(1284, 49);
+            clear2_Btn.Location = new Point(1245, 58);
             clear2_Btn.Name = "clear2_Btn";
             clear2_Btn.Size = new Size(75, 23);
             clear2_Btn.TabIndex = 73;
@@ -237,7 +367,7 @@
             // 
             autoFill_Cb.Anchor = AnchorStyles.Top;
             autoFill_Cb.AutoSize = true;
-            autoFill_Cb.Location = new Point(1284, 24);
+            autoFill_Cb.Location = new Point(1245, 33);
             autoFill_Cb.Name = "autoFill_Cb";
             autoFill_Cb.Size = new Size(70, 19);
             autoFill_Cb.TabIndex = 72;
@@ -247,7 +377,7 @@
             // Clear_Btn
             // 
             Clear_Btn.Anchor = AnchorStyles.Top;
-            Clear_Btn.Location = new Point(1974, 93);
+            Clear_Btn.Location = new Point(1983, 93);
             Clear_Btn.Name = "Clear_Btn";
             Clear_Btn.Size = new Size(80, 30);
             Clear_Btn.TabIndex = 71;
@@ -258,7 +388,7 @@
             // 
             register_Btn.Anchor = AnchorStyles.Top;
             register_Btn.Font = new Font("Microsoft Sans Serif", 12.75F);
-            register_Btn.Location = new Point(739, 344);
+            register_Btn.Location = new Point(731, 439);
             register_Btn.Name = "register_Btn";
             register_Btn.Size = new Size(125, 30);
             register_Btn.TabIndex = 70;
@@ -270,7 +400,7 @@
             // 
             autoFill_checkBox.Anchor = AnchorStyles.Top;
             autoFill_checkBox.AutoSize = true;
-            autoFill_checkBox.Location = new Point(1974, 68);
+            autoFill_checkBox.Location = new Point(1983, 68);
             autoFill_checkBox.Name = "autoFill_checkBox";
             autoFill_checkBox.Size = new Size(80, 19);
             autoFill_checkBox.TabIndex = 69;
@@ -281,7 +411,7 @@
             // 
             purchaseDate_Dtp.Anchor = AnchorStyles.Top;
             purchaseDate_Dtp.Checked = false;
-            purchaseDate_Dtp.Location = new Point(504, 308);
+            purchaseDate_Dtp.Location = new Point(450, 364);
             purchaseDate_Dtp.Name = "purchaseDate_Dtp";
             purchaseDate_Dtp.Size = new Size(211, 23);
             purchaseDate_Dtp.TabIndex = 68;
@@ -290,7 +420,7 @@
             // 
             supplier_Tb.Anchor = AnchorStyles.Top;
             supplier_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            supplier_Tb.Location = new Point(504, 275);
+            supplier_Tb.Location = new Point(450, 299);
             supplier_Tb.Name = "supplier_Tb";
             supplier_Tb.Size = new Size(695, 27);
             supplier_Tb.TabIndex = 67;
@@ -298,7 +428,7 @@
             // days_numericUpDown
             // 
             days_numericUpDown.Anchor = AnchorStyles.Top;
-            days_numericUpDown.Location = new Point(843, 238);
+            days_numericUpDown.Location = new Point(790, 335);
             days_numericUpDown.Name = "days_numericUpDown";
             days_numericUpDown.Size = new Size(48, 23);
             days_numericUpDown.TabIndex = 66;
@@ -306,7 +436,7 @@
             // months_numericUpDown
             // 
             months_numericUpDown.Anchor = AnchorStyles.Top;
-            months_numericUpDown.Location = new Point(713, 237);
+            months_numericUpDown.Location = new Point(660, 334);
             months_numericUpDown.Name = "months_numericUpDown";
             months_numericUpDown.Size = new Size(48, 23);
             months_numericUpDown.TabIndex = 65;
@@ -314,7 +444,7 @@
             // years_numericUpDown
             // 
             years_numericUpDown.Anchor = AnchorStyles.Top;
-            years_numericUpDown.Location = new Point(567, 238);
+            years_numericUpDown.Location = new Point(514, 335);
             years_numericUpDown.Name = "years_numericUpDown";
             years_numericUpDown.Size = new Size(48, 23);
             years_numericUpDown.TabIndex = 64;
@@ -323,7 +453,7 @@
             // 
             cost_Tb.Anchor = AnchorStyles.Top;
             cost_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            cost_Tb.Location = new Point(504, 199);
+            cost_Tb.Location = new Point(450, 266);
             cost_Tb.Name = "cost_Tb";
             cost_Tb.Size = new Size(695, 27);
             cost_Tb.TabIndex = 63;
@@ -334,7 +464,7 @@
             serial_Tb.Anchor = AnchorStyles.Top;
             serial_Tb.CharacterCasing = CharacterCasing.Upper;
             serial_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            serial_Tb.Location = new Point(504, 166);
+            serial_Tb.Location = new Point(450, 167);
             serial_Tb.Name = "serial_Tb";
             serial_Tb.Size = new Size(695, 27);
             serial_Tb.TabIndex = 62;
@@ -344,7 +474,7 @@
             model_Tb.Anchor = AnchorStyles.Top;
             model_Tb.CharacterCasing = CharacterCasing.Upper;
             model_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            model_Tb.Location = new Point(504, 133);
+            model_Tb.Location = new Point(450, 101);
             model_Tb.Name = "model_Tb";
             model_Tb.Size = new Size(695, 27);
             model_Tb.TabIndex = 61;
@@ -358,7 +488,7 @@
             type_Cmb.Font = new Font("Microsoft Sans Serif", 12.75F);
             type_Cmb.FormattingEnabled = true;
             type_Cmb.IntegralHeight = false;
-            type_Cmb.Location = new Point(504, 98);
+            type_Cmb.Location = new Point(450, 33);
             type_Cmb.MaxDropDownItems = 20;
             type_Cmb.Name = "type_Cmb";
             type_Cmb.Size = new Size(656, 28);
@@ -369,7 +499,7 @@
             // 
             add_Btn.Anchor = AnchorStyles.Top;
             add_Btn.Font = new Font("Segoe UI", 12F);
-            add_Btn.Location = new Point(1166, 98);
+            add_Btn.Location = new Point(1112, 33);
             add_Btn.Name = "add_Btn";
             add_Btn.Size = new Size(33, 28);
             add_Btn.TabIndex = 59;
@@ -383,7 +513,7 @@
             label15.AutoSize = true;
             label15.BackColor = Color.White;
             label15.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label15.Location = new Point(784, 240);
+            label15.Location = new Point(731, 337);
             label15.Name = "label15";
             label15.Size = new Size(53, 20);
             label15.TabIndex = 58;
@@ -395,7 +525,7 @@
             label14.AutoSize = true;
             label14.BackColor = Color.White;
             label14.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label14.Location = new Point(637, 240);
+            label14.Location = new Point(584, 337);
             label14.Name = "label14";
             label14.Size = new Size(69, 20);
             label14.TabIndex = 57;
@@ -407,7 +537,7 @@
             label13.AutoSize = true;
             label13.BackColor = Color.White;
             label13.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label13.Location = new Point(504, 240);
+            label13.Location = new Point(451, 337);
             label13.Name = "label13";
             label13.Size = new Size(57, 20);
             label13.TabIndex = 56;
@@ -418,7 +548,7 @@
             PurchaseDate_Lbl.Anchor = AnchorStyles.Top;
             PurchaseDate_Lbl.AutoSize = true;
             PurchaseDate_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            PurchaseDate_Lbl.Location = new Point(362, 308);
+            PurchaseDate_Lbl.Location = new Point(308, 367);
             PurchaseDate_Lbl.Name = "PurchaseDate_Lbl";
             PurchaseDate_Lbl.Size = new Size(126, 20);
             PurchaseDate_Lbl.TabIndex = 55;
@@ -429,7 +559,7 @@
             Supplier_Lbl.Anchor = AnchorStyles.Top;
             Supplier_Lbl.AutoSize = true;
             Supplier_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Supplier_Lbl.Location = new Point(361, 272);
+            Supplier_Lbl.Location = new Point(307, 306);
             Supplier_Lbl.Name = "Supplier_Lbl";
             Supplier_Lbl.Size = new Size(75, 20);
             Supplier_Lbl.TabIndex = 54;
@@ -440,7 +570,7 @@
             Warranty_Lbl.Anchor = AnchorStyles.Top;
             Warranty_Lbl.AutoSize = true;
             Warranty_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Warranty_Lbl.Location = new Point(361, 238);
+            Warranty_Lbl.Location = new Point(308, 338);
             Warranty_Lbl.Name = "Warranty_Lbl";
             Warranty_Lbl.Size = new Size(82, 20);
             Warranty_Lbl.TabIndex = 53;
@@ -451,7 +581,7 @@
             Cost_Lbl.Anchor = AnchorStyles.Top;
             Cost_Lbl.AutoSize = true;
             Cost_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Cost_Lbl.Location = new Point(362, 203);
+            Cost_Lbl.Location = new Point(307, 273);
             Cost_Lbl.Name = "Cost_Lbl";
             Cost_Lbl.Size = new Size(49, 20);
             Cost_Lbl.TabIndex = 52;
@@ -462,7 +592,7 @@
             Serial_Lbl.Anchor = AnchorStyles.Top;
             Serial_Lbl.AutoSize = true;
             Serial_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Serial_Lbl.Location = new Point(361, 173);
+            Serial_Lbl.Location = new Point(307, 174);
             Serial_Lbl.Name = "Serial_Lbl";
             Serial_Lbl.Size = new Size(87, 20);
             Serial_Lbl.TabIndex = 51;
@@ -473,7 +603,7 @@
             Model_Lbl.Anchor = AnchorStyles.Top;
             Model_Lbl.AutoSize = true;
             Model_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Model_Lbl.Location = new Point(361, 138);
+            Model_Lbl.Location = new Point(307, 106);
             Model_Lbl.Name = "Model_Lbl";
             Model_Lbl.Size = new Size(59, 20);
             Model_Lbl.TabIndex = 50;
@@ -484,7 +614,7 @@
             type_Lbl.Anchor = AnchorStyles.Top;
             type_Lbl.AutoSize = true;
             type_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            type_Lbl.Location = new Point(361, 104);
+            type_Lbl.Location = new Point(307, 39);
             type_Lbl.Name = "type_Lbl";
             type_Lbl.Size = new Size(50, 20);
             type_Lbl.TabIndex = 49;
@@ -544,6 +674,7 @@
             ((System.ComponentModel.ISupportInitialize)qr_pictureBox).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)uploadImage_Pb).EndInit();
             ((System.ComponentModel.ISupportInitialize)days_numericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)months_numericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)years_numericUpDown).EndInit();
@@ -591,5 +722,15 @@
         private CheckBox autoFill_Cb;
         private Button qmark_Btn;
         private ComboBox serial2_Cb;
+        private TextBox siNumber_Tb;
+        private Label label4;
+        private TextBox poNumber_Tb;
+        private Label label3;
+        private TextBox propertyID_Tb;
+        private Label label2;
+        private Button button1;
+        private TextBox brand_Tb;
+        private Label label5;
+        private PictureBox uploadImage_Pb;
     }
 }

@@ -127,6 +127,9 @@ namespace Smart_Asset
             {
                 locationType_Cmb.Enabled = true;
                 unitType_Cmb.Enabled = true;
+
+                plus1_Btn.Enabled = true;
+                plus2_Btn.Enabled = true;
             }
             else
             {
@@ -136,6 +139,9 @@ namespace Smart_Asset
 
                 locationType_Cmb.Enabled = false;
                 unitType_Cmb.Enabled = false;
+
+                plus1_Btn.Enabled = false;
+                plus2_Btn.Enabled = false;
             }
 
 
@@ -193,5 +199,16 @@ namespace Smart_Asset
             }
         }
 
+        private void plus1_Btn_Click(object sender, EventArgs e)
+        {
+            Deployment_Location_List dll = new Deployment_Location_List();
+            dll.Show();
+        }
+
+        private void plus2_Btn_Click(object sender, EventArgs e)
+        {
+            Deployment_Unit_List dul = new Deployment_Unit_List();
+            dul.Show();
+        }
     }
 }

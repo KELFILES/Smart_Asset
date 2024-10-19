@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Smart_Asset.Read;
@@ -328,11 +329,15 @@ namespace Smart_Asset
                 var cpuList = documents.Select(doc => new Read_Model
                 {
                     Type = doc["Type"].AsString,
+                    Brand = doc["Brand"].AsString,
                     Model = doc["Model"].AsString,
+                    PropertyID = doc["PropertyID"].AsString,
                     SerialNo = doc["SerialNo"].AsString,
+                    PONumber = doc["PONumber"].AsString,
+                    SINumber = doc["SINumber"].AsString,
                     Cost = doc["Cost"].AsString,
-                    Supplier = doc["Supplier"].AsString,
                     Warranty = doc["Warranty"].AsString,
+                    Supplier = doc["Supplier"].AsString,
 
                     // Calculate warranty status if still valid
                     WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -432,11 +437,15 @@ namespace Smart_Asset
             var cpuList = documents.Select(doc => new Read_Model
             {
                 Type = doc["Type"].AsString,
+                Brand = doc["Brand"].AsString,
                 Model = doc["Model"].AsString,
+                PropertyID = doc["PropertyID"].AsString,
                 SerialNo = doc["SerialNo"].AsString,
+                PONumber = doc["PONumber"].AsString,
+                SINumber = doc["SINumber"].AsString,
                 Cost = doc["Cost"].AsString,
-                Supplier = doc["Supplier"].AsString,
                 Warranty = doc["Warranty"].AsString,
+                Supplier = doc["Supplier"].AsString,
 
                 // Calculate warranty status if still valid
                 WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -494,11 +503,18 @@ namespace Smart_Asset
                     var cpuList = documents.Select(doc => new Read_Model
                     {
                         Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                        Brand = doc.Contains("Brand") ? doc["Brand"].AsString : string.Empty,
                         Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                        PropertyID = doc.Contains("PropertyID") ? doc["PropertyID"].AsString : string.Empty,
                         SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                        PONumber = doc.Contains("PONumber") ? doc["PONumber"].AsString : string.Empty,
+                        SINumber = doc.Contains("SINumber") ? doc["SINumber"].AsString : string.Empty,
                         Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
-                        Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
                         Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+                        Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
+
+
+
 
                         // Calculate warranty status if still valid
                         WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -527,11 +543,15 @@ namespace Smart_Asset
                 var cpuList = documents.Select(doc => new Read_Model
                 {
                     Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                    Brand = doc.Contains("Brand") ? doc["Brand"].AsString : string.Empty,
                     Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                    PropertyID = doc.Contains("PropertyID") ? doc["PropertyID"].AsString : string.Empty,
                     SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                    PONumber = doc.Contains("PONumber") ? doc["PONumber"].AsString : string.Empty,
+                    SINumber = doc.Contains("SINumber") ? doc["SINumber"].AsString : string.Empty,
                     Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
-                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
                     Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
 
                     // Calculate warranty status if still valid
                     WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -591,11 +611,15 @@ namespace Smart_Asset
                     var cpuList = documents.Select(doc => new Read_Model
                     {
                         Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                        Brand = doc.Contains("Brand") ? doc["Brand"].AsString : string.Empty,
                         Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                        PropertyID = doc.Contains("PropertyID") ? doc["PropertyID"].AsString : string.Empty,
                         SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                        PONumber = doc.Contains("PONumber") ? doc["PONumber"].AsString : string.Empty,
+                        SINumber = doc.Contains("SINumber") ? doc["SINumber"].AsString : string.Empty,
                         Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
-                        Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
                         Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+                        Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
 
                         // Calculate warranty status if still valid
                         WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -624,11 +648,15 @@ namespace Smart_Asset
                 var cpuList = documents.Select(doc => new Read_Model
                 {
                     Type = doc.Contains("Type") ? doc["Type"].AsString : string.Empty,
+                    Brand = doc.Contains("Brand") ? doc["Brand"].AsString : string.Empty,
                     Model = doc.Contains("Model") ? doc["Model"].AsString : string.Empty,
+                    PropertyID = doc.Contains("PropertyID") ? doc["PropertyID"].AsString : string.Empty,
                     SerialNo = doc.Contains("SerialNo") ? doc["SerialNo"].AsString : string.Empty,
+                    PONumber = doc.Contains("PONumber") ? doc["PONumber"].AsString : string.Empty,
+                    SINumber = doc.Contains("SINumber") ? doc["SINumber"].AsString : string.Empty,
                     Cost = doc.Contains("Cost") ? doc["Cost"].AsString : string.Empty,
-                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
                     Warranty = doc.Contains("Warranty") ? doc["Warranty"].AsString : string.Empty,
+                    Supplier = doc.Contains("Supplier") ? doc["Supplier"].AsString : string.Empty,
 
                     // Calculate warranty status if still valid
                     WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -673,7 +701,7 @@ namespace Smart_Asset
             // Iterate over all collections, except the ones we want to exclude
             foreach (var collectionName in collectionNames.ToList())
             {
-                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List")  // Skip excluded collections
+                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List" && collectionName != "Images")  // Skip excluded collections
                 {
                     var collection = database.GetCollection<BsonDocument>(collectionName);
 
@@ -698,11 +726,15 @@ namespace Smart_Asset
                         return new Read_Model
                         {
                             Type = doc.GetValue("Type", "").AsString,
+                            Brand = doc.GetValue("Brand", "").AsString,
                             Model = doc.GetValue("Model", "").AsString,
+                            PropertyID = doc.GetValue("PropertyID", "").AsString,
                             SerialNo = doc.GetValue("SerialNo", "").AsString,
+                            PONumber = doc.GetValue("PONumber", "").AsString,
+                            SINumber = doc.GetValue("SINumber", "").AsString,
                             Cost = doc.GetValue("Cost", "").AsString,
-                            Supplier = doc.GetValue("Supplier", "").AsString,
                             Warranty = doc.GetValue("Warranty", "").AsString,
+                            Supplier = doc.GetValue("Supplier", "").AsString,
                             WarrantyStatus = warrantyStatus,
                             PurchaseDate = purchaseDateString,  // Keep the original string value
                             Usage = usage,
@@ -745,11 +777,15 @@ namespace Smart_Asset
             var myList = documents.Select(doc => new Read_ModelWithNotes
             {
                 Type = doc.GetValue("Type", "").AsString,
+                Brand = doc.GetValue("Brand", "").AsString,
                 Model = doc.GetValue("Model", "").AsString,
+                PropertyID = doc.GetValue("PropertyID", "").AsString,
                 SerialNo = doc.GetValue("SerialNo", "").AsString,
+                PONumber = doc.GetValue("PONumber", "").AsString,
+                SINumber = doc.GetValue("SINumber", "").AsString,
                 Cost = doc.GetValue("Cost", "").AsString,
-                Supplier = doc.GetValue("Supplier", "").AsString,
                 Warranty = doc.GetValue("Warranty", "").AsString,
+                Supplier = doc.GetValue("Supplier", "").AsString,
 
                 // Warranty status calculation
                 WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -800,11 +836,15 @@ namespace Smart_Asset
                 var myList = documents.Select(doc => new Read_Model_ForBorrow
                 {
                     Type = doc.GetValue("Type", "").AsString,
+                    Brand = doc.GetValue("Brand", "").AsString,
                     Model = doc.GetValue("Model", "").AsString,
+                    PropertyID = doc.GetValue("PropertyID", "").AsString,
                     SerialNo = doc.GetValue("SerialNo", "").AsString,
+                    PONumber = doc.GetValue("PONumber", "").AsString,
+                    SINumber = doc.GetValue("SINumber", "").AsString,
                     Cost = doc.GetValue("Cost", "").AsString,
-                    Supplier = doc.GetValue("Supplier", "").AsString,
                     Warranty = doc.GetValue("Warranty", "").AsString,
+                    Supplier = doc.GetValue("Supplier", "").AsString,
 
                     // Warranty status calculation
                     WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
@@ -922,12 +962,16 @@ namespace Smart_Asset
 
             var allDocuments = documents.Select(doc => new Read_Model
             {
-                Type = doc["Type"].AsString,
-                Model = doc["Model"].AsString,
-                SerialNo = doc["SerialNo"].AsString,
-                Cost = doc["Cost"].AsString,
-                Supplier = doc["Supplier"].AsString,
-                Warranty = doc["Warranty"].AsString,
+                Type = doc.GetValue("Type", "").AsString,
+                Brand = doc.GetValue("Brand", "").AsString,
+                Model = doc.GetValue("Model", "").AsString,
+                PropertyID = doc.GetValue("PropertyID", "").AsString,
+                SerialNo = doc.GetValue("SerialNo", "").AsString,
+                PONumber = doc.GetValue("PONumber", "").AsString,
+                SINumber = doc.GetValue("SINumber", "").AsString,
+                Cost = doc.GetValue("Cost", "").AsString,
+                Warranty = doc.GetValue("Warranty", "").AsString,
+                Supplier = doc.GetValue("Supplier", "").AsString,
                 WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
                 PurchaseDate = doc["PurchaseDate"].AsString,
                 Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
@@ -980,12 +1024,16 @@ namespace Smart_Asset
 
                 var cpuList = documents.Select(doc => new Read_Model
                 {
-                    Type = doc["Type"].AsString,
-                    Model = doc["Model"].AsString,
-                    SerialNo = doc["SerialNo"].AsString,
-                    Cost = doc["Cost"].AsString,
-                    Supplier = doc["Supplier"].AsString,
-                    Warranty = doc["Warranty"].AsString,
+                    Type = doc.GetValue("Type", "").AsString,
+                    Brand = doc.GetValue("Brand", "").AsString,
+                    Model = doc.GetValue("Model", "").AsString,
+                    PropertyID = doc.GetValue("PropertyID", "").AsString,
+                    SerialNo = doc.GetValue("SerialNo", "").AsString,
+                    PONumber = doc.GetValue("PONumber", "").AsString,
+                    SINumber = doc.GetValue("SINumber", "").AsString,
+                    Cost = doc.GetValue("Cost", "").AsString,
+                    Warranty = doc.GetValue("Warranty", "").AsString,
+                    Supplier = doc.GetValue("Supplier", "").AsString,
                     WarrantyStatus = MyCalculations.IsWarrantyValid(DateTime.Parse(doc["PurchaseDate"].AsString), doc["Warranty"].AsString) ? "In Warranty" : "Out of Warranty",
                     PurchaseDate = doc["PurchaseDate"].AsString,
                     Usage = MyCalculations.CalculateUsage(DateTime.Parse(doc["PurchaseDate"].AsString)),
@@ -1117,10 +1165,14 @@ namespace Smart_Asset
 
                 var update = Builders<BsonDocument>.Update
                     .Set("Type", row.Cells["Type"].Value?.ToString())
+                    .Set("Brand", row.Cells["Brand"].Value?.ToString())
                     .Set("Model", row.Cells["Model"].Value?.ToString())
+                    .Set("PropertyID", row.Cells["PropertyID"].Value?.ToString())
+                    .Set("PONumber", row.Cells["PONumber"].Value?.ToString())
+                    .Set("SINumber", row.Cells["SINumber"].Value?.ToString())
                     .Set("Cost", row.Cells["Cost"].Value?.ToString())
-                    .Set("Supplier", row.Cells["Supplier"].Value?.ToString())
                     .Set("Warranty", row.Cells["Warranty"].Value?.ToString())
+                    .Set("Supplier", row.Cells["Supplier"].Value?.ToString())
                     .Set("PurchaseDate", row.Cells["PurchaseDate"].Value?.ToString());
 
                 collection.UpdateOne(filter, update);
@@ -1128,6 +1180,7 @@ namespace Smart_Asset
 
             MessageBox.Show("Changes updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
 
@@ -1255,7 +1308,7 @@ namespace Smart_Asset
                     try
                     {
                         // Conditionally add the "OldLocation" field to the document
-                        var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete" };
+                        var exemptLocations = new[] { "Repairing", "Cleaning", "Disposed_Hardwares", "Borrowed_Hardwares", "Delete", "Images" };
 
                         if (!exemptLocations.Contains(sourceCollectionName))
                         {
@@ -1305,7 +1358,7 @@ namespace Smart_Asset
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
-            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2"};
 
             var serialNoList = serialNos.Split(',')
                                         .Select(s => s.Trim())
@@ -1835,6 +1888,156 @@ namespace Smart_Asset
             return false;
         }
 
+
+        //CONVERT IMG TO BYTE ARRAY
+        public static  byte[] ImageToByteArray(Image image)
+        {
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, image.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
+        //INSERT IMAGE TO DB
+        public static async Task ImgInsertToDbAsync(string imagePath, string savingName, string dbName, string collName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var collection = database.GetCollection<BsonDocument>(collName);
+
+            // Load the image from the specified path asynchronously
+            Image image = await Task.Run(() => Image.FromFile(imagePath));
+
+            // Convert the image to byte array asynchronously
+            byte[] imageBytes = await Task.Run(() => ImageToByteArray(image));
+
+            // Create a MongoDB document to store the image bytes and the image name
+            var document = new BsonDocument
+            {
+                { "image", imageBytes },
+                { "FileName", savingName } // Store the custom image name
+            };
+
+            // Insert the document into the collection asynchronously
+            await collection.InsertOneAsync(document);
+
+            Console.WriteLine($"Image {savingName} saved successfully.");
+        }
+
+
+        public static Task<Image> ByteArrayToImageAsync(byte[] byteArray)
+        {
+            return Task.Run(() =>
+            {
+                using (var ms = new MemoryStream(byteArray))
+                {
+                    return Image.FromStream(ms);
+                }
+            });
+        }
+
+        public static async Task<Image> ImgGetToDbAsync(string imageId, string DefaultConnectionString, string dbName, string collName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var collection = database.GetCollection<BsonDocument>(collName);
+
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(imageId));
+
+            // Asynchronously find the document
+            var document = await collection.Find(filter).FirstOrDefaultAsync();
+
+            if (document != null)
+            {
+                byte[] imageBytes = document["image"].AsByteArray;
+
+                // Convert the byte array to an Image asynchronously
+                return await ByteArrayToImageAsync(imageBytes);
+            }
+
+            return null; // Return null if no image was found
+        }
+
+        public static async Task ImgSaveFromDbAsync(Image image, string DefaultConnectionString, string dbName, string collName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var collection = database.GetCollection<BsonDocument>(collName);
+
+            // Convert the image to byte array asynchronously
+            byte[] imageBytes = await Task.Run(() => ImageToByteArray(image));
+
+            // Create a MongoDB document to store the image bytes
+            var document = new BsonDocument
+            {
+                { "image", imageBytes },
+                { "description", "Sample Image" } // Add additional fields if needed
+            };
+
+            // Insert the document asynchronously
+            await collection.InsertOneAsync(document);
+
+            Console.WriteLine("Image saved successfully.");
+        }
+
+
+        public static string SelectImageFromFileExplorer()
+        {
+            // Create an instance of OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            // Set the filter to only show image files (jpg, jpeg, png, bmp, gif)
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+            // Set the title for the dialog
+            openFileDialog.Title = "Select an Image";
+
+            // Optionally set the initial directory (e.g., Desktop or any custom path)
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // Show the dialog and check if a file was selected
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Return the selected image's file path
+                return openFileDialog.FileName;
+            }
+
+            // Return null or an empty string if no file was selected
+            return null;
+        }
+
+        public static async Task<string> Get_LocationAsync(string dbName, string serialNoVal)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            // Split the input serial numbers by commas and remove any extra spaces
+            var serialNoList = serialNoVal.Split(',').Select(s => s.Trim()).ToList();
+
+            // Get all collection names asynchronously
+            var collectionNames = await database.ListCollectionNamesAsync();
+            var collectionNamesList = await collectionNames.ToListAsync();
+
+            // Define the filter for multiple serial numbers
+            var filter = Builders<BsonDocument>.Filter.In("SerialNo", serialNoList);
+
+            // Iterate over each collection and apply the filter asynchronously
+            foreach (var collectionName in collectionNamesList)
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var documents = await collection.Find(filter).ToListAsync();
+
+                // If documents are found, return the collection name (location)
+                if (documents.Count > 0)
+                {
+                    return collectionName;
+                }
+            }
+
+            // Return null or an appropriate value if no document is found
+            return null;
+        }
 
 
 

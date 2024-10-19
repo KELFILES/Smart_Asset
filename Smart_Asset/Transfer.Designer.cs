@@ -30,6 +30,9 @@
         {
             panel1 = new Panel();
             panel3 = new Panel();
+            label1 = new Label();
+            plus2_Btn = new Button();
+            plus1_Btn = new Button();
             locationType_Cmb = new ComboBox();
             unitType_Cmb = new ComboBox();
             location_Rdb = new RadioButton();
@@ -62,6 +65,9 @@
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.BackColor = Color.Gray;
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(plus2_Btn);
+            panel3.Controls.Add(plus1_Btn);
             panel3.Controls.Add(locationType_Cmb);
             panel3.Controls.Add(unitType_Cmb);
             panel3.Controls.Add(location_Rdb);
@@ -79,6 +85,39 @@
             panel3.Size = new Size(1117, 555);
             panel3.TabIndex = 7;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(615, 179);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 17);
+            label1.TabIndex = 39;
+            label1.Text = "UNIT";
+            // 
+            // plus2_Btn
+            // 
+            plus2_Btn.Enabled = false;
+            plus2_Btn.Location = new Point(882, 173);
+            plus2_Btn.Name = "plus2_Btn";
+            plus2_Btn.Size = new Size(44, 24);
+            plus2_Btn.TabIndex = 38;
+            plus2_Btn.Text = "+";
+            plus2_Btn.UseVisualStyleBackColor = true;
+            plus2_Btn.Click += plus2_Btn_Click;
+            // 
+            // plus1_Btn
+            // 
+            plus1_Btn.Enabled = false;
+            plus1_Btn.Location = new Point(555, 174);
+            plus1_Btn.Name = "plus1_Btn";
+            plus1_Btn.Size = new Size(44, 24);
+            plus1_Btn.TabIndex = 37;
+            plus1_Btn.Text = "+";
+            plus1_Btn.UseVisualStyleBackColor = true;
+            plus1_Btn.Click += plus1_Btn_Click;
+            // 
             // locationType_Cmb
             // 
             locationType_Cmb.Anchor = AnchorStyles.Top;
@@ -87,7 +126,7 @@
             locationType_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             locationType_Cmb.Enabled = false;
             locationType_Cmb.FormattingEnabled = true;
-            locationType_Cmb.Location = new Point(381, 175);
+            locationType_Cmb.Location = new Point(340, 175);
             locationType_Cmb.Name = "locationType_Cmb";
             locationType_Cmb.Size = new Size(209, 23);
             locationType_Cmb.TabIndex = 35;
@@ -101,7 +140,7 @@
             unitType_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             unitType_Cmb.Enabled = false;
             unitType_Cmb.FormattingEnabled = true;
-            unitType_Cmb.Location = new Point(608, 175);
+            unitType_Cmb.Location = new Point(667, 173);
             unitType_Cmb.Name = "unitType_Cmb";
             unitType_Cmb.Size = new Size(209, 23);
             unitType_Cmb.TabIndex = 36;
@@ -112,7 +151,7 @@
             location_Rdb.Anchor = AnchorStyles.Top;
             location_Rdb.AutoSize = true;
             location_Rdb.ForeColor = Color.White;
-            location_Rdb.Location = new Point(283, 179);
+            location_Rdb.Location = new Point(242, 179);
             location_Rdb.Name = "location_Rdb";
             location_Rdb.Size = new Size(82, 19);
             location_Rdb.TabIndex = 32;
@@ -268,5 +307,8 @@
         private ComboBox unitType_Cmb;
         public ComboBox serialNo_Cmb;
         public RadioButton location_Rdb;
+        private Button plus1_Btn;
+        private Label label1;
+        private Button plus2_Btn;
     }
 }

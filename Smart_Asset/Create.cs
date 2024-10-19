@@ -39,12 +39,15 @@ namespace Smart_Asset
 
         private void Create_Load(object sender, EventArgs e)
         {
-
+            uploadImage_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "X_Icon.ico"));
+            uploadImage_Pb.Padding = new Padding(10, 0, 20, 0);
         }
 
 
         //FIELDS
         Transfer tf = new Transfer();
+        public string pathName = null;
+
 
         private void Create_Resize(object sender, EventArgs e)
         {
@@ -56,7 +59,7 @@ namespace Smart_Asset
 
             try
             {
-                bool isExist = await MyDbMethods.CheckIfCollValueExists("SmartAssetDb", "Serial_List", "Serial" ,serial_Tb.Text);
+                bool isExist = await MyDbMethods.CheckIfCollValueExists("SmartAssetDb", "Serial_List", "Serial", serial_Tb.Text);
 
                 if (isExist)
                 {
@@ -64,10 +67,16 @@ namespace Smart_Asset
                 }
                 else
                 {
+                    string dateNow = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+
                     // Validate all required fields
                     if (IsFieldEmpty(type_Cmb.Text, "Type") ||
+                        IsFieldEmpty(brand_Tb.Text, "Brand") ||
                         IsFieldEmpty(model_Tb.Text, "Model") ||
+                        IsFieldEmpty(propertyID_Tb.Text, "Property ID") ||
                         IsFieldEmpty(serial_Tb.Text, "Serial Number") ||
+                        IsFieldEmpty(poNumber_Tb.Text, "PO Number") ||
+                        IsFieldEmpty(siNumber_Tb.Text, "SI Number") ||
                         IsFieldEmpty(cost_Tb.Text, "Cost") ||
                         IsFieldEmpty(supplier_Tb.Text, "Supplier") ||
                         IsFieldEmpty(purchaseDate_Dtp.Text, "Purchase Date"))
@@ -79,16 +88,36 @@ namespace Smart_Asset
                     var fields = new Dictionary<string, string>
                 {
                     { "Type", type_Cmb.Text },
+                    { "Brand", brand_Tb.Text },
                     { "Model", model_Tb.Text },
+                    { "PropertyID", propertyID_Tb.Text },
                     { "SerialNo", serial_Tb.Text },
+                    { "PONumber", poNumber_Tb.Text },
+                    { "SINumber", siNumber_Tb.Text },
                     { "Cost", cost_Tb.Text },
                     { "Warranty", CalculateWarranty() },
                     { "Supplier", supplier_Tb.Text },
-                    { "PurchaseDate", purchaseDate_Dtp.Text }
+                    { "PurchaseDate", purchaseDate_Dtp.Text },
+                    { "DocumentCreated", dateNow}
                 };
 
                     // Insert the document into the database
                     await MyDbMethods.InsertDocument("SmartAssetDb", "Reserved_Hardwares", fields, true);
+
+
+
+
+                    if (pathName != null)
+                    {
+                        //Insert image to database
+                        await MyDbMethods.ImgInsertToDbAsync(pathName, $"{serial_Tb.Text}", "SmartAssetDb", "Images");
+                    }
+
+                    pathName = null;
+                    uploadImage_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "X_Icon.ico"));
+                    uploadImage_Pb.Padding = new Padding(10, 0, 20, 0);
+
+
 
                     // CREATE QR CODE
                     // Clear the previous image from the PictureBox
@@ -165,13 +194,48 @@ namespace Smart_Asset
 
 
 
-
+            //CLEAR TEXTBOX IF FILL IS ENABLED
+            if (autoFill_Cb.Checked)
+            {
+                propertyID_Tb.Text = "";
+                serial_Tb.Text = "";
+                poNumber_Tb.Text = "";
+                siNumber_Tb.Text = "";
+            }
+            else
+            {
+                clearAllField();
+            }
 
 
 
 
 
         }
+
+        public void clearAllField()
+        {
+            type_Cmb.Text = "";
+            type_Cmb.SelectedIndex = -1; // Reset the selection
+            brand_Tb.Text = string.Empty;
+            model_Tb.Text = string.Empty;
+            propertyID_Tb.Text = string.Empty;
+            serial_Tb.Text = string.Empty;
+            poNumber_Tb.Text = string.Empty;
+            siNumber_Tb.Text = string.Empty;
+            cost_Tb.Text = string.Empty;
+            years_numericUpDown.Value = 0;
+            months_numericUpDown.Value = 0;
+            days_numericUpDown.Value = 0;
+            supplier_Tb.Text = string.Empty;
+            purchaseDate_Dtp.Value = DateTime.Now;
+
+            pathName = null;
+            uploadImage_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "X_Icon.ico"));
+            uploadImage_Pb.Padding = new Padding(10, 0, 20, 0);
+        }
+
+
 
         private bool IsFieldEmpty(string field, string fieldName)
         {
@@ -210,6 +274,7 @@ namespace Smart_Asset
             days_numericUpDown.Value = months_numericUpDown.Minimum;
             supplier_Tb.Text = string.Empty;
             purchaseDate_Dtp.Text = string.Empty;
+
         }
 
 
@@ -228,16 +293,7 @@ namespace Smart_Asset
 
         private void Clear_Btn_Click(object sender, EventArgs e)
         {
-            type_Cmb.Text = "";
-            type_Cmb.SelectedIndex = -1; // Reset the selection
-            model_Tb.Text = string.Empty;
-            serial_Tb.Text = string.Empty;
-            cost_Tb.Text = string.Empty;
-            years_numericUpDown.Value = 0;
-            months_numericUpDown.Value = 0;
-            days_numericUpDown.Value = 0;
-            supplier_Tb.Text = string.Empty;
-            purchaseDate_Dtp.Value = DateTime.Now;
+            clearAllField();
         }
 
         private void cost_Tb_KeyPress(object sender, KeyPressEventArgs e)
@@ -344,6 +400,19 @@ namespace Smart_Asset
         private void serial2_Cb_MouseEnter(object sender, EventArgs e)
         {
             MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serial2_Cb);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pathName = MyDbMethods.SelectImageFromFileExplorer();
+
+            if (!string.IsNullOrEmpty(pathName))
+            {
+                uploadImage_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "Check_Icon.ico"));
+                uploadImage_Pb.Padding = new Padding(10, 0, 20, 0);
+            }
+
+            
         }
     }
 }

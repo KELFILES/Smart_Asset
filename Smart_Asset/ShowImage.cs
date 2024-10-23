@@ -77,9 +77,11 @@ namespace Smart_Asset
                         {
                             //Insert image to database
                             await MyDbMethods.ImgInsertToDbAsync(pathName, $"{serialNoValue_Lb.Text}", "SmartAssetDb", "Images");
+
+                            await MyDbMethods.ImgGetToPictureBoxAsync($"{serialNoValue_Lb.Text}", "SmartAssetDb", "Images", pictureBox1);
                         }
 
-                        await MyDbMethods.ImgGetToPictureBoxAsync($"{serialNoValue_Lb.Text}", "SmartAssetDb", "Images", pictureBox1);
+
                     }
                     else if (result == DialogResult.No)
                     {
@@ -95,9 +97,13 @@ namespace Smart_Asset
                     {
                         //Insert image to database
                         await MyDbMethods.ImgInsertToDbAsync(pathName, $"{serialNoValue_Lb.Text}", "SmartAssetDb", "Images");
+
+                        await MyDbMethods.ImgGetToPictureBoxAsync($"{serialNoValue_Lb.Text}", "SmartAssetDb", "Images", pictureBox1);
+                        
+                        isImageFound = true;
                     }
 
-                    await MyDbMethods.ImgGetToPictureBoxAsync($"{serialNoValue_Lb.Text}", "SmartAssetDb", "Images", pictureBox1);
+                    
                 }
 
         }
@@ -109,12 +115,21 @@ namespace Smart_Asset
                 // Open folder selection dialog
                 string folderPath = MyDbMethods.SelectFolderFromFileExplorer();
 
-                // Ensure the file path includes the ".png" extension
-                string fileName = $"{serialNoValue_Lb.Text}.png"; // Append ".png" to the file name
-                string filePath = System.IO.Path.Combine(folderPath, fileName);
+                // Check if a valid folder path was selected
+                if (!string.IsNullOrEmpty(folderPath))
+                {
+                    // Ensure the file path includes the ".png" extension
+                    string fileName = $"{serialNoValue_Lb.Text}.png"; // Append ".png" to the file name
+                    string filePath = System.IO.Path.Combine(folderPath, fileName);
 
-                // Save the image from the PictureBox to the full file path
-                MyDbMethods.SaveImageFromPictureBox(pictureBox1, filePath, System.Drawing.Imaging.ImageFormat.Png);
+                    // Save the image from the PictureBox to the full file path
+                    MyDbMethods.SaveImageFromPictureBox(pictureBox1, filePath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+                else
+                {
+                    // Handle the case where the user cancels the folder selection dialog
+                    MessageBox.Show("Save operation was canceled. No folder selected.");
+                }
             }
             else
             {

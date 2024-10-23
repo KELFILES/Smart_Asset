@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -1900,30 +1901,67 @@ namespace Smart_Asset
         }
 
         //INSERT IMAGE TO DB
-        public static async Task ImgInsertToDbAsync(string imagePath, string savingName, string dbName, string collName)
+        public static async Task<bool> ImgInsertToDbAsync(string imagePath, string savingName, string dbName, string collName)
         {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collName);
-
-            // Load the image from the specified path asynchronously
-            Image image = await Task.Run(() => Image.FromFile(imagePath));
-
-            // Convert the image to byte array asynchronously
-            byte[] imageBytes = await Task.Run(() => ImageToByteArray(image));
-
-            // Create a MongoDB document to store the image bytes and the image name
-            var document = new BsonDocument
+            try
             {
-                { "image", imageBytes },
-                { "FileName", savingName } // Store the custom image name
-            };
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var collection = database.GetCollection<BsonDocument>(collName);
 
-            // Insert the document into the collection asynchronously
-            await collection.InsertOneAsync(document);
+                // Load the image from the specified path asynchronously
+                Image image = await Task.Run(() => Image.FromFile(imagePath));
 
-            Console.WriteLine($"Image {savingName} saved successfully.");
+                // Convert the image to byte array asynchronously
+                byte[] imageBytes = await Task.Run(() => ImageToByteArray(image));
+
+                // Create a filter to check if a document with the same FileName already exists
+                var filter = Builders<BsonDocument>.Filter.Eq("FileName", savingName);
+
+                // Check if an existing document with the same FileName is present
+                var existingDocument = await collection.Find(filter).FirstOrDefaultAsync();
+
+                bool isOverwrite = false;  // Flag to track if an overwrite is happening
+
+                if (existingDocument != null)
+                {
+                    // If an image with the same FileName exists, delete the old document
+                    await collection.DeleteOneAsync(filter);
+                    Console.WriteLine($"Existing image {savingName} deleted.");
+                    isOverwrite = true;  // Set flag to true since an overwrite occurred
+                }
+
+                // Create a new MongoDB document to store the new image bytes and the image name
+                var newDocument = new BsonDocument
+                {
+                    { "image", imageBytes },
+                    { "FileName", savingName } // Store the custom image name
+                };
+
+                // Insert the new document into the collection asynchronously
+                await collection.InsertOneAsync(newDocument);
+
+                // Show the message box only if an overwrite occurred
+                if (isOverwrite)
+                {
+                    MessageBox.Show($"Image {savingName} has been overwritten successfully.", "Overwrite Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Image {savingName} has been saved successfully.", "Overwrite Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Return true to indicate success
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the error and return false to indicate failure
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return false;
+            }
         }
+
 
 
         public static Task<Image> ByteArrayToImageAsync(byte[] byteArray)
@@ -1937,13 +1975,14 @@ namespace Smart_Asset
             });
         }
 
-        public static async Task<Image> ImgGetToDbAsync(string imageId, string DefaultConnectionString, string dbName, string collName)
+        public static async Task ImgGetToPictureBoxAsync(string FileName, string dbName, string collName, PictureBox pictureBox)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
             var collection = database.GetCollection<BsonDocument>(collName);
 
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(imageId));
+            // Create a filter to find the document by FileName (as a string)
+            var filter = Builders<BsonDocument>.Filter.Eq("FileName", FileName);
 
             // Asynchronously find the document
             var document = await collection.Find(filter).FirstOrDefaultAsync();
@@ -1952,35 +1991,71 @@ namespace Smart_Asset
             {
                 byte[] imageBytes = document["image"].AsByteArray;
 
-                // Convert the byte array to an Image asynchronously
-                return await ByteArrayToImageAsync(imageBytes);
+                // Convert the byte array to an Image asynchronously and store it in the PictureBox
+                pictureBox.Image = await ByteArrayToImageAsync(imageBytes);
+            }
+            else
+            {
+                pictureBox.Image = null; // Clear the PictureBox if no image is found
+            }
+        }
+
+        public static async void SaveImageFromPictureBox(PictureBox pictureBox, string filePath, System.Drawing.Imaging.ImageFormat format)
+        {
+            if (pictureBox.Image != null)
+            {
+                try
+                {
+                    // Create a true copy of the image to avoid GDI+ errors and file locking issues
+                    using (Bitmap bmp = new Bitmap(pictureBox.Image.Width, pictureBox.Image.Height))
+                    {
+                        // Draw the PictureBox image into the new Bitmap
+                        using (Graphics g = Graphics.FromImage(bmp))
+                        {
+                            g.DrawImage(pictureBox.Image, 0, 0, pictureBox.Image.Width, pictureBox.Image.Height);
+                        }
+
+                        // Save the bitmap copy to the specified file path in the desired format
+                        bmp.Save(filePath, format);
+                    }
+
+                    MessageBox.Show("Image saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while saving the image: {ex.Message}\n{ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image to save.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public static string OpenSaveFileDialog(string defaultFileName, string filter = "PNG Files|*.png|JPEG Files|*.jpg|BMP Files|*.bmp|All Files|*.*")
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                // Set default file name (optional)
+                saveFileDialog.FileName = defaultFileName;
+
+                // Set filter for file types
+                saveFileDialog.Filter = filter;
+
+                // Set the default extension for the file
+                saveFileDialog.DefaultExt = "png"; // You can change this based on your preference
+
+                // Show the dialog and get the result
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Return the selected file path
+                    return saveFileDialog.FileName;
+                }
             }
 
-            return null; // Return null if no image was found
+            // Return null if the user cancels or closes the dialog
+            return null;
         }
-
-        public static async Task ImgSaveFromDbAsync(Image image, string DefaultConnectionString, string dbName, string collName)
-        {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collName);
-
-            // Convert the image to byte array asynchronously
-            byte[] imageBytes = await Task.Run(() => ImageToByteArray(image));
-
-            // Create a MongoDB document to store the image bytes
-            var document = new BsonDocument
-            {
-                { "image", imageBytes },
-                { "description", "Sample Image" } // Add additional fields if needed
-            };
-
-            // Insert the document asynchronously
-            await collection.InsertOneAsync(document);
-
-            Console.WriteLine("Image saved successfully.");
-        }
-
 
         public static string SelectImageFromFileExplorer()
         {
@@ -2004,6 +2079,29 @@ namespace Smart_Asset
             }
 
             // Return null or an empty string if no file was selected
+            return null;
+        }
+
+        public static string SelectFolderFromFileExplorer()
+        {
+            // Create an instance of FolderBrowserDialog
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            {
+                // Set the description for the dialog
+                folderBrowserDialog.Description = "Select a folder to save files";
+
+                // Optionally set the initial directory (e.g., Desktop or any custom path)
+                folderBrowserDialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                // Show the dialog and check if a folder was selected
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Return the selected folder's path
+                    return folderBrowserDialog.SelectedPath;
+                }
+            }
+
+            // Return null or an empty string if no folder was selected
             return null;
         }
 

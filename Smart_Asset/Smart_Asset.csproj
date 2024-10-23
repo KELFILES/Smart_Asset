@@ -128,6 +128,9 @@
     <None Update="Images\manageUsers_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\noImageFound.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\questionMark_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

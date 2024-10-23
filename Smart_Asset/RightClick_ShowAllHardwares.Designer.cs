@@ -35,6 +35,7 @@
             Transfer = new Button();
             replace_Btn = new Button();
             borrow_Btn = new Button();
+            showImage_Btn = new Button();
             SuspendLayout();
             // 
             // refresh_Btn
@@ -107,11 +108,22 @@
             borrow_Btn.UseVisualStyleBackColor = true;
             borrow_Btn.Click += borrow_Btn_Click;
             // 
+            // showImage_Btn
+            // 
+            showImage_Btn.Location = new Point(12, 271);
+            showImage_Btn.Name = "showImage_Btn";
+            showImage_Btn.Size = new Size(172, 31);
+            showImage_Btn.TabIndex = 8;
+            showImage_Btn.Text = "Show Image";
+            showImage_Btn.UseVisualStyleBackColor = true;
+            showImage_Btn.Click += showImage_Btn_Click;
+            // 
             // RightClick_ShowAllHardwares
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(193, 277);
+            ClientSize = new Size(193, 331);
+            Controls.Add(showImage_Btn);
             Controls.Add(borrow_Btn);
             Controls.Add(replace_Btn);
             Controls.Add(Transfer);
@@ -133,5 +145,6 @@
         public Button Transfer;
         public Button replace_Btn;
         public Button borrow_Btn;
+        public Button showImage_Btn;
     }
 }

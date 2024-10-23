@@ -39,6 +39,7 @@ namespace Smart_Asset
         Repair_Window rp = new Repair_Window();
         Dispose_Window dp = new Dispose_Window();
         Replacement rpl = new Replacement();
+        ShowImage si = new ShowImage();
 
 
         // Constructor that accepts Form1 (Read) as a parameter
@@ -275,6 +276,25 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
+        }
+
+        private void showImage_Btn_Click(object sender, EventArgs e)
+        {
+            if (getData == null || getData.Count == 0)
+            {
+                MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (getData.Count > 1)
+            {
+                MessageBox.Show("Please Select 1 Row only to Show Image.", "Multiple Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            si.FormBorderStyle = FormBorderStyle.FixedSingle;
+            si.StartPosition = FormStartPosition.CenterScreen;
+            si.serialNoValue_Lb.Text = string.Join(", ", getData);
+            si.Show();
         }
     }
 }

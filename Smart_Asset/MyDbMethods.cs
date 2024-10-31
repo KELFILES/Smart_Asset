@@ -1,18 +1,8 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using MongoDB.Driver.Core.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Smart_Asset.Read;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ComboBox = System.Windows.Forms.ComboBox;
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace Smart_Asset
@@ -28,6 +18,7 @@ namespace Smart_Asset
         private string connectionString;
         private string dbName;
         private string collectionName;
+        private string decryptedPass { get; set; }
 
         private MyDbMethods()
         {
@@ -136,6 +127,35 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //OVERLOADING METHOD FOR INSERTDOCUMENT WITH DICTIONARY <string, Object>
+        public static async Task InsertDocument(string dbName, string collName, Dictionary<string, object> fields)
+        {
+            try
+            {
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+                var collection = database.GetCollection<BsonDocument>(collName);
+
+                // Manually create the BsonDocument to handle mixed types
+                var document = new BsonDocument();
+                foreach (var field in fields)
+                {
+                    document.Add(field.Key, BsonValue.Create(field.Value));
+                }
+
+                await collection.InsertOneAsync(document);
+
+                // Show success message
+                MessageBox.Show("Document inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Show error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
         //OVERLOADING METHOD WITH MESSAGEBOX PARAMETER
@@ -477,8 +497,6 @@ namespace Smart_Asset
         }
 
 
-
-
         //OVERLOADED FOR N/A UNIT
         public static void ReadLocation(string dbName, DataGridView dataGridViewName, string collectionName, bool isNA)
         {
@@ -705,7 +723,7 @@ namespace Smart_Asset
             // Iterate over all collections, except the ones we want to exclude
             foreach (var collectionName in collectionNames.ToList())
             {
-                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List" && collectionName != "Images")  // Skip excluded collections
+                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List" && collectionName != "Images" && collectionName != "Users")  // Skip excluded collections
                 {
                     var collection = database.GetCollection<BsonDocument>(collectionName);
 
@@ -1061,6 +1079,17 @@ namespace Smart_Asset
             dataGridViewName.CellClick += DataGridView_CellClick;
         }
 
+
+        
+
+
+
+
+
+
+
+
+
         private static DateTimePicker _dateTimePicker;
 
         private static void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1152,19 +1181,18 @@ namespace Smart_Asset
             var database = client.GetDatabase(dbName);
 
             LockColumns(dataGridView);
+            bool isSuccess = true;
 
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
                 if (row.IsNewRow) continue;
 
-                // Assuming SerialNo is unique. If not, use other fields or a combination for a unique filter.
                 var serialNo = row.Cells["SerialNo"].Value?.ToString();
                 if (string.IsNullOrEmpty(serialNo)) continue;
 
-                var docCollectionName = row.Cells["Location"].Value?.ToString(); // Get the original collection name
-                var collection = database.GetCollection<BsonDocument>(docCollectionName); // Use the correct collection
+                var docCollectionName = row.Cells["Location"].Value?.ToString();
+                var collection = database.GetCollection<BsonDocument>(docCollectionName);
 
-                // Use SerialNo as the filter for updating the document
                 var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
 
                 var update = Builders<BsonDocument>.Update
@@ -1179,11 +1207,179 @@ namespace Smart_Asset
                     .Set("Supplier", row.Cells["Supplier"].Value?.ToString())
                     .Set("PurchaseDate", row.Cells["PurchaseDate"].Value?.ToString());
 
-                collection.UpdateOne(filter, update);
+                try
+                {
+                    collection.UpdateOne(filter, update);
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    MessageBox.Show($"Error updating SerialNo {serialNo}: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
-            MessageBox.Show("Changes updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (isSuccess)
+            {
+                MessageBox.Show("Changes updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
+
+        public static void UpdateUsingUserID(string dbName, string collectionName, DataGridView dataGridViewName, string userIds)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            var allDocuments = new List<Read_Model_ForManageUsers>();
+
+            // Split the input by commas and trim spaces, then convert to ObjectId
+            var userIdList = userIds.Split(',')
+                                     .Select(s => s.Trim())
+                                     .Where(s => !string.IsNullOrEmpty(s))
+                                     .Select(id => ObjectId.Parse(id)) // Convert to ObjectId
+                                     .ToList();
+
+            if (userIdList.Count == 0)
+            {
+                MessageBox.Show("Please provide valid UserID(s).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Console.WriteLine("UserIDs to search: " + string.Join(", ", userIdList));
+
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Use In filter to match any of the provided ObjectIds in userID
+            var filter = Builders<BsonDocument>.Filter.In("userID", userIdList);
+            var documents = collection.Find(filter).ToList();
+
+            Console.WriteLine("Documents found: " + documents.Count);
+
+            foreach (var document in documents)
+            {
+                var update = Builders<BsonDocument>.Update
+                    .Set("name", document.GetValue("name", "").AsString)
+                    .Set("username", document.GetValue("username", "").AsString)
+                    .Set("email", document.GetValue("email", "").AsString)
+                    .Set("contactNo", document.GetValue("contactNo", "").AsString)
+                    .Set("address", document.GetValue("address", "").AsString);
+
+                // Apply the update using the ObjectId from "userID"
+                collection.UpdateOne(
+                    Builders<BsonDocument>.Filter.Eq("userID", document.GetValue("userID").AsObjectId),
+                    update
+                );
+            }
+
+            var userList = documents.Select(doc => new Read_Model_ForManageUsers
+            {
+                UserID = doc.GetValue("userID").AsObjectId.ToString(), // Convert ObjectId to String
+                Name = doc.GetValue("name", "").AsString,
+                Username = doc.GetValue("username", "").AsString,
+                Email = doc.GetValue("email", "").AsString,
+                ContactNo = doc.GetValue("contactNo", "").AsString,
+                Address = doc.GetValue("address", "").AsString,
+            }).ToList();
+
+            allDocuments.AddRange(userList);
+
+            if (allDocuments.Count == 0)
+            {
+                MessageBox.Show($"No records found with the provided UserIDs.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            dataGridViewName.DataSource = allDocuments;
+
+            // Make UserID column read-only and set up event handlers
+            if (dataGridViewName.Columns.Contains("UserID"))
+            {
+                var userIdColumn = dataGridViewName.Columns["UserID"];
+                userIdColumn.ReadOnly = true;
+
+                // Set the background color and forecolor to match the style in the provided image
+                userIdColumn.DefaultCellStyle.BackColor = Color.LightGray;
+                userIdColumn.DefaultCellStyle.ForeColor = Color.Gray;
+            }
+
+            dataGridViewName.CellMouseEnter += (s, e) =>
+            {
+                if (e.ColumnIndex >= 0 && dataGridViewName.Columns[e.ColumnIndex].Name == "UserID")
+                {
+                    dataGridViewName.Cursor = Cursors.No;
+                }
+            };
+
+            dataGridViewName.CellMouseLeave += (s, e) =>
+            {
+                if (e.ColumnIndex >= 0 && dataGridViewName.Columns[e.ColumnIndex].Name == "UserID")
+                {
+                    dataGridViewName.Cursor = Cursors.Default;
+                }
+            };
+
+            LockColumns(dataGridViewName);
+            dataGridViewName.CellMouseEnter += DataGridView_CellMouseEnter;
+            dataGridViewName.CellMouseLeave += DataGridView_CellMouseLeave;
+        }
+
+
+        public static void UpdateChangesToUsers(string dbName, DataGridView dataGridView, string collectionName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            LockColumns(dataGridView);
+            bool isSuccess = true;
+
+            // Access the specified collection using collectionName
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                var userId = row.Cells["UserID"].Value?.ToString();
+                if (string.IsNullOrEmpty(userId)) continue;
+
+                // Parse userId as ObjectId for filter
+                if (!ObjectId.TryParse(userId, out var objectId))
+                {
+                    MessageBox.Show($"Invalid UserID format for row {row.Index + 1}. Skipping update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    continue;
+                }
+
+                var filter = Builders<BsonDocument>.Filter.Eq("userID", objectId);
+
+                var update = Builders<BsonDocument>.Update
+                    .Set("name", row.Cells["Name"].Value?.ToString())
+                    .Set("username", row.Cells["Username"].Value?.ToString())
+                    .Set("email", row.Cells["Email"].Value?.ToString())
+                    .Set("contactNo", row.Cells["ContactNo"].Value?.ToString())
+                    .Set("address", row.Cells["Address"].Value?.ToString());
+
+                try
+                {
+                    var result = collection.UpdateOne(filter, update);
+                    if (result.ModifiedCount == 0)
+                    {
+                        MessageBox.Show($"No document with UserID {userId} was updated. It may not exist in the database.", "Update Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    MessageBox.Show($"Error updating UserID {userId}: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            if (isSuccess)
+            {
+                MessageBox.Show("Changes updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
 
 
 
@@ -2209,6 +2405,125 @@ namespace Smart_Asset
             dataGridViewName.DataSource = allDocuments;
         }
 
+        public static async Task EnsureSuperAdminExistsAsync(string dbName, string collName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var usersCollection = database.GetCollection<BsonDocument>(collName);
+
+            // Filter to find a document with role "SuperAdmin"
+            var filter = Builders<BsonDocument>.Filter.Eq("role", "Super Admin");
+            var superAdmin = await usersCollection.Find(filter).FirstOrDefaultAsync();
+
+            // If no document with role "SuperAdmin" is found, create one with placeholder values
+            if (superAdmin == null)
+            {
+                string encrypted = MyOtherMethods.EncryptPassword("SuperAdmin123");
+
+                var defaultSuperAdmin = new BsonDocument
+                {
+                    { "_id", ObjectId.GenerateNewId() }, // Automatically generated ObjectId
+                    { "name", "NotSet" },
+                    { "email", "NotSet" },
+                    { "contactNo", "NotSet" },
+                    { "address", "NotSet" },
+                    { "username", "SuperAdmin" },
+                    { "password", $"{encrypted}" },
+                    { "role", "Super Admin" },
+                    { "userID", ObjectId.GenerateNewId() } // Assigning userID as a new ObjectId for uniqueness
+                };
+
+                await usersCollection.InsertOneAsync(defaultSuperAdmin);
+            }
+        }
+
+        public static async Task<UserDetails> GetUserDetailsAsync(string dbName, string collName, string username, string password)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var usersCollection = database.GetCollection<BsonDocument>(collName);
+
+            // Build the filter for username and password
+            var filter = Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("username", username),
+                Builders<BsonDocument>.Filter.Eq("password", password)
+            );
+
+            // Search for the document with the specified username and password
+            var userDocument = await usersCollection.Find(filter).FirstOrDefaultAsync();
+
+            if (userDocument != null)
+            {
+                // Initialize a new UserDetails instance to store retrieved data
+                var userDetails = new UserDetails
+                {
+                    Name = userDocument.Contains("name") ? userDocument["name"].AsString : null,
+                    Email = userDocument.Contains("email") ? userDocument["email"].AsString : null,
+                    ContactNo = userDocument.Contains("contactNo") ? userDocument["contactNo"].AsString : null,
+                    Address = userDocument.Contains("address") ? userDocument["address"].AsString : null,
+                    Username = userDocument.Contains("username") ? userDocument["username"].AsString : null,
+                    Role = userDocument.Contains("role") ? userDocument["role"].AsString : null,
+                    UserID = userDocument.Contains("userID") ? userDocument["userID"].ToString() : null // Convert to string
+                };
+
+                return userDetails; // Return the populated UserDetails object
+            }
+
+            // Return null if the user was not found
+            return null;
+        }
+
+        public class UserDetails
+        {
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public string ContactNo { get; set; }
+            public string Address { get; set; }
+            public string Username { get; set; }
+            public string Role { get; set; }
+            public string? UserID { get; set; } // Nullable string to handle missing values
+        }
+
+
+        public static void ReadManageUsers(string dbName, DataGridView dataGridViewName, string collectionName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            // Get the specified collection by name
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Retrieve all documents from the collection (you can add filters if needed)
+            var documents = collection.Find(new BsonDocument()).ToList();
+
+            var allDocuments = documents.Select(doc => new
+            {
+                // Aligning fields in the specified order
+                UserID = doc.Contains("userID")
+                         ? (doc["userID"].BsonType == BsonType.ObjectId
+                            ? doc["userID"].AsObjectId.ToString()
+                            : doc["userID"].AsString)
+                         : string.Empty,
+
+                Name = doc.Contains("name") && doc["name"].IsString ? doc["name"].AsString : string.Empty,
+                Username = doc.Contains("username") && doc["username"].IsString ? doc["username"].AsString : string.Empty,
+                //Password = doc.Contains("password") && doc["password"].IsString ? doc["password"].AsString : string.Empty,
+                Email = doc.Contains("email") && doc["email"].IsString ? doc["email"].AsString : string.Empty,
+                ContactNo = doc.Contains("contactNo") && doc["contactNo"].IsString ? doc["contactNo"].AsString : string.Empty,
+                Address = doc.Contains("address") && doc["address"].IsString ? doc["address"].AsString : string.Empty,
+                Role = doc.Contains("role") && doc["role"].IsString ? doc["role"].AsString : string.Empty
+            }).ToList<object>();
+
+            if (allDocuments.Count == 0)
+            {
+                // Optionally, clear the DataGridView or set it to an empty state
+                dataGridViewName.DataSource = null;
+                return;
+            }
+
+            // Bind the list to the DataGridView
+            dataGridViewName.DataSource = allDocuments;
+        }
 
     }
 }

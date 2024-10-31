@@ -166,6 +166,7 @@
             Text = "Login";
             WindowState = FormWindowState.Maximized;
             FormClosed += Login_FormClosed;
+            Load += Login_Load;
             Shown += Login_Shown;
             KeyDown += Login_KeyDown;
             panel1.ResumeLayout(false);

@@ -32,7 +32,7 @@ namespace Smart_Asset
 
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

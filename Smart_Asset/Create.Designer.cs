@@ -277,6 +277,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Top;
+            button1.BackColor = Color.White;
             button1.FlatAppearance.MouseDownBackColor = Color.Red;
             button1.FlatAppearance.MouseOverBackColor = Color.Lime;
             button1.FlatStyle = FlatStyle.Flat;
@@ -286,7 +287,7 @@
             button1.Size = new Size(170, 30);
             button1.TabIndex = 81;
             button1.Text = "UPLOAD IMAGE";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // siNumber_Tb

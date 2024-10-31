@@ -32,6 +32,11 @@
             logout_Panel = new Panel();
             logout_Btn = new Button();
             panel5 = new Panel();
+            panel1 = new Panel();
+            userID_Lbl = new Label();
+            label2 = new Label();
+            name_Lbl = new Label();
+            label1 = new Label();
             backupData_Btn = new Button();
             createReport_Btn = new Button();
             ManageUsers_Btn = new Button();
@@ -57,6 +62,7 @@
             sideMenu_Panel.SuspendLayout();
             logout_Panel.SuspendLayout();
             panel5.SuspendLayout();
+            panel1.SuspendLayout();
             fileMaintenance_SubMenuPanel.SuspendLayout();
             logo_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -110,6 +116,7 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(11, 8, 20);
+            panel5.Controls.Add(panel1);
             panel5.Controls.Add(backupData_Btn);
             panel5.Controls.Add(createReport_Btn);
             panel5.Controls.Add(ManageUsers_Btn);
@@ -122,6 +129,62 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(246, 933);
             panel5.TabIndex = 49;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(userID_Lbl);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(name_Lbl);
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 749);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(246, 184);
+            panel1.TabIndex = 40;
+            // 
+            // userID_Lbl
+            // 
+            userID_Lbl.Anchor = AnchorStyles.Top;
+            userID_Lbl.AutoSize = true;
+            userID_Lbl.ForeColor = Color.White;
+            userID_Lbl.Location = new Point(18, 85);
+            userID_Lbl.Name = "userID_Lbl";
+            userID_Lbl.Size = new Size(51, 19);
+            userID_Lbl.TabIndex = 3;
+            userID_Lbl.Text = "UserID";
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top;
+            label2.AutoSize = true;
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(18, 66);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 19);
+            label2.TabIndex = 2;
+            label2.Text = "User ID:";
+            // 
+            // name_Lbl
+            // 
+            name_Lbl.Anchor = AnchorStyles.Top;
+            name_Lbl.AutoSize = true;
+            name_Lbl.ForeColor = Color.White;
+            name_Lbl.Location = new Point(18, 37);
+            name_Lbl.Name = "name_Lbl";
+            name_Lbl.Size = new Size(45, 19);
+            name_Lbl.TabIndex = 1;
+            name_Lbl.Text = "Name";
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top;
+            label1.AutoSize = true;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(17, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(40, 19);
+            label1.TabIndex = 0;
+            label1.Text = "User:";
             // 
             // backupData_Btn
             // 
@@ -516,11 +579,14 @@
             Padding = new Padding(2);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrontPage";
+            FormClosed += FrontPage_Final_FormClosed;
             Load += FrontPage_Final_Load;
             sideMenu_Panel.ResumeLayout(false);
             logout_Panel.ResumeLayout(false);
             logout_Panel.PerformLayout();
             panel5.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             fileMaintenance_SubMenuPanel.ResumeLayout(false);
             logo_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -545,7 +611,6 @@
         private PictureBox pictureBox1;
         private Panel logout_Panel;
         private Button logout_Btn;
-        private Button ManageUsers_Btn;
         private PictureBox headerPicture_Pb;
         public Label header_Lbl;
         private Button replacement_Btn;
@@ -557,5 +622,11 @@
         private Button reserved_Btn;
         private Button backupData_Btn;
         private Button createReport_Btn;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        public Label userID_Lbl;
+        public Label name_Lbl;
+        public Button ManageUsers_Btn;
     }
 }

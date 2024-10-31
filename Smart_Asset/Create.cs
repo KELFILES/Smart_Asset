@@ -86,20 +86,20 @@ namespace Smart_Asset
 
                     // Prepare the fields to be inserted
                     var fields = new Dictionary<string, string>
-                {
-                    { "Type", type_Cmb.Text },
-                    { "Brand", brand_Tb.Text },
-                    { "Model", model_Tb.Text },
-                    { "PropertyID", propertyID_Tb.Text },
-                    { "SerialNo", serial_Tb.Text },
-                    { "PONumber", poNumber_Tb.Text },
-                    { "SINumber", siNumber_Tb.Text },
-                    { "Cost", cost_Tb.Text },
-                    { "Warranty", CalculateWarranty() },
-                    { "Supplier", supplier_Tb.Text },
-                    { "PurchaseDate", purchaseDate_Dtp.Text },
-                    { "DocumentCreated", dateNow}
-                };
+                    {
+                        { "Type", type_Cmb.Text },
+                        { "Brand", brand_Tb.Text },
+                        { "Model", model_Tb.Text },
+                        { "PropertyID", propertyID_Tb.Text },
+                        { "SerialNo", serial_Tb.Text },
+                        { "PONumber", poNumber_Tb.Text },
+                        { "SINumber", siNumber_Tb.Text },
+                        { "Cost", cost_Tb.Text },
+                        { "Warranty", CalculateWarranty() },
+                        { "Supplier", supplier_Tb.Text },
+                        { "PurchaseDate", purchaseDate_Dtp.Text },
+                        { "DocumentCreated", dateNow}
+                    };
 
                     // Insert the document into the database
                     await MyDbMethods.InsertDocument("SmartAssetDb", "Reserved_Hardwares", fields, true);

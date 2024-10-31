@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Smart_Asset
 {
@@ -14,6 +15,9 @@ namespace Smart_Asset
     {
         // Declare the background image at the class level
         private Image backgroundImage;
+
+        //FIELDS
+        private string encrypted {  get; set; } 
 
         public Login()
         {
@@ -39,21 +43,49 @@ namespace Smart_Asset
             Application.Exit();
         }
 
-        private void submit_Btn_Click_1(object sender, EventArgs e)
+        private async void submit_Btn_Click_1(object sender, EventArgs e)
         {
-            if (username_Tb.Text.Equals("Admin") && password_Tb.Text.Equals("Admin123"))
+            string password = password_Tb.Text;
+
+            if (username_Tb.Text.Equals("SuperAdmin") && password.Equals("SuperAdmin123"))
             {
-                MessageBox.Show("Login Successful");
+                //FOR FIRST USE OF DATABASE CREATE FIRST SUPER ADMIN
+                await MyDbMethods.EnsureSuperAdminExistsAsync("SmartAssetDb", "Users");
+            }
+
+
+
+
+
+            // Encryption
+            encrypted = MyOtherMethods.EncryptPassword(password);
+
+            var userDetails = await MyDbMethods.GetUserDetailsAsync("SmartAssetDb", "Users", $"{username_Tb.Text}", $"{encrypted}");
+
+            if (userDetails != null)
+            {
+                Console.WriteLine($"Name: {userDetails.Name}");
+                Console.WriteLine($"Email: {userDetails.Email}");
+                Console.WriteLine($"ContactNo: {userDetails.ContactNo}");
+                Console.WriteLine($"Address: {userDetails.Address}");
+                Console.WriteLine($"Username: {userDetails.Username}");
+                Console.WriteLine($"Role: {userDetails.Role}");
+                Console.WriteLine($"UserID: {userDetails.UserID}");
+
+
 
                 FrontPage_Final pff = new FrontPage_Final();
+
+                pff.name_Lbl.Text = userDetails.Name;
+                pff.userID_Lbl.Text = userDetails.UserID;
+
                 pff.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Wrong Username or Password");
+                MessageBox.Show("User not found or fields missing.");
             }
-            Console.WriteLine(password_Lbl.Text);
         }
 
         private void Login_Shown(object sender, EventArgs e)
@@ -122,6 +154,11 @@ namespace Smart_Asset
             {
                 submit_Btn.PerformClick();
             }
+        }
+
+        private async void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

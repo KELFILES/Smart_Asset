@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Smart_Asset.MyDbMethods;
 using static System.Windows.Forms.DataFormats;
 
 namespace Smart_Asset
@@ -30,9 +31,14 @@ namespace Smart_Asset
             originalBackColor = sideMenu_Panel.BackColor;
             SubOriginalBackColor = fileMaintenance_SubMenuPanel.BackColor;
 
-
             fileMaintenance_SubMenuPanel.Visible = false;
+
+
         }
+
+
+
+
 
 
         // Enable double buffering for the entire form
@@ -55,11 +61,20 @@ namespace Smart_Asset
         Deployment dp;
         Swap sw;
         Borrow br = new Borrow();
+        ManageUsers mu = new ManageUsers();
 
         public static string selectedButton = "";
         RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
         RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
         RightClick_DisposedHardwares dsp = new RightClick_DisposedHardwares();
+
+        public static string name = "";
+        public static string email = "";
+        public static string contactNo = "";
+        public static string address = "";
+        public static string username = "";
+        public static string role = "";
+        public static string userID = "";
 
         private Action _lastRefreshAction; // Action to store the last refresh operation
 
@@ -80,6 +95,8 @@ namespace Smart_Asset
 
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
+            ManageUsers_Btn.Hide();
+
             // Scroll the panel to the top
             sideMenu_Panel.AutoScrollPosition = new Point(0, 0);
 
@@ -295,9 +312,11 @@ namespace Smart_Asset
 
         private void ManageUsers_Btn_Click_1(object sender, EventArgs e)
         {
-            //showFormSelected(ref mngrl, "MANAGE ROLES");
+            showFormSelected(ref mu, "MANAGE USERS");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "manageUsers_Icon.ico"));
-            MessageBox.Show("STILL ON PROGRESS!");
+            //MyDbMethods.ReadManageUsers("SmartAssetDb", mu.dataGridView1, "Users");
+
+
         }
 
         private void createReport_Btn_Click(object sender, EventArgs e)
@@ -481,7 +500,19 @@ namespace Smart_Asset
 
         private void logout_Btn_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("STILL ON PROGRESS!");
+            // Hide and dispose of the main form
+            this.Hide();
+            DisposeCurrentFormInMainPanel(); // Clear any open forms in the main panel
+            this.Dispose();
+
+            // Release any application-level resources or reset static fields if necessary
+            ClearApplicationResources();
+
+            // Open the login form in a new context to avoid dependency on the main form
+            using (Login lg = new Login())
+            {
+                lg.ShowDialog();
+            }
         }
 
         private void ManageAsset_Btn_Click(object sender, EventArgs e)
@@ -492,7 +523,7 @@ namespace Smart_Asset
         private void asset_Btn_Click(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
 
             sah.SendClickBtnInfo("ASSETS");
@@ -658,7 +689,7 @@ namespace Smart_Asset
         private void repairing_Btn_Click(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "REPLACEMENT");
 
@@ -671,7 +702,7 @@ namespace Smart_Asset
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
-            rd.panel2.Padding = new Padding(10,10,0,10);
+            rd.panel2.Padding = new Padding(10, 10, 0, 10);
             HideColumnIfExists("Location");
 
 
@@ -682,7 +713,7 @@ namespace Smart_Asset
         private void cleaning_Btn_Click_1(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "CLEANING");
 
@@ -694,7 +725,7 @@ namespace Smart_Asset
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
-            rd.panel2.Padding = new Padding(10,10,0,10);
+            rd.panel2.Padding = new Padding(10, 10, 0, 10);
             HideColumnIfExists("Location");
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
@@ -703,7 +734,7 @@ namespace Smart_Asset
         private void disposed_Btn_Click_1(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "DISPOSED");
 
@@ -715,7 +746,7 @@ namespace Smart_Asset
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
-            rd.panel2.Padding = new Padding(10,10,0,10);
+            rd.panel2.Padding = new Padding(10, 10, 0, 10);
             HideColumnIfExists("Location");
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "disposed_Icon.ico"));
@@ -724,7 +755,7 @@ namespace Smart_Asset
         private void borrowed_Btn_Click(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "BORROWED");
 
@@ -739,7 +770,7 @@ namespace Smart_Asset
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
-            rd.panel2.Padding = new Padding(10,10,0,10);
+            rd.panel2.Padding = new Padding(10, 10, 0, 10);
             HideColumnIfExists("Location");
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "borrowed_Icon.ico"));
@@ -748,7 +779,7 @@ namespace Smart_Asset
         private async void reserved_Btn_Click(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "RESERVED");
 
@@ -762,7 +793,7 @@ namespace Smart_Asset
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
-            rd.panel2.Padding = new Padding(10,10,0,10);
+            rd.panel2.Padding = new Padding(10, 10, 0, 10);
             HideColumnIfExists("Location");
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
@@ -771,7 +802,7 @@ namespace Smart_Asset
         private void archived_Btn_Click(object sender, EventArgs e)
         {
             //RESET THE SERIALNO. SELECTED
-            Read.selectedSerialNos.Clear();
+            //Read.selectedSerialNos.Clear();
 
             showFormSelected(ref rd, "ARCHIVE");
 
@@ -783,7 +814,7 @@ namespace Smart_Asset
 
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
-            rd.panel2.Padding = new Padding(10,10,0,10);
+            rd.panel2.Padding = new Padding(10, 10, 0, 10);
             HideColumnIfExists("Location");
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "archive_Icon.ico"));
@@ -807,41 +838,15 @@ namespace Smart_Asset
             }
         }
 
+        private void FrontPage_Final_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void ClearApplicationResources()
+        {
+            GC.Collect(); // Force garbage collection
+            GC.WaitForPendingFinalizers(); // Ensure all finalizers have completed
+        }
     }
 }

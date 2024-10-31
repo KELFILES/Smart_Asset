@@ -34,6 +34,9 @@
     <Compile Update="RightClick_DisposedHardwares.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="RightClick_ManageUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RightClick_Replacement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TransferAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Update_Users.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

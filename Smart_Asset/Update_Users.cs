@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace Smart_Asset
 {
-    public partial class Update : Form
+    public partial class Update_Users : Form
     {
 
         private RightClick_RepairingHardwares rc = new RightClick_RepairingHardwares();
 
 
-        public Update()
+        public Update_Users()
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace Smart_Asset
 
             if (result == DialogResult.Yes)
             {
-                MyDbMethods.UpdateChangesToDatabase("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+                MyDbMethods.UpdateChangesToUsers("SmartAssetDb", dataGridView1, "Users");
             }
             else
             {
@@ -49,39 +49,28 @@ namespace Smart_Asset
 
         private void show_Btn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(location_Cmb.Text) && !string.IsNullOrWhiteSpace(unit_Cmb.Text))
-            {
-                MyDbMethods.UpdateUsingLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-            }
-            else 
-            {
-                MessageBox.Show("SELECT LOCATION AND UNIT PROPERLY!");
-            }
+
         }
 
         private async void location_Cmb_DropDown(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Location_List", location_Cmb);
-            Cursor = Cursors.Arrow;
+
         }
 
         private async void unit_Cmb_DropDown(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            await MyDbMethods.LoadDatabase_TypeList("SmartAssetDb", "Deployment_Unit_List", unit_Cmb);
-            Cursor = Cursors.Arrow;
+
         }
 
 
         private void serialNo_Cmb_MouseEnter(object sender, EventArgs e)
         {
-            MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serialNo_Cmb);
+            MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", userID_Cmb);
         }
 
         private void show2_Btn_Click(object sender, EventArgs e)
         {
-            MyDbMethods.UpdateUsingSerialNo("SmartAssetDb", dataGridView1, $"{serialNo_Cmb.Text}");
+            MyDbMethods.UpdateUsingUserID("SmartAssetDb","Users", dataGridView1, $"{userID_Cmb.Text}");
         }
 
         private void serialNo_Cmb_KeyPress(object sender, KeyPressEventArgs e)

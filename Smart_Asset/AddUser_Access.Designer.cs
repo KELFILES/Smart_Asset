@@ -1,6 +1,6 @@
 ﻿namespace Smart_Asset
 {
-    partial class ChangeRole
+    partial class AddUser_Access
     {
         /// <summary>
         /// Required designer variable.
@@ -64,36 +64,23 @@
             disposed_Cb = new CheckBox();
             lowerLabel_Lbl = new Label();
             topLabel_Lbl = new Label();
-            panel2 = new Panel();
-            currentRoleVal_Lbl = new Label();
-            label5 = new Label();
-            nameVal_Lbl = new Label();
-            label4 = new Label();
-            newRole_Cb = new ComboBox();
-            change_Btn = new Button();
-            changeRoleTopLabel_Lbl = new Label();
-            label6 = new Label();
-            userIDVal_Lbl = new Label();
-            label3 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             otherModules_Panel.SuspendLayout();
             assetEnabled_Panel.SuspendLayout();
             manageAsset_Panel.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Gray;
             panel1.Controls.Add(panel3);
-            panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(7);
-            panel1.Size = new Size(1250, 461);
+            panel1.Size = new Size(612, 461);
             panel1.TabIndex = 0;
             // 
             // panel3
@@ -102,11 +89,11 @@
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(lowerLabel_Lbl);
             panel3.Controls.Add(topLabel_Lbl);
-            panel3.Dock = DockStyle.Right;
-            panel3.Location = new Point(647, 7);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(7, 7);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(7);
-            panel3.Size = new Size(596, 447);
+            panel3.Size = new Size(598, 447);
             panel3.TabIndex = 10;
             // 
             // panel4
@@ -119,7 +106,7 @@
             panel4.Dock = DockStyle.Bottom;
             panel4.Location = new Point(7, 117);
             panel4.Name = "panel4";
-            panel4.Size = new Size(582, 323);
+            panel4.Size = new Size(584, 323);
             panel4.TabIndex = 7;
             // 
             // otherModules_Panel
@@ -505,141 +492,13 @@
             topLabel_Lbl.TabIndex = 5;
             topLabel_Lbl.Text = "TOP LABEL";
             // 
-            // panel2
-            // 
-            panel2.BackColor = Color.DimGray;
-            panel2.Controls.Add(currentRoleVal_Lbl);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(nameVal_Lbl);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(newRole_Cb);
-            panel2.Controls.Add(change_Btn);
-            panel2.Controls.Add(changeRoleTopLabel_Lbl);
-            panel2.Controls.Add(label6);
-            panel2.Controls.Add(userIDVal_Lbl);
-            panel2.Controls.Add(label3);
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(7, 7);
-            panel2.Name = "panel2";
-            panel2.Padding = new Padding(7);
-            panel2.Size = new Size(634, 447);
-            panel2.TabIndex = 9;
-            // 
-            // currentRoleVal_Lbl
-            // 
-            currentRoleVal_Lbl.AutoSize = true;
-            currentRoleVal_Lbl.Font = new Font("Segoe UI", 14.25F);
-            currentRoleVal_Lbl.ForeColor = Color.White;
-            currentRoleVal_Lbl.Location = new Point(224, 199);
-            currentRoleVal_Lbl.Name = "currentRoleVal_Lbl";
-            currentRoleVal_Lbl.Size = new Size(138, 25);
-            currentRoleVal_Lbl.TabIndex = 14;
-            currentRoleVal_Lbl.Text = "CurrentRoleVal";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(94, 199);
-            label5.Name = "label5";
-            label5.Size = new Size(130, 25);
-            label5.TabIndex = 13;
-            label5.Text = "Current Role:";
-            // 
-            // nameVal_Lbl
-            // 
-            nameVal_Lbl.AutoSize = true;
-            nameVal_Lbl.Font = new Font("Segoe UI", 14.25F);
-            nameVal_Lbl.ForeColor = Color.White;
-            nameVal_Lbl.Location = new Point(224, 174);
-            nameVal_Lbl.Name = "nameVal_Lbl";
-            nameVal_Lbl.Size = new Size(88, 25);
-            nameVal_Lbl.TabIndex = 12;
-            nameVal_Lbl.Text = "NameVal";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(94, 174);
-            label4.Name = "label4";
-            label4.Size = new Size(69, 25);
-            label4.TabIndex = 11;
-            label4.Text = "Name:";
-            // 
-            // newRole_Cb
-            // 
-            newRole_Cb.DropDownStyle = ComboBoxStyle.DropDownList;
-            newRole_Cb.FormattingEnabled = true;
-            newRole_Cb.Location = new Point(206, 266);
-            newRole_Cb.Name = "newRole_Cb";
-            newRole_Cb.Size = new Size(247, 23);
-            newRole_Cb.TabIndex = 10;
-            newRole_Cb.TextChanged += newRole_Cb_TextChanged;
-            newRole_Cb.MouseClick += comboBox1_MouseClick;
-            // 
-            // change_Btn
-            // 
-            change_Btn.Location = new Point(264, 305);
-            change_Btn.Name = "change_Btn";
-            change_Btn.Size = new Size(112, 31);
-            change_Btn.TabIndex = 9;
-            change_Btn.Text = "CHANGE";
-            change_Btn.UseVisualStyleBackColor = true;
-            // 
-            // changeRoleTopLabel_Lbl
-            // 
-            changeRoleTopLabel_Lbl.AutoSize = true;
-            changeRoleTopLabel_Lbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            changeRoleTopLabel_Lbl.ForeColor = Color.White;
-            changeRoleTopLabel_Lbl.Location = new Point(224, 89);
-            changeRoleTopLabel_Lbl.Name = "changeRoleTopLabel_Lbl";
-            changeRoleTopLabel_Lbl.Size = new Size(179, 32);
-            changeRoleTopLabel_Lbl.TabIndex = 4;
-            changeRoleTopLabel_Lbl.Text = "CHANGE ROLE";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(99, 266);
-            label6.Name = "label6";
-            label6.Size = new Size(101, 25);
-            label6.TabIndex = 7;
-            label6.Text = "New Role:";
-            // 
-            // userIDVal_Lbl
-            // 
-            userIDVal_Lbl.AutoSize = true;
-            userIDVal_Lbl.Font = new Font("Segoe UI", 14.25F);
-            userIDVal_Lbl.ForeColor = Color.White;
-            userIDVal_Lbl.Location = new Point(224, 149);
-            userIDVal_Lbl.Name = "userIDVal_Lbl";
-            userIDVal_Lbl.Size = new Size(94, 25);
-            userIDVal_Lbl.TabIndex = 6;
-            userIDVal_Lbl.Text = "UserIDVal";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(94, 149);
-            label3.Name = "label3";
-            label3.Size = new Size(82, 25);
-            label3.TabIndex = 5;
-            label3.Text = "User ID:";
-            // 
-            // ChangeRole
+            // AddUser_Access
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1250, 461);
+            ClientSize = new Size(612, 461);
             Controls.Add(panel1);
-            Name = "ChangeRole";
+            Name = "AddUser_Access";
             Text = "ChangeRole";
             Load += ChangeRole_Load;
             panel1.ResumeLayout(false);
@@ -652,26 +511,13 @@
             assetEnabled_Panel.PerformLayout();
             manageAsset_Panel.ResumeLayout(false);
             manageAsset_Panel.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
-        private Panel panel2;
-        private Label changeRoleTopLabel_Lbl;
-        private Label label6;
-        private Button change_Btn;
-        private ComboBox newRole_Cb;
         private Panel panel3;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        public Label nameVal_Lbl;
-        public Label currentRoleVal_Lbl;
-        public Label userIDVal_Lbl;
         private Label topLabel_Lbl;
         private Label lowerLabel_Lbl;
         private Panel panel4;

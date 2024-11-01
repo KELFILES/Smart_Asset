@@ -95,8 +95,6 @@ namespace Smart_Asset
 
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
-            ManageUsers_Btn.Hide();
-
             // Scroll the panel to the top
             sideMenu_Panel.AutoScrollPosition = new Point(0, 0);
 
@@ -143,8 +141,8 @@ namespace Smart_Asset
             createReport_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "createReport_Icon.ico"));
             createReport_Btn.Padding = new Padding(10, 0, 20, 0);
 
-            backupData_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
-            backupData_Btn.Padding = new Padding(10, 0, 20, 0);
+            backupAndRestoreData_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
+            backupAndRestoreData_Btn.Padding = new Padding(10, 0, 20, 0);
         }
 
         private void customizeDesign()
@@ -606,12 +604,12 @@ namespace Smart_Asset
 
         private void backupData_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(backupData_Btn);
+            ButtonEnterColor(backupAndRestoreData_Btn);
         }
 
         private void backupData_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(backupData_Btn);
+            ButtonLeaveColor(backupAndRestoreData_Btn);
         }
 
         private void repairingHardwares_Btn_MouseEnter(object sender, EventArgs e)

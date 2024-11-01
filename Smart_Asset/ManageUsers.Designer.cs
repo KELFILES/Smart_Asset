@@ -54,7 +54,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10);
-            panel1.Size = new Size(1200, 764);
+            panel1.Size = new Size(1904, 1041);
             panel1.TabIndex = 1;
             // 
             // dataGridView1
@@ -77,7 +77,7 @@
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(10, 105);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1180, 649);
+            dataGridView1.Size = new Size(1884, 926);
             dataGridView1.TabIndex = 2;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
@@ -90,14 +90,14 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(10, 10);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1180, 95);
+            panel2.Size = new Size(1884, 95);
             panel2.TabIndex = 1;
             // 
             // panel4
             // 
             panel4.Controls.Add(addUsers_Btn);
             panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(881, 0);
+            panel4.Location = new Point(1585, 0);
             panel4.Name = "panel4";
             panel4.Size = new Size(299, 95);
             panel4.TabIndex = 4;
@@ -149,7 +149,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1200, 764);
+            ClientSize = new Size(1904, 1041);
             Controls.Add(panel1);
             Name = "ManageUsers";
             Text = "ManageUsers";

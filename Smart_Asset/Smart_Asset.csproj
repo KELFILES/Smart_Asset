@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AddUser_Access.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Dispose_Window.cs" />
     <Compile Update="Repair_Window.cs">
       <SubType>Form</SubType>

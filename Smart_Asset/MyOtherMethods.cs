@@ -150,6 +150,12 @@ namespace Smart_Asset
 
 
 
+        public static void CenterInPanel(Label lblName, Panel pnlname)
+        {
+            lblName.Location = new Point((pnlname.Width - lblName.Width) / 2, lblName.Location.Y);
+        }
+
+
 
 
     }

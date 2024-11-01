@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Smart_Asset
 {
-    public partial class ChangeRole : Form
+    public partial class AddUser_Access : Form
     {
-        public ChangeRole()
+        public AddUser_Access()
         {
             InitializeComponent();
         }
@@ -36,66 +36,8 @@ namespace Smart_Asset
             topLabel_Lbl.Text = "";
             panel4.Hide();
             assetEnabled_Panel.Visible = false;
-
-            MyOtherMethods.CenterInPanel(changeRoleTopLabel_Lbl, panel2);
         }
 
-        private void comboBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            switch (currentRoleVal_Lbl.Text)
-            {
-                case "Super Admin":
-                    newRole_Cb.Items.Clear();
-                    newRole_Cb.Items.Add("Admin");
-                    newRole_Cb.Items.Add("Custom User");
-                    break;
-                case "Admin":
-                    newRole_Cb.Items.Clear();
-                    newRole_Cb.Items.Add("Super Admin");
-                    newRole_Cb.Items.Add("Custom User");
-                    break;
-                case "Custom User":
-                    newRole_Cb.Items.Clear();
-                    newRole_Cb.Items.Add("Super Admin");
-                    newRole_Cb.Items.Add("Admin");
-                    break;
-            }
-        }
-
-        private void newRole_Cb_TextChanged(object sender, EventArgs e)
-        {
-            if (newRole_Cb.Text.Equals(String.IsNullOrEmpty) || newRole_Cb.Text.Equals(""))
-            {
-                lowerLabel_Lbl.Text = "";
-                topLabel_Lbl.Text = "";
-                panel4.Hide();
-                assetEnabled_Panel.Visible = false;
-            }
-
-            if (newRole_Cb.Text.Equals("Super Admin"))
-            {
-                lowerLabel_Lbl.Text = "All Access Is Allowed Including Manage Users.";
-                topLabel_Lbl.Text = "Super Admin";
-                panel4.Hide();
-            }
-
-            else if (newRole_Cb.Text.Equals("Admin"))
-            {
-                lowerLabel_Lbl.Text = "All Access Is Allowed Excluding Manage Users.";
-                topLabel_Lbl.Text = "Admin";
-                panel4.Hide();
-            }
-
-            else if (newRole_Cb.Text.Equals("Custom User"))
-            {
-                lowerLabel_Lbl.Text = "Select only the allowed access below.";
-                topLabel_Lbl.Text = "Custom User";
-                panel4.Show();
-            }
-
-            MyOtherMethods.CenterInPanel(lowerLabel_Lbl, panel3);
-            MyOtherMethods.CenterInPanel(topLabel_Lbl, panel3);
-        }
 
         private void assets_Cb_CheckedChanged(object sender, EventArgs e)
         {

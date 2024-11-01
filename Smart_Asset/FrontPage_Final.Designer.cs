@@ -37,7 +37,7 @@
             label2 = new Label();
             name_Lbl = new Label();
             label1 = new Label();
-            backupData_Btn = new Button();
+            backupAndRestoreData_Btn = new Button();
             createReport_Btn = new Button();
             ManageUsers_Btn = new Button();
             artificialIntelligence_Btn = new Button();
@@ -117,7 +117,7 @@
             // 
             panel5.BackColor = Color.FromArgb(11, 8, 20);
             panel5.Controls.Add(panel1);
-            panel5.Controls.Add(backupData_Btn);
+            panel5.Controls.Add(backupAndRestoreData_Btn);
             panel5.Controls.Add(createReport_Btn);
             panel5.Controls.Add(ManageUsers_Btn);
             panel5.Controls.Add(artificialIntelligence_Btn);
@@ -186,25 +186,25 @@
             label1.TabIndex = 0;
             label1.Text = "User:";
             // 
-            // backupData_Btn
+            // backupAndRestoreData_Btn
             // 
-            backupData_Btn.Dock = DockStyle.Top;
-            backupData_Btn.FlatAppearance.BorderSize = 0;
-            backupData_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            backupData_Btn.FlatStyle = FlatStyle.Flat;
-            backupData_Btn.ForeColor = Color.Gainsboro;
-            backupData_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            backupData_Btn.Location = new Point(0, 547);
-            backupData_Btn.Name = "backupData_Btn";
-            backupData_Btn.Padding = new Padding(10, 0, 0, 0);
-            backupData_Btn.Size = new Size(246, 45);
-            backupData_Btn.TabIndex = 39;
-            backupData_Btn.Text = "Backup Data";
-            backupData_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            backupData_Btn.UseVisualStyleBackColor = true;
-            backupData_Btn.Click += createReport_Btn_Click_1;
-            backupData_Btn.MouseEnter += backupData_Btn_MouseEnter;
-            backupData_Btn.MouseLeave += backupData_Btn_MouseLeave;
+            backupAndRestoreData_Btn.Dock = DockStyle.Top;
+            backupAndRestoreData_Btn.FlatAppearance.BorderSize = 0;
+            backupAndRestoreData_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            backupAndRestoreData_Btn.FlatStyle = FlatStyle.Flat;
+            backupAndRestoreData_Btn.ForeColor = Color.Gainsboro;
+            backupAndRestoreData_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            backupAndRestoreData_Btn.Location = new Point(0, 547);
+            backupAndRestoreData_Btn.Name = "backupAndRestoreData_Btn";
+            backupAndRestoreData_Btn.Padding = new Padding(10, 0, 0, 0);
+            backupAndRestoreData_Btn.Size = new Size(246, 45);
+            backupAndRestoreData_Btn.TabIndex = 39;
+            backupAndRestoreData_Btn.Text = "Backup and Restore Data";
+            backupAndRestoreData_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            backupAndRestoreData_Btn.UseVisualStyleBackColor = true;
+            backupAndRestoreData_Btn.Click += createReport_Btn_Click_1;
+            backupAndRestoreData_Btn.MouseEnter += backupData_Btn_MouseEnter;
+            backupAndRestoreData_Btn.MouseLeave += backupData_Btn_MouseLeave;
             // 
             // createReport_Btn
             // 
@@ -620,7 +620,7 @@
         private Button assetHistory_Btn;
         private Button archived_Btn;
         private Button reserved_Btn;
-        private Button backupData_Btn;
+        private Button backupAndRestoreData_Btn;
         private Button createReport_Btn;
         private Panel panel1;
         private Label label2;

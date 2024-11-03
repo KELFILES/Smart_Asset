@@ -22,6 +22,11 @@ namespace Smart_Asset
 
         }
 
+        private void Update_Users_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Enable double buffering for the entire form
         protected override CreateParams CreateParams
         {
@@ -70,7 +75,7 @@ namespace Smart_Asset
 
         private void show2_Btn_Click(object sender, EventArgs e)
         {
-            MyDbMethods.UpdateUsingUserID("SmartAssetDb","Users", dataGridView1, $"{userID_Cmb.Text}");
+            MyDbMethods.UpdateUsingUserID("SmartAssetDb", "Users", dataGridView1, $"{userID_Cmb.Text}");
         }
 
         private void serialNo_Cmb_KeyPress(object sender, KeyPressEventArgs e)
@@ -80,21 +85,8 @@ namespace Smart_Asset
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

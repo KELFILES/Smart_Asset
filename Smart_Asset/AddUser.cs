@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,6 @@ namespace Smart_Asset
 
         private async void button1_Click(object sender, EventArgs e)
         {
-
             // Check if any of the TextBoxes are null or empty
             if (string.IsNullOrWhiteSpace(name_Tb.Text) ||
                 string.IsNullOrWhiteSpace(email_Tb.Text) ||
@@ -50,6 +50,15 @@ namespace Smart_Asset
                 return; // Exit the method if any field is empty
             }
 
+            // Check if the username is already used
+            bool isUsernameUsed = await MyDbMethods.IsUsernameAlreadyUsed("SmartAssetDb", "Users", username_Tb.Text);
+
+            if (isUsernameUsed)
+            {
+                MessageBox.Show("Username is Already Used", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Exit the method if the username is already used
+            }
+
             // Check if password and re-entered password match
             if (password_Tb.Text != reEnterPassword_Tb.Text)
             {
@@ -61,21 +70,57 @@ namespace Smart_Asset
             string encryptedPass = MyOtherMethods.EncryptPassword(password_Tb.Text);
             Console.WriteLine(encryptedPass);
 
-            // Prepare the fields to be inserted
-            var fields = new Dictionary<string, object>
-            {
-                { "name", name_Tb.Text },
-                { "email", email_Tb.Text },
-                { "contactNo", contactNo_Tb.Text },
-                { "address", address_Tb.Text },
-                { "username", username_Tb.Text },
-                { "password",  encryptedPass },
-                { "role", role_Cb.Text },
-                { "userID", ObjectId.GenerateNewId() }
-            };
+            // Generate the userID once and store it in a variable
+            var userIdValue = ObjectId.GenerateNewId().ToString();
 
-            // Insert the document into the database
+            // Prepare the fields to be inserted with user information
+            var fields = new Dictionary<string, object>
+    {
+        { "name", name_Tb.Text },
+        { "email", email_Tb.Text },
+        { "contactNo", contactNo_Tb.Text },
+        { "address", address_Tb.Text },
+        { "username", username_Tb.Text },
+        { "password", encryptedPass },
+        { "role", role_Cb.Text },
+        { "userID", userIdValue } // Use the generated userID here
+    };
+
+            // Insert the user document into the database
             await MyDbMethods.InsertDocument("SmartAssetDb", "Users", fields);
+
+            if (role_Cb.Text.Equals("Custom User"))
+            {
+                // Prepare the permissions fields with the same userID
+                var permissionsFields = new Dictionary<string, string>
+                {
+                    { "userID", userIdValue },  // Use the same userID here
+                    { "Assets", assets_Cb.Checked ? "1" : "0" },
+                    { "Replacement", replacement_Cb.Checked ? "1" : "0" },
+                    { "Cleaning", cleaning_Cb.Checked ? "1" : "0" },
+                    { "Disposed", disposed_Cb.Checked ? "1" : "0" },
+                    { "Borrowed", borrowed_Cb.Checked ? "1" : "0" },
+                    { "Reserved", reserved_Cb.Checked ? "1" : "0" },
+                    { "Archived", archived_Cb.Checked ? "1" : "0" },
+                    { "Asset History", assetHistory_Cb.Checked ? "1" : "0" },
+
+                    { "Add", add_Cb.Checked ? "1" : "0" },
+                    { "Edit", edit_Cb.Checked ? "1" : "0" },
+                    { "Replace", replace_Cb.Checked ? "1" : "0" },
+                    { "Transfer", transfer_Cb.Checked ? "1" : "0" },
+                    { "Borrow", borrow_Cb.Checked ? "1" : "0" },
+                    { "Archive", archive_Cb.Checked ? "1" : "0" },
+                    { "Show Image", showImage_Cb.Checked ? "1" : "0" },
+
+                    { "Dashboard", dashboard_Cb.Checked ? "1" : "0" },
+                    { "Artificial Intelligence", artificialIntelligence.Checked ? "1" : "0" },
+                    { "Create Report", createReport_Cb.Checked ? "1" : "0" },
+                    { "Backup And Restore Data", backupAndRestoreData_Cb.Checked ? "1" : "0" }
+                };
+
+                // Use the UpsertDocumentAsync method to insert or update the permissions document
+                await MyDbMethods.UpsertDocumentAsync("SmartAssetDb", "CustomUsers_Permissions", userIdValue, permissionsFields);
+            }
         }
 
         private void role_Cb_TextChanged(object sender, EventArgs e)

@@ -17,6 +17,8 @@ namespace Smart_Asset
         {
             InitializeComponent();
         }
+        //FIELDS
+        string finalUserIDVal;
 
         // Enable double buffering for the entire form
         protected override CreateParams CreateParams
@@ -62,7 +64,7 @@ namespace Smart_Asset
             }
         }
 
-        private void newRole_Cb_TextChanged(object sender, EventArgs e)
+        private async void newRole_Cb_TextChanged(object sender, EventArgs e)
         {
             if (newRole_Cb.Text.Equals(String.IsNullOrEmpty) || newRole_Cb.Text.Equals(""))
             {
@@ -91,7 +93,46 @@ namespace Smart_Asset
                 lowerLabel_Lbl.Text = "Select only the allowed access below.";
                 topLabel_Lbl.Text = "Custom User";
                 panel4.Show();
+
+
+
+
+                //RETRIEVE USER PERMISSION THEN CHECK OR UNCHECK IF 1 CHECK 0 UNCHECK
+
+                // Retrieve permissions dictionary
+                var permissions = await MyDbMethods.RetrievePermissionsAsync("SmartAssetDb", "CustomUsers_Permissions", finalUserIDVal);
+
+                if (permissions == null)
+                {
+                    Console.WriteLine("Failed to load permissions.");
+                    return;
+                }
+
+                // Set each checkbox based on the permissions dictionary values
+                assets_Cb.Checked = permissions.TryGetValue("Assets", out var assets) && assets == "1";
+                replacement_Cb.Checked = permissions.TryGetValue("Replacement", out var replacement) && replacement == "1";
+                cleaning_Cb.Checked = permissions.TryGetValue("Cleaning", out var cleaning) && cleaning == "1";
+                disposed_Cb.Checked = permissions.TryGetValue("Disposed", out var disposed) && disposed == "1";
+                borrowed_Cb.Checked = permissions.TryGetValue("Borrowed", out var borrowed) && borrowed == "1";
+                reserved_Cb.Checked = permissions.TryGetValue("Reserved", out var reserved) && reserved == "1";
+                archived_Cb.Checked = permissions.TryGetValue("Archived", out var archived) && archived == "1";
+                assetHistory_Cb.Checked = permissions.TryGetValue("Asset History", out var assetHistory) && assetHistory == "1";
+
+                add_Cb.Checked = permissions.TryGetValue("Add", out var add) && add == "1";
+                edit_Cb.Checked = permissions.TryGetValue("Edit", out var edit) && edit == "1";
+                replace_Cb.Checked = permissions.TryGetValue("Replace", out var replace) && replace == "1";
+                transfer_Cb.Checked = permissions.TryGetValue("Transfer", out var transfer) && transfer == "1";
+                borrow_Cb.Checked = permissions.TryGetValue("Borrow", out var borrow) && borrow == "1";
+                archive_Cb.Checked = permissions.TryGetValue("Archive", out var archive) && archive == "1";
+                showImage_Cb.Checked = permissions.TryGetValue("Show Image", out var showImage) && showImage == "1";
+
+                dashboard_Cb.Checked = permissions.TryGetValue("Dashboard", out var dashboard) && dashboard == "1";
+                artificialIntelligence_Cb.Checked = permissions.TryGetValue("Artificial Intelligence", out var artificialIntelligence) && artificialIntelligence == "1";
+                createReport_Cb.Checked = permissions.TryGetValue("Create Report", out var createReport) && createReport == "1";
+                backupAndRestoreData_Cb.Checked = permissions.TryGetValue("Backup And Restore Data", out var backupAndRestoreData) && backupAndRestoreData == "1";
             }
+
+
 
             MyOtherMethods.CenterInPanel(lowerLabel_Lbl, panel3);
             MyOtherMethods.CenterInPanel(topLabel_Lbl, panel3);
@@ -169,7 +210,7 @@ namespace Smart_Asset
         private void button4_Click(object sender, EventArgs e)
         {
             dashboard_Cb.Checked = true;
-            artificialIntelligence.Checked = true;
+            artificialIntelligence_Cb.Checked = true;
             createReport_Cb.Checked = true;
             backupAndRestoreData_Cb.Checked = true;
             archived_Cb.Checked = true;
@@ -179,9 +220,76 @@ namespace Smart_Asset
         private void button3_Click(object sender, EventArgs e)
         {
             dashboard_Cb.Checked = false;
-            artificialIntelligence.Checked = false;
+            artificialIntelligence_Cb.Checked = false;
             createReport_Cb.Checked = false;
             backupAndRestoreData_Cb.Checked = false;
+        }
+
+        private async void change_Btn_Click(object sender, EventArgs e)
+        {
+            if (newRole_Cb.Text.Equals("Super Admin"))
+            {
+                await MyDbMethods.UpdateFieldAsync("SmartAssetDb", "Users", $"{userIDVal_Lbl.Text}", "role", $"{newRole_Cb.Text}");
+
+                //DELETE IN DB IF THERE ARE PERMISSION DATA IN CUSTOMUSERS_PERMISSIONS COLLECTION TO SAVE STORAGE
+
+            }
+
+            if (newRole_Cb.Text.Equals("Admin"))
+            {
+                await MyDbMethods.UpdateFieldAsync("SmartAssetDb", "Users", $"{userIDVal_Lbl.Text}", "role", $"{newRole_Cb.Text}");
+
+                //DELETE IN DB IF THERE ARE PERMISSION DATA IN CUSTOMUSERS_PERMISSIONS COLLECTION TO SAVE STORAGE
+
+            }
+
+            if (newRole_Cb.Text.Equals("Custom User"))
+            {
+                //UPDATE IN USER COLLECTION
+                await MyDbMethods.UpdateFieldAsync("SmartAssetDb", "Users", $"{userIDVal_Lbl.Text}", "role", $"{newRole_Cb.Text}");
+
+                //UPDATE IN CUSTOMUSERS_PERMISSIONS COLLECTION
+                var permissions_Dictionary = new Dictionary<string, string>
+                {
+                    { "Assets", assets_Cb.Checked ? "1" : "0" },
+                    { "Replacement", replacement_Cb.Checked ? "1" : "0" },
+                    { "Cleaning", cleaning_Cb.Checked ? "1" : "0" },
+                    { "Disposed", disposed_Cb.Checked ? "1" : "0" },
+                    { "Borrowed", borrowed_Cb.Checked ? "1" : "0" },
+                    { "Reserved", reserved_Cb.Checked ? "1" : "0" },
+                    { "Archived", archived_Cb.Checked ? "1" : "0" },
+                    { "Asset History", assetHistory_Cb.Checked ? "1" : "0" },
+
+                    { "Add", add_Cb.Checked ? "1" : "0" },
+                    { "Edit", edit_Cb.Checked ? "1" : "0" },
+                    { "Replace", replace_Cb.Checked ? "1" : "0" },
+                    { "Transfer", transfer_Cb.Checked ? "1" : "0" },
+                    { "Borrow", borrow_Cb.Checked ? "1" : "0" },
+                    { "Archive", archive_Cb.Checked ? "1" : "0" },
+                    { "Show Image", showImage_Cb.Checked ? "1" : "0" },
+
+                    { "Dashboard", dashboard_Cb.Checked ? "1" : "0" },
+                    { "Artificial Intelligence", artificialIntelligence_Cb.Checked ? "1" : "0" },
+                    { "Create Report", createReport_Cb.Checked ? "1" : "0" },
+                    { "Backup And Restore Data", backupAndRestoreData_Cb.Checked ? "1" : "0" }
+                };
+
+                // Assuming userId is the ID of the user you want to update
+                await MyDbMethods.UpdatePermissionsAsync("SmartAssetDb", "CustomUsers_Permissions", "6727979b0e7ea38de8056322", permissions_Dictionary);
+
+            }
+
+            if (newRole_Cb.Text.Equals("") || newRole_Cb.Text.Equals(String.IsNullOrEmpty))
+            {
+                MessageBox.Show("Enter Role Properly!");
+            }
+
+        }
+
+        private async void userIDVal_Lbl_TextChanged(object sender, EventArgs e)
+        {
+            finalUserIDVal = userIDVal_Lbl.Text;
+
         }
     }
 }

@@ -36,7 +36,7 @@
             button4 = new Button();
             label8 = new Label();
             dashboard_Cb = new CheckBox();
-            artificialIntelligence = new CheckBox();
+            artificialIntelligence_Cb = new CheckBox();
             createReport_Cb = new CheckBox();
             backupAndRestoreData_Cb = new CheckBox();
             assetEnabled_Panel = new Panel();
@@ -130,7 +130,7 @@
             otherModules_Panel.Controls.Add(button4);
             otherModules_Panel.Controls.Add(label8);
             otherModules_Panel.Controls.Add(dashboard_Cb);
-            otherModules_Panel.Controls.Add(artificialIntelligence);
+            otherModules_Panel.Controls.Add(artificialIntelligence_Cb);
             otherModules_Panel.Controls.Add(createReport_Cb);
             otherModules_Panel.Controls.Add(backupAndRestoreData_Cb);
             otherModules_Panel.Dock = DockStyle.Left;
@@ -181,16 +181,16 @@
             dashboard_Cb.Text = "Dashboard";
             dashboard_Cb.UseVisualStyleBackColor = true;
             // 
-            // artificialIntelligence
+            // artificialIntelligence_Cb
             // 
-            artificialIntelligence.AutoSize = true;
-            artificialIntelligence.ForeColor = Color.White;
-            artificialIntelligence.Location = new Point(41, 84);
-            artificialIntelligence.Name = "artificialIntelligence";
-            artificialIntelligence.Size = new Size(134, 19);
-            artificialIntelligence.TabIndex = 3;
-            artificialIntelligence.Text = "Artificial Intelligence";
-            artificialIntelligence.UseVisualStyleBackColor = true;
+            artificialIntelligence_Cb.AutoSize = true;
+            artificialIntelligence_Cb.ForeColor = Color.White;
+            artificialIntelligence_Cb.Location = new Point(41, 84);
+            artificialIntelligence_Cb.Name = "artificialIntelligence_Cb";
+            artificialIntelligence_Cb.Size = new Size(134, 19);
+            artificialIntelligence_Cb.TabIndex = 3;
+            artificialIntelligence_Cb.Text = "Artificial Intelligence";
+            artificialIntelligence_Cb.UseVisualStyleBackColor = true;
             // 
             // createReport_Cb
             // 
@@ -588,6 +588,7 @@
             change_Btn.TabIndex = 9;
             change_Btn.Text = "CHANGE";
             change_Btn.UseVisualStyleBackColor = true;
+            change_Btn.Click += change_Btn_Click;
             // 
             // changeRoleTopLabel_Lbl
             // 
@@ -621,6 +622,7 @@
             userIDVal_Lbl.Size = new Size(94, 25);
             userIDVal_Lbl.TabIndex = 6;
             userIDVal_Lbl.Text = "UserIDVal";
+            userIDVal_Lbl.TextChanged += userIDVal_Lbl_TextChanged;
             // 
             // label3
             // 
@@ -678,7 +680,7 @@
         private Panel otherModules_Panel;
         private Label label8;
         private CheckBox dashboard_Cb;
-        private CheckBox artificialIntelligence;
+        private CheckBox artificialIntelligence_Cb;
         private CheckBox createReport_Cb;
         private CheckBox backupAndRestoreData_Cb;
         private Panel assetEnabled_Panel;

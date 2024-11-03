@@ -145,6 +145,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Update_Users";
             Text = "Update";
+            Load += Update_Users_Load;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

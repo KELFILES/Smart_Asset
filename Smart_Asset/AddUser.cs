@@ -32,7 +32,6 @@ namespace Smart_Asset
 
         //FIELDS
         private string encryptedPass { get; set; }
-        AddUser_Access aua = new AddUser_Access();
 
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -70,31 +69,31 @@ namespace Smart_Asset
             string encryptedPass = MyOtherMethods.EncryptPassword(password_Tb.Text);
             Console.WriteLine(encryptedPass);
 
-            // Generate the userID once and store it in a variable
-            var userIdValue = ObjectId.GenerateNewId().ToString();
+            // Generate the userID as ObjectId without converting it to string
+            var userIdValue = ObjectId.GenerateNewId();
 
             // Prepare the fields to be inserted with user information
             var fields = new Dictionary<string, object>
-    {
-        { "name", name_Tb.Text },
-        { "email", email_Tb.Text },
-        { "contactNo", contactNo_Tb.Text },
-        { "address", address_Tb.Text },
-        { "username", username_Tb.Text },
-        { "password", encryptedPass },
-        { "role", role_Cb.Text },
-        { "userID", userIdValue } // Use the generated userID here
-    };
+            {
+                { "name", name_Tb.Text },
+                { "email", email_Tb.Text },
+                { "contactNo", contactNo_Tb.Text },
+                { "address", address_Tb.Text },
+                { "username", username_Tb.Text },
+                { "password", encryptedPass },
+                { "role", role_Cb.Text },
+                { "userID", userIdValue } // Use ObjectId directly
+            };
 
             // Insert the user document into the database
             await MyDbMethods.InsertDocument("SmartAssetDb", "Users", fields);
 
             if (role_Cb.Text.Equals("Custom User"))
             {
-                // Prepare the permissions fields with the same userID
+                // Prepare the permissions fields as Dictionary<string, string>
                 var permissionsFields = new Dictionary<string, string>
                 {
-                    { "userID", userIdValue },  // Use the same userID here
+                    { "userID", userIdValue.ToString() },  // Convert ObjectId to string
                     { "Assets", assets_Cb.Checked ? "1" : "0" },
                     { "Replacement", replacement_Cb.Checked ? "1" : "0" },
                     { "Cleaning", cleaning_Cb.Checked ? "1" : "0" },
@@ -113,15 +112,16 @@ namespace Smart_Asset
                     { "Show Image", showImage_Cb.Checked ? "1" : "0" },
 
                     { "Dashboard", dashboard_Cb.Checked ? "1" : "0" },
-                    { "Artificial Intelligence", artificialIntelligence.Checked ? "1" : "0" },
+                    { "Artificial Intelligence", artificialIntelligence_Cb.Checked ? "1" : "0" },
                     { "Create Report", createReport_Cb.Checked ? "1" : "0" },
                     { "Backup And Restore Data", backupAndRestoreData_Cb.Checked ? "1" : "0" }
                 };
 
                 // Use the UpsertDocumentAsync method to insert or update the permissions document
-                await MyDbMethods.UpsertDocumentAsync("SmartAssetDb", "CustomUsers_Permissions", userIdValue, permissionsFields);
+                await MyDbMethods.UpsertDocumentAsync("SmartAssetDb", "CustomUsers_Permissions", userIdValue.ToString(), permissionsFields);
             }
         }
+
 
         private void role_Cb_TextChanged(object sender, EventArgs e)
         {
@@ -141,7 +141,7 @@ namespace Smart_Asset
 
         private void role_Cb_TextChanged_1(object sender, EventArgs e)
         {
-            
+
             if (role_Cb.Text.Equals(String.IsNullOrEmpty) || role_Cb.Text.Equals(""))
             {
                 lowerLabel_Lbl.Text = "";
@@ -224,17 +224,15 @@ namespace Smart_Asset
         private void button4_Click(object sender, EventArgs e)
         {
             dashboard_Cb.Checked = true;
-            artificialIntelligence.Checked = true;
+            artificialIntelligence_Cb.Checked = true;
             createReport_Cb.Checked = true;
             backupAndRestoreData_Cb.Checked = true;
-            archived_Cb.Checked = true;
-            showImage_Cb.Checked = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             dashboard_Cb.Checked = false;
-            artificialIntelligence.Checked = false;
+            artificialIntelligence_Cb.Checked = false;
             createReport_Cb.Checked = false;
             backupAndRestoreData_Cb.Checked = false;
         }
@@ -259,6 +257,12 @@ namespace Smart_Asset
                 assetEnabled_Panel.Visible = false;
 
             }
+        }
+
+        private void AddUser_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Refresh
+            ManageUsers.Refresh_ManageUsers();
         }
     }
 }

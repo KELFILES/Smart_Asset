@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AddUser_Access.cs">
+    <Compile Update="ChangePermission.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Dispose_Window.cs" />

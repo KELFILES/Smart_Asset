@@ -48,11 +48,10 @@
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(dataGridView1);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
+            panel1.Location = new Point(0, 12);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(0, 55, 0, 0);
-            panel1.Size = new Size(1125, 800);
+            panel1.Size = new Size(1113, 788);
             panel1.TabIndex = 9;
             // 
             // panel3
@@ -62,7 +61,7 @@
             panel3.Controls.Add(show2_Btn);
             panel3.Controls.Add(userID_Cmb);
             panel3.Controls.Add(label3);
-            panel3.Location = new Point(279, 67);
+            panel3.Location = new Point(273, 67);
             panel3.Name = "panel3";
             panel3.Size = new Size(541, 102);
             panel3.TabIndex = 10;
@@ -105,7 +104,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom;
-            button1.Location = new Point(524, 751);
+            button1.Location = new Point(518, 739);
             button1.Name = "button1";
             button1.Size = new Size(101, 37);
             button1.TabIndex = 9;
@@ -132,7 +131,7 @@
             dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
             dataGridView1.Location = new Point(11, 175);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1102, 570);
+            dataGridView1.Size = new Size(1090, 558);
             dataGridView1.TabIndex = 4;
             dataGridView1.MouseClick += dataGridView1_MouseClick;
             // 
@@ -145,6 +144,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Update_Users";
             Text = "Update";
+            FormClosed += Update_Users_FormClosed;
             Load += Update_Users_Load;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);

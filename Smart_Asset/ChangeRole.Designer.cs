@@ -643,6 +643,7 @@
             Controls.Add(panel1);
             Name = "ChangeRole";
             Text = "ChangeRole";
+            FormClosed += ChangeRole_FormClosed;
             Load += ChangeRole_Load;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);

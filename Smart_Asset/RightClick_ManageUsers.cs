@@ -18,6 +18,10 @@ namespace Smart_Asset
         //FIELDS
         Update_Users us = new Update_Users();
         ChangeRole cr = new ChangeRole();
+        ChangePermission cp = new ChangePermission();
+        ResetPassword rp = new ResetPassword();
+        RemoveUser ru = new RemoveUser();
+
 
 
         // Parameterless constructor (still needed by the designer)
@@ -26,7 +30,40 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        private void RightClick_ManageUsers_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ensure all lists have at least one element before accessing the first item
+                if (userIDs.Count > 0 && names.Count > 0 && roles.Count > 0)
+                {
+                    panel4.Visible = false;
 
+                    // Continue if only one row is selected
+                    string userID = userIDs[0];
+                    string name = names[0];
+                    string role = roles[0];
+
+                    if (userIDs.Count == 1)
+                    {
+                        Console.WriteLine(role);
+                        if (role.Equals("Custom User"))
+                        {
+                            panel4.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        panel4.Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                // Optionally, handle or log the exception in a way that helps with debugging
+            }
+        }
 
 
         // Constructor that accepts Form1 (Read) as a parameter
@@ -80,7 +117,7 @@ namespace Smart_Asset
         }
 
 
-        private async void markAsRepaired_Btn_Click(object sender, EventArgs e)
+        private void editInformation_Btn_Click(object sender, EventArgs e)
         {
             /*
             try
@@ -134,8 +171,8 @@ namespace Smart_Asset
                 string name = names[0];
                 string role = roles[0];
 
-                cr.FormBorderStyle = FormBorderStyle.FixedSingle;
-                cr.StartPosition = FormStartPosition.CenterScreen;
+                us.FormBorderStyle = FormBorderStyle.FixedSingle;
+                us.StartPosition = FormStartPosition.CenterScreen;
 
                 us.FormBorderStyle = FormBorderStyle.FixedSingle;
                 us.StartPosition = FormStartPosition.CenterScreen;
@@ -148,7 +185,6 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
-
         }
 
 
@@ -200,9 +236,122 @@ namespace Smart_Asset
             }
         }
 
+        private void changePermission_Btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (userIDs == null || userIDs.Count == 0)
+                {
+                    MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                if (userIDs.Count > 1)
+                {
+                    MessageBox.Show("Only one row selection allowed for changing the Role.", "Multiple Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                // Continue if only one row is selected
+                string userID = userIDs[0];
+                string name = names[0];
+                string role = roles[0];
 
+                cp.FormBorderStyle = FormBorderStyle.FixedSingle;
+                cp.StartPosition = FormStartPosition.CenterScreen;
 
+                // Set the values in the ChangeRole form
+                cp.userIDVal_Lbl.Text = userID;
+                cp.nameVal_Lbl.Text = name;
+
+                cp.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (userIDs == null || userIDs.Count == 0)
+                {
+                    // Log diagnostic message for debugging
+                    MessageBox.Show("No row selected. Please select at least one row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (userIDs.Count == 1)
+                {
+                    // Continue if only one row is selected
+                    string userID = userIDs[0];
+                    string name = names[0];
+                    string role = roles[0];
+
+                    rp.FormBorderStyle = FormBorderStyle.FixedSingle;
+                    rp.StartPosition = FormStartPosition.CenterScreen;
+
+                    // Set the values in the ChangeRole form
+                    rp.userIDVal_Lbl.Text = userID;
+                    rp.nameVal_Lbl.Text = name;
+
+                    rp.Show();
+                }
+                else if (userIDs.Count > 1)
+                {
+                    MessageBox.Show("Please Select Only One Row!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                if (userIDs == null || userIDs.Count == 0)
+                {
+                    // Log diagnostic message for debugging
+                    MessageBox.Show("No row selected. Please select at least one row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (userIDs.Count == 1)
+                {
+                    // Continue if only one row is selected
+                    string userID = userIDs[0];
+                    string name = names[0];
+                    string role = roles[0];
+
+                    ru.FormBorderStyle = FormBorderStyle.FixedSingle;
+                    ru.StartPosition = FormStartPosition.CenterScreen;
+
+                    // Set the values in the ChangeRole form
+                    ru.userIDVal_Lbl.Text = userID;
+                    ru.nameVal_Lbl.Text = name;
+
+                    ru.Show();
+                }
+                else if (userIDs.Count > 1)
+                {
+                    MessageBox.Show("Please Select Only One Row!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+            
+        }
     }
 }

@@ -8,6 +8,7 @@ using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace Smart_Asset
 {
@@ -150,11 +151,14 @@ namespace Smart_Asset
 
 
 
-        public static void CenterInPanel(Label lblName, Panel pnlname)
+        public static void CenterInPanel(Label lblName, Panel pnlName)
         {
-            lblName.Location = new Point((pnlname.Width - lblName.Width) / 2, lblName.Location.Y);
+            lblName.Location = new Point((pnlName.Width - lblName.Width) / 2, lblName.Location.Y);
         }
-
+        public static void CenterInPanel(Button BtnName, Panel pnlName)
+        {
+            BtnName.Location = new Point((pnlName.Width - BtnName.Width) / 2, BtnName.Location.Y);
+        }
 
 
 

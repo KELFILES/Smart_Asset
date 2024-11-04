@@ -88,6 +88,10 @@ namespace Smart_Asset
 
         }
 
-
+        private void Update_Users_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Refresh
+            ManageUsers.Refresh_ManageUsers();
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace Smart_Asset
         public static List<string> selectedUserIDs = new List<string>();
         RightClick_ManageUsers rcm = new RightClick_ManageUsers();
 
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -175,7 +176,44 @@ namespace Smart_Asset
 
         private void ManageUsers_Load(object sender, EventArgs e)
         {
-            MyDbMethods.ReadManageUsers("SmartAssetDb", StaticDataGridView1, "Users");
+            // Load data initially
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            MyDbMethods.ReadManageUsers("SmartAssetDb", dataGridView1, "Users");
+            InitializeDataSource();
+        }
+
+
+        private BindingSource bindingSource = new BindingSource();
+        private void InitializeDataSource()
+        {
+            dataGridView1.AllowUserToAddRows = false;
+            DataTable dataTable = new DataTable();
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                dataTable.Columns.Add(col.Name, typeof(string));
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+                if (!row.IsNewRow)
+                    dataTable.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray());
+
+            bindingSource.DataSource = dataTable;
+            dataGridView1.DataSource = bindingSource;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string filterText = searchUser_Tb.Text.Trim().ToLower();
+            bindingSource.Filter = $"Name LIKE '%{filterText}%' OR Username LIKE '%{filterText}%' OR Email LIKE '%{filterText}%' OR UserID LIKE '%{filterText}%'";
+        }
+
+        private void searchUser_Tb_Click(object sender, EventArgs e)
+        {
+            // Reload data to refresh the DataGridView
+            LoadData();
         }
     }
 }

@@ -36,7 +36,7 @@
             panel4 = new Panel();
             addUsers_Btn = new Button();
             panel3 = new Panel();
-            textBox1 = new TextBox();
+            searchUser_Tb = new TextBox();
             label1 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -119,7 +119,7 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(searchUser_Tb);
             panel3.Controls.Add(label1);
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
@@ -127,12 +127,14 @@
             panel3.Size = new Size(884, 95);
             panel3.TabIndex = 3;
             // 
-            // textBox1
+            // searchUser_Tb
             // 
-            textBox1.Location = new Point(144, 37);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(301, 23);
-            textBox1.TabIndex = 2;
+            searchUser_Tb.Location = new Point(144, 37);
+            searchUser_Tb.Name = "searchUser_Tb";
+            searchUser_Tb.Size = new Size(301, 23);
+            searchUser_Tb.TabIndex = 2;
+            searchUser_Tb.Click += searchUser_Tb_Click;
+            searchUser_Tb.TextChanged += textBox1_TextChanged;
             // 
             // label1
             // 
@@ -166,7 +168,7 @@
         #endregion
         private Panel panel1;
         private Panel panel2;
-        private TextBox textBox1;
+        private TextBox searchUser_Tb;
         private Label label1;
         private Button addUsers_Btn;
         public DataGridView dataGridView1;

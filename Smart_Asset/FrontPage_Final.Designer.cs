@@ -152,6 +152,7 @@
             userID_Lbl.Size = new Size(51, 19);
             userID_Lbl.TabIndex = 3;
             userID_Lbl.Text = "UserID";
+            userID_Lbl.TabIndexChanged += userID_Lbl_TabIndexChanged;
             // 
             // label2
             // 

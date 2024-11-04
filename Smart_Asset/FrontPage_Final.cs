@@ -33,11 +33,10 @@ namespace Smart_Asset
 
             fileMaintenance_SubMenuPanel.Visible = false;
 
-
+            StaticUserID = userID_Lbl;
         }
-
-
-
+        //STATIC
+        public static Label StaticUserID;
 
 
 
@@ -845,6 +844,11 @@ namespace Smart_Asset
         {
             GC.Collect(); // Force garbage collection
             GC.WaitForPendingFinalizers(); // Ensure all finalizers have completed
+        }
+
+        private void userID_Lbl_TabIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

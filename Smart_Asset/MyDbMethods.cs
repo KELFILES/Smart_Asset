@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System.Data;
+using System.Windows.Forms;
 using static Smart_Asset.Read;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -723,7 +724,7 @@ namespace Smart_Asset
             // Iterate over all collections, except the ones we want to exclude
             foreach (var collectionName in collectionNames.ToList())
             {
-                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List" && collectionName != "Images" && collectionName != "Users")  // Skip excluded collections
+                if (collectionName != "RecycleBin" && collectionName != "Deployment_Unit_List" && collectionName != "Type_List" && collectionName != "Deployment_Location_List" && collectionName != "Serial_List" && collectionName != "Images" && collectionName != "Users" && collectionName != "CustomUsers_Permissions")  // Skip excluded collections
                 {
                     var collection = database.GetCollection<BsonDocument>(collectionName);
 
@@ -1332,6 +1333,8 @@ namespace Smart_Asset
 
             LockColumns(dataGridView);
             bool isSuccess = true;
+            int updatedCount = 0;  // Tracks number of successful updates
+            int skippedCount = 0;  // Tracks number of skipped updates
 
             // Access the specified collection using collectionName
             var collection = database.GetCollection<BsonDocument>(collectionName);
@@ -1343,32 +1346,35 @@ namespace Smart_Asset
                 var userId = row.Cells["UserID"].Value?.ToString();
                 var username = row.Cells["Username"].Value?.ToString();
 
+                // Check if userId and username are provided
                 if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(username)) continue;
 
                 // Parse userId as ObjectId for filter
                 if (!ObjectId.TryParse(userId, out var objectId))
                 {
                     MessageBox.Show($"Invalid UserID format for row {row.Index + 1}. Skipping update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    skippedCount++;
                     continue;
                 }
 
                 // Check if the username is already used by another document
                 var usernameFilter = Builders<BsonDocument>.Filter.And(
                     Builders<BsonDocument>.Filter.Eq("username", username),
-                    Builders<BsonDocument>.Filter.Ne("userID", objectId)
+                    Builders<BsonDocument>.Filter.Ne("userID", objectId) // Ensure userID is treated as ObjectId
                 );
 
                 var existingUser = collection.Find(usernameFilter).FirstOrDefault();
                 if (existingUser != null)
                 {
                     MessageBox.Show($"Username '{username}' is already used by another user. Update canceled for row {row.Index + 1}.", "Duplicate Username", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    skippedCount++;
                     continue; // Skip update for this row
                 }
 
                 // Define the filter to find the document by userID
                 var filter = Builders<BsonDocument>.Filter.Eq("userID", objectId);
 
-                // Build the update definition
+                // Build the update definition with necessary fields
                 var update = Builders<BsonDocument>.Update
                     .Set("name", row.Cells["Name"].Value?.ToString())
                     .Set("username", username)
@@ -1379,23 +1385,36 @@ namespace Smart_Asset
                 try
                 {
                     var result = collection.UpdateOne(filter, update);
-                    if (result.ModifiedCount == 0)
+                    if (result.ModifiedCount > 0)
+                    {
+                        updatedCount++;
+                    }
+                    else
                     {
                         MessageBox.Show($"No document with UserID {userId} was updated. It may not exist in the database.", "Update Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        skippedCount++;
                     }
                 }
                 catch (Exception ex)
                 {
                     isSuccess = false;
                     MessageBox.Show($"Error updating UserID {userId}: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    skippedCount++;
                 }
             }
 
+            // Summary message after processing all rows
             if (isSuccess)
             {
-                MessageBox.Show("Changes updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{updatedCount} record(s) updated successfully.\n{skippedCount} record(s) skipped due to errors or warnings.", "Update Summary", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Some updates failed.\n{updatedCount} record(s) updated successfully.\n{skippedCount} record(s) skipped due to errors or warnings.", "Update Summary", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+
 
 
 
@@ -2545,24 +2564,26 @@ namespace Smart_Asset
 
 
 
-        public static async Task UpsertDocumentAsync(string dbName, string collName, string userIdValue, Dictionary<string, string> fields)
+        public static async Task<bool> UpsertDocumentAsync(string dbName, string collectionName, string userId, Dictionary<string, string> fields)
         {
-            // Initialize the MongoDB client, database, and collection using the provided parameters
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collName);
+            var collection = database.GetCollection<BsonDocument>(collectionName);
 
-            // Define the filter to search by userID
-            var filter = Builders<BsonDocument>.Filter.Eq("userID", userIdValue);
+            var filter = Builders<BsonDocument>.Filter.Eq("userID", userId);
+            var update = new BsonDocument("$set", new BsonDocument(fields));
 
-            // Convert the fields dictionary to a BsonDocument
-            var document = new BsonDocument(fields);
-
-            // Set up update options with upsert = true (insert if not exists)
-            var updateOptions = new UpdateOptions { IsUpsert = true };
-
-            // Perform the update if the document exists, otherwise insert
-            await collection.ReplaceOneAsync(filter, document, updateOptions);
+            try
+            {
+                // Perform the upsert operation
+                var result = await collection.UpdateOneAsync(filter, update, new UpdateOptions { IsUpsert = true });
+                return result.ModifiedCount > 0 || result.UpsertedId != null; // Success if modified or inserted
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in upsert operation: {ex.Message}");
+                return false;
+            }
         }
 
         // Method to check if a username already exists in the Users collection
@@ -2612,7 +2633,7 @@ namespace Smart_Asset
                 }
                 else
                 {
-                    MessageBox.Show("Field updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Successfull.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -2622,50 +2643,7 @@ namespace Smart_Asset
         }
 
 
-        public static async Task UpdatePermissionsAsync(string dbName, string collectionName, string userId, Dictionary<string, string> fieldsToUpdate)
-        {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-
-            // Parse userId as ObjectId
-            if (!ObjectId.TryParse(userId, out var objectId))
-            {
-                Console.WriteLine("Invalid UserID format.");
-                return;
-            }
-
-            // Define the filter to target the specific document by userID
-            var filter = Builders<BsonDocument>.Filter.Eq("userID", objectId);
-
-            // Build the update definition from the dictionary
-            var updateDefinition = new BsonDocument();
-            foreach (var field in fieldsToUpdate)
-            {
-                updateDefinition[field.Key] = field.Value;
-            }
-
-            var update = new BsonDocument("$set", updateDefinition);
-
-            try
-            {
-                // Perform the update operation
-                var result = await collection.UpdateOneAsync(filter, update);
-
-                if (result.ModifiedCount == 0)
-                {
-                    MessageBox.Show("No document was updated. It may not exist in the database.", "Update Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    MessageBox.Show("Permissions updated successfully.", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error updating permissions: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
 
 
 
@@ -2709,6 +2687,179 @@ namespace Smart_Asset
 
             return permissions;
         }
+
+
+
+        public static async Task RemoveDocumentAsync(string dbName, string collectionName, string userId)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Define the filter to target the specific document by userID as a string
+            var filter = Builders<BsonDocument>.Filter.Eq("userID", userId);
+
+            try
+            {
+                // Perform the delete operation
+                var deleteResult = await collection.DeleteOneAsync(filter);
+
+                if (deleteResult.DeletedCount == 0)
+                {
+                    Console.WriteLine("No document found to delete. It may not exist in the database.");
+                }
+                else
+                {
+                    Console.WriteLine("Document successfully deleted.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting document: {ex.Message}");
+            }
+        }
+
+
+        public class UserPermissions
+        {
+            public string UserID { get; set; }
+            public bool Add { get; set; }
+            public bool Archive { get; set; }
+            public bool Archived { get; set; }
+            public bool ArtificialIntelligence { get; set; }
+            public bool AssetHistory { get; set; }
+            public bool Assets { get; set; }
+            public bool BackupAndRestoreData { get; set; }
+            public bool Borrow { get; set; }
+            public bool Borrowed { get; set; }
+            public bool Cleaning { get; set; }
+            public bool CreateReport { get; set; }
+            public bool Dashboard { get; set; }
+            public bool Disposed { get; set; }
+            public bool Edit { get; set; }
+            public bool Replace { get; set; }
+            public bool Replacement { get; set; }
+            public bool Reserved { get; set; }
+            public bool ShowImage { get; set; }
+            public bool Transfer { get; set; }
+        }
+
+        public static async Task<UserPermissions> GetPermissionsAsync(string dbName, string collectionName, string userId)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var collection = database.GetCollection<UserPermissions>(collectionName);
+
+            Console.WriteLine($"Searching for userID: {userId} in database: {dbName}, collection: {collectionName}");
+
+            // Define the filter to target the document by userID as a string
+            var filter = Builders<UserPermissions>.Filter.Eq("userID", userId);
+
+            try
+            {
+                // Retrieve the document with the specified filter
+                var document = await collection.Find(filter).FirstOrDefaultAsync();
+
+                if (document == null)
+                {
+                    Console.WriteLine("No document found with the specified userID.");
+                }
+                else
+                {
+                    Console.WriteLine("Document found.");
+                }
+
+                return document;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving permissions: {ex.Message}");
+                return null;
+            }
+        }
+
+        public static async Task<bool> ValidateUserUsingUserID(string dbName, string collName, string userId, string password)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var usersCollection = database.GetCollection<BsonDocument>(collName);
+
+            // Parse userId as ObjectId
+            if (!ObjectId.TryParse(userId, out var objectId))
+            {
+                Console.WriteLine("Invalid UserID format.");
+                return false;
+            }
+
+            Console.WriteLine($"Parsed ObjectId: {objectId}");
+
+            // Build the filter for userID and password
+            var filter = Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("userID", objectId),
+                Builders<BsonDocument>.Filter.Eq("password", password)
+            );
+
+            Console.WriteLine($"Filter: userID = {objectId}, password = {password}");
+
+            // Check if a document with the specified userID and password exists
+            var userDocument = await usersCollection.Find(filter).FirstOrDefaultAsync();
+
+            if (userDocument != null)
+            {
+                Console.WriteLine("Document found.");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("No document found with the specified userID and password.");
+                return false;
+            }
+        }
+
+
+
+
+        public static async Task<bool> DeleteUserByUserIDAsync(string dbName, string collName, string userId)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var usersCollection = database.GetCollection<BsonDocument>(collName);
+
+            // Parse userId as ObjectId
+            if (!ObjectId.TryParse(userId, out var objectId))
+            {
+                Console.WriteLine("Invalid UserID format.");
+                return false;
+            }
+
+            // Build the filter for userID
+            var filter = Builders<BsonDocument>.Filter.Eq("userID", objectId);
+
+            try
+            {
+                // Attempt to delete the document with the specified userID
+                var deleteResult = await usersCollection.DeleteOneAsync(filter);
+
+                if (deleteResult.DeletedCount > 0)
+                {
+                    Console.WriteLine("Document successfully deleted.");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("No document found with the specified userID.");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting document: {ex.Message}");
+                return false;
+            }
+        }
+
+
+
 
 
 

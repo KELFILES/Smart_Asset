@@ -17,7 +17,7 @@ namespace Smart_Asset
         private Image backgroundImage;
 
         //FIELDS
-        private string encrypted {  get; set; } 
+        private string encrypted { get; set; }
 
         public Login()
         {

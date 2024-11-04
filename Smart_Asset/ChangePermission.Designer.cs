@@ -1,6 +1,6 @@
 ﻿namespace Smart_Asset
 {
-    partial class AddUser_Access
+    partial class ChangePermission
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,15 @@
         {
             panel1 = new Panel();
             panel3 = new Panel();
+            panel5 = new Panel();
+            changePermission_Btn = new Button();
             panel4 = new Panel();
             otherModules_Panel = new Panel();
             button3 = new Button();
             button4 = new Button();
             label8 = new Label();
             dashboard_Cb = new CheckBox();
-            artificialIntelligence = new CheckBox();
+            artificialIntelligence_Cb = new CheckBox();
             createReport_Cb = new CheckBox();
             backupAndRestoreData_Cb = new CheckBox();
             assetEnabled_Panel = new Panel();
@@ -62,14 +64,19 @@
             cleaning_Cb = new CheckBox();
             borrowed_Cb = new CheckBox();
             disposed_Cb = new CheckBox();
-            lowerLabel_Lbl = new Label();
-            topLabel_Lbl = new Label();
+            panel2 = new Panel();
+            userIDVal_Lbl = new Label();
+            label3 = new Label();
+            nameVal_Lbl = new Label();
+            label4 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
+            panel5.SuspendLayout();
             panel4.SuspendLayout();
             otherModules_Panel.SuspendLayout();
             assetEnabled_Panel.SuspendLayout();
             manageAsset_Panel.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -80,21 +87,41 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(7);
-            panel1.Size = new Size(612, 461);
+            panel1.Size = new Size(625, 503);
             panel1.TabIndex = 0;
             // 
             // panel3
             // 
             panel3.BackColor = Color.DimGray;
+            panel3.Controls.Add(panel5);
             panel3.Controls.Add(panel4);
-            panel3.Controls.Add(lowerLabel_Lbl);
-            panel3.Controls.Add(topLabel_Lbl);
+            panel3.Controls.Add(panel2);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(7, 7);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(7);
-            panel3.Size = new Size(598, 447);
+            panel3.Size = new Size(611, 489);
             panel3.TabIndex = 10;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(changePermission_Btn);
+            panel5.Dock = DockStyle.Bottom;
+            panel5.Location = new Point(7, 412);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(597, 70);
+            panel5.TabIndex = 19;
+            // 
+            // changePermission_Btn
+            // 
+            changePermission_Btn.Anchor = AnchorStyles.Top;
+            changePermission_Btn.Location = new Point(205, 19);
+            changePermission_Btn.Name = "changePermission_Btn";
+            changePermission_Btn.Size = new Size(159, 31);
+            changePermission_Btn.TabIndex = 10;
+            changePermission_Btn.Text = "CHANGE PERMISSION";
+            changePermission_Btn.UseVisualStyleBackColor = true;
+            changePermission_Btn.Click += changePermission_Btn_Click;
             // 
             // panel4
             // 
@@ -103,11 +130,11 @@
             panel4.Controls.Add(otherModules_Panel);
             panel4.Controls.Add(assetEnabled_Panel);
             panel4.Controls.Add(manageAsset_Panel);
-            panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(7, 117);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(7, 106);
             panel4.Name = "panel4";
-            panel4.Size = new Size(584, 323);
-            panel4.TabIndex = 7;
+            panel4.Size = new Size(597, 376);
+            panel4.TabIndex = 15;
             // 
             // otherModules_Panel
             // 
@@ -117,18 +144,18 @@
             otherModules_Panel.Controls.Add(button4);
             otherModules_Panel.Controls.Add(label8);
             otherModules_Panel.Controls.Add(dashboard_Cb);
-            otherModules_Panel.Controls.Add(artificialIntelligence);
+            otherModules_Panel.Controls.Add(artificialIntelligence_Cb);
             otherModules_Panel.Controls.Add(createReport_Cb);
             otherModules_Panel.Controls.Add(backupAndRestoreData_Cb);
             otherModules_Panel.Dock = DockStyle.Left;
-            otherModules_Panel.Location = new Point(378, 0);
+            otherModules_Panel.Location = new Point(387, 0);
             otherModules_Panel.Name = "otherModules_Panel";
-            otherModules_Panel.Size = new Size(204, 321);
+            otherModules_Panel.Size = new Size(207, 374);
             otherModules_Panel.TabIndex = 12;
             // 
             // button3
             // 
-            button3.Location = new Point(109, 272);
+            button3.Location = new Point(108, 265);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 14;
@@ -138,7 +165,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(28, 272);
+            button4.Location = new Point(27, 265);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 13;
@@ -168,16 +195,16 @@
             dashboard_Cb.Text = "Dashboard";
             dashboard_Cb.UseVisualStyleBackColor = true;
             // 
-            // artificialIntelligence
+            // artificialIntelligence_Cb
             // 
-            artificialIntelligence.AutoSize = true;
-            artificialIntelligence.ForeColor = Color.White;
-            artificialIntelligence.Location = new Point(41, 84);
-            artificialIntelligence.Name = "artificialIntelligence";
-            artificialIntelligence.Size = new Size(134, 19);
-            artificialIntelligence.TabIndex = 3;
-            artificialIntelligence.Text = "Artificial Intelligence";
-            artificialIntelligence.UseVisualStyleBackColor = true;
+            artificialIntelligence_Cb.AutoSize = true;
+            artificialIntelligence_Cb.ForeColor = Color.White;
+            artificialIntelligence_Cb.Location = new Point(41, 84);
+            artificialIntelligence_Cb.Name = "artificialIntelligence_Cb";
+            artificialIntelligence_Cb.Size = new Size(134, 19);
+            artificialIntelligence_Cb.TabIndex = 3;
+            artificialIntelligence_Cb.Text = "Artificial Intelligence";
+            artificialIntelligence_Cb.UseVisualStyleBackColor = true;
             // 
             // createReport_Cb
             // 
@@ -216,14 +243,14 @@
             assetEnabled_Panel.Controls.Add(borrow_Cb);
             assetEnabled_Panel.Controls.Add(transfer_Cb);
             assetEnabled_Panel.Dock = DockStyle.Left;
-            assetEnabled_Panel.Location = new Point(189, 0);
+            assetEnabled_Panel.Location = new Point(192, 0);
             assetEnabled_Panel.Name = "assetEnabled_Panel";
-            assetEnabled_Panel.Size = new Size(189, 321);
+            assetEnabled_Panel.Size = new Size(195, 374);
             assetEnabled_Panel.TabIndex = 11;
             // 
             // button1
             // 
-            button1.Location = new Point(97, 272);
+            button1.Location = new Point(95, 265);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 14;
@@ -233,7 +260,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(16, 272);
+            button2.Location = new Point(14, 265);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 13;
@@ -347,12 +374,12 @@
             manageAsset_Panel.Dock = DockStyle.Left;
             manageAsset_Panel.Location = new Point(0, 0);
             manageAsset_Panel.Name = "manageAsset_Panel";
-            manageAsset_Panel.Size = new Size(189, 321);
+            manageAsset_Panel.Size = new Size(192, 374);
             manageAsset_Panel.TabIndex = 10;
             // 
             // clear_Btn
             // 
-            clear_Btn.Location = new Point(97, 272);
+            clear_Btn.Location = new Point(100, 265);
             clear_Btn.Name = "clear_Btn";
             clear_Btn.Size = new Size(75, 23);
             clear_Btn.TabIndex = 12;
@@ -362,7 +389,7 @@
             // 
             // selectAll_Btn
             // 
-            selectAll_Btn.Location = new Point(16, 272);
+            selectAll_Btn.Location = new Point(19, 265);
             selectAll_Btn.Name = "selectAll_Btn";
             selectAll_Btn.Size = new Size(75, 23);
             selectAll_Btn.TabIndex = 11;
@@ -470,40 +497,75 @@
             disposed_Cb.Text = "Disposed";
             disposed_Cb.UseVisualStyleBackColor = true;
             // 
-            // lowerLabel_Lbl
+            // panel2
             // 
-            lowerLabel_Lbl.AutoSize = true;
-            lowerLabel_Lbl.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lowerLabel_Lbl.ForeColor = Color.White;
-            lowerLabel_Lbl.Location = new Point(178, 72);
-            lowerLabel_Lbl.Name = "lowerLabel_Lbl";
-            lowerLabel_Lbl.Size = new Size(235, 20);
-            lowerLabel_Lbl.TabIndex = 6;
-            lowerLabel_Lbl.Text = "Notes- The access of role selected";
+            panel2.Controls.Add(userIDVal_Lbl);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(nameVal_Lbl);
+            panel2.Controls.Add(label4);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(7, 7);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(597, 99);
+            panel2.TabIndex = 13;
             // 
-            // topLabel_Lbl
+            // userIDVal_Lbl
             // 
-            topLabel_Lbl.AutoSize = true;
-            topLabel_Lbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            topLabel_Lbl.ForeColor = Color.White;
-            topLabel_Lbl.Location = new Point(236, 29);
-            topLabel_Lbl.Name = "topLabel_Lbl";
-            topLabel_Lbl.Size = new Size(137, 32);
-            topLabel_Lbl.TabIndex = 5;
-            topLabel_Lbl.Text = "TOP LABEL";
+            userIDVal_Lbl.AutoSize = true;
+            userIDVal_Lbl.Font = new Font("Segoe UI", 14.25F);
+            userIDVal_Lbl.ForeColor = Color.White;
+            userIDVal_Lbl.Location = new Point(124, 23);
+            userIDVal_Lbl.Name = "userIDVal_Lbl";
+            userIDVal_Lbl.Size = new Size(94, 25);
+            userIDVal_Lbl.TabIndex = 6;
+            userIDVal_Lbl.Text = "UserIDVal";
+            userIDVal_Lbl.TextChanged += userIDVal_Lbl_TextChanged;
             // 
-            // AddUser_Access
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(36, 23);
+            label3.Name = "label3";
+            label3.Size = new Size(82, 25);
+            label3.TabIndex = 5;
+            label3.Text = "User ID:";
+            // 
+            // nameVal_Lbl
+            // 
+            nameVal_Lbl.AutoSize = true;
+            nameVal_Lbl.Font = new Font("Segoe UI", 14.25F);
+            nameVal_Lbl.ForeColor = Color.White;
+            nameVal_Lbl.Location = new Point(124, 48);
+            nameVal_Lbl.Name = "nameVal_Lbl";
+            nameVal_Lbl.Size = new Size(88, 25);
+            nameVal_Lbl.TabIndex = 12;
+            nameVal_Lbl.Text = "NameVal";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(36, 48);
+            label4.Name = "label4";
+            label4.Size = new Size(69, 25);
+            label4.TabIndex = 11;
+            label4.Text = "Name:";
+            // 
+            // ChangePermission
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(612, 461);
+            ClientSize = new Size(625, 503);
             Controls.Add(panel1);
-            Name = "AddUser_Access";
-            Text = "ChangeRole";
+            Name = "ChangePermission";
+            Text = "ChangePermission";
             Load += ChangeRole_Load;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
             otherModules_Panel.ResumeLayout(false);
             otherModules_Panel.PerformLayout();
@@ -511,6 +573,8 @@
             assetEnabled_Panel.PerformLayout();
             manageAsset_Panel.ResumeLayout(false);
             manageAsset_Panel.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -518,16 +582,23 @@
 
         private Panel panel1;
         private Panel panel3;
-        private Label topLabel_Lbl;
-        private Label lowerLabel_Lbl;
+        private Label label3;
+        private Label label4;
+        public Label nameVal_Lbl;
+        public Label userIDVal_Lbl;
+        private Panel panel2;
         private Panel panel4;
         private Panel otherModules_Panel;
+        private Button button3;
+        private Button button4;
         private Label label8;
         private CheckBox dashboard_Cb;
-        private CheckBox artificialIntelligence;
+        private CheckBox artificialIntelligence_Cb;
         private CheckBox createReport_Cb;
         private CheckBox backupAndRestoreData_Cb;
         private Panel assetEnabled_Panel;
+        private Button button1;
+        private Button button2;
         private Label label7;
         private CheckBox showImage_Cb;
         private CheckBox add_Cb;
@@ -537,6 +608,8 @@
         private CheckBox borrow_Cb;
         private CheckBox transfer_Cb;
         private Panel manageAsset_Panel;
+        private Button clear_Btn;
+        private Button selectAll_Btn;
         private Label label1;
         private CheckBox assetHistory_Cb;
         private CheckBox assets_Cb;
@@ -546,11 +619,7 @@
         private CheckBox cleaning_Cb;
         private CheckBox borrowed_Cb;
         private CheckBox disposed_Cb;
-        private Button clear_Btn;
-        private Button selectAll_Btn;
-        private Button button3;
-        private Button button4;
-        private Button button1;
-        private Button button2;
+        private Panel panel5;
+        private Button changePermission_Btn;
     }
 }

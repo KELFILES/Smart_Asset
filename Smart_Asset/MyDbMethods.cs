@@ -2842,18 +2842,18 @@ namespace Smart_Asset
 
                 if (deleteResult.DeletedCount > 0)
                 {
-                    Console.WriteLine("Document successfully deleted.");
+                    MessageBox.Show("Document successfully deleted.");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("No document found with the specified userID.");
+                    MessageBox.Show("No document found with the specified userID.");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting document: {ex.Message}");
+                MessageBox.Show($"Error deleting document: {ex.Message}");
                 return false;
             }
         }

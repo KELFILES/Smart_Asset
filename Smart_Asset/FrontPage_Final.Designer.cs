@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrontPage_Final));
             sideMenu_Panel = new Panel();
             logout_Panel = new Panel();
             logout_Btn = new Button();
@@ -125,9 +126,9 @@
             panel5.Controls.Add(ManageAsset_Btn);
             panel5.Controls.Add(dashboard_Btn);
             panel5.Dock = DockStyle.Fill;
-            panel5.Location = new Point(0, 100);
+            panel5.Location = new Point(0, 169);
             panel5.Name = "panel5";
-            panel5.Size = new Size(246, 933);
+            panel5.Size = new Size(246, 864);
             panel5.TabIndex = 49;
             // 
             // panel1
@@ -137,7 +138,7 @@
             panel1.Controls.Add(name_Lbl);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 749);
+            panel1.Location = new Point(0, 680);
             panel1.Name = "panel1";
             panel1.Size = new Size(246, 184);
             panel1.TabIndex = 40;
@@ -490,18 +491,18 @@
             logo_Panel.Dock = DockStyle.Top;
             logo_Panel.Location = new Point(0, 0);
             logo_Panel.Name = "logo_Panel";
-            logo_Panel.Size = new Size(246, 100);
+            logo_Panel.Size = new Size(246, 169);
             logo_Panel.TabIndex = 47;
             // 
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Image = Properties.Resources.frontPage_Logo1;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.ImageLocation = "";
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new Point(36, 7);
+            pictureBox1.Location = new Point(5, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(160, 87);
+            pictureBox1.Size = new Size(237, 157);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;

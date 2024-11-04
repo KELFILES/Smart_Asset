@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Startup));
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             start_Btn = new Button();
@@ -49,7 +50,7 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.None;
-            pictureBox1.Image = Properties.Resources.startupLogo_Image;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(332, 67);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(453, 308);

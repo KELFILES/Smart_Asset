@@ -207,7 +207,10 @@ namespace Smart_Asset
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string filterText = searchUser_Tb.Text.Trim().ToLower();
-            bindingSource.Filter = $"Name LIKE '%{filterText}%' OR Username LIKE '%{filterText}%' OR Email LIKE '%{filterText}%' OR UserID LIKE '%{filterText}%'";
+            bindingSource.Filter = $"Name LIKE '%{filterText}%' " +
+                $"OR Username LIKE '%{filterText}%' " +
+                $"OR Email LIKE '%{filterText}%' " +
+                $"OR UserID LIKE '%{filterText}%'";
         }
 
         private void searchUser_Tb_Click(object sender, EventArgs e)

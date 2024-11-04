@@ -70,7 +70,8 @@ namespace Smart_Asset
 
         private void Read_Load(object sender, EventArgs e)
         {
-
+            // Load data initially
+            LoadData();
         }
 
 
@@ -158,15 +159,7 @@ namespace Smart_Asset
             dp.SendClickBtnInfo(selectedButton);
         }
 
-        private void show1_Btn_Click(object sender, EventArgs e)
-        {
-            selectedButton = "show1";
 
-            SendButtonInfo();
-
-            MyDbMethods.Read_SerialNo("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
-            _lastRefreshAction = () => MyDbMethods.Read_SerialNo("SmartAssetDb", dataGridView1, serialNo_Cmb.Text);
-        }
 
         private void reservedHardwares_Btn_Click_1(object sender, EventArgs e)
         {
@@ -209,12 +202,12 @@ namespace Smart_Asset
 
         private void serialNo_Cmb_MouseEnter(object sender, EventArgs e)
         {
-            MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serialNo_Cmb);
+
         }
 
         private void serialNo_Cmb_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.KeyChar = char.ToUpper(e.KeyChar);
+
         }
 
 
@@ -292,6 +285,10 @@ namespace Smart_Asset
                 string.IsNullOrWhiteSpace(type_Cmb.Text))
             {
                 MessageBox.Show("Please select properly!");
+
+                //Reload Datagridview
+                LoadData();
+
                 return;
             }
 
@@ -693,8 +690,6 @@ namespace Smart_Asset
             panel5.Show();
             panel7.Show();
 
-            search1_Btn.PerformClick();
-
             panel5.Hide();
             panel7.Hide();
         }
@@ -768,6 +763,59 @@ namespace Smart_Asset
             type_Cmb.Items.Insert(0, "N/A");
 
 
+        }
+
+
+
+
+
+
+        private void LoadData()
+        {
+            InitializeDataSource();
+        }
+
+        private BindingSource bindingSource = new BindingSource();
+        private void InitializeDataSource()
+        {
+            dataGridView1.AllowUserToAddRows = false;
+            DataTable dataTable = new DataTable();
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                dataTable.Columns.Add(col.Name, typeof(string));
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+                if (!row.IsNewRow)
+                    dataTable.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray());
+
+            bindingSource.DataSource = dataTable;
+            dataGridView1.DataSource = bindingSource;
+        }
+
+        private void serialNo_Cmb_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string filterText = search_Cmb.Text.Trim().ToLower();
+                var filterColumns = new[]
+                {
+                    "Type", "Brand", "Model", "PropertyID", "SerialNo",
+                    "PONumber", "SINumber", "Cost", "Warranty", "Supplier",
+                    "WarrantyStatus", "PurchaseDate", "Usage", "Location"
+                };
+
+                bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while filtering data: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void serialNo_Cmb_Click(object sender, EventArgs e)
+        {
+            // Reload data to refresh the DataGridView
+            LoadData();
         }
     }
 }

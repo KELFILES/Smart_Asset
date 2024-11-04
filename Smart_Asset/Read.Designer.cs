@@ -47,8 +47,7 @@
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
             panel4 = new Panel();
-            search1_Btn = new Button();
-            serialNo_Cmb = new ComboBox();
+            search_Cmb = new ComboBox();
             label4 = new Label();
             panel6 = new Panel();
             type_Cmb = new ComboBox();
@@ -321,47 +320,35 @@
             // panel4
             // 
             panel4.BackColor = Color.Gray;
-            panel4.Controls.Add(search1_Btn);
-            panel4.Controls.Add(serialNo_Cmb);
+            panel4.Controls.Add(search_Cmb);
             panel4.Controls.Add(label4);
             panel4.Location = new Point(7, 6);
             panel4.Name = "panel4";
             panel4.Size = new Size(350, 136);
             panel4.TabIndex = 29;
             // 
-            // search1_Btn
+            // search_Cmb
             // 
-            search1_Btn.Anchor = AnchorStyles.Top;
-            search1_Btn.Location = new Point(149, 63);
-            search1_Btn.Name = "search1_Btn";
-            search1_Btn.Size = new Size(88, 28);
-            search1_Btn.TabIndex = 19;
-            search1_Btn.Text = "SEARCH";
-            search1_Btn.UseVisualStyleBackColor = true;
-            search1_Btn.Click += show1_Btn_Click;
-            // 
-            // serialNo_Cmb
-            // 
-            serialNo_Cmb.Anchor = AnchorStyles.Top;
-            serialNo_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
-            serialNo_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            serialNo_Cmb.FormattingEnabled = true;
-            serialNo_Cmb.Location = new Point(76, 34);
-            serialNo_Cmb.Name = "serialNo_Cmb";
-            serialNo_Cmb.Size = new Size(261, 23);
-            serialNo_Cmb.TabIndex = 23;
-            serialNo_Cmb.KeyPress += serialNo_Cmb_KeyPress;
-            serialNo_Cmb.MouseEnter += serialNo_Cmb_MouseEnter;
+            search_Cmb.Anchor = AnchorStyles.Top;
+            search_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
+            search_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            search_Cmb.FormattingEnabled = true;
+            search_Cmb.Location = new Point(65, 51);
+            search_Cmb.Name = "search_Cmb";
+            search_Cmb.Size = new Size(261, 23);
+            search_Cmb.TabIndex = 23;
+            search_Cmb.TextChanged += serialNo_Cmb_TextChanged;
+            search_Cmb.Click += serialNo_Cmb_Click;
             // 
             // label4
             // 
             label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
-            label4.Location = new Point(14, 37);
+            label4.Location = new Point(14, 56);
             label4.Name = "label4";
-            label4.Size = new Size(60, 15);
+            label4.Size = new Size(45, 15);
             label4.TabIndex = 24;
-            label4.Text = "Serial No.:";
+            label4.Text = "Search:";
             // 
             // panel6
             // 
@@ -500,9 +487,8 @@
         private Button export_Btn;
         private Label exportTo_Lbl;
         private Panel panel1;
-        private Button search1_Btn;
         private Label label4;
-        private ComboBox serialNo_Cmb;
+        private ComboBox search_Cmb;
         private ComboBox location_Cmb;
         private Label label1;
         private Label label2;

@@ -16,7 +16,26 @@ namespace Smart_Asset
         public ManageUsers()
         {
             InitializeComponent();
+
+            // Enable double buffering for the entire form
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
+
+
             StaticDataGridView1 = dataGridView1;
+        }
+
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         public static DataGridView StaticDataGridView1;

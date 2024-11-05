@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrontPage_Final));
             sideMenu_Panel = new Panel();
             logout_Panel = new Panel();
             logout_Btn = new Button();
@@ -497,7 +496,7 @@
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Image = Properties.Resources.frontPage_Logo1;
             pictureBox1.ImageLocation = "";
             pictureBox1.InitialImage = null;
             pictureBox1.Location = new Point(5, 2);

@@ -27,6 +27,13 @@ namespace Smart_Asset
 
         private async void resetPassword_Btn_Click(object sender, EventArgs e)
         {
+            // Ensure password and re-entered password fields are not empty
+            if (string.IsNullOrWhiteSpace(password_Tb.Text) || string.IsNullOrWhiteSpace(reEnterPassword_Tb.Text))
+            {
+                MessageBox.Show("Password fields cannot be empty.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Exit the method if either password field is empty
+            }
+
             // Check if password and re-entered password match
             if (password_Tb.Text != reEnterPassword_Tb.Text)
             {
@@ -38,12 +45,6 @@ namespace Smart_Asset
             encrypted = MyOtherMethods.EncryptPassword(password_Tb.Text);
 
             await MyDbMethods.UpdateFieldAsync("SmartAssetDb", "Users", userIDVal_Lbl.Text, "password", $"{encrypted}");
-
-
-
-
-
-
         }
 
 

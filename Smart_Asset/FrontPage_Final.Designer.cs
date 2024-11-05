@@ -88,10 +88,10 @@
             // 
             logout_Panel.Controls.Add(logout_Btn);
             logout_Panel.Dock = DockStyle.Bottom;
-            logout_Panel.Location = new Point(0, 971);
+            logout_Panel.Location = new Point(0, 963);
             logout_Panel.Name = "logout_Panel";
             logout_Panel.Padding = new Padding(0, 20, 90, 20);
-            logout_Panel.Size = new Size(246, 62);
+            logout_Panel.Size = new Size(246, 70);
             logout_Panel.TabIndex = 50;
             // 
             // logout_Btn
@@ -107,7 +107,7 @@
             logout_Btn.ForeColor = Color.Gainsboro;
             logout_Btn.Location = new Point(100, 20);
             logout_Btn.Name = "logout_Btn";
-            logout_Btn.Size = new Size(56, 22);
+            logout_Btn.Size = new Size(56, 30);
             logout_Btn.TabIndex = 32;
             logout_Btn.Text = "Logout";
             logout_Btn.UseVisualStyleBackColor = true;
@@ -125,9 +125,9 @@
             panel5.Controls.Add(ManageAsset_Btn);
             panel5.Controls.Add(dashboard_Btn);
             panel5.Dock = DockStyle.Fill;
-            panel5.Location = new Point(0, 169);
+            panel5.Location = new Point(0, 128);
             panel5.Name = "panel5";
-            panel5.Size = new Size(246, 864);
+            panel5.Size = new Size(246, 905);
             panel5.TabIndex = 49;
             // 
             // panel1
@@ -137,9 +137,9 @@
             panel1.Controls.Add(name_Lbl);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 680);
+            panel1.Location = new Point(0, 733);
             panel1.Name = "panel1";
-            panel1.Size = new Size(246, 184);
+            panel1.Size = new Size(246, 172);
             panel1.TabIndex = 40;
             // 
             // userID_Lbl
@@ -147,7 +147,7 @@
             userID_Lbl.Anchor = AnchorStyles.Top;
             userID_Lbl.AutoSize = true;
             userID_Lbl.ForeColor = Color.White;
-            userID_Lbl.Location = new Point(18, 85);
+            userID_Lbl.Location = new Point(19, 78);
             userID_Lbl.Name = "userID_Lbl";
             userID_Lbl.Size = new Size(51, 19);
             userID_Lbl.TabIndex = 3;
@@ -159,7 +159,7 @@
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(18, 66);
+            label2.Location = new Point(19, 59);
             label2.Name = "label2";
             label2.Size = new Size(58, 19);
             label2.TabIndex = 2;
@@ -170,7 +170,7 @@
             name_Lbl.Anchor = AnchorStyles.Top;
             name_Lbl.AutoSize = true;
             name_Lbl.ForeColor = Color.White;
-            name_Lbl.Location = new Point(18, 37);
+            name_Lbl.Location = new Point(19, 30);
             name_Lbl.Name = "name_Lbl";
             name_Lbl.Size = new Size(45, 19);
             name_Lbl.TabIndex = 1;
@@ -181,7 +181,7 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(17, 18);
+            label1.Location = new Point(18, 11);
             label1.Name = "label1";
             label1.Size = new Size(40, 19);
             label1.TabIndex = 0;
@@ -490,7 +490,7 @@
             logo_Panel.Dock = DockStyle.Top;
             logo_Panel.Location = new Point(0, 0);
             logo_Panel.Name = "logo_Panel";
-            logo_Panel.Size = new Size(246, 169);
+            logo_Panel.Size = new Size(246, 128);
             logo_Panel.TabIndex = 47;
             // 
             // pictureBox1
@@ -501,7 +501,7 @@
             pictureBox1.InitialImage = null;
             pictureBox1.Location = new Point(5, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(237, 157);
+            pictureBox1.Size = new Size(237, 120);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;

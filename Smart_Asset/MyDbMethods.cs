@@ -11,9 +11,8 @@ namespace Smart_Asset
     public class MyDbMethods
     {
         //private static readonly string DefaultConnectionString = "mongodb+srv://SmartAssetDb:SmartAssetDb_Pass@smartasset-serverlessin.lmjehif.mongodb.net/?retryWrites=true&w=majority&appName=SmartAsset-ServerlessInstance0";
-        private static readonly string DefaultConnectionString = "mongodb://SmartAssetDb:SmartAssetDb_Pass@ac-3zy0icx-shard-00-00.2ae1zep.mongodb.net:27017,ac-3zy0icx-shard-00-01.2ae1zep.mongodb.net:27017,ac-3zy0icx-shard-00-02.2ae1zep.mongodb.net:27017/?ssl=true&replicaSet=atlas-soaq1o-shard-0&authSource=admin&retryWrites=true&w=majority&appName=SmartAssetCluster1";
-
-
+        private static readonly string DefaultConnectionString = "mongodb://SmartAssetDb:SmartAssetDb_Pass@smartassetfinalcluster-shard-00-00.b9c9x.mongodb.net:27017,smartassetfinalcluster-shard-00-01.b9c9x.mongodb.net:27017,smartassetfinalcluster-shard-00-02.b9c9x.mongodb.net:27017/?ssl=true&replicaSet=atlas-x13njr-shard-0&authSource=admin&retryWrites=true&w=majority&appName=SmartAssetFinalCluster";
+        
         private static readonly MyDbMethods instance = new MyDbMethods();
 
         private string connectionString;

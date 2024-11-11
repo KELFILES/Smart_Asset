@@ -260,7 +260,7 @@
             artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
             artificialIntelligence_Btn.Size = new Size(246, 45);
             artificialIntelligence_Btn.TabIndex = 36;
-            artificialIntelligence_Btn.Text = "Artificial Intelligence";
+            artificialIntelligence_Btn.Text = "AI Recommendation";
             artificialIntelligence_Btn.TextAlign = ContentAlignment.MiddleLeft;
             artificialIntelligence_Btn.UseVisualStyleBackColor = true;
             artificialIntelligence_Btn.Click += artificialIntelligence_Btn_Click_1;

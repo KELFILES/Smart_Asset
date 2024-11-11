@@ -9,11 +9,13 @@ using ZXing.Common;
 using ZXing.QrCode;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Smart_Asset
 {
     public static class MyOtherMethods
     {
+        internal static Settings1 s1 = new Settings1();
 
         //FOR QR CODE
         public static async Task<Bitmap> GenerateQRCodeAsync(string text, int width, int height)

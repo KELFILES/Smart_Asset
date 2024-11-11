@@ -12,6 +12,7 @@ using MongoDB.Bson;
 using static Smart_Asset.Read;
 using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Smart_Asset.Images;
 
 
 namespace Smart_Asset
@@ -25,6 +26,8 @@ namespace Smart_Asset
         RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
         RightClick_DisposedHardwares dp = new RightClick_DisposedHardwares();
         RightClick_Replacement rep = new RightClick_Replacement();
+        Settings1 s1 = new Settings1();
+        HideColumn hc = new HideColumn();
 
         public Read()
         {
@@ -38,8 +41,14 @@ namespace Smart_Asset
 
             //Double Buffering for DataGridView
             EnableDoubleBuffering(dataGridView1);
-        }
 
+            //static fields
+            StaticDataGridView = dataGridView1;
+            p8 = panel8;
+        }
+        //static fields
+        public static DataGridView StaticDataGridView;
+        public static Panel p8;
 
         // Enable double buffering for the entire form
         protected override CreateParams CreateParams
@@ -73,6 +82,7 @@ namespace Smart_Asset
             // Load data initially
             LoadData();
         }
+
 
 
         private void Read_Resize(object sender, EventArgs e)
@@ -277,72 +287,7 @@ namespace Smart_Asset
             throw new NotImplementedException();
         }
 
-        private async void Show2_Click_1(object sender, EventArgs e)
-        {
-            // Check if all the combo boxes are empty or null
-            if (string.IsNullOrWhiteSpace(location_Cmb.Text) &&
-                string.IsNullOrWhiteSpace(unit_Cmb.Text) &&
-                string.IsNullOrWhiteSpace(type_Cmb.Text))
-            {
-                MessageBox.Show("Please select properly!");
 
-                //Reload Datagridview
-                LoadData();
-
-                return;
-            }
-
-            selectedButton = "show2";
-            SendButtonInfo();
-
-            // Case: Location is null/empty or "N/A", Unit is selected, Type is null/empty or "N/A"
-            if ((string.IsNullOrWhiteSpace(location_Cmb.Text) || location_Cmb.Text.Equals("N/A")) &&
-                !string.IsNullOrWhiteSpace(unit_Cmb.Text) &&
-                (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A")))
-            {
-                // Call the async method to show documents based on unit
-                await MyDbMethods.ShowDocuContainsTextAsync("SmartAssetDb", dataGridView1, unit_Cmb.Text);
-                _lastRefreshAction = async () => await MyDbMethods.ShowDocuContainsTextAsync("SmartAssetDb", dataGridView1, unit_Cmb.Text);
-            }
-            // Case 1: Show location if both unit and type are "N/A" or empty/null, and location is set
-            else if ((string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A")) &&
-                (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A")) &&
-                !string.IsNullOrWhiteSpace(location_Cmb.Text))
-            {
-                // Show location
-                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
-                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
-            }
-            // Case 2: Show all types in all locations if unit is "N/A", location is "N/A" or empty, and type is selected
-            else if ((string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A")) &&
-                     (string.IsNullOrWhiteSpace(location_Cmb.Text) || location_Cmb.Text.Equals("N/A")) &&
-                     !string.IsNullOrWhiteSpace(type_Cmb.Text))
-            {
-                // Show all types across all locations for the selected type
-                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "", true, "Type", $"{type_Cmb.Text}");
-                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "", true, "Type", $"{type_Cmb.Text}");
-            }
-            // Case 3: Show location and unit if type is "N/A" or empty/null
-            else if (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A"))
-            {
-                // Show location and unit
-                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
-            }
-            // Case 4: Show specific type in a location when unit is "N/A" or empty/null but type is selected
-            else if (string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A"))
-            {
-                // Show all items of the selected type (e.g., CPU) in the specific location (e.g., Laboratory1)
-                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
-                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
-            }
-            // Default case: Show specific location, unit, and type
-            else
-            {
-                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
-                _lastRefreshAction = () => MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
-            }
-        }
 
         private void disposedHardwares_Btn_Click(object sender, EventArgs e)
         {
@@ -398,6 +343,7 @@ namespace Smart_Asset
         {
             if (selectedButton.Equals("showAllHardwares") ||
                 selectedButton.Equals("reservedHardwares") ||
+                selectedButton.Equals("ASSETS") ||
                 selectedButton.Equals("show1") ||
                 selectedButton.Equals("show2"))
             {
@@ -816,6 +762,171 @@ namespace Smart_Asset
         {
             // Reload data to refresh the DataGridView
             LoadData();
+        }
+
+        private void add_Btn_Click(object sender, EventArgs e)
+        {
+            Create cr = new Create();
+            cr.Show();
+        }
+
+        private void hideColumn_Btn_Click(object sender, EventArgs e)
+        {
+            HideColumn hc = new HideColumn();
+            hc.Show();
+        }
+
+        private async void search2_Btn_Click(object sender, EventArgs e)
+        {
+            // Check if all the combo boxes are empty or null
+            if (string.IsNullOrWhiteSpace(location_Cmb.Text) &&
+                string.IsNullOrWhiteSpace(unit_Cmb.Text) &&
+                string.IsNullOrWhiteSpace(type_Cmb.Text))
+            {
+                MessageBox.Show("Please select properly!");
+
+                // Reload Datagridview
+                LoadData();
+                HideColumnsBasedOnS1(); // Ensure columns are hidden when reloading
+                return;
+            }
+
+            selectedButton = "show2";
+            SendButtonInfo();
+
+            // Perform the relevant database operation based on selection
+            if ((string.IsNullOrWhiteSpace(location_Cmb.Text) || location_Cmb.Text.Equals("N/A")) &&
+                !string.IsNullOrWhiteSpace(unit_Cmb.Text) &&
+                (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A")))
+            {
+                await MyDbMethods.ShowDocuContainsTextAsync("SmartAssetDb", dataGridView1, unit_Cmb.Text);
+            }
+            else if ((string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A")) &&
+                     (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A")) &&
+                     !string.IsNullOrWhiteSpace(location_Cmb.Text))
+            {
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true);
+            }
+            else if ((string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A")) &&
+                     (string.IsNullOrWhiteSpace(location_Cmb.Text) || location_Cmb.Text.Equals("N/A")) &&
+                     !string.IsNullOrWhiteSpace(type_Cmb.Text))
+            {
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, "", true, "Type", $"{type_Cmb.Text}");
+            }
+            else if (string.IsNullOrWhiteSpace(type_Cmb.Text) || type_Cmb.Text.Equals("N/A"))
+            {
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}");
+            }
+            else if (string.IsNullOrWhiteSpace(unit_Cmb.Text) || unit_Cmb.Text.Equals("N/A"))
+            {
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_", true, "Type", $"{type_Cmb.Text}");
+            }
+            else
+            {
+                MyDbMethods.ReadLocation("SmartAssetDb", dataGridView1, $"{location_Cmb.Text}_{unit_Cmb.Text}", true, "Type", $"{type_Cmb.Text}");
+            }
+
+
+
+
+            // Call HideColumnsBasedOnS1 to apply column visibility after data has loaded
+            // Check if the column exists before trying to set its visibility
+            s1.Reload();
+
+            if (Read.StaticDataGridView.Columns["Type"] != null)
+                Read.StaticDataGridView.Columns["Type"].Visible = !s1.type;
+
+            if (Read.StaticDataGridView.Columns["Brand"] != null)
+                Read.StaticDataGridView.Columns["Brand"].Visible = !s1.brand;
+
+            if (Read.StaticDataGridView.Columns["Model"] != null)
+                Read.StaticDataGridView.Columns["Model"].Visible = !s1.model;
+
+            if (Read.StaticDataGridView.Columns["PropertyID"] != null)
+                Read.StaticDataGridView.Columns["PropertyID"].Visible = !s1.propertyID;
+
+            if (Read.StaticDataGridView.Columns["SerialNo"] != null)
+                Read.StaticDataGridView.Columns["SerialNo"].Visible = !s1.serialNo;
+
+            if (Read.StaticDataGridView.Columns["PONumber"] != null)
+                Read.StaticDataGridView.Columns["PONumber"].Visible = !s1.poNumber;
+
+            if (Read.StaticDataGridView.Columns["SINumber"] != null)
+                Read.StaticDataGridView.Columns["SINumber"].Visible = !s1.siNumber;
+
+            if (Read.StaticDataGridView.Columns["Cost"] != null)
+                Read.StaticDataGridView.Columns["Cost"].Visible = !s1.cost;
+
+            if (Read.StaticDataGridView.Columns["Warranty"] != null)
+                Read.StaticDataGridView.Columns["Warranty"].Visible = !s1.warranty;
+
+            if (Read.StaticDataGridView.Columns["Supplier"] != null)
+                Read.StaticDataGridView.Columns["Supplier"].Visible = !s1.supplier;
+
+            if (Read.StaticDataGridView.Columns["WarrantyStatus"] != null)
+                Read.StaticDataGridView.Columns["WarrantyStatus"].Visible = !s1.warrantyStatus;
+
+            if (Read.StaticDataGridView.Columns["PurchaseDate"] != null)
+                Read.StaticDataGridView.Columns["PurchaseDate"].Visible = !s1.purchaseDate;
+
+            if (Read.StaticDataGridView.Columns["Usage"] != null)
+                Read.StaticDataGridView.Columns["Usage"].Visible = !s1.usage;
+
+            if (Read.StaticDataGridView.Columns["Location"] != null)
+                Read.StaticDataGridView.Columns["Location"].Visible = !s1.location;
+
+        }
+
+
+        public void HideColumnsBasedOnS1()
+        {
+            // Check if the column exists before trying to set its visibility
+            if (dataGridView1.Columns["Type"] != null)
+                dataGridView1.Columns["Type"].Visible = !s1.type;
+
+            if (dataGridView1.Columns["Brand"] != null)
+                dataGridView1.Columns["Brand"].Visible = !s1.brand;
+
+            if (dataGridView1.Columns["Model"] != null)
+                dataGridView1.Columns["Model"].Visible = !s1.model;
+
+            if (dataGridView1.Columns["PropertyID"] != null)
+                dataGridView1.Columns["PropertyID"].Visible = !s1.propertyID;
+
+            if (dataGridView1.Columns["SerialNo"] != null)
+                dataGridView1.Columns["SerialNo"].Visible = !s1.serialNo;
+
+            if (dataGridView1.Columns["PONumber"] != null)
+                dataGridView1.Columns["PONumber"].Visible = !s1.poNumber;
+
+            if (dataGridView1.Columns["SINumber"] != null)
+                dataGridView1.Columns["SINumber"].Visible = !s1.siNumber;
+
+            if (dataGridView1.Columns["Cost"] != null)
+                dataGridView1.Columns["Cost"].Visible = !s1.cost;
+
+            if (dataGridView1.Columns["Warranty"] != null)
+                dataGridView1.Columns["Warranty"].Visible = !s1.warranty;
+
+            if (dataGridView1.Columns["Supplier"] != null)
+                dataGridView1.Columns["Supplier"].Visible = !s1.supplier;
+
+            if (dataGridView1.Columns["WarrantyStatus"] != null)
+                dataGridView1.Columns["WarrantyStatus"].Visible = !s1.warrantyStatus;
+
+            if (dataGridView1.Columns["PurchaseDate"] != null)
+                dataGridView1.Columns["PurchaseDate"].Visible = !s1.purchaseDate;
+
+            if (dataGridView1.Columns["Usage"] != null)
+                dataGridView1.Columns["Usage"].Visible = !s1.usage;
+
+            if (dataGridView1.Columns["Location"] != null)
+                dataGridView1.Columns["Location"].Visible = !s1.location;
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            HideColumnsBasedOnS1();
         }
     }
 }

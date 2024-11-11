@@ -61,6 +61,7 @@ namespace Smart_Asset
         Swap sw;
         Borrow br = new Borrow();
         ManageUsers mu = new ManageUsers();
+        Settings1 s1 = new Settings1();
 
         public static string selectedButton = "";
         RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
@@ -531,10 +532,10 @@ namespace Smart_Asset
             rd.panel5.Visible = false;
             rd.panel7.Visible = false;
 
-
-
+            Read.selectedButton = "ASSETS";
 
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
+
         }
 
         private void AssetCategories_Btn_Click(object sender, EventArgs e)
@@ -692,7 +693,7 @@ namespace Smart_Asset
 
             rd.replacement_Btn.PerformClick();
             rd.panel5.Hide();
-            rd.panel6.Hide();
+            rd.panel9.Hide();
             rd.panel7.Hide();
 
 
@@ -716,7 +717,7 @@ namespace Smart_Asset
 
             rd.cleaningHardwares_Btn.PerformClick();
             rd.panel5.Hide();
-            rd.panel6.Hide();
+            rd.panel9.Hide();
             rd.panel7.Hide();
 
 
@@ -738,7 +739,7 @@ namespace Smart_Asset
 
             rd.disposedHardwares_Btn.PerformClick();
             rd.panel5.Hide();
-            rd.panel6.Hide();
+            rd.panel9.Hide();
             rd.panel7.Hide();
 
             rd.panel4.Anchor = AnchorStyles.Left;
@@ -758,10 +759,10 @@ namespace Smart_Asset
 
             rd.borrowedHardwares_Btn.PerformClick();
             rd.panel5.Hide();
-            rd.panel6.Hide();
+            rd.panel9.Hide();
             rd.panel7.Hide();
             rd.panel5.Visible = false;
-            rd.panel6.Visible = false;
+            rd.panel9.Visible = false;
             rd.panel7.Visible = false;
 
 
@@ -783,7 +784,7 @@ namespace Smart_Asset
             rd.reservedHardwares_Btn.PerformClick();
 
             rd.panel5.Visible = false;
-            rd.panel6.Visible = false;
+            rd.panel9.Visible = false;
             rd.panel7.Visible = false;
 
 
@@ -805,7 +806,7 @@ namespace Smart_Asset
 
             rd.archive_Btn.PerformClick();
             rd.panel5.Hide();
-            rd.panel6.Hide();
+            rd.panel9.Hide();
             rd.panel7.Hide();
 
 

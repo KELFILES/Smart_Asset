@@ -51,6 +51,11 @@
     <Compile Update="Borrow.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Settings1.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
     <Compile Update="TransferAll.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +170,10 @@
     </None>
     <None Update="Images\X_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

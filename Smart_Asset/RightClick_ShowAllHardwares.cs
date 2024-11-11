@@ -71,11 +71,13 @@ namespace Smart_Asset
 
         private void refresh_Btn_Click(object sender, EventArgs e)
         {
-            Read rd = new Read();
 
             switch (getClickBtnInfo)
             {
                 case "showAllHardwares":
+                    form1.Refresh_ShowAllHardwares();
+                    break;
+                case "ASSETS":
                     form1.Refresh_ShowAllHardwares();
                     break;
                 case "archive":
@@ -118,8 +120,7 @@ namespace Smart_Asset
 
         private void add_Btn_Click(object sender, EventArgs e)
         {
-            Create cr = new Create();
-            cr.Show();
+
         }
 
         private async void remove_Btn_Click(object sender, EventArgs e)

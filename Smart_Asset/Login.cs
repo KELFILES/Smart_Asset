@@ -65,9 +65,6 @@ namespace Smart_Asset
             if (userDetails != null)
             {
                 Console.WriteLine($"Name: {userDetails.Name}");
-                Console.WriteLine($"Email: {userDetails.Email}");
-                Console.WriteLine($"ContactNo: {userDetails.ContactNo}");
-                Console.WriteLine($"Address: {userDetails.Address}");
                 Console.WriteLine($"Username: {userDetails.Username}");
                 Console.WriteLine($"Role: {userDetails.Role}");
                 Console.WriteLine($"UserID: {userDetails.UserID}");

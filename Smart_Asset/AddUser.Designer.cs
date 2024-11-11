@@ -29,24 +29,14 @@
         private void InitializeComponent()
         {
             panel2 = new Panel();
-            reEnterPassword_Tb = new TextBox();
-            label100 = new Label();
             label2 = new Label();
-            password_Tb = new TextBox();
             label1 = new Label();
-            label8 = new Label();
             name_Tb = new TextBox();
             username_Tb = new TextBox();
-            label3 = new Label();
             label7 = new Label();
-            email_Tb = new TextBox();
             button1 = new Button();
-            label4 = new Label();
             role_Cb = new ComboBox();
-            contactNo_Tb = new TextBox();
             label6 = new Label();
-            label5 = new Label();
-            address_Tb = new TextBox();
             panel1 = new Panel();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -83,6 +73,7 @@
             disposed_Cb = new CheckBox();
             lowerLabel_Lbl = new Label();
             topLabel_Lbl = new Label();
+            label3 = new Label();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -95,51 +86,21 @@
             // panel2
             // 
             panel2.BackColor = Color.DimGray;
-            panel2.Controls.Add(reEnterPassword_Tb);
-            panel2.Controls.Add(label100);
+            panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(password_Tb);
             panel2.Controls.Add(label1);
-            panel2.Controls.Add(label8);
             panel2.Controls.Add(name_Tb);
             panel2.Controls.Add(username_Tb);
-            panel2.Controls.Add(label3);
             panel2.Controls.Add(label7);
-            panel2.Controls.Add(email_Tb);
             panel2.Controls.Add(button1);
-            panel2.Controls.Add(label4);
             panel2.Controls.Add(role_Cb);
-            panel2.Controls.Add(contactNo_Tb);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(address_Tb);
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(10, 10);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10);
             panel2.Size = new Size(574, 451);
             panel2.TabIndex = 17;
-            // 
-            // reEnterPassword_Tb
-            // 
-            reEnterPassword_Tb.Anchor = AnchorStyles.Top;
-            reEnterPassword_Tb.Location = new Point(263, 292);
-            reEnterPassword_Tb.Name = "reEnterPassword_Tb";
-            reEnterPassword_Tb.PasswordChar = '*';
-            reEnterPassword_Tb.Size = new Size(276, 23);
-            reEnterPassword_Tb.TabIndex = 17;
-            // 
-            // label100
-            // 
-            label100.Anchor = AnchorStyles.Top;
-            label100.AutoSize = true;
-            label100.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label100.ForeColor = Color.White;
-            label100.Location = new Point(38, 292);
-            label100.Name = "label100";
-            label100.Size = new Size(209, 24);
-            label100.TabIndex = 16;
-            label100.Text = "Re Enter Password:";
             // 
             // label2
             // 
@@ -153,15 +114,6 @@
             label2.TabIndex = 1;
             label2.Text = "Name:";
             // 
-            // password_Tb
-            // 
-            password_Tb.Anchor = AnchorStyles.Top;
-            password_Tb.Location = new Point(263, 263);
-            password_Tb.Name = "password_Tb";
-            password_Tb.PasswordChar = '*';
-            password_Tb.Size = new Size(276, 23);
-            password_Tb.TabIndex = 15;
-            // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top;
@@ -174,18 +126,6 @@
             label1.TabIndex = 0;
             label1.Text = "ADD USER:";
             // 
-            // label8
-            // 
-            label8.Anchor = AnchorStyles.Top;
-            label8.AutoSize = true;
-            label8.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(38, 263);
-            label8.Name = "label8";
-            label8.Size = new Size(117, 24);
-            label8.TabIndex = 14;
-            label8.Text = "Password:";
-            // 
             // name_Tb
             // 
             name_Tb.Anchor = AnchorStyles.Top;
@@ -197,22 +137,10 @@
             // username_Tb
             // 
             username_Tb.Anchor = AnchorStyles.Top;
-            username_Tb.Location = new Point(263, 234);
+            username_Tb.Location = new Point(263, 147);
             username_Tb.Name = "username_Tb";
             username_Tb.Size = new Size(276, 23);
             username_Tb.TabIndex = 13;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Top;
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(38, 147);
-            label3.Name = "label3";
-            label3.Size = new Size(74, 24);
-            label3.TabIndex = 3;
-            label3.Text = "Email:";
             // 
             // label7
             // 
@@ -220,19 +148,11 @@
             label7.AutoSize = true;
             label7.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(38, 234);
+            label7.Location = new Point(38, 147);
             label7.Name = "label7";
             label7.Size = new Size(121, 24);
             label7.TabIndex = 12;
             label7.Text = "Username:";
-            // 
-            // email_Tb
-            // 
-            email_Tb.Anchor = AnchorStyles.Top;
-            email_Tb.Location = new Point(263, 147);
-            email_Tb.Name = "email_Tb";
-            email_Tb.Size = new Size(276, 23);
-            email_Tb.TabIndex = 4;
             // 
             // button1
             // 
@@ -241,7 +161,7 @@
             button1.FlatAppearance.MouseDownBackColor = Color.Red;
             button1.FlatAppearance.MouseOverBackColor = Color.Green;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(225, 381);
+            button1.Location = new Point(227, 250);
             button1.Name = "button1";
             button1.Size = new Size(121, 38);
             button1.TabIndex = 11;
@@ -249,37 +169,17 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Top;
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(38, 176);
-            label4.Name = "label4";
-            label4.Size = new Size(131, 24);
-            label4.TabIndex = 5;
-            label4.Text = "Contact No:";
-            // 
             // role_Cb
             // 
             role_Cb.Anchor = AnchorStyles.Top;
             role_Cb.DropDownStyle = ComboBoxStyle.DropDownList;
             role_Cb.FormattingEnabled = true;
             role_Cb.Items.AddRange(new object[] { "Super Admin", "Admin", "Custom User" });
-            role_Cb.Location = new Point(263, 321);
+            role_Cb.Location = new Point(263, 176);
             role_Cb.Name = "role_Cb";
             role_Cb.Size = new Size(276, 23);
             role_Cb.TabIndex = 10;
             role_Cb.TextChanged += role_Cb_TextChanged_1;
-            // 
-            // contactNo_Tb
-            // 
-            contactNo_Tb.Anchor = AnchorStyles.Top;
-            contactNo_Tb.Location = new Point(263, 176);
-            contactNo_Tb.Name = "contactNo_Tb";
-            contactNo_Tb.Size = new Size(276, 23);
-            contactNo_Tb.TabIndex = 6;
             // 
             // label6
             // 
@@ -287,31 +187,11 @@
             label6.AutoSize = true;
             label6.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(38, 321);
+            label6.Location = new Point(38, 176);
             label6.Name = "label6";
             label6.Size = new Size(63, 24);
             label6.TabIndex = 9;
             label6.Text = "Role:";
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Top;
-            label5.AutoSize = true;
-            label5.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(38, 205);
-            label5.Name = "label5";
-            label5.Size = new Size(101, 24);
-            label5.TabIndex = 7;
-            label5.Text = "Address:";
-            // 
-            // address_Tb
-            // 
-            address_Tb.Anchor = AnchorStyles.Top;
-            address_Tb.Location = new Point(263, 205);
-            address_Tb.Name = "address_Tb";
-            address_Tb.Size = new Size(276, 23);
-            address_Tb.TabIndex = 8;
             // 
             // panel1
             // 
@@ -731,6 +611,17 @@
             topLabel_Lbl.TabIndex = 5;
             topLabel_Lbl.Text = "TOP LABEL";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(38, 214);
+            label3.Name = "label3";
+            label3.Size = new Size(489, 20);
+            label3.TabIndex = 14;
+            label3.Text = "Note! The default password will be Username + 123 (Ex.\"Username123\").";
+            // 
             // AddUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -763,24 +654,14 @@
         #endregion
 
         private Panel panel2;
-        private TextBox reEnterPassword_Tb;
-        private Label label100;
         private Label label2;
-        private TextBox password_Tb;
         private Label label1;
-        private Label label8;
         private TextBox name_Tb;
         private TextBox username_Tb;
-        private Label label3;
         private Label label7;
-        private TextBox email_Tb;
         private Button button1;
-        private Label label4;
         private ComboBox role_Cb;
-        private TextBox contactNo_Tb;
         private Label label6;
-        private Label label5;
-        private TextBox address_Tb;
         private Panel panel1;
         private Panel panel3;
         private Panel panel4;
@@ -817,5 +698,6 @@
         private CheckBox disposed_Cb;
         private Label lowerLabel_Lbl;
         private Label topLabel_Lbl;
+        private Label label3;
     }
 }

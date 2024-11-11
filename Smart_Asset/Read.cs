@@ -42,6 +42,9 @@ namespace Smart_Asset
             //Double Buffering for DataGridView
             EnableDoubleBuffering(dataGridView1);
 
+            // Subscribe to the MouseWheel event for additional functionality
+            dataGridView1.MouseWheel += DataGridView1_MouseWheel;
+
             //static fields
             StaticDataGridView = dataGridView1;
             p8 = panel8;
@@ -158,9 +161,6 @@ namespace Smart_Asset
             public string UserID { get; set; }
             public string Name { get; set; }
             public string Username { get; set; }
-            public string Email { get; set; }
-            public string ContactNo { get; set; }
-            public string Address { get; set; }
         }
         private void SendButtonInfo()
         {
@@ -928,5 +928,74 @@ namespace Smart_Asset
         {
             HideColumnsBasedOnS1();
         }
+
+
+
+        private void DataGridView1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            // Check if Ctrl key is held down
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                AdjustFontSize(e);
+            }
+            // Check if Shift key is held down
+            else if (Control.ModifierKeys == Keys.Shift)
+            {
+                ScrollHorizontally(e);
+            }
+        }
+
+        // Method to adjust the font size of the DataGridView
+        private void AdjustFontSize(MouseEventArgs e)
+        {
+            // Get the current font size
+            float currentFontSize = dataGridView1.DefaultCellStyle.Font.Size;
+            float newFontSize = currentFontSize;
+
+            // Increase or decrease the font size based on scroll direction
+            if (e.Delta > 0)
+            {
+                newFontSize += 1; // Scroll up, increase font size
+            }
+            else if (e.Delta < 0)
+            {
+                newFontSize -= 1; // Scroll down, decrease font size
+            }
+
+            // Set minimum and maximum font size limits
+            if (newFontSize < 5) newFontSize = 5;
+            if (newFontSize > 30) newFontSize = 30;
+
+            // Update the DataGridView font
+            dataGridView1.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font.FontFamily, newFontSize);
+        }
+
+        // Method to scroll the DataGridView horizontally
+        private void ScrollHorizontally(MouseEventArgs e)
+        {
+            // Scroll left if the mouse wheel is scrolled up
+            if (e.Delta > 0)
+            {
+                // Move to the previous column if possible
+                if (dataGridView1.FirstDisplayedScrollingColumnIndex > 0)
+                {
+                    dataGridView1.FirstDisplayedScrollingColumnIndex--;
+                }
+            }
+            // Scroll right if the mouse wheel is scrolled down
+            else if (e.Delta < 0)
+            {
+                // Check if there are more columns to the right to scroll to
+                int lastVisibleColumnIndex = dataGridView1.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+                if (dataGridView1.FirstDisplayedScrollingColumnIndex < lastVisibleColumnIndex)
+                {
+                    dataGridView1.FirstDisplayedScrollingColumnIndex++;
+                }
+            }
+        }
+
+
+
+
     }
 }

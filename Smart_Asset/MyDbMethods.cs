@@ -1259,10 +1259,7 @@ namespace Smart_Asset
             {
                 var update = Builders<BsonDocument>.Update
                     .Set("name", document.GetValue("name", "").AsString)
-                    .Set("username", document.GetValue("username", "").AsString)
-                    .Set("email", document.GetValue("email", "").AsString)
-                    .Set("contactNo", document.GetValue("contactNo", "").AsString)
-                    .Set("address", document.GetValue("address", "").AsString);
+                    .Set("username", document.GetValue("username", "").AsString);
 
                 // Apply the update using the ObjectId from "userID"
                 collection.UpdateOne(
@@ -1276,9 +1273,6 @@ namespace Smart_Asset
                 UserID = doc.GetValue("userID").AsObjectId.ToString(), // Convert ObjectId to String
                 Name = doc.GetValue("name", "").AsString,
                 Username = doc.GetValue("username", "").AsString,
-                Email = doc.GetValue("email", "").AsString,
-                ContactNo = doc.GetValue("contactNo", "").AsString,
-                Address = doc.GetValue("address", "").AsString,
             }).ToList();
 
             allDocuments.AddRange(userList);
@@ -1376,10 +1370,7 @@ namespace Smart_Asset
                 // Build the update definition with necessary fields
                 var update = Builders<BsonDocument>.Update
                     .Set("name", row.Cells["Name"].Value?.ToString())
-                    .Set("username", username)
-                    .Set("email", row.Cells["Email"].Value?.ToString())
-                    .Set("contactNo", row.Cells["ContactNo"].Value?.ToString())
-                    .Set("address", row.Cells["Address"].Value?.ToString());
+                    .Set("username", username);
 
                 try
                 {
@@ -2460,9 +2451,6 @@ namespace Smart_Asset
                 {
                     { "_id", ObjectId.GenerateNewId() }, // Automatically generated ObjectId
                     { "name", "NotSet" },
-                    { "email", "NotSet" },
-                    { "contactNo", "NotSet" },
-                    { "address", "NotSet" },
                     { "username", "SuperAdmin" },
                     { "password", $"{encrypted}" },
                     { "role", "Super Admin" },
@@ -2494,9 +2482,6 @@ namespace Smart_Asset
                 var userDetails = new UserDetails
                 {
                     Name = userDocument.Contains("name") ? userDocument["name"].AsString : null,
-                    Email = userDocument.Contains("email") ? userDocument["email"].AsString : null,
-                    ContactNo = userDocument.Contains("contactNo") ? userDocument["contactNo"].AsString : null,
-                    Address = userDocument.Contains("address") ? userDocument["address"].AsString : null,
                     Username = userDocument.Contains("username") ? userDocument["username"].AsString : null,
                     Role = userDocument.Contains("role") ? userDocument["role"].AsString : null,
                     UserID = userDocument.Contains("userID") ? userDocument["userID"].ToString() : null // Convert to string
@@ -2512,9 +2497,6 @@ namespace Smart_Asset
         public class UserDetails
         {
             public string Name { get; set; }
-            public string Email { get; set; }
-            public string ContactNo { get; set; }
-            public string Address { get; set; }
             public string Username { get; set; }
             public string Role { get; set; }
             public string? UserID { get; set; } // Nullable string to handle missing values
@@ -2544,9 +2526,6 @@ namespace Smart_Asset
                 Name = doc.Contains("name") && doc["name"].IsString ? doc["name"].AsString : string.Empty,
                 Username = doc.Contains("username") && doc["username"].IsString ? doc["username"].AsString : string.Empty,
                 //Password = doc.Contains("password") && doc["password"].IsString ? doc["password"].AsString : string.Empty,
-                Email = doc.Contains("email") && doc["email"].IsString ? doc["email"].AsString : string.Empty,
-                ContactNo = doc.Contains("contactNo") && doc["contactNo"].IsString ? doc["contactNo"].AsString : string.Empty,
-                Address = doc.Contains("address") && doc["address"].IsString ? doc["address"].AsString : string.Empty,
                 Role = doc.Contains("role") && doc["role"].IsString ? doc["role"].AsString : string.Empty
             }).ToList<object>();
 

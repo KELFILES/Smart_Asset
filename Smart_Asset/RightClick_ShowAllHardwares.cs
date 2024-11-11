@@ -118,11 +118,6 @@ namespace Smart_Asset
             this.Dispose();
         }
 
-        private void add_Btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void remove_Btn_Click(object sender, EventArgs e)
         {
             try

@@ -37,12 +37,7 @@ namespace Smart_Asset
         {
             // Check if any of the TextBoxes are null or empty
             if (string.IsNullOrWhiteSpace(name_Tb.Text) ||
-                string.IsNullOrWhiteSpace(email_Tb.Text) ||
-                string.IsNullOrWhiteSpace(contactNo_Tb.Text) ||
-                string.IsNullOrWhiteSpace(address_Tb.Text) ||
                 string.IsNullOrWhiteSpace(username_Tb.Text) ||
-                string.IsNullOrWhiteSpace(password_Tb.Text) ||
-                string.IsNullOrWhiteSpace(reEnterPassword_Tb.Text) ||
                 string.IsNullOrWhiteSpace(role_Cb.Text))
             {
                 MessageBox.Show("Please Fill Up The Blanks.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -58,15 +53,9 @@ namespace Smart_Asset
                 return; // Exit the method if the username is already used
             }
 
-            // Check if password and re-entered password match
-            if (password_Tb.Text != reEnterPassword_Tb.Text)
-            {
-                MessageBox.Show("Passwords do not match.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Exit the method if passwords don't match
-            }
 
             // Encrypt the password
-            string encryptedPass = MyOtherMethods.EncryptPassword(password_Tb.Text);
+            string encryptedPass = MyOtherMethods.EncryptPassword(username_Tb.Text + "123");
             Console.WriteLine(encryptedPass);
 
             // Generate the userID as ObjectId without converting it to string
@@ -76,9 +65,6 @@ namespace Smart_Asset
             var fields = new Dictionary<string, object>
             {
                 { "name", name_Tb.Text },
-                { "email", email_Tb.Text },
-                { "contactNo", contactNo_Tb.Text },
-                { "address", address_Tb.Text },
                 { "username", username_Tb.Text },
                 { "password", encryptedPass },
                 { "role", role_Cb.Text },

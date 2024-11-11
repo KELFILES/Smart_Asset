@@ -69,9 +69,6 @@ namespace Smart_Asset
         RightClick_DisposedHardwares dsp = new RightClick_DisposedHardwares();
 
         public static string name = "";
-        public static string email = "";
-        public static string contactNo = "";
-        public static string address = "";
         public static string username = "";
         public static string role = "";
         public static string userID = "";
@@ -179,14 +176,16 @@ namespace Smart_Asset
                 Form currentForm = mainPanel.Controls[0] as Form;
                 if (currentForm != null)
                 {
-                    currentForm.Close();  // Close the form to free up resources
-                    currentForm.Dispose();  // Dispose the form
-                    mainPanel.Controls.Clear();  // Clear the panel
-                    GC.Collect();  // Force garbage collection
-                    GC.WaitForPendingFinalizers();  // Wait for finalizers to complete
-
+                    currentForm.Close();   // Close the form to free up resources
+                    currentForm.Dispose(); // Dispose the form
                 }
+
+                mainPanel.Controls.Clear(); // Clear the panel
             }
+
+            // Suggest garbage collection as a last resort
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         // Helper method to reuse form instance if it is disposed
@@ -526,6 +525,16 @@ namespace Smart_Asset
 
             sah.SendClickBtnInfo("ASSETS");
 
+            // Dispose of the previous instance of the 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Recreate the form instance
+            rd = new Read();
+
             showFormSelected(ref rd, "ASSETS");
             rd.showAllHardwares_Btn.PerformClick();
 
@@ -686,137 +695,219 @@ namespace Smart_Asset
 
         private void repairing_Btn_Click(object sender, EventArgs e)
         {
-            //RESET THE SERIALNO. SELECTED
-            //Read.selectedSerialNos.Clear();
+            // Dispose of the previous instance of 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Create a new instance of the 'Read' form
+            rd = new Read();
 
             showFormSelected(ref rd, "REPLACEMENT");
 
+            // Trigger the replacement button click on the 'Read' form
             rd.replacement_Btn.PerformClick();
+
+            // Hide unnecessary panels
             rd.panel5.Hide();
             rd.panel9.Hide();
             rd.panel7.Hide();
 
-
-
+            // Adjust layout and docking
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10, 10, 0, 10);
+
+            // Hide the 'Location' column if it exists
             HideColumnIfExists("Location");
 
-
-
+            // Update the header picture
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
         }
 
         private void cleaning_Btn_Click_1(object sender, EventArgs e)
         {
-            //RESET THE SERIALNO. SELECTED
-            //Read.selectedSerialNos.Clear();
+            // Dispose of the previous instance of 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Create a new instance of the 'Read' form
+            rd = new Read();
 
             showFormSelected(ref rd, "CLEANING");
 
+            // Trigger the cleaning button click on the 'Read' form
             rd.cleaningHardwares_Btn.PerformClick();
+
+            // Hide unnecessary panels
             rd.panel5.Hide();
             rd.panel9.Hide();
             rd.panel7.Hide();
 
-
+            // Adjust layout and docking
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10, 10, 0, 10);
+
+            // Hide the 'Location' column if it exists
             HideColumnIfExists("Location");
 
+            // Update the header picture
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
         }
 
+
         private void disposed_Btn_Click_1(object sender, EventArgs e)
         {
-            //RESET THE SERIALNO. SELECTED
-            //Read.selectedSerialNos.Clear();
+            // Dispose of the previous instance of 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Create a new instance of the 'Read' form
+            rd = new Read();
 
             showFormSelected(ref rd, "DISPOSED");
 
-
+            // Trigger the disposed button click on the 'Read' form
             rd.disposedHardwares_Btn.PerformClick();
+
+            // Hide unnecessary panels
             rd.panel5.Hide();
             rd.panel9.Hide();
             rd.panel7.Hide();
 
+            // Adjust layout and docking
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10, 10, 0, 10);
+
+            // Hide the 'Location' column if it exists
             HideColumnIfExists("Location");
 
+            // Update the header picture
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "disposed_Icon.ico"));
         }
 
         private void borrowed_Btn_Click(object sender, EventArgs e)
         {
-            //RESET THE SERIALNO. SELECTED
-            //Read.selectedSerialNos.Clear();
+            // Dispose of the previous instance of 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Create a new instance of the 'Read' form
+            rd = new Read();
 
             showFormSelected(ref rd, "BORROWED");
 
+            // Trigger the borrowed button click on the 'Read' form
             rd.borrowedHardwares_Btn.PerformClick();
+
+            // Hide unnecessary panels
             rd.panel5.Hide();
             rd.panel9.Hide();
             rd.panel7.Hide();
+
+            // Ensure the panels are hidden (in case they are shown by some other action)
             rd.panel5.Visible = false;
             rd.panel9.Visible = false;
             rd.panel7.Visible = false;
 
-
+            // Adjust layout and docking
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10, 10, 0, 10);
+
+            // Hide the 'Location' column if it exists
             HideColumnIfExists("Location");
 
+            // Update the header picture
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "borrowed_Icon.ico"));
         }
 
+
         private async void reserved_Btn_Click(object sender, EventArgs e)
         {
-            //RESET THE SERIALNO. SELECTED
-            //Read.selectedSerialNos.Clear();
+            // Dispose of the previous instance of 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Create a new instance of the 'Read' form
+            rd = new Read();
 
             showFormSelected(ref rd, "RESERVED");
 
+            // Trigger the reserved button click on the 'Read' form
             rd.reservedHardwares_Btn.PerformClick();
 
+            // Ensure the panels are hidden
             rd.panel5.Visible = false;
             rd.panel9.Visible = false;
             rd.panel7.Visible = false;
 
-
-
+            // Adjust layout and docking
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10, 10, 0, 10);
+
+            // Hide the 'Location' column if it exists
             HideColumnIfExists("Location");
 
+            // Update the header picture
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
+
+            // Optionally await any async operations if needed
+            await Task.Yield(); // This is just a placeholder for any async work you might have
         }
+
 
         private void archived_Btn_Click(object sender, EventArgs e)
         {
-            //RESET THE SERIALNO. SELECTED
-            //Read.selectedSerialNos.Clear();
+            // Dispose of the previous instance of 'Read' form properly
+            if (rd != null && !rd.IsDisposed)
+            {
+                rd.Dispose();
+                rd = null;
+            }
+
+            // Create a new instance of the 'Read' form
+            rd = new Read();
 
             showFormSelected(ref rd, "ARCHIVE");
 
+            // Trigger the archive button click on the 'Read' form
             rd.archive_Btn.PerformClick();
+
+            // Hide unnecessary panels
             rd.panel5.Hide();
             rd.panel9.Hide();
             rd.panel7.Hide();
 
-
+            // Adjust layout and docking
             rd.panel4.Anchor = AnchorStyles.Left;
             rd.panel4.Dock = DockStyle.Left;
             rd.panel2.Padding = new Padding(10, 10, 0, 10);
+
+            // Hide the 'Location' column if it exists
             HideColumnIfExists("Location");
 
+            // Update the header picture
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "archive_Icon.ico"));
         }
+
 
 
         private void AssetHistory_Button_Click(object sender, EventArgs e)

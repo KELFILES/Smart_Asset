@@ -31,7 +31,6 @@
             refresh_Btn = new Button();
             edit_Btn = new Button();
             archive_Btn = new Button();
-            add_Btn = new Button();
             Transfer = new Button();
             replace_Btn = new Button();
             borrow_Btn = new Button();
@@ -50,7 +49,7 @@
             // 
             // edit_Btn
             // 
-            edit_Btn.Location = new Point(12, 86);
+            edit_Btn.Location = new Point(12, 49);
             edit_Btn.Name = "edit_Btn";
             edit_Btn.Size = new Size(172, 31);
             edit_Btn.TabIndex = 2;
@@ -60,7 +59,7 @@
             // 
             // archive_Btn
             // 
-            archive_Btn.Location = new Point(12, 234);
+            archive_Btn.Location = new Point(12, 197);
             archive_Btn.Name = "archive_Btn";
             archive_Btn.Size = new Size(172, 31);
             archive_Btn.TabIndex = 3;
@@ -68,19 +67,9 @@
             archive_Btn.UseVisualStyleBackColor = true;
             archive_Btn.Click += archieve_Btn_Click;
             // 
-            // add_Btn
-            // 
-            add_Btn.Location = new Point(9, 49);
-            add_Btn.Name = "add_Btn";
-            add_Btn.Size = new Size(172, 31);
-            add_Btn.TabIndex = 4;
-            add_Btn.Text = "Add";
-            add_Btn.UseVisualStyleBackColor = true;
-            add_Btn.Click += add_Btn_Click;
-            // 
             // Transfer
             // 
-            Transfer.Location = new Point(12, 160);
+            Transfer.Location = new Point(12, 123);
             Transfer.Name = "Transfer";
             Transfer.Size = new Size(172, 31);
             Transfer.TabIndex = 5;
@@ -90,7 +79,7 @@
             // 
             // replace_Btn
             // 
-            replace_Btn.Location = new Point(12, 123);
+            replace_Btn.Location = new Point(12, 86);
             replace_Btn.Name = "replace_Btn";
             replace_Btn.Size = new Size(172, 31);
             replace_Btn.TabIndex = 6;
@@ -100,7 +89,7 @@
             // 
             // borrow_Btn
             // 
-            borrow_Btn.Location = new Point(12, 197);
+            borrow_Btn.Location = new Point(12, 160);
             borrow_Btn.Name = "borrow_Btn";
             borrow_Btn.Size = new Size(172, 31);
             borrow_Btn.TabIndex = 7;
@@ -110,7 +99,7 @@
             // 
             // showImage_Btn
             // 
-            showImage_Btn.Location = new Point(12, 271);
+            showImage_Btn.Location = new Point(12, 234);
             showImage_Btn.Name = "showImage_Btn";
             showImage_Btn.Size = new Size(172, 31);
             showImage_Btn.TabIndex = 8;
@@ -122,12 +111,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(193, 331);
+            ClientSize = new Size(193, 301);
             Controls.Add(showImage_Btn);
             Controls.Add(borrow_Btn);
             Controls.Add(replace_Btn);
             Controls.Add(Transfer);
-            Controls.Add(add_Btn);
             Controls.Add(archive_Btn);
             Controls.Add(edit_Btn);
             Controls.Add(refresh_Btn);
@@ -141,7 +129,6 @@
         public Button refresh_Btn;
         public Button edit_Btn;
         public Button archive_Btn;
-        public Button add_Btn;
         public Button Transfer;
         public Button replace_Btn;
         public Button borrow_Btn;

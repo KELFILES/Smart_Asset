@@ -34,10 +34,11 @@ namespace Smart_Asset
             fileMaintenance_SubMenuPanel.Visible = false;
 
             StaticUserID = userID_Lbl;
+            StaticAsset = assets_Btn;
         }
         //STATIC
         public static Label StaticUserID;
-
+        public static Button StaticAsset;
 
 
         // Enable double buffering for the entire form

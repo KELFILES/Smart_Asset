@@ -743,20 +743,43 @@ namespace Smart_Asset
             try
             {
                 string filterText = search_Cmb.Text.Trim().ToLower();
-                var filterColumns = new[]
-                {
-                    "Type", "Brand", "Model", "PropertyID", "SerialNo",
-                    "PONumber", "SINumber", "Cost", "Warranty", "Supplier",
-                    "WarrantyStatus", "PurchaseDate", "Usage", "Location"
-                };
 
-                bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+                if (string.IsNullOrEmpty(filterText))
+                {
+                    // Text is cleared, remove filter and reload original data
+                    bindingSource.RemoveFilter(); // Clears any active filter
+
+                    Refresh_ShowAllHardwares();
+
+                    // Explicitly reload all data to show the full dataset
+                    if (_lastRefreshAction != null)
+                    {
+                        _lastRefreshAction.Invoke(); // Use the last set refresh action to reload the data
+                    }
+                    else
+                    {
+                        LoadData(); // As a fallback, load the data if _lastRefreshAction is not set
+                    }
+                }
+                else
+                {
+                    // Apply filter based on entered text
+                    var filterColumns = new[]
+                    {
+                "Type", "Brand", "Model", "PropertyID", "SerialNo",
+                "PONumber", "SINumber", "Cost", "Warranty", "Supplier",
+                "WarrantyStatus", "PurchaseDate", "Usage", "Location"
+            };
+
+                    bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while filtering data: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void serialNo_Cmb_Click(object sender, EventArgs e)
         {
@@ -772,6 +795,7 @@ namespace Smart_Asset
 
         private void hideColumn_Btn_Click(object sender, EventArgs e)
         {
+            s1.Reload();
             HideColumn hc = new HideColumn();
             hc.Show();
         }

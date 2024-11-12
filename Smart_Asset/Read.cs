@@ -767,7 +767,7 @@ namespace Smart_Asset
 
 
         // This method will be called when the debounce timer elapses
-        private async void DebounceTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void DebounceTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Invoke on the UI thread
             this.Invoke(new Action(() =>
@@ -781,20 +781,34 @@ namespace Smart_Asset
 
                     if (string.IsNullOrEmpty(filterText))
                     {
-                        // Text is cleared, remove filter and reload original data
+                        // Text is cleared, remove filter
                         bindingSource.RemoveFilter();
 
-                        Refresh_ShowAllHardwares();
-
-                        // Reload the cached data if available
-                        if (cachedDataTable != null)
+                        // Refresh based on the current selectedButton
+                        switch (selectedButton)
                         {
-                            bindingSource.DataSource = cachedDataTable;
-                            dataGridView1.DataSource = bindingSource;
-                        }
-                        else
-                        {
-                            LoadData();
+                            case "reservedHardwares":
+                                Refresh_ReservedHardwares();
+                                break;
+                            case "cleaningHardwares":
+                                Refresh_Cleaning();
+                                break;
+                            case "replacement":
+                                Refresh_ReplacementHarwares();
+                                break;
+                            case "disposedHardwares":
+                                Refresh_DisposedHardwares();
+                                break;
+                            case "borrowedHardwares":
+                                Refresh_Borrowed();
+                                break;
+                            case "archive":
+                                Refresh_Archive();
+                                break;
+                            default:
+                                // If no specific module is selected, show all hardwares
+                                Refresh_ShowAllHardwares();
+                                break;
                         }
                     }
                     else

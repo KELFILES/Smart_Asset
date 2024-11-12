@@ -225,17 +225,34 @@ namespace Smart_Asset
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string filterText = searchUser_Tb.Text.Trim().ToLower();
-            bindingSource.Filter = $"Name LIKE '%{filterText}%' " +
-                $"OR Username LIKE '%{filterText}%' " +
-                $"OR Email LIKE '%{filterText}%' " +
-                $"OR UserID LIKE '%{filterText}%'";
+            try
+            {
+                string filterText = searchUser_Tb.Text.Trim().ToLower();
+                var filterColumns = new[]
+                {
+                    "Name", "Username", "Role"
+                };
+
+                bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while filtering data: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void searchUser_Tb_Click(object sender, EventArgs e)
         {
             // Reload data to refresh the DataGridView
             LoadData();
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (dataGridView1.Columns["UserID"] != null)
+            {
+                dataGridView1.Columns["UserID"].Visible = false;
+            }
         }
     }
 }

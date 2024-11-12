@@ -79,6 +79,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(1884, 926);
             dataGridView1.TabIndex = 2;
+            dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
             // 

@@ -536,8 +536,8 @@
             search_Cmb.Name = "search_Cmb";
             search_Cmb.Size = new Size(261, 23);
             search_Cmb.TabIndex = 23;
-            search_Cmb.TextChanged += serialNo_Cmb_TextChanged;
-            search_Cmb.Click += serialNo_Cmb_Click;
+            search_Cmb.TextChanged += search_Cmb_TextChanged;
+            search_Cmb.KeyDown += search_Cmb_KeyDown;
             // 
             // label4
             // 

@@ -31,6 +31,8 @@ namespace Smart_Asset
         RightClick_Replacement rep = new RightClick_Replacement();
         Settings1 s1 = new Settings1();
         HideColumn hc = new HideColumn();
+        private int previousTextLength = 0;
+
 
         public Read()
         {
@@ -753,15 +755,35 @@ namespace Smart_Asset
         private DataTable cachedDataTable = null;
         private void serialNo_Cmb_TextChanged(object sender, EventArgs e)
         {
-            try
+
+        }
+
+
+        private void RefreshBasedOnSelectedButton()
+        {
+            switch (selectedButton)
             {
-                // Reset the debounce timer
-                debounceTimer.Stop();
-                debounceTimer.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case "reservedHardwares":
+                    Refresh_ReservedHardwares();
+                    break;
+                case "cleaningHardwares":
+                    Refresh_Cleaning();
+                    break;
+                case "replacement":
+                    Refresh_ReplacementHarwares();
+                    break;
+                case "disposedHardwares":
+                    Refresh_DisposedHardwares();
+                    break;
+                case "borrowedHardwares":
+                    Refresh_Borrowed();
+                    break;
+                case "archive":
+                    Refresh_Archive();
+                    break;
+                default:
+                    Refresh_ShowAllHardwares();
+                    break;
             }
         }
 
@@ -832,11 +854,6 @@ namespace Smart_Asset
         }
 
 
-        private void serialNo_Cmb_Click(object sender, EventArgs e)
-        {
-            // Reload data to refresh the DataGridView
-            //LoadData();
-        }
 
         private void add_Btn_Click(object sender, EventArgs e)
         {
@@ -1086,6 +1103,78 @@ namespace Smart_Asset
             bu.StartPosition = FormStartPosition.CenterScreen;
             bu.Show();
 
+        }
+
+        private void search_Cmb_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string filterText = search_Cmb.Text.Trim().ToLower();
+
+                // If the text is cleared, immediately refresh based on the selected module
+                if (string.IsNullOrEmpty(filterText))
+                {
+                    RefreshBasedOnSelectedButton();
+                }
+                else if (filterText.Length < previousTextLength)
+                {
+                    // If the text length is reduced (Backspace pressed), immediately apply the filter
+                    ApplyFilter(filterText);
+                }
+                else
+                {
+                    // Reset and start the debounce timer for regular text changes
+                    debounceTimer.Stop();
+                    debounceTimer.Start();
+                }
+
+                // Update the previous text length
+                previousTextLength = filterText.Length;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ApplyFilter(string filterText)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(filterText))
+                {
+                    // Remove filter
+                    bindingSource.RemoveFilter();
+                    RefreshBasedOnSelectedButton();
+                }
+                else
+                {
+                    // Apply filter based on entered text
+                    var filterColumns = new[]
+                    {
+                "Type", "Brand", "Model", "PropertyID", "SerialNo",
+                "PONumber", "SINumber", "Cost", "Warranty", "Supplier",
+                "WarrantyStatus", "PurchaseDate", "Usage", "Location"
+            };
+
+                    bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while applying the filter: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void search_Cmb_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if Backspace key is pressed and the text is empty
+            if (e.KeyCode == Keys.Back && string.IsNullOrWhiteSpace(search_Cmb.Text))
+            {
+                // Immediately refresh based on the selected module
+                RefreshBasedOnSelectedButton();
+                e.SuppressKeyPress = true; // Optional: Prevent further processing of the Backspace key
+            }
         }
     }
 }

@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExcelDataReader" Version="3.7.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.28.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.28.0" />
@@ -72,6 +74,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Files\Example Excel File.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\add_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

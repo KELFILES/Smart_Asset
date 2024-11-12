@@ -163,6 +163,40 @@ namespace Smart_Asset
         }
 
 
+        public static void SaveExistingFileToComputer()
+        {
+            // Path to the file inside your project (adjust as needed)
+            string sourceFilePath = System.IO.Path.Combine(Application.StartupPath, "Files", "Example Excel File.xlsx");
+
+            // Extract the original file name
+            string originalFileName = Path.GetFileName(sourceFilePath);
+
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.Description = "Select a folder to save the file";
+
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the selected folder path
+                    string destinationFolder = folderDialog.SelectedPath;
+
+                    // Combine the folder path with the original file name
+                    string destinationFilePath = Path.Combine(destinationFolder, originalFileName);
+
+                    try
+                    {
+                        // Copy the file to the selected location with the original file name
+                        File.Copy(sourceFilePath, destinationFilePath, true);
+                        MessageBox.Show($"File '{originalFileName}' saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error saving file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
 
     }
 }

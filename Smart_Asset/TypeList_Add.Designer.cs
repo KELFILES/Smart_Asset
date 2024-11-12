@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            search_Tb = new TextBox();
+            label1 = new Label();
             button1 = new Button();
             add_Btn = new Button();
             item_Tb = new TextBox();
@@ -40,6 +42,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(search_Tb);
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(add_Btn);
             panel1.Controls.Add(item_Tb);
@@ -48,13 +52,37 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(631, 479);
+            panel1.Size = new Size(631, 525);
             panel1.TabIndex = 0;
+            // 
+            // search_Tb
+            // 
+            search_Tb.Anchor = AnchorStyles.Top;
+            search_Tb.CharacterCasing = CharacterCasing.Upper;
+            search_Tb.Font = new Font("Segoe UI", 13F);
+            search_Tb.Location = new Point(167, 31);
+            search_Tb.Multiline = true;
+            search_Tb.Name = "search_Tb";
+            search_Tb.Size = new Size(370, 25);
+            search_Tb.TabIndex = 6;
+            search_Tb.Click += search_Tb_Click;
+            search_Tb.TextChanged += search_Tb_TextChanged;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 13F);
+            label1.Location = new Point(93, 31);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 25);
+            label1.TabIndex = 5;
+            label1.Text = "Search:";
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 13F);
-            button1.Location = new Point(402, 408);
+            button1.Location = new Point(402, 458);
             button1.Name = "button1";
             button1.Size = new Size(98, 41);
             button1.TabIndex = 4;
@@ -65,7 +93,7 @@
             // add_Btn
             // 
             add_Btn.Font = new Font("Segoe UI", 13F);
-            add_Btn.Location = new Point(130, 408);
+            add_Btn.Location = new Point(130, 458);
             add_Btn.Name = "add_Btn";
             add_Btn.Size = new Size(98, 41);
             add_Btn.TabIndex = 3;
@@ -78,7 +106,7 @@
             item_Tb.Anchor = AnchorStyles.Top;
             item_Tb.CharacterCasing = CharacterCasing.Upper;
             item_Tb.Font = new Font("Segoe UI", 13F);
-            item_Tb.Location = new Point(130, 358);
+            item_Tb.Location = new Point(130, 408);
             item_Tb.Multiline = true;
             item_Tb.Name = "item_Tb";
             item_Tb.Size = new Size(370, 25);
@@ -89,7 +117,7 @@
             item_Lbl.Anchor = AnchorStyles.Top;
             item_Lbl.AutoSize = true;
             item_Lbl.Font = new Font("Segoe UI", 13F);
-            item_Lbl.Location = new Point(72, 358);
+            item_Lbl.Location = new Point(72, 408);
             item_Lbl.Name = "item_Lbl";
             item_Lbl.Size = new Size(52, 25);
             item_Lbl.TabIndex = 1;
@@ -103,16 +131,17 @@
             dataGridView1.BackgroundColor = Color.Black;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dataGridView1.Location = new Point(29, 28);
+            dataGridView1.Location = new Point(29, 78);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(572, 295);
             dataGridView1.TabIndex = 0;
+            dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
             // 
             // TypeList_Add
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(631, 479);
+            ClientSize = new Size(631, 525);
             Controls.Add(panel1);
             Name = "TypeList_Add";
             StartPosition = FormStartPosition.CenterScreen;
@@ -132,5 +161,7 @@
         private TextBox item_Tb;
         private Label item_Lbl;
         private DataGridView dataGridView1;
+        private TextBox search_Tb;
+        private Label label1;
     }
 }

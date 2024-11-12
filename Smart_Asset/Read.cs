@@ -1000,26 +1000,41 @@ namespace Smart_Asset
             // Scroll left if the mouse wheel is scrolled up
             if (e.Delta > 0)
             {
-                // Move to the previous column if possible
-                if (dataGridView1.FirstDisplayedScrollingColumnIndex > 0)
+                // Move to the previous visible column if possible
+                int index = dataGridView1.FirstDisplayedScrollingColumnIndex;
+                while (index > 0)
                 {
-                    dataGridView1.FirstDisplayedScrollingColumnIndex--;
+                    index--;
+                    if (dataGridView1.Columns[index].Visible)
+                    {
+                        dataGridView1.FirstDisplayedScrollingColumnIndex = index;
+                        break;
+                    }
                 }
             }
             // Scroll right if the mouse wheel is scrolled down
             else if (e.Delta < 0)
             {
-                // Check if there are more columns to the right to scroll to
-                int lastVisibleColumnIndex = dataGridView1.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
-                if (dataGridView1.FirstDisplayedScrollingColumnIndex < lastVisibleColumnIndex)
+                // Move to the next visible column if possible
+                int index = dataGridView1.FirstDisplayedScrollingColumnIndex;
+                while (index < dataGridView1.Columns.Count - 1)
                 {
-                    dataGridView1.FirstDisplayedScrollingColumnIndex++;
+                    index++;
+                    if (dataGridView1.Columns[index].Visible)
+                    {
+                        dataGridView1.FirstDisplayedScrollingColumnIndex = index;
+                        break;
+                    }
                 }
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BatchUpload bu = new BatchUpload();
+            bu.StartPosition = FormStartPosition.CenterScreen;
+            bu.Show();
 
-
-
+        }
     }
 }

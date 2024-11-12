@@ -2,9 +2,15 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 using static Smart_Asset.Read;
 using TextBox = System.Windows.Forms.TextBox;
+using ExcelDataReader;
+using System.Data;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Smart_Asset
 {
@@ -2697,6 +2703,36 @@ namespace Smart_Asset
             }
         }
 
+        //OVERLOADING METHOD REMOVE ANY DOCUMENT WITH 
+        public static async Task RemoveDocumentAsync(string dbName, string collectionName,string fieldName, string value)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Define the filter to target the specific document by userID as a string
+            var filter = Builders<BsonDocument>.Filter.Eq($"{fieldName}", value);
+
+            try
+            {
+                // Perform the delete operation
+                var deleteResult = await collection.DeleteOneAsync(filter);
+
+                if (deleteResult.DeletedCount == 0)
+                {
+                    Console.WriteLine("No document found to delete. It may not exist in the database.");
+                }
+                else
+                {
+                    Console.WriteLine("Document successfully deleted.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting document: {ex.Message}");
+            }
+        }
+
 
         public class UserPermissions
         {
@@ -2837,6 +2873,272 @@ namespace Smart_Asset
         }
 
 
+        public static async Task BatchUploadFromExcelAsync(string filePath)
+        {
+            try
+            {
+                // Initialize ExcelDataReader encoding provider
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase("SmartAssetDb");
+                var reservedHardwareCollection = database.GetCollection<BsonDocument>("Reserved_Hardwares");
+                var serialListCollection = database.GetCollection<BsonDocument>("Serial_List");
+                var typeListCollection = database.GetCollection<BsonDocument>("Type_List");
+
+                // Fetch the valid types from the Type_List collection
+                var validTypes = await FetchValidTypesAsync(typeListCollection);
+
+                // Fetch existing serial numbers from Serial_List
+                var existingSerialNumbers = await FetchExistingSerialNumbersAsync(serialListCollection);
+                var existingPropertyIDs = await FetchExistingPropertyIDsAsync(reservedHardwareCollection);
+                var existingSINumbers = await FetchExistingSINumbersAsync(reservedHardwareCollection);
+
+                using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    {
+                        var result = reader.AsDataSet();
+                        var table = result.Tables[0];
+
+                        var headers = new List<string>();
+                        for (int i = 0; i < table.Columns.Count; i++)
+                        {
+                            headers.Add(table.Rows[0][i].ToString());
+                        }
+
+                        var documents = new List<BsonDocument>();
+                        var serialDocuments = new List<BsonDocument>();
+
+                        // HashSets to track duplicates within the same Excel file
+                        var serialNumbersSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                        var propertyIDsSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                        var siNumbersSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                        for (int i = 1; i < table.Rows.Count; i++)
+                        {
+                            var document = new BsonDocument();
+                            string serialNo = string.Empty;
+                            string propertyID = string.Empty;
+                            string siNumber = string.Empty;
+
+                            for (int j = 0; j < headers.Count; j++)
+                            {
+                                string header = headers[j];
+                                string value = table.Rows[i][j]?.ToString() ?? string.Empty;
+
+                                // Convert Type, Brand, Model, PropertyID to uppercase
+                                if (header.Equals("Type", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    value = value.ToUpper();
+                                    value = CorrectType(value, validTypes);
+                                    if (string.IsNullOrEmpty(value))
+                                    {
+                                        MessageBox.Show($"Invalid Type at row {i + 1}. It must match the Type_List collection.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+                                else if (header.Equals("Brand", StringComparison.OrdinalIgnoreCase) ||
+                                         header.Equals("Model", StringComparison.OrdinalIgnoreCase) ||
+                                         header.Equals("PropertyID", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    value = value.ToUpper();
+                                }
+
+                                // Validate PONumber and SINumber (numeric only)
+                                if ((header.Equals("PONumber", StringComparison.OrdinalIgnoreCase) ||
+                                     header.Equals("SINumber", StringComparison.OrdinalIgnoreCase)) &&
+                                     !Regex.IsMatch(value, @"^\d+$"))
+                                {
+                                    MessageBox.Show($"Invalid value for {header} at row {i + 1}. Only numeric values are allowed.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+
+                                // Validate the Cost field (numeric with one optional dot)
+                                if (header.Equals("Cost", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    if (!Regex.IsMatch(value, @"^\d+(\.\d{1,2})?$"))
+                                    {
+                                        MessageBox.Show($"Invalid Cost at row {i + 1}. Only numbers and one optional decimal point are allowed (e.g., 12345.67).", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+
+                                // Validate and correct Warranty format
+                                if (header.Equals("Warranty", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    value = CorrectWarrantyFormat(value);
+                                }
+
+                                // Validate and format PurchaseDate
+                                if (header.Equals("PurchaseDate", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    value = CorrectPurchaseDateFormat(value);
+                                    if (string.IsNullOrEmpty(value))
+                                    {
+                                        MessageBox.Show($"Invalid PurchaseDate at row {i + 1}. Please check the date format.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+
+                                // Check for duplicate SerialNo
+                                if (header.Equals("SerialNo", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    serialNo = value.ToUpper();
+                                    if (existingSerialNumbers.Contains(serialNo) || !serialNumbersSet.Add(serialNo))
+                                    {
+                                        MessageBox.Show($"Duplicate SerialNo '{serialNo}' found at row {i + 1}.", "Duplication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                    value = serialNo;
+                                }
+
+                                // Check for duplicate PropertyID
+                                if (header.Equals("PropertyID", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    propertyID = value.ToUpper();
+                                    if (existingPropertyIDs.Contains(propertyID) || !propertyIDsSet.Add(propertyID))
+                                    {
+                                        MessageBox.Show($"Duplicate PropertyID '{propertyID}' found at row {i + 1}.", "Duplication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                    value = propertyID;
+                                }
+
+                                // Check for duplicate SINumber
+                                if (header.Equals("SINumber", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    siNumber = value;
+                                    if (existingSINumbers.Contains(siNumber) || !siNumbersSet.Add(siNumber))
+                                    {
+                                        MessageBox.Show($"Duplicate SINumber '{siNumber}' found at row {i + 1}.", "Duplication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+
+                                document[header] = value;
+                            }
+
+                            document["Location"] = "Reserved_Hardwares";
+                            document["DocumentCreated"] = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+
+                            documents.Add(document);
+                            if (!string.IsNullOrWhiteSpace(serialNo))
+                            {
+                                var serialDocument = new BsonDocument { { "Serial", serialNo } };
+                                serialDocuments.Add(serialDocument);
+                            }
+                        }
+
+                        await reservedHardwareCollection.InsertManyAsync(documents);
+                        await serialListCollection.InsertManyAsync(serialDocuments);
+                    }
+                }
+
+                MessageBox.Show("Batch upload completed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during batch upload: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static async Task<HashSet<string>> FetchExistingPropertyIDsAsync(IMongoCollection<BsonDocument> reservedHardwareCollection)
+        {
+            var existingPropertyIDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var documents = await reservedHardwareCollection.Find(new BsonDocument()).ToListAsync();
+
+            foreach (var doc in documents)
+            {
+                if (doc.Contains("PropertyID"))
+                {
+                    existingPropertyIDs.Add(doc["PropertyID"].AsString.ToUpper());
+                }
+            }
+
+            return existingPropertyIDs;
+        }
+
+        private static async Task<HashSet<string>> FetchExistingSINumbersAsync(IMongoCollection<BsonDocument> reservedHardwareCollection)
+        {
+            var existingSINumbers = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var documents = await reservedHardwareCollection.Find(new BsonDocument()).ToListAsync();
+
+            foreach (var doc in documents)
+            {
+                if (doc.Contains("SINumber"))
+                {
+                    existingSINumbers.Add(doc["SINumber"].AsString);
+                }
+            }
+
+            return existingSINumbers;
+        }
+
+        private static async Task<HashSet<string>> FetchExistingSerialNumbersAsync(IMongoCollection<BsonDocument> serialListCollection)
+        {
+            var existingSerialNumbers = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var documents = await serialListCollection.Find(new BsonDocument()).ToListAsync();
+
+            foreach (var doc in documents)
+            {
+                if (doc.Contains("Serial"))
+                {
+                    existingSerialNumbers.Add(doc["Serial"].AsString.ToUpper());
+                }
+            }
+
+            return existingSerialNumbers;
+        }
+
+
+        private static async Task<Dictionary<string, string>> FetchValidTypesAsync(IMongoCollection<BsonDocument> typeListCollection)
+        {
+            var validTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var documents = await typeListCollection.Find(new BsonDocument()).ToListAsync();
+
+            foreach (var doc in documents)
+            {
+                if (doc.Contains("List"))
+                {
+                    string type = doc["List"].AsString;
+                    validTypes[type.ToUpper()] = type;
+                }
+            }
+
+            return validTypes;
+        }
+
+        private static string CorrectWarrantyFormat(string warranty)
+        {
+            warranty = warranty.Trim().ToLower().Replace(",", "").Replace("and", "").Replace("only", "");
+
+            var yearMatch = Regex.Match(warranty, @"(\d+)\s*(y|year|years|yr)");
+            var monthMatch = Regex.Match(warranty, @"(\d+)\s*(m|month|months|mos)");
+            var dayMatch = Regex.Match(warranty, @"(\d+)\s*(d|day|days|ds)");
+
+            int years = yearMatch.Success ? int.Parse(yearMatch.Groups[1].Value) : 0;
+            int months = monthMatch.Success ? int.Parse(monthMatch.Groups[1].Value) : 0;
+            int days = dayMatch.Success ? int.Parse(dayMatch.Groups[1].Value) : 0;
+
+            return $"years:{years} months:{months} days:{days}";
+        }
+
+        private static string CorrectType(string input, Dictionary<string, string> validTypes)
+        {
+            return validTypes.TryGetValue(input.ToUpper(), out string correctedType) ? correctedType : string.Empty;
+        }
+
+        private static string CorrectPurchaseDateFormat(string input)
+        {
+            if (DateTime.TryParse(input, out DateTime parsedDate))
+            {
+                // Format the date as "Friday, November 1, 2019"
+                return parsedDate.ToString("dddd, MMMM dd, yyyy");
+            }
+
+            return string.Empty; // Return empty if the date cannot be parsed
+        }
 
 
 

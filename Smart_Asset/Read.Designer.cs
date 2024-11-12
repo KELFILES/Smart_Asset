@@ -37,6 +37,9 @@
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             panel2 = new Panel();
+            panel11 = new Panel();
+            button1 = new Button();
+            add_Btn = new Button();
             panel8 = new Panel();
             hideColumns_Btn = new Button();
             panel10 = new Panel();
@@ -49,7 +52,6 @@
             unit_Cmb = new ComboBox();
             label2 = new Label();
             panel6 = new Panel();
-            add_Btn = new Button();
             panel7 = new Panel();
             borrowedHardwares_Btn = new Button();
             cleaningHardwares_Btn = new Button();
@@ -62,17 +64,16 @@
             panel4 = new Panel();
             search_Cmb = new ComboBox();
             label4 = new Label();
-            panel11 = new Panel();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panel11.SuspendLayout();
             panel8.SuspendLayout();
             panel9.SuspendLayout();
             panel7.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
-            panel11.SuspendLayout();
             SuspendLayout();
             // 
             // panel3
@@ -186,6 +187,47 @@
             panel2.Padding = new Padding(7);
             panel2.Size = new Size(1904, 148);
             panel2.TabIndex = 8;
+            // 
+            // panel11
+            // 
+            panel11.BackColor = Color.Transparent;
+            panel11.Controls.Add(button1);
+            panel11.Controls.Add(add_Btn);
+            panel11.Dock = DockStyle.Right;
+            panel11.Location = new Point(1708, 7);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(189, 134);
+            panel11.TabIndex = 36;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Right;
+            button1.BackColor = Color.RoyalBlue;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(35, 66);
+            button1.Name = "button1";
+            button1.Size = new Size(126, 32);
+            button1.TabIndex = 14;
+            button1.Text = "+ Batch Upload";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // add_Btn
+            // 
+            add_Btn.Anchor = AnchorStyles.Right;
+            add_Btn.BackColor = Color.RoyalBlue;
+            add_Btn.FlatStyle = FlatStyle.Flat;
+            add_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            add_Btn.ForeColor = Color.White;
+            add_Btn.Location = new Point(35, 29);
+            add_Btn.Name = "add_Btn";
+            add_Btn.Size = new Size(126, 32);
+            add_Btn.TabIndex = 13;
+            add_Btn.Text = "+ Add";
+            add_Btn.UseVisualStyleBackColor = false;
+            add_Btn.Click += add_Btn_Click;
             // 
             // panel8
             // 
@@ -328,21 +370,6 @@
             panel6.Name = "panel6";
             panel6.Size = new Size(10, 134);
             panel6.TabIndex = 32;
-            // 
-            // add_Btn
-            // 
-            add_Btn.Anchor = AnchorStyles.Right;
-            add_Btn.BackColor = Color.RoyalBlue;
-            add_Btn.FlatStyle = FlatStyle.Flat;
-            add_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            add_Btn.ForeColor = Color.White;
-            add_Btn.Location = new Point(34, 46);
-            add_Btn.Name = "add_Btn";
-            add_Btn.Size = new Size(126, 32);
-            add_Btn.TabIndex = 13;
-            add_Btn.Text = "+ Add";
-            add_Btn.UseVisualStyleBackColor = false;
-            add_Btn.Click += add_Btn_Click;
             // 
             // panel7
             // 
@@ -522,16 +549,6 @@
             label4.TabIndex = 24;
             label4.Text = "Search:";
             // 
-            // panel11
-            // 
-            panel11.BackColor = Color.Transparent;
-            panel11.Controls.Add(add_Btn);
-            panel11.Dock = DockStyle.Right;
-            panel11.Location = new Point(1708, 7);
-            panel11.Name = "panel11";
-            panel11.Size = new Size(189, 134);
-            panel11.TabIndex = 36;
-            // 
             // Read
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -549,6 +566,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panel11.ResumeLayout(false);
             panel8.ResumeLayout(false);
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
@@ -556,7 +574,6 @@
             panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            panel11.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -595,5 +612,6 @@
         private Button hideColumns_Btn;
         private Panel panel10;
         public Panel panel11;
+        private Button button1;
     }
 }

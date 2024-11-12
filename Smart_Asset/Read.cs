@@ -20,6 +20,9 @@ namespace Smart_Asset
     public partial class Read : Form
     {
 
+        // Declare the debounce timer as a class-level variable
+        private System.Timers.Timer debounceTimer;
+
         //FIELD
         public static string selectedButton = "";
         RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
@@ -48,6 +51,11 @@ namespace Smart_Asset
             //static fields
             StaticDataGridView = dataGridView1;
             p8 = panel8;
+
+            // Initialize the debounce timer
+            debounceTimer = new System.Timers.Timer(500); // 500 milliseconds debounce time
+            debounceTimer.AutoReset = false; // Trigger only once after the delay
+            debounceTimer.Elapsed += DebounceTimer_Elapsed;
         }
         //static fields
         public static DataGridView StaticDataGridView;
@@ -736,55 +744,84 @@ namespace Smart_Asset
 
             bindingSource.DataSource = dataTable;
             dataGridView1.DataSource = bindingSource;
+
+            // Cache the loaded data
+            cachedDataTable = dataTable.Copy();
         }
 
+
+        private DataTable cachedDataTable = null;
         private void serialNo_Cmb_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                string filterText = search_Cmb.Text.Trim().ToLower();
-
-                if (string.IsNullOrEmpty(filterText))
-                {
-                    // Text is cleared, remove filter and reload original data
-                    bindingSource.RemoveFilter(); // Clears any active filter
-
-                    Refresh_ShowAllHardwares();
-
-                    // Explicitly reload all data to show the full dataset
-                    if (_lastRefreshAction != null)
-                    {
-                        _lastRefreshAction.Invoke(); // Use the last set refresh action to reload the data
-                    }
-                    else
-                    {
-                        LoadData(); // As a fallback, load the data if _lastRefreshAction is not set
-                    }
-                }
-                else
-                {
-                    // Apply filter based on entered text
-                    var filterColumns = new[]
-                    {
-                "Type", "Brand", "Model", "PropertyID", "SerialNo",
-                "PONumber", "SINumber", "Cost", "Warranty", "Supplier",
-                "WarrantyStatus", "PurchaseDate", "Usage", "Location"
-            };
-
-                    bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
-                }
+                // Reset the debounce timer
+                debounceTimer.Stop();
+                debounceTimer.Start();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while filtering data: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        // This method will be called when the debounce timer elapses
+        private async void DebounceTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Invoke on the UI thread
+            this.Invoke(new Action(() =>
+            {
+                try
+                {
+                    // Reload data to refresh the DataGridView
+                    LoadData();
+
+                    string filterText = search_Cmb.Text.Trim().ToLower();
+
+                    if (string.IsNullOrEmpty(filterText))
+                    {
+                        // Text is cleared, remove filter and reload original data
+                        bindingSource.RemoveFilter();
+
+                        Refresh_ShowAllHardwares();
+
+                        // Reload the cached data if available
+                        if (cachedDataTable != null)
+                        {
+                            bindingSource.DataSource = cachedDataTable;
+                            dataGridView1.DataSource = bindingSource;
+                        }
+                        else
+                        {
+                            LoadData();
+                        }
+                    }
+                    else
+                    {
+                        // Apply filter based on entered text
+                        var filterColumns = new[]
+                        {
+                    "Type", "Brand", "Model", "PropertyID", "SerialNo",
+                    "PONumber", "SINumber", "Cost", "Warranty", "Supplier",
+                    "WarrantyStatus", "PurchaseDate", "Usage", "Location"
+                };
+
+                        bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while filtering data: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }));
         }
 
 
         private void serialNo_Cmb_Click(object sender, EventArgs e)
         {
             // Reload data to refresh the DataGridView
-            LoadData();
+            //LoadData();
         }
 
         private void add_Btn_Click(object sender, EventArgs e)

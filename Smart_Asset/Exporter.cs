@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Newtonsoft.Json;
 using System.Xml;
+using MigraDoc.Rendering;
+using System.Text;
+using PdfSharp.Drawing;
+using MigraDoc.DocumentObjectModel;
 
 namespace Smart_Asset
 {
@@ -21,7 +23,7 @@ namespace Smart_Asset
         }
 
         // 1. Export to Excel
-        public static async void ExportDataGridViewToExcel(DataGridView dataGridView, string filePath, bool includeHeaders)
+        public static async Task ExportDataGridViewToExcel(DataGridView dataGridView, string filePath, bool includeHeaders)
         {
             Excel.Application excelApp = null;
             Excel.Workbook workbook = null;
@@ -29,44 +31,48 @@ namespace Smart_Asset
 
             try
             {
-                Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
+                Cursor.Current = Cursors.WaitCursor; // Set cursor to wait state
 
-                excelApp = new Excel.Application { Visible = false, DisplayAlerts = false };
-                workbook = excelApp.Workbooks.Add(Type.Missing);
-                worksheet = (Excel.Worksheet)workbook.Sheets[1];
-                int startRow = 1;
-
-                if (includeHeaders)
+                await Task.Run(() =>
                 {
-                    int colIndex = 1;
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    excelApp = new Excel.Application { Visible = false, DisplayAlerts = false };
+                    workbook = excelApp.Workbooks.Add(Type.Missing);
+                    worksheet = (Excel.Worksheet)workbook.Sheets[1];
+                    int startRow = 1;
+
+                    if (includeHeaders)
                     {
-                        if (column.Visible)
+                        int colIndex = 1;
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
                         {
-                            worksheet.Cells[startRow, colIndex] = column.HeaderText;
-                            colIndex++;
+                            if (column.Visible)
+                            {
+                                worksheet.Cells[startRow, colIndex] = column.HeaderText;
+                                colIndex++;
+                            }
+                        }
+                        startRow++;
+                    }
+
+                    for (int i = 0; i < dataGridView.Rows.Count; i++)
+                    {
+                        if (dataGridView.Rows[i].IsNewRow) continue;
+
+                        int colIndex = 1;
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
+                        {
+                            if (column.Visible)
+                            {
+                                worksheet.Cells[i + startRow, colIndex] = dataGridView.Rows[i].Cells[column.Index].Value?.ToString() ?? string.Empty;
+                                colIndex++;
+                            }
                         }
                     }
-                    startRow++;
-                }
 
-                for (int i = 0; i < dataGridView.Rows.Count; i++)
-                {
-                    if (dataGridView.Rows[i].IsNewRow) continue;
+                    workbook.SaveAs(filePath);
+                });
 
-                    int colIndex = 1;
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
-                    {
-                        if (column.Visible)
-                        {
-                            worksheet.Cells[i + startRow, colIndex] = dataGridView.Rows[i].Cells[column.Index].Value?.ToString() ?? string.Empty;
-                            colIndex++;
-                        }
-                    }
-                }
-
-                workbook.SaveAs(filePath);
+                // Show success message after Task completion
                 MessageBox.Show("Data exported successfully to Excel!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -75,6 +81,7 @@ namespace Smart_Asset
             }
             finally
             {
+                // Cleanup Excel resources
                 if (worksheet != null) System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
                 if (workbook != null)
                 {
@@ -87,14 +94,14 @@ namespace Smart_Asset
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
                 }
 
-                Cursor.Current = Cursors.Default;
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                Cursor.Current = Cursors.Default; // Reset cursor
             }
         }
 
+
+
         // 2. Export to Word
-        public static async void ExportDataGridViewToWord(DataGridView dataGridView, string filePath, bool includeHeaders)
+        public static async Task ExportDataGridViewToWord(DataGridView dataGridView, string filePath, bool includeHeaders)
         {
             Word.Application wordApp = null;
             Word.Document document = null;
@@ -102,49 +109,67 @@ namespace Smart_Asset
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                wordApp = new Word.Application { Visible = false };
-                document = wordApp.Documents.Add();
-                int visibleColumnCount = 0;
-
-                foreach (DataGridViewColumn column in dataGridView.Columns)
+                await Task.Run(() =>
                 {
-                    if (column.Visible) visibleColumnCount++;
-                }
+                    wordApp = new Word.Application { Visible = false };
+                    document = wordApp.Documents.Add();
+                    int visibleColumnCount = 0;
 
-                Word.Table table = document.Tables.Add(document.Range(0, 0), dataGridView.Rows.Count + (includeHeaders ? 1 : 0), visibleColumnCount);
-                table.Borders.Enable = 1;
-
-                if (includeHeaders)
-                {
-                    int colIndex = 1;
+                    // Count visible columns
                     foreach (DataGridViewColumn column in dataGridView.Columns)
                     {
-                        if (column.Visible)
-                        {
-                            table.Cell(1, colIndex).Range.Text = column.HeaderText;
-                            colIndex++;
-                        }
+                        if (column.Visible) visibleColumnCount++;
                     }
-                }
 
-                for (int i = 0; i < dataGridView.Rows.Count; i++)
-                {
-                    if (dataGridView.Rows[i].IsNewRow) continue;
+                    // Add the table to the Word document
+                    Word.Table table = document.Tables.Add(document.Range(0, 0), dataGridView.Rows.Count + (includeHeaders ? 1 : 0), visibleColumnCount);
+                    table.Borders.Enable = 1;
+                    table.AutoFitBehavior(Word.WdAutoFitBehavior.wdAutoFitContent);
 
-                    int colIndex = 1;
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    // Set default font size
+                    table.Range.Font.Size = 8;
+
+                    // Add headers if needed
+                    if (includeHeaders)
                     {
-                        if (column.Visible)
+                        int colIndex = 1;
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
                         {
-                            table.Cell(i + (includeHeaders ? 2 : 1), colIndex).Range.Text = dataGridView.Rows[i].Cells[column.Index].Value?.ToString() ?? string.Empty;
-                            colIndex++;
+                            if (column.Visible)
+                            {
+                                var cell = table.Cell(1, colIndex);
+                                cell.Range.Text = column.HeaderText;
+                                cell.Range.Font.Bold = 1;
+                                cell.Range.Font.Size = 8;
+                                cell.Shading.BackgroundPatternColor = Word.WdColor.wdColorGray20;
+                                colIndex++;
+                            }
                         }
                     }
-                }
 
-                document.SaveAs2(filePath);
+                    // Add data rows
+                    for (int i = 0; i < dataGridView.Rows.Count; i++)
+                    {
+                        if (dataGridView.Rows[i].IsNewRow) continue;
+
+                        int colIndex = 1;
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
+                        {
+                            if (column.Visible)
+                            {
+                                var cell = table.Cell(i + (includeHeaders ? 2 : 1), colIndex);
+                                cell.Range.Text = dataGridView.Rows[i].Cells[column.Index].Value?.ToString() ?? string.Empty;
+                                cell.Range.Font.Size = 8;
+                                colIndex++;
+                            }
+                        }
+                    }
+
+                    // Save the Word document
+                    document.SaveAs2(filePath);
+                });
+
                 MessageBox.Show("Data exported successfully to Word!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -160,44 +185,133 @@ namespace Smart_Asset
             }
         }
 
+
+
+
         // 3. Export to PDF
-        public static async void ExportDataGridViewToPDF(DataGridView dataGridView, string filePath)
+        public static async Task ExportDataGridViewToPdf(DataGridView dataGridView, string filePath, bool includeHeaders)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                using (var pdfDoc = new Document(PageSize.A4))
+                await Task.Run(() =>
                 {
-                    PdfWriter.GetInstance(pdfDoc, stream);
-                    pdfDoc.Open();
-                    var pdfTable = new PdfPTable(dataGridView.Columns.Count);
+                    var document = new Document();
+                    var pageWidth = Unit.FromCentimeter(29.7); // A4 landscape width
+                    var maxColumnsPerPage = 8; // Maximum columns per page, adjust as needed
 
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    int totalColumns = dataGridView.Columns.Cast<DataGridViewColumn>().Count(c => c.Visible);
+                    int pagesNeeded = (int)Math.Ceiling((double)totalColumns / maxColumnsPerPage);
+
+                    for (int pageIndex = 0; pageIndex < pagesNeeded; pageIndex++)
                     {
-                        if (column.Visible)
-                        {
-                            pdfTable.AddCell(new Phrase(column.HeaderText));
-                        }
-                    }
+                        var section = document.AddSection();
+                        section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
 
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        if (row.IsNewRow) continue;
+                        // Set margins to reduce white space
+                        section.PageSetup.LeftMargin = Unit.FromCentimeter(1);
+                        section.PageSetup.RightMargin = Unit.FromCentimeter(1);
 
-                        foreach (DataGridViewColumn column in dataGridView.Columns)
+                        // Create a table and align it to the left
+                        var table = section.AddTable();
+                        table.Borders.Width = 0.5;
+                        table.Rows.LeftIndent = 0; // Align table to the left
+
+                        // Define columns and calculate widths for the current page
+                        int startColumnIndex = pageIndex * maxColumnsPerPage;
+                        int endColumnIndex = Math.Min(startColumnIndex + maxColumnsPerPage, totalColumns);
+                        double totalWidth = 0;
+                        var columnWidths = new List<Unit>();
+
+                        foreach (DataGridViewColumn column in dataGridView.Columns.Cast<DataGridViewColumn>().Skip(startColumnIndex).Take(endColumnIndex - startColumnIndex))
                         {
                             if (column.Visible)
                             {
-                                pdfTable.AddCell(row.Cells[column.Index].Value?.ToString() ?? string.Empty);
+                                double maxLength = column.HeaderText.Length;
+                                foreach (DataGridViewRow row in dataGridView.Rows)
+                                {
+                                    if (row.IsNewRow) continue;
+                                    var cellValue = row.Cells[column.Index].Value?.ToString() ?? string.Empty;
+                                    maxLength = Math.Max(maxLength, cellValue.Length);
+                                }
+
+                                var columnWidth = Unit.FromCentimeter(Math.Max(2, maxLength * 0.15));
+                                columnWidths.Add(columnWidth);
+                                totalWidth += columnWidth.Point;
+                            }
+                        }
+
+                        // Scale down columns if total width exceeds page width
+                        if (totalWidth > pageWidth.Point)
+                        {
+                            double scaleFactor = pageWidth.Point / totalWidth;
+                            for (int i = 0; i < columnWidths.Count; i++)
+                            {
+                                columnWidths[i] = Unit.FromPoint(columnWidths[i].Point * scaleFactor);
+                            }
+                        }
+
+                        // Add columns to the table
+                        int colIndex = 0;
+                        foreach (DataGridViewColumn column in dataGridView.Columns.Cast<DataGridViewColumn>().Skip(startColumnIndex).Take(endColumnIndex - startColumnIndex))
+                        {
+                            if (column.Visible)
+                            {
+                                table.AddColumn(columnWidths[colIndex]);
+                                colIndex++;
+                            }
+                        }
+
+                        // Add header row if needed
+                        if (includeHeaders)
+                        {
+                            var headerRow = table.AddRow();
+                            headerRow.Shading.Color = Colors.LightGray;
+                            headerRow.Format.Font.Bold = true;
+                            headerRow.Format.Alignment = ParagraphAlignment.Center;
+
+                            colIndex = 0;
+                            foreach (DataGridViewColumn column in dataGridView.Columns.Cast<DataGridViewColumn>().Skip(startColumnIndex).Take(endColumnIndex - startColumnIndex))
+                            {
+                                if (column.Visible)
+                                {
+                                    var paragraph = headerRow.Cells[colIndex].AddParagraph(column.HeaderText);
+                                    paragraph.Format.Font.Size = 6; // Smaller font size
+                                    paragraph.Format.Alignment = ParagraphAlignment.Center;
+                                    colIndex++;
+                                }
+                            }
+                        }
+
+                        // Add data rows
+                        for (int i = 0; i < dataGridView.Rows.Count; i++)
+                        {
+                            if (dataGridView.Rows[i].IsNewRow) continue;
+
+                            var row = table.AddRow();
+                            colIndex = 0;
+
+                            foreach (DataGridViewColumn column in dataGridView.Columns.Cast<DataGridViewColumn>().Skip(startColumnIndex).Take(endColumnIndex - startColumnIndex))
+                            {
+                                if (column.Visible)
+                                {
+                                    string cellValue = dataGridView.Rows[i].Cells[column.Index].Value?.ToString() ?? string.Empty;
+                                    var paragraph = row.Cells[colIndex].AddParagraph(cellValue);
+                                    paragraph.Format.Font.Size = 6; // Smaller font size
+                                    paragraph.Format.Alignment = ParagraphAlignment.Left;
+                                    colIndex++;
+                                }
                             }
                         }
                     }
 
-                    pdfDoc.Add(pdfTable);
-                }
+                    // Render the MigraDoc document to a PDF
+                    var pdfRenderer = new PdfDocumentRenderer(true);
+                    pdfRenderer.Document = document;
+                    pdfRenderer.RenderDocument();
+                    pdfRenderer.PdfDocument.Save(filePath);
+                });
 
                 MessageBox.Show("Data exported successfully to PDF!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -211,39 +325,57 @@ namespace Smart_Asset
             }
         }
 
+
+
+
+
+
+
+
+
+
+
         // 4. Export to CSV
-        public static async void ExportDataGridViewToCSV(DataGridView dataGridView, string filePath)
+        public static async Task ExportDataGridViewToCSV(DataGridView dataGridView, string filePath)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                using (var writer = new StreamWriter(filePath))
+                await Task.Run(() =>
                 {
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    using (var writer = new StreamWriter(filePath))
                     {
-                        if (column.Visible)
-                        {
-                            writer.Write(column.HeaderText + ",");
-                        }
-                    }
-                    writer.WriteLine();
-
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        if (row.IsNewRow) continue;
-
+                        // Write the header row for visible columns only
+                        var headers = new List<string>();
                         foreach (DataGridViewColumn column in dataGridView.Columns)
                         {
                             if (column.Visible)
                             {
-                                writer.Write(row.Cells[column.Index].Value?.ToString() ?? string.Empty + ",");
+                                headers.Add(column.HeaderText);
                             }
                         }
-                        writer.WriteLine();
+                        writer.WriteLine(string.Join(",", headers));
+
+                        // Write the data rows
+                        foreach (DataGridViewRow row in dataGridView.Rows)
+                        {
+                            if (row.IsNewRow) continue;
+
+                            var rowData = new List<string>();
+                            foreach (DataGridViewColumn column in dataGridView.Columns)
+                            {
+                                if (column.Visible)
+                                {
+                                    // Fetch cell value properly
+                                    var cellValue = row.Cells[column.Index].FormattedValue?.ToString() ?? string.Empty;
+                                    rowData.Add(EscapeCsvValue(cellValue));
+                                }
+                            }
+                            writer.WriteLine(string.Join(",", rowData));
+                        }
                     }
-                }
+                });
 
                 MessageBox.Show("Data exported successfully to CSV!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -257,41 +389,63 @@ namespace Smart_Asset
             }
         }
 
+        // Helper method to handle special CSV characters
+        private static string EscapeCsvValue(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+
+            // Escape quotes and wrap in quotes if necessary
+            if (value.Contains(",") || value.Contains("\"") || value.Contains("\n"))
+            {
+                value = value.Replace("\"", "\"\"");
+                return $"\"{value}\"";
+            }
+
+            return value;
+        }
+
+
+
+
         // 5. Export to XML
-        public static async void ExportDataGridViewToXML(DataGridView dataGridView, string filePath)
+        public static async Task ExportDataGridViewToXML(DataGridView dataGridView, string filePath)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                DataTable dt = new DataTable("Data");
-                foreach (DataGridViewColumn column in dataGridView.Columns)
+                await Task.Run(() =>
                 {
-                    if (column.Visible)
-                    {
-                        dt.Columns.Add(column.HeaderText);
-                    }
-                }
-
-                foreach (DataGridViewRow row in dataGridView.Rows)
-                {
-                    if (row.IsNewRow) continue;
-
-                    DataRow dr = dt.NewRow();
-                    int colIndex = 0;
+                    DataTable dt = new DataTable("Data");
                     foreach (DataGridViewColumn column in dataGridView.Columns)
                     {
                         if (column.Visible)
                         {
-                            dr[colIndex] = row.Cells[column.Index].Value ?? string.Empty;
-                            colIndex++;
+                            dt.Columns.Add(column.HeaderText);
                         }
                     }
-                    dt.Rows.Add(dr);
-                }
 
-                dt.WriteXml(filePath);
+                    foreach (DataGridViewRow row in dataGridView.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        DataRow dr = dt.NewRow();
+                        int colIndex = 0;
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
+                        {
+                            if (column.Visible)
+                            {
+                                dr[colIndex] = row.Cells[column.Index].Value ?? string.Empty;
+                                colIndex++;
+                            }
+                        }
+                        dt.Rows.Add(dr);
+                    }
+
+                    dt.WriteXml(filePath);
+                });
+
                 MessageBox.Show("Data exported successfully to XML!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -304,31 +458,36 @@ namespace Smart_Asset
             }
         }
 
+
+
         // 6. Export to JSON
-        public static async void ExportDataGridViewToJSON(DataGridView dataGridView, string filePath)
+        public static async Task ExportDataGridViewToJSON(DataGridView dataGridView, string filePath)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                var rows = new List<Dictionary<string, object>>();
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                await Task.Run(() =>
                 {
-                    if (row.IsNewRow) continue;
-
-                    var rowData = new Dictionary<string, object>();
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    var rows = new List<Dictionary<string, object>>();
+                    foreach (DataGridViewRow row in dataGridView.Rows)
                     {
-                        if (column.Visible)
-                        {
-                            rowData[column.HeaderText] = row.Cells[column.Index].Value ?? string.Empty;
-                        }
-                    }
-                    rows.Add(rowData);
-                }
+                        if (row.IsNewRow) continue;
 
-                File.WriteAllText(filePath, JsonConvert.SerializeObject(rows, Newtonsoft.Json.Formatting.Indented));
+                        var rowData = new Dictionary<string, object>();
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
+                        {
+                            if (column.Visible)
+                            {
+                                rowData[column.HeaderText] = row.Cells[column.Index].Value ?? string.Empty;
+                            }
+                        }
+                        rows.Add(rowData);
+                    }
+
+                    File.WriteAllText(filePath, JsonConvert.SerializeObject(rows, Newtonsoft.Json.Formatting.Indented));
+                });
+
                 MessageBox.Show("Data exported successfully to JSON!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -341,47 +500,50 @@ namespace Smart_Asset
             }
         }
 
+
+
+
         // 7. Export to HTML
-        public static async void ExportDataGridViewToHTML(DataGridView dataGridView, string filePath)
+        public static async Task ExportDataGridViewToHTML(DataGridView dataGridView, string filePath)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                using (StreamWriter writer = new StreamWriter(filePath))
+                await Task.Run(() =>
                 {
-                    writer.WriteLine("<html><body><table border='1'>");
-
-                    // Write headers
-                    writer.WriteLine("<tr>");
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    using (StreamWriter writer = new StreamWriter(filePath))
                     {
-                        if (column.Visible)
-                        {
-                            writer.WriteLine($"<th>{column.HeaderText}</th>");
-                        }
-                    }
-                    writer.WriteLine("</tr>");
-
-                    // Write data rows
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        if (row.IsNewRow) continue;
+                        writer.WriteLine("<html><body><table border='1'>");
 
                         writer.WriteLine("<tr>");
                         foreach (DataGridViewColumn column in dataGridView.Columns)
                         {
                             if (column.Visible)
                             {
-                                writer.WriteLine($"<td>{row.Cells[column.Index].Value?.ToString() ?? string.Empty}</td>");
+                                writer.WriteLine($"<th>{column.HeaderText}</th>");
                             }
                         }
                         writer.WriteLine("</tr>");
-                    }
 
-                    writer.WriteLine("</table></body></html>");
-                }
+                        foreach (DataGridViewRow row in dataGridView.Rows)
+                        {
+                            if (row.IsNewRow) continue;
+
+                            writer.WriteLine("<tr>");
+                            foreach (DataGridViewColumn column in dataGridView.Columns)
+                            {
+                                if (column.Visible)
+                                {
+                                    writer.WriteLine($"<td>{row.Cells[column.Index].Value?.ToString() ?? string.Empty}</td>");
+                                }
+                            }
+                            writer.WriteLine("</tr>");
+                        }
+
+                        writer.WriteLine("</table></body></html>");
+                    }
+                });
 
                 MessageBox.Show("Data exported successfully to HTML!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -395,41 +557,44 @@ namespace Smart_Asset
             }
         }
 
+
+
+
         // 8. Export to TXT
-        public static async void ExportDataGridViewToTXT(DataGridView dataGridView, string filePath)
+        public static async Task ExportDataGridViewToTXT(DataGridView dataGridView, string filePath)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await Task.Run(() => ShowWaitMessage());
 
-                using (StreamWriter writer = new StreamWriter(filePath))
+                await Task.Run(() =>
                 {
-                    // Write headers
-                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    using (StreamWriter writer = new StreamWriter(filePath))
                     {
-                        if (column.Visible)
-                        {
-                            writer.Write($"{column.HeaderText}\t");
-                        }
-                    }
-                    writer.WriteLine();
-
-                    // Write data rows
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        if (row.IsNewRow) continue;
-
                         foreach (DataGridViewColumn column in dataGridView.Columns)
                         {
                             if (column.Visible)
                             {
-                                writer.Write($"{row.Cells[column.Index].Value?.ToString() ?? string.Empty}\t");
+                                writer.Write($"{column.HeaderText}\t");
                             }
                         }
                         writer.WriteLine();
+
+                        foreach (DataGridViewRow row in dataGridView.Rows)
+                        {
+                            if (row.IsNewRow) continue;
+
+                            foreach (DataGridViewColumn column in dataGridView.Columns)
+                            {
+                                if (column.Visible)
+                                {
+                                    writer.Write($"{row.Cells[column.Index].Value?.ToString() ?? string.Empty}\t");
+                                }
+                            }
+                            writer.WriteLine();
+                        }
                     }
-                }
+                });
 
                 MessageBox.Show("Data exported successfully to TXT!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -442,5 +607,7 @@ namespace Smart_Asset
                 Cursor.Current = Cursors.Default;
             }
         }
+
+
     }
 }

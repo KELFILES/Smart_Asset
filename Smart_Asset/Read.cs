@@ -111,7 +111,6 @@ namespace Smart_Asset
                 return;
             }
 
-            // Commit any pending edits in the DataGridView
             dataGridView1.EndEdit();
             dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
@@ -127,42 +126,35 @@ namespace Smart_Asset
             {
                 saveFileDialog.Title = "Select Download Location";
 
-                if (selectedFormat.Equals("Microsoft Excel File (.xlsx)"))
+                switch (selectedFormat)
                 {
-                    saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
-                }
-                else if (selectedFormat.Equals("Microsoft Word File (.docx)"))
-                {
-                    saveFileDialog.Filter = "Word Files (*.docx)|*.docx";
-                }
-                else if (selectedFormat.Equals("PDF File (.pdf)"))
-                {
-                    saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf";
-                }
-                else if (selectedFormat.Equals("CSV File (.csv)"))
-                {
-                    saveFileDialog.Filter = "CSV Files (*.csv)|*.csv";
-                }
-                else if (selectedFormat.Equals("XML File (.xml)"))
-                {
-                    saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
-                }
-                else if (selectedFormat.Equals("JSON File (.json)"))
-                {
-                    saveFileDialog.Filter = "JSON Files (*.json)|*.json";
-                }
-                else if (selectedFormat.Equals("HTML File (.html)"))
-                {
-                    saveFileDialog.Filter = "HTML Files (*.html)|*.html";
-                }
-                else if (selectedFormat.Equals("Text File (.txt)"))
-                {
-                    saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
-                }
-                else
-                {
-                    MessageBox.Show("Unsupported file format selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    case "Microsoft Excel File (.xlsx)":
+                        saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                        break;
+                    case "Microsoft Word File (.docx)":
+                        saveFileDialog.Filter = "Word Files (*.docx)|*.docx";
+                        break;
+                    case "PDF File (.pdf)":
+                        saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf";
+                        break;
+                    case "CSV File (.csv)":
+                        saveFileDialog.Filter = "CSV Files (*.csv)|*.csv";
+                        break;
+                    case "XML File (.xml)":
+                        saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
+                        break;
+                    case "JSON File (.json)":
+                        saveFileDialog.Filter = "JSON Files (*.json)|*.json";
+                        break;
+                    case "HTML File (.html)":
+                        saveFileDialog.Filter = "HTML Files (*.html)|*.html";
+                        break;
+                    case "Text File (.txt)":
+                        saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                        break;
+                    default:
+                        MessageBox.Show("Unsupported file format selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                 }
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -171,45 +163,60 @@ namespace Smart_Asset
 
                     try
                     {
-                        // Change cursor to wait state
+                        MessageBox.Show("Please wait. Exporting data is on process.");
                         Cursor.Current = Cursors.WaitCursor;
 
-                        // Export the DataGridView content based on the selected format
+                        // Call the appropriate export method
                         if (selectedFormat.Equals("Microsoft Excel File (.xlsx)"))
                         {
-                            Exporter.ExportDataGridViewToExcel(dataGridView1, filePath, true);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToExcel(dataGridView1, filePath, true);
                         }
+                            
                         else if (selectedFormat.Equals("Microsoft Word File (.docx)"))
                         {
-                            Exporter.ExportDataGridViewToWord(dataGridView1, filePath, true);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToWord(dataGridView1, filePath, true);
                         }
+                            
                         else if (selectedFormat.Equals("PDF File (.pdf)"))
                         {
-                            Exporter.ExportDataGridViewToPDF(dataGridView1, filePath);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToPdf(dataGridView1, filePath, includeHeaders: true);
                         }
+                            
                         else if (selectedFormat.Equals("CSV File (.csv)"))
                         {
-                            Exporter.ExportDataGridViewToCSV(dataGridView1, filePath);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToCSV(dataGridView1, filePath);
                         }
+                            
                         else if (selectedFormat.Equals("XML File (.xml)"))
                         {
-                            Exporter.ExportDataGridViewToXML(dataGridView1, filePath);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToXML(dataGridView1, filePath);
                         }
+                            
                         else if (selectedFormat.Equals("JSON File (.json)"))
                         {
-                            Exporter.ExportDataGridViewToJSON(dataGridView1, filePath);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToJSON(dataGridView1, filePath);
                         }
+                            
                         else if (selectedFormat.Equals("HTML File (.html)"))
                         {
-                            Exporter.ExportDataGridViewToHTML(dataGridView1, filePath);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToHTML(dataGridView1, filePath);
                         }
+                            
                         else if (selectedFormat.Equals("Text File (.txt)"))
                         {
-                            Exporter.ExportDataGridViewToTXT(dataGridView1, filePath);
+                            Cursor.Current = Cursors.WaitCursor;
+                            await Exporter.ExportDataGridViewToTXT(dataGridView1, filePath);
                         }
+                            
 
-                        // Notify user of successful export
-                        MessageBox.Show("Data exported successfully!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
                     }
                     catch (Exception ex)
                     {
@@ -217,12 +224,12 @@ namespace Smart_Asset
                     }
                     finally
                     {
-                        // Revert cursor back to default
-                        Cursor.Current = Cursors.Default;
+                        //Cursor.Current = Cursors.Default;
                     }
                 }
             }
         }
+
 
 
 

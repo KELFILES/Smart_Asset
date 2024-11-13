@@ -30,13 +30,14 @@ namespace Smart_Asset
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            //FIRST I NEED TO GET THE LOCATION OF serialNoFrom_Cmb
-            string location = await MyDbMethods.Get_LocationAsync("SmartAssetDb", $"{serialNoFrom_Cmb.Text}");
+            // Get the location of 'SerialNoTo' (bottom ComboBox)
+            string locationTo = await MyDbMethods.Get_LocationAsync("SmartAssetDb", serialNoTo_Cmb.Text);
 
-            await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", "Replacement", $"{serialNoFrom_Cmb.Text}", notes_Tb.Text);
+            // Move 'SerialNoTo' (bottom ComboBox) to the "Replacement" collection
+            await MyDbMethods.MoveToReplacement("SmartAssetDb", serialNoTo_Cmb.Text, notes_Tb.Text);
 
-            //OVERRIDE THE LOCATION
-            await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", $"{location}", $"{serialNoTo_Cmb.Text}", notes_Tb.Text);
+            // Transfer 'SerialNoFrom' (top ComboBox) to the location of 'SerialNoTo'
+            await MyDbMethods.TransferSerialNoToLocation("SmartAssetDb", locationTo, serialNoFrom_Cmb.Text, notes_Tb.Text);
         }
     }
 }

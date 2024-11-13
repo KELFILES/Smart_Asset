@@ -18,7 +18,7 @@ namespace Smart_Asset
     {
         //private static readonly string DefaultConnectionString = "mongodb+srv://SmartAssetDb:SmartAssetDb_Pass@smartasset-serverlessin.lmjehif.mongodb.net/?retryWrites=true&w=majority&appName=SmartAsset-ServerlessInstance0";
         private static readonly string DefaultConnectionString = "mongodb://SmartAssetDb:SmartAssetDb_Pass@smartassetfinalcluster-shard-00-00.b9c9x.mongodb.net:27017,smartassetfinalcluster-shard-00-01.b9c9x.mongodb.net:27017,smartassetfinalcluster-shard-00-02.b9c9x.mongodb.net:27017/?ssl=true&replicaSet=atlas-x13njr-shard-0&authSource=admin&retryWrites=true&w=majority&appName=SmartAssetFinalCluster";
-        
+
         private static readonly MyDbMethods instance = new MyDbMethods();
 
         private string connectionString;
@@ -847,7 +847,7 @@ namespace Smart_Asset
         //OVERLOADING METHOD FOR BORROWED HARDWARES
         public static void ReadLocationWithNotes(string dbName, DataGridView dataGridViewName, string collectionName, bool isForBorrow)
         {
-            if(isForBorrow == true)
+            if (isForBorrow == true)
             {
                 var client = new MongoClient(DefaultConnectionString);
                 var database = client.GetDatabase(dbName);
@@ -1086,7 +1086,7 @@ namespace Smart_Asset
         }
 
 
-        
+
 
 
 
@@ -1139,7 +1139,7 @@ namespace Smart_Asset
         }
 
 
-        
+
 
         private static void LockColumns(DataGridView dataGridView)
         {
@@ -1591,7 +1591,7 @@ namespace Smart_Asset
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
-            var excludeCollections = new[] { "ExceptColl", "ExceptColl2"};
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2" };
 
             var serialNoList = serialNos.Split(',')
                                         .Select(s => s.Trim())
@@ -1828,7 +1828,7 @@ namespace Smart_Asset
                 string serialNosDisplay = string.Join(", ", serialNos);
 
                 // Show a MessageBox asking the user if they want to proceed
-                var result = MessageBox.Show($"Do you want to proceed operation for this Serial No? \n{serialNosDisplay}" , "Confirm Transfer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show($"Do you want to proceed operation for this Serial No? \n{serialNosDisplay}", "Confirm Transfer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 // If the user clicks 'No', exit the method
                 if (result == DialogResult.No)
@@ -2123,7 +2123,7 @@ namespace Smart_Asset
 
 
         //CONVERT IMG TO BYTE ARRAY
-        public static  byte[] ImageToByteArray(Image image)
+        public static byte[] ImageToByteArray(Image image)
         {
             using (var ms = new MemoryStream())
             {
@@ -2627,7 +2627,7 @@ namespace Smart_Asset
         }
 
 
-        
+
 
 
 
@@ -2704,7 +2704,7 @@ namespace Smart_Asset
         }
 
         //OVERLOADING METHOD REMOVE ANY DOCUMENT WITH 
-        public static async Task RemoveDocumentAsync(string dbName, string collectionName,string fieldName, string value)
+        public static async Task RemoveDocumentAsync(string dbName, string collectionName, string fieldName, string value)
         {
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
@@ -3140,8 +3140,146 @@ namespace Smart_Asset
             return string.Empty; // Return empty if the date cannot be parsed
         }
 
+        public static async Task TransferSerialNoToLocation(string dbName, string targetLocation, string serialNoFrom, string notes)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var targetCollection = database.GetCollection<BsonDocument>(targetLocation);
 
+            // Find the document for 'SerialNoFrom'
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+            var documentFrom = await FindDocumentBySerialNo(database, serialNoFrom, excludeCollections);
 
+            if (documentFrom == null)
+            {
+                MessageBox.Show($"SerialNo '{serialNoFrom}' not found in any collection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            try
+            {
+                documentFrom["OldLocation"] = targetLocation;
+                documentFrom["Notes"] = notes;
+
+                // Insert the document into the target collection
+                await targetCollection.InsertOneAsync(documentFrom);
+
+                // Delete the original document from its source collection
+                var originalCollection = database.GetCollection<BsonDocument>(documentFrom["OldLocation"].AsString);
+                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNoFrom);
+                await originalCollection.DeleteOneAsync(filter);
+
+                MessageBox.Show($"SerialNo '{serialNoFrom}' was successfully transferred to location '{targetLocation}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during transfer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static async Task MoveToReplacement(string dbName, string serialNoTo, string notes)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var replacementCollection = database.GetCollection<BsonDocument>("Replacement");
+
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+            var documentTo = await FindDocumentBySerialNo(database, serialNoTo, excludeCollections);
+
+            if (documentTo == null)
+            {
+                MessageBox.Show($"SerialNo '{serialNoTo}' not found in any collection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                documentTo["Notes"] = notes;
+
+                // Insert into the "Replacement" collection
+                await replacementCollection.InsertOneAsync(documentTo);
+
+                // Delete from the original collection
+                var originalCollection = database.GetCollection<BsonDocument>(documentTo["OldLocation"].AsString);
+                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNoTo);
+                await originalCollection.DeleteOneAsync(filter);
+
+                MessageBox.Show($"SerialNo '{serialNoTo}' was successfully moved to the 'Replacement' collection.", "Replacement Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error moving to Replacement: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static async Task<BsonDocument> FindDocumentBySerialNo(IMongoDatabase database, string serialNo, string[] excludeCollections)
+        {
+            // Iterate through all collection names in the database
+            using (var cursor = await database.ListCollectionNamesAsync())
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    foreach (var collectionName in cursor.Current)
+                    {
+                        // Skip excluded collections
+                        if (!excludeCollections.Contains(collectionName))
+                        {
+                            var collection = database.GetCollection<BsonDocument>(collectionName);
+                            var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
+
+                            // Search for the document by SerialNo
+                            var document = await collection.Find(filter).FirstOrDefaultAsync();
+                            if (document != null)
+                            {
+                                // Store the original collection name in the document
+                                document["OldLocation"] = collectionName;
+                                return document;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Return null if the document is not found
+            return null;
+        }
+
+        public static async Task TransferAndDeleteOriginal(string dbName, string targetLocation, string serialNoFrom, string notes)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var targetCollection = database.GetCollection<BsonDocument>(targetLocation);
+
+            // Find the document for 'serialNoFrom'
+            var excludeCollections = new[] { "ExceptColl", "ExceptColl2", "ExceptColl3" };
+            var documentFrom = await FindDocumentBySerialNo(database, serialNoFrom, excludeCollections);
+
+            if (documentFrom == null)
+            {
+                MessageBox.Show($"SerialNo '{serialNoFrom}' not found in any collection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                // Update the document fields
+                documentFrom["OldLocation"] = targetLocation;
+                documentFrom["Notes"] = notes;
+
+                // Insert the document into the target collection
+                await targetCollection.InsertOneAsync(documentFrom);
+
+                // Delete the original document from its source collection
+                var originalCollection = database.GetCollection<BsonDocument>(documentFrom["OldLocation"].AsString);
+                var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNoFrom);
+                await originalCollection.DeleteOneAsync(filter);
+
+                MessageBox.Show($"SerialNo '{serialNoFrom}' was successfully transferred to location '{targetLocation}' and deleted from its original collection.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during transfer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

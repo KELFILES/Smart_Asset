@@ -110,6 +110,7 @@
             forgotPassword_Lbl.Size = new Size(101, 15);
             forgotPassword_Lbl.TabIndex = 31;
             forgotPassword_Lbl.Text = "Change Password";
+            forgotPassword_Lbl.Click += forgotPassword_Lbl_Click;
             // 
             // password_Tb
             // 

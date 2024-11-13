@@ -3281,5 +3281,93 @@ namespace Smart_Asset
                 MessageBox.Show($"Error during transfer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        public static void ChangePassword(string dbName, string collectionName, string username_Tb, string currentPassword_Tb, string newPassword_Tb, string repeatPassword_Tb)
+        {
+            // Input validation: Check if any TextBox is null or empty
+            if (string.IsNullOrWhiteSpace(username_Tb) ||
+                string.IsNullOrWhiteSpace(currentPassword_Tb) ||
+                string.IsNullOrWhiteSpace(newPassword_Tb) ||
+                string.IsNullOrWhiteSpace(repeatPassword_Tb))
+            {
+                MessageBox.Show("All fields are required. Please fill in all the fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if new password matches repeat password
+            if (newPassword_Tb != repeatPassword_Tb)
+            {
+                MessageBox.Show("New password and repeat password do not match.", "Password Mismatch", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Initialize MongoDB client and collection
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+            var targetCollection = database.GetCollection<BsonDocument>(collectionName);
+
+            // Find the user document by username
+            var filter = Builders<BsonDocument>.Filter.Eq("username", username_Tb);
+            var userDocument = targetCollection.Find(filter).FirstOrDefault();
+
+            // Check if the user was found
+            if (userDocument == null)
+            {
+                MessageBox.Show("User not found in the specified collection.", "User Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Decrypt the stored password
+            string storedEncryptedPassword = userDocument["password"].AsString;
+            string decryptedPassword;
+
+            try
+            {
+                decryptedPassword = MyOtherMethods.DecryptPassword(storedEncryptedPassword);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during password decryption: {ex.Message}", "Decryption Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if the current password matches
+            if (currentPassword_Tb != decryptedPassword)
+            {
+                MessageBox.Show("Current password is incorrect.", "Incorrect Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Encrypt the new password
+            string encryptedNewPassword;
+            try
+            {
+                encryptedNewPassword = MyOtherMethods.EncryptPassword(newPassword_Tb);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during password encryption: {ex.Message}", "Encryption Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Update the password in the collection
+            var update = Builders<BsonDocument>.Update.Set("password", encryptedNewPassword);
+
+            try
+            {
+                targetCollection.UpdateOne(filter, update);
+                MessageBox.Show("Password successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating the password in the database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
     }
 }

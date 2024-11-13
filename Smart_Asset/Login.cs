@@ -157,6 +157,13 @@ namespace Smart_Asset
         {
 
         }
+
+        private void forgotPassword_Lbl_Click(object sender, EventArgs e)
+        {
+            ChangePassword cp = new ChangePassword();
+            cp.StartPosition = FormStartPosition.CenterScreen;
+            cp.Show();
+        }
     }
 
     public class DoubleBufferedPanel : Panel

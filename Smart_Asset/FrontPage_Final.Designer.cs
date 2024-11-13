@@ -115,6 +115,7 @@
             // 
             // panel5
             // 
+            panel5.AutoScroll = true;
             panel5.BackColor = Color.FromArgb(11, 8, 20);
             panel5.Controls.Add(panel1);
             panel5.Controls.Add(backupAndRestoreData_Btn);

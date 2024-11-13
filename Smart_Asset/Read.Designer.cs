@@ -84,39 +84,49 @@
             panel3.Controls.Add(export_Btn);
             panel3.Controls.Add(exportTo_Lbl);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(8, 968);
+            panel3.Location = new Point(8, 960);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1904, 104);
+            panel3.Size = new Size(1904, 112);
             panel3.TabIndex = 9;
             // 
             // exportTo_Cb
             // 
             exportTo_Cb.Anchor = AnchorStyles.Top;
+            exportTo_Cb.DropDownStyle = ComboBoxStyle.DropDownList;
+            exportTo_Cb.FlatStyle = FlatStyle.Flat;
             exportTo_Cb.FormattingEnabled = true;
-            exportTo_Cb.Location = new Point(885, 42);
+            exportTo_Cb.Items.AddRange(new object[] { "Microsoft Excel File (.xlsx)", "Microsoft Word File (.docx)", "PDF File (.pdf)", "CSV File (.csv)", "XML File (.xml)", "JSON File (.json)", "HTML File (.html)", "Text File (.txt)" });
+            exportTo_Cb.Location = new Point(808, 44);
             exportTo_Cb.Name = "exportTo_Cb";
-            exportTo_Cb.Size = new Size(133, 23);
+            exportTo_Cb.Size = new Size(294, 23);
             exportTo_Cb.TabIndex = 8;
             exportTo_Cb.Tag = "";
             // 
             // export_Btn
             // 
             export_Btn.Anchor = AnchorStyles.Top;
-            export_Btn.Location = new Point(906, 71);
+            export_Btn.BackColor = Color.DarkOrange;
+            export_Btn.FlatAppearance.BorderColor = Color.FromArgb(255, 255, 128);
+            export_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            export_Btn.FlatAppearance.MouseOverBackColor = Color.Lime;
+            export_Btn.FlatStyle = FlatStyle.Flat;
+            export_Btn.Location = new Point(910, 73);
             export_Btn.Name = "export_Btn";
-            export_Btn.Size = new Size(88, 23);
+            export_Btn.Size = new Size(88, 31);
             export_Btn.TabIndex = 7;
             export_Btn.Text = "EXPORT";
-            export_Btn.UseVisualStyleBackColor = true;
+            export_Btn.UseVisualStyleBackColor = false;
             export_Btn.Click += export_Btn_Click;
             // 
             // exportTo_Lbl
             // 
             exportTo_Lbl.Anchor = AnchorStyles.Top;
             exportTo_Lbl.AutoSize = true;
-            exportTo_Lbl.Location = new Point(922, 24);
+            exportTo_Lbl.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            exportTo_Lbl.ForeColor = Color.White;
+            exportTo_Lbl.Location = new Point(901, 9);
             exportTo_Lbl.Name = "exportTo_Lbl";
-            exportTo_Lbl.Size = new Size(59, 15);
+            exportTo_Lbl.Size = new Size(104, 30);
             exportTo_Lbl.TabIndex = 5;
             exportTo_Lbl.Text = "Export To:";
             // 
@@ -149,7 +159,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 50;
-            dataGridView1.Size = new Size(1904, 765);
+            dataGridView1.Size = new Size(1904, 757);
             dataGridView1.TabIndex = 4;
             dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;

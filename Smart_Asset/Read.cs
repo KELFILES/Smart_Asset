@@ -105,8 +105,126 @@ namespace Smart_Asset
 
         private async void export_Btn_Click(object sender, EventArgs e)
         {
-            //MyDbMethods.ReadDocument("SmartAssetDb", "Reserved_Hardwares", "Type", "CPU");
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("There is no data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Commit any pending edits in the DataGridView
+            dataGridView1.EndEdit();
+            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+
+            string selectedFormat = exportTo_Cb.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(selectedFormat))
+            {
+                MessageBox.Show("Please select a file format to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Select Download Location";
+
+                if (selectedFormat.Equals("Microsoft Excel File (.xlsx)"))
+                {
+                    saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                }
+                else if (selectedFormat.Equals("Microsoft Word File (.docx)"))
+                {
+                    saveFileDialog.Filter = "Word Files (*.docx)|*.docx";
+                }
+                else if (selectedFormat.Equals("PDF File (.pdf)"))
+                {
+                    saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf";
+                }
+                else if (selectedFormat.Equals("CSV File (.csv)"))
+                {
+                    saveFileDialog.Filter = "CSV Files (*.csv)|*.csv";
+                }
+                else if (selectedFormat.Equals("XML File (.xml)"))
+                {
+                    saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
+                }
+                else if (selectedFormat.Equals("JSON File (.json)"))
+                {
+                    saveFileDialog.Filter = "JSON Files (*.json)|*.json";
+                }
+                else if (selectedFormat.Equals("HTML File (.html)"))
+                {
+                    saveFileDialog.Filter = "HTML Files (*.html)|*.html";
+                }
+                else if (selectedFormat.Equals("Text File (.txt)"))
+                {
+                    saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                }
+                else
+                {
+                    MessageBox.Show("Unsupported file format selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+
+                    try
+                    {
+                        // Change cursor to wait state
+                        Cursor.Current = Cursors.WaitCursor;
+
+                        // Export the DataGridView content based on the selected format
+                        if (selectedFormat.Equals("Microsoft Excel File (.xlsx)"))
+                        {
+                            Exporter.ExportDataGridViewToExcel(dataGridView1, filePath, true);
+                        }
+                        else if (selectedFormat.Equals("Microsoft Word File (.docx)"))
+                        {
+                            Exporter.ExportDataGridViewToWord(dataGridView1, filePath, true);
+                        }
+                        else if (selectedFormat.Equals("PDF File (.pdf)"))
+                        {
+                            Exporter.ExportDataGridViewToPDF(dataGridView1, filePath);
+                        }
+                        else if (selectedFormat.Equals("CSV File (.csv)"))
+                        {
+                            Exporter.ExportDataGridViewToCSV(dataGridView1, filePath);
+                        }
+                        else if (selectedFormat.Equals("XML File (.xml)"))
+                        {
+                            Exporter.ExportDataGridViewToXML(dataGridView1, filePath);
+                        }
+                        else if (selectedFormat.Equals("JSON File (.json)"))
+                        {
+                            Exporter.ExportDataGridViewToJSON(dataGridView1, filePath);
+                        }
+                        else if (selectedFormat.Equals("HTML File (.html)"))
+                        {
+                            Exporter.ExportDataGridViewToHTML(dataGridView1, filePath);
+                        }
+                        else if (selectedFormat.Equals("Text File (.txt)"))
+                        {
+                            Exporter.ExportDataGridViewToTXT(dataGridView1, filePath);
+                        }
+
+                        // Notify user of successful export
+                        MessageBox.Show("Data exported successfully!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred during export: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        // Revert cursor back to default
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+            }
         }
+
+
 
         public class Read_Model
         {

@@ -190,5 +190,17 @@ namespace Smart_Asset {
                 this["location"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool notes {
+            get {
+                return ((bool)(this["notes"]));
+            }
+            set {
+                this["notes"] = value;
+            }
+        }
     }
 }

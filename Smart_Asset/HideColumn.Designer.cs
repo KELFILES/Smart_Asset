@@ -47,12 +47,14 @@
             brand_Cb = new CheckBox();
             type_Cb = new CheckBox();
             topLabel_Lbl = new Label();
+            notes_Cb = new CheckBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.DimGray;
+            panel1.Controls.Add(notes_Cb);
             panel1.Controls.Add(hide_Btn);
             panel1.Controls.Add(clear_Btn);
             panel1.Controls.Add(selectAll_Btn);
@@ -74,12 +76,12 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(7, 7);
             panel1.Name = "panel1";
-            panel1.Size = new Size(278, 561);
+            panel1.Size = new Size(278, 597);
             panel1.TabIndex = 0;
             // 
             // hide_Btn
             // 
-            hide_Btn.Location = new Point(82, 493);
+            hide_Btn.Location = new Point(80, 517);
             hide_Btn.Name = "hide_Btn";
             hide_Btn.Size = new Size(112, 31);
             hide_Btn.TabIndex = 23;
@@ -89,7 +91,7 @@
             // 
             // clear_Btn
             // 
-            clear_Btn.Location = new Point(140, 440);
+            clear_Btn.Location = new Point(138, 464);
             clear_Btn.Name = "clear_Btn";
             clear_Btn.Size = new Size(75, 23);
             clear_Btn.TabIndex = 22;
@@ -99,7 +101,7 @@
             // 
             // selectAll_Btn
             // 
-            selectAll_Btn.Location = new Point(59, 440);
+            selectAll_Btn.Location = new Point(57, 464);
             selectAll_Btn.Name = "selectAll_Btn";
             selectAll_Btn.Size = new Size(75, 23);
             selectAll_Btn.TabIndex = 21;
@@ -272,12 +274,23 @@
             topLabel_Lbl.TabIndex = 6;
             topLabel_Lbl.Text = "HIDE COLUMNS";
             // 
+            // notes_Cb
+            // 
+            notes_Cb.AutoSize = true;
+            notes_Cb.ForeColor = Color.White;
+            notes_Cb.Location = new Point(59, 435);
+            notes_Cb.Name = "notes_Cb";
+            notes_Cb.Size = new Size(57, 19);
+            notes_Cb.TabIndex = 24;
+            notes_Cb.Text = "Notes";
+            notes_Cb.UseVisualStyleBackColor = true;
+            // 
             // HideColumn
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(292, 575);
+            ClientSize = new Size(292, 611);
             Controls.Add(panel1);
             Name = "HideColumn";
             Padding = new Padding(7);
@@ -309,5 +322,6 @@
         private Button clear_Btn;
         private Button selectAll_Btn;
         private Button hide_Btn;
+        public CheckBox notes_Cb;
     }
 }

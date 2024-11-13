@@ -499,9 +499,9 @@
             pictureBox1.Image = Properties.Resources.frontPage_Logo1;
             pictureBox1.ImageLocation = "";
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new Point(5, 2);
+            pictureBox1.Location = new Point(24, 16);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(237, 120);
+            pictureBox1.Size = new Size(194, 95);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;

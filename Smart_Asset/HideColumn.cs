@@ -156,6 +156,15 @@ namespace Smart_Asset.Images
             {
                 location_Cb.Checked = false;
             }
+
+            if (s1.notes)
+            {
+                notes_Cb.Checked = true;
+            }
+            else
+            {
+                notes_Cb.Checked = false;
+            }
         }
 
         public void HideColumns()
@@ -202,6 +211,9 @@ namespace Smart_Asset.Images
 
             if (Read.StaticDataGridView.Columns["Location"] != null)
                 Read.StaticDataGridView.Columns["Location"].Visible = !s1.location;
+
+            if (Read.StaticDataGridView.Columns["Notes"] != null)
+                Read.StaticDataGridView.Columns["Notes"].Visible = !s1.notes;
         }
 
 
@@ -221,6 +233,7 @@ namespace Smart_Asset.Images
             purchaseDate_Cb.Checked = true;
             usage_Cb.Checked = true;
             location_Cb.Checked = true;
+            notes_Cb.Checked = true;
         }
 
         private void clear_Btn_Click(object sender, EventArgs e)
@@ -239,6 +252,7 @@ namespace Smart_Asset.Images
             purchaseDate_Cb.Checked = false;
             usage_Cb.Checked = false;
             location_Cb.Checked = false;
+            notes_Cb.Checked = false;
         }
 
         private void hide_Btn_Click(object sender, EventArgs e)
@@ -258,6 +272,7 @@ namespace Smart_Asset.Images
             s1.purchaseDate = purchaseDate_Cb.Checked;
             s1.usage = usage_Cb.Checked;
             s1.location = location_Cb.Checked;
+            s1.notes = notes_Cb.Checked;
 
             // Save the changes to the settings file
             s1.Save();

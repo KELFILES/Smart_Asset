@@ -33,6 +33,7 @@
             logout_Btn = new Button();
             panel5 = new Panel();
             panel1 = new Panel();
+            changePassword_Lbl = new Label();
             userID_Lbl = new Label();
             label2 = new Label();
             name_Lbl = new Label();
@@ -47,8 +48,8 @@
             reserved_Btn = new Button();
             borrowed_Btn = new Button();
             disposed_Btn = new Button();
+            replaced_Btn = new Button();
             cleaning_Btn = new Button();
-            replacement_Btn = new Button();
             assets_Btn = new Button();
             ManageAsset_Btn = new Button();
             dashboard_Btn = new Button();
@@ -88,10 +89,10 @@
             // 
             logout_Panel.Controls.Add(logout_Btn);
             logout_Panel.Dock = DockStyle.Bottom;
-            logout_Panel.Location = new Point(0, 963);
+            logout_Panel.Location = new Point(0, 967);
             logout_Panel.Name = "logout_Panel";
             logout_Panel.Padding = new Padding(0, 20, 90, 20);
-            logout_Panel.Size = new Size(246, 70);
+            logout_Panel.Size = new Size(246, 66);
             logout_Panel.TabIndex = 50;
             // 
             // logout_Btn
@@ -107,7 +108,7 @@
             logout_Btn.ForeColor = Color.Gainsboro;
             logout_Btn.Location = new Point(100, 20);
             logout_Btn.Name = "logout_Btn";
-            logout_Btn.Size = new Size(56, 30);
+            logout_Btn.Size = new Size(56, 26);
             logout_Btn.TabIndex = 32;
             logout_Btn.Text = "Logout";
             logout_Btn.UseVisualStyleBackColor = true;
@@ -133,22 +134,38 @@
             // 
             // panel1
             // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(changePassword_Lbl);
             panel1.Controls.Add(userID_Lbl);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(name_Lbl);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 733);
+            panel1.Location = new Point(0, 704);
             panel1.Name = "panel1";
-            panel1.Size = new Size(246, 172);
+            panel1.Size = new Size(246, 201);
             panel1.TabIndex = 40;
+            // 
+            // changePassword_Lbl
+            // 
+            changePassword_Lbl.Anchor = AnchorStyles.Top;
+            changePassword_Lbl.AutoSize = true;
+            changePassword_Lbl.Cursor = Cursors.Hand;
+            changePassword_Lbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            changePassword_Lbl.ForeColor = Color.White;
+            changePassword_Lbl.Location = new Point(66, 109);
+            changePassword_Lbl.Name = "changePassword_Lbl";
+            changePassword_Lbl.Size = new Size(112, 17);
+            changePassword_Lbl.TabIndex = 4;
+            changePassword_Lbl.Text = "Change Password";
+            changePassword_Lbl.Click += changePassword_Lbl_Click;
             // 
             // userID_Lbl
             // 
             userID_Lbl.Anchor = AnchorStyles.Top;
             userID_Lbl.AutoSize = true;
             userID_Lbl.ForeColor = Color.White;
-            userID_Lbl.Location = new Point(19, 78);
+            userID_Lbl.Location = new Point(18, 78);
             userID_Lbl.Name = "userID_Lbl";
             userID_Lbl.Size = new Size(51, 19);
             userID_Lbl.TabIndex = 3;
@@ -160,7 +177,7 @@
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(19, 59);
+            label2.Location = new Point(18, 59);
             label2.Name = "label2";
             label2.Size = new Size(58, 19);
             label2.TabIndex = 2;
@@ -171,7 +188,7 @@
             name_Lbl.Anchor = AnchorStyles.Top;
             name_Lbl.AutoSize = true;
             name_Lbl.ForeColor = Color.White;
-            name_Lbl.Location = new Point(19, 30);
+            name_Lbl.Location = new Point(18, 30);
             name_Lbl.Name = "name_Lbl";
             name_Lbl.Size = new Size(45, 19);
             name_Lbl.TabIndex = 1;
@@ -182,7 +199,7 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(18, 11);
+            label1.Location = new Point(17, 11);
             label1.Name = "label1";
             label1.Size = new Size(40, 19);
             label1.TabIndex = 0;
@@ -276,8 +293,8 @@
             fileMaintenance_SubMenuPanel.Controls.Add(reserved_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(borrowed_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(disposed_Btn);
+            fileMaintenance_SubMenuPanel.Controls.Add(replaced_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(cleaning_Btn);
-            fileMaintenance_SubMenuPanel.Controls.Add(replacement_Btn);
             fileMaintenance_SubMenuPanel.Controls.Add(assets_Btn);
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
@@ -297,13 +314,13 @@
             assetHistory_Btn.Name = "assetHistory_Btn";
             assetHistory_Btn.Padding = new Padding(35, 0, 0, 0);
             assetHistory_Btn.Size = new Size(246, 40);
-            assetHistory_Btn.TabIndex = 14;
+            assetHistory_Btn.TabIndex = 29;
             assetHistory_Btn.Text = "Asset History";
             assetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
             assetHistory_Btn.UseVisualStyleBackColor = true;
             assetHistory_Btn.Click += AssetHistory_Button_Click;
-            assetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter_1;
-            assetHistory_Btn.MouseLeave += assetHistory_Btn_MouseLeave_1;
+            assetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter;
+            assetHistory_Btn.MouseLeave += AssetHistory_Btn_MouseLeave;
             // 
             // archived_Btn
             // 
@@ -317,7 +334,7 @@
             archived_Btn.Name = "archived_Btn";
             archived_Btn.Padding = new Padding(35, 0, 0, 0);
             archived_Btn.Size = new Size(246, 40);
-            archived_Btn.TabIndex = 13;
+            archived_Btn.TabIndex = 28;
             archived_Btn.Text = "Archived";
             archived_Btn.TextAlign = ContentAlignment.MiddleLeft;
             archived_Btn.UseVisualStyleBackColor = true;
@@ -337,7 +354,7 @@
             reserved_Btn.Name = "reserved_Btn";
             reserved_Btn.Padding = new Padding(35, 0, 0, 0);
             reserved_Btn.Size = new Size(246, 40);
-            reserved_Btn.TabIndex = 12;
+            reserved_Btn.TabIndex = 27;
             reserved_Btn.Text = "Reserved";
             reserved_Btn.TextAlign = ContentAlignment.MiddleLeft;
             reserved_Btn.UseVisualStyleBackColor = true;
@@ -357,7 +374,7 @@
             borrowed_Btn.Name = "borrowed_Btn";
             borrowed_Btn.Padding = new Padding(35, 0, 0, 0);
             borrowed_Btn.Size = new Size(246, 40);
-            borrowed_Btn.TabIndex = 11;
+            borrowed_Btn.TabIndex = 26;
             borrowed_Btn.Text = "Borrowed";
             borrowed_Btn.TextAlign = ContentAlignment.MiddleLeft;
             borrowed_Btn.UseVisualStyleBackColor = true;
@@ -377,13 +394,33 @@
             disposed_Btn.Name = "disposed_Btn";
             disposed_Btn.Padding = new Padding(35, 0, 0, 0);
             disposed_Btn.Size = new Size(246, 40);
-            disposed_Btn.TabIndex = 10;
+            disposed_Btn.TabIndex = 25;
             disposed_Btn.Text = "Disposed";
             disposed_Btn.TextAlign = ContentAlignment.MiddleLeft;
             disposed_Btn.UseVisualStyleBackColor = true;
             disposed_Btn.Click += disposed_Btn_Click_1;
             disposed_Btn.MouseEnter += disposed_Btn_MouseEnter;
             disposed_Btn.MouseLeave += disposed_Btn_MouseLeave;
+            // 
+            // replaced_Btn
+            // 
+            replaced_Btn.Dock = DockStyle.Top;
+            replaced_Btn.FlatAppearance.BorderSize = 0;
+            replaced_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            replaced_Btn.FlatStyle = FlatStyle.Flat;
+            replaced_Btn.ForeColor = Color.Gainsboro;
+            replaced_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            replaced_Btn.Location = new Point(0, 80);
+            replaced_Btn.Name = "replaced_Btn";
+            replaced_Btn.Padding = new Padding(35, 0, 0, 0);
+            replaced_Btn.Size = new Size(246, 40);
+            replaced_Btn.TabIndex = 24;
+            replaced_Btn.Text = "Replaced";
+            replaced_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            replaced_Btn.UseVisualStyleBackColor = true;
+            replaced_Btn.Click += repairing_Btn_Click;
+            replaced_Btn.MouseEnter += repairingHardwares_Btn_MouseEnter;
+            replaced_Btn.MouseLeave += repairingHardwares_Btn_MouseLeave;
             // 
             // cleaning_Btn
             // 
@@ -393,37 +430,17 @@
             cleaning_Btn.FlatStyle = FlatStyle.Flat;
             cleaning_Btn.ForeColor = Color.Gainsboro;
             cleaning_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            cleaning_Btn.Location = new Point(0, 80);
+            cleaning_Btn.Location = new Point(0, 40);
             cleaning_Btn.Name = "cleaning_Btn";
             cleaning_Btn.Padding = new Padding(35, 0, 0, 0);
             cleaning_Btn.Size = new Size(246, 40);
-            cleaning_Btn.TabIndex = 9;
+            cleaning_Btn.TabIndex = 23;
             cleaning_Btn.Text = "Cleaning";
             cleaning_Btn.TextAlign = ContentAlignment.MiddleLeft;
             cleaning_Btn.UseVisualStyleBackColor = true;
             cleaning_Btn.Click += cleaning_Btn_Click_1;
             cleaning_Btn.MouseEnter += cleaning_Btn_MouseEnter;
             cleaning_Btn.MouseLeave += cleaning_Btn_MouseLeave;
-            // 
-            // replacement_Btn
-            // 
-            replacement_Btn.Dock = DockStyle.Top;
-            replacement_Btn.FlatAppearance.BorderSize = 0;
-            replacement_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            replacement_Btn.FlatStyle = FlatStyle.Flat;
-            replacement_Btn.ForeColor = Color.Gainsboro;
-            replacement_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            replacement_Btn.Location = new Point(0, 40);
-            replacement_Btn.Name = "replacement_Btn";
-            replacement_Btn.Padding = new Padding(35, 0, 0, 0);
-            replacement_Btn.Size = new Size(246, 40);
-            replacement_Btn.TabIndex = 8;
-            replacement_Btn.Text = "Replacement";
-            replacement_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            replacement_Btn.UseVisualStyleBackColor = true;
-            replacement_Btn.Click += repairing_Btn_Click;
-            replacement_Btn.MouseEnter += repairingHardwares_Btn_MouseEnter;
-            replacement_Btn.MouseLeave += repairingHardwares_Btn_MouseLeave;
             // 
             // assets_Btn
             // 
@@ -496,7 +513,6 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
             pictureBox1.Image = Properties.Resources.frontPage_Logo1;
             pictureBox1.ImageLocation = "";
             pictureBox1.InitialImage = null;
@@ -535,6 +551,7 @@
             header_Lbl.TabIndex = 7;
             header_Lbl.Text = "HEADER";
             header_Lbl.TextAlign = ContentAlignment.MiddleRight;
+            header_Lbl.TextChanged += header_Lbl_TextChanged;
             // 
             // headerPicture_Pb
             // 
@@ -608,20 +625,12 @@
         private Button dashboard_Btn;
         private Button artificialIntelligence_Btn;
         private Button qmark_Btn;
-        private Button assets_Btn;
         private Panel mainPanel;
         private PictureBox pictureBox1;
         private Panel logout_Panel;
         private Button logout_Btn;
         private PictureBox headerPicture_Pb;
         public Label header_Lbl;
-        private Button replacement_Btn;
-        private Button disposed_Btn;
-        private Button cleaning_Btn;
-        private Button borrowed_Btn;
-        private Button assetHistory_Btn;
-        private Button archived_Btn;
-        private Button reserved_Btn;
         private Button backupAndRestoreData_Btn;
         private Button createReport_Btn;
         private Panel panel1;
@@ -630,5 +639,14 @@
         public Label userID_Lbl;
         public Label name_Lbl;
         public Button ManageUsers_Btn;
+        public Label changePassword_Lbl;
+        private Button assetHistory_Btn;
+        private Button archived_Btn;
+        private Button reserved_Btn;
+        private Button borrowed_Btn;
+        private Button disposed_Btn;
+        private Button replaced_Btn;
+        private Button cleaning_Btn;
+        private Button assets_Btn;
     }
 }

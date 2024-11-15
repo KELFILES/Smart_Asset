@@ -17,6 +17,7 @@ namespace Smart_Asset
             AdjustScaling();
 
             Application.Run(new Startup());
+            //Application.Run(new FrontPage_Final());
         }
 
         private static void AdjustScaling()

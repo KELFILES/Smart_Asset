@@ -172,51 +172,51 @@ namespace Smart_Asset
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToExcel(dataGridView1, filePath, true);
                         }
-                            
+
                         else if (selectedFormat.Equals("Microsoft Word File (.docx)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToWord(dataGridView1, filePath, true);
                         }
-                            
+
                         else if (selectedFormat.Equals("PDF File (.pdf)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToPdf(dataGridView1, filePath, includeHeaders: true);
                         }
-                            
+
                         else if (selectedFormat.Equals("CSV File (.csv)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToCSV(dataGridView1, filePath);
                         }
-                            
+
                         else if (selectedFormat.Equals("XML File (.xml)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToXML(dataGridView1, filePath);
                         }
-                            
+
                         else if (selectedFormat.Equals("JSON File (.json)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToJSON(dataGridView1, filePath);
                         }
-                            
+
                         else if (selectedFormat.Equals("HTML File (.html)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToHTML(dataGridView1, filePath);
                         }
-                            
+
                         else if (selectedFormat.Equals("Text File (.txt)"))
                         {
                             Cursor.Current = Cursors.WaitCursor;
                             await Exporter.ExportDataGridViewToTXT(dataGridView1, filePath);
                         }
-                            
 
-                        
+
+
                     }
                     catch (Exception ex)
                     {
@@ -986,12 +986,7 @@ namespace Smart_Asset
             cr.Show();
         }
 
-        private void hideColumn_Btn_Click(object sender, EventArgs e)
-        {
-            s1.Reload();
-            HideColumn hc = new HideColumn();
-            hc.Show();
-        }
+
 
         private async void search2_Btn_Click(object sender, EventArgs e)
         {
@@ -1300,6 +1295,13 @@ namespace Smart_Asset
                 RefreshBasedOnSelectedButton();
                 e.SuppressKeyPress = true; // Optional: Prevent further processing of the Backspace key
             }
+        }
+
+        private void hideColumn_Btn_Click(object sender, EventArgs e)
+        {
+            s1.Reload();
+            HideColumn hc = new HideColumn();
+            hc.Show();
         }
     }
 }

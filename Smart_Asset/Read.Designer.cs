@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel3 = new Panel();
             exportTo_Cb = new ComboBox();
             export_Btn = new Button();
@@ -37,11 +38,15 @@
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             panel2 = new Panel();
-            panel11 = new Panel();
+            panel8 = new Panel();
+            hideColumn_Btn = new Button();
             button1 = new Button();
             add_Btn = new Button();
-            panel8 = new Panel();
-            hideColumns_Btn = new Button();
+            panel7 = new Panel();
+            borrowedHardwares_Btn = new Button();
+            cleaningHardwares_Btn = new Button();
+            disposedHardwares_Btn = new Button();
+            replacement_Btn = new Button();
             panel10 = new Panel();
             panel9 = new Panel();
             search2_Btn = new Button();
@@ -52,34 +57,28 @@
             unit_Cmb = new ComboBox();
             label2 = new Label();
             panel6 = new Panel();
-            panel7 = new Panel();
-            borrowedHardwares_Btn = new Button();
-            cleaningHardwares_Btn = new Button();
-            disposedHardwares_Btn = new Button();
-            replacement_Btn = new Button();
+            panel4 = new Panel();
+            search_Cmb = new ComboBox();
+            label4 = new Label();
             panel5 = new Panel();
             archive_Btn = new Button();
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
-            panel4 = new Panel();
-            search_Cmb = new ComboBox();
-            label4 = new Label();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel11.SuspendLayout();
             panel8.SuspendLayout();
-            panel9.SuspendLayout();
             panel7.SuspendLayout();
-            panel5.SuspendLayout();
+            panel9.SuspendLayout();
             panel4.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel3
             // 
             panel3.AutoScroll = true;
-            panel3.BackColor = SystemColors.WindowFrame;
+            panel3.BackColor = Color.FromArgb(4, 9, 64);
             panel3.Controls.Add(exportTo_Cb);
             panel3.Controls.Add(export_Btn);
             panel3.Controls.Add(exportTo_Lbl);
@@ -105,11 +104,12 @@
             // export_Btn
             // 
             export_Btn.Anchor = AnchorStyles.Top;
-            export_Btn.BackColor = Color.DarkOrange;
+            export_Btn.BackColor = Color.SteelBlue;
             export_Btn.FlatAppearance.BorderColor = Color.FromArgb(255, 255, 128);
             export_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             export_Btn.FlatAppearance.MouseOverBackColor = Color.Lime;
             export_Btn.FlatStyle = FlatStyle.Flat;
+            export_Btn.ForeColor = Color.White;
             export_Btn.Location = new Point(910, 73);
             export_Btn.Name = "export_Btn";
             export_Btn.Size = new Size(88, 31);
@@ -158,6 +158,14 @@
             dataGridView1.Location = new Point(8, 203);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.RowTemplate.Height = 50;
             dataGridView1.Size = new Size(1904, 757);
             dataGridView1.TabIndex = 4;
@@ -182,15 +190,14 @@
             // panel2
             // 
             panel2.AutoScroll = true;
-            panel2.BackColor = SystemColors.WindowFrame;
-            panel2.Controls.Add(panel11);
+            panel2.BackColor = Color.FromArgb(4, 9, 64);
             panel2.Controls.Add(panel8);
+            panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel10);
             panel2.Controls.Add(panel9);
             panel2.Controls.Add(panel6);
-            panel2.Controls.Add(panel7);
-            panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
+            panel2.Controls.Add(panel5);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(8, 55);
             panel2.Name = "panel2";
@@ -198,16 +205,32 @@
             panel2.Size = new Size(1904, 148);
             panel2.TabIndex = 8;
             // 
-            // panel11
+            // panel8
             // 
-            panel11.BackColor = Color.Transparent;
-            panel11.Controls.Add(button1);
-            panel11.Controls.Add(add_Btn);
-            panel11.Dock = DockStyle.Right;
-            panel11.Location = new Point(1708, 7);
-            panel11.Name = "panel11";
-            panel11.Size = new Size(189, 134);
-            panel11.TabIndex = 36;
+            panel8.BackColor = Color.FromArgb(60, 76, 102);
+            panel8.Controls.Add(hideColumn_Btn);
+            panel8.Controls.Add(button1);
+            panel8.Controls.Add(add_Btn);
+            panel8.Dock = DockStyle.Left;
+            panel8.Location = new Point(727, 7);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(189, 134);
+            panel8.TabIndex = 35;
+            // 
+            // hideColumn_Btn
+            // 
+            hideColumn_Btn.Anchor = AnchorStyles.Right;
+            hideColumn_Btn.BackColor = Color.RoyalBlue;
+            hideColumn_Btn.FlatStyle = FlatStyle.Flat;
+            hideColumn_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            hideColumn_Btn.ForeColor = Color.White;
+            hideColumn_Btn.Location = new Point(32, 87);
+            hideColumn_Btn.Name = "hideColumn_Btn";
+            hideColumn_Btn.Size = new Size(126, 32);
+            hideColumn_Btn.TabIndex = 15;
+            hideColumn_Btn.Text = "Hide Column";
+            hideColumn_Btn.UseVisualStyleBackColor = false;
+            hideColumn_Btn.Click += hideColumn_Btn_Click;
             // 
             // button1
             // 
@@ -216,7 +239,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(35, 66);
+            button1.Location = new Point(32, 49);
             button1.Name = "button1";
             button1.Size = new Size(126, 32);
             button1.TabIndex = 14;
@@ -231,155 +254,13 @@
             add_Btn.FlatStyle = FlatStyle.Flat;
             add_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             add_Btn.ForeColor = Color.White;
-            add_Btn.Location = new Point(35, 29);
+            add_Btn.Location = new Point(32, 12);
             add_Btn.Name = "add_Btn";
             add_Btn.Size = new Size(126, 32);
             add_Btn.TabIndex = 13;
             add_Btn.Text = "+ Add";
             add_Btn.UseVisualStyleBackColor = false;
             add_Btn.Click += add_Btn_Click;
-            // 
-            // panel8
-            // 
-            panel8.BackColor = Color.Gray;
-            panel8.Controls.Add(hideColumns_Btn);
-            panel8.Dock = DockStyle.Left;
-            panel8.Location = new Point(727, 7);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(189, 134);
-            panel8.TabIndex = 35;
-            // 
-            // hideColumns_Btn
-            // 
-            hideColumns_Btn.Anchor = AnchorStyles.Top;
-            hideColumns_Btn.Location = new Point(26, 16);
-            hideColumns_Btn.Name = "hideColumns_Btn";
-            hideColumns_Btn.Size = new Size(132, 29);
-            hideColumns_Btn.TabIndex = 28;
-            hideColumns_Btn.Text = "HIDE COLUMNS";
-            hideColumns_Btn.UseVisualStyleBackColor = true;
-            hideColumns_Btn.Click += hideColumn_Btn_Click;
-            // 
-            // panel10
-            // 
-            panel10.Dock = DockStyle.Left;
-            panel10.Location = new Point(717, 7);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(10, 134);
-            panel10.TabIndex = 34;
-            // 
-            // panel9
-            // 
-            panel9.BackColor = Color.Gray;
-            panel9.Controls.Add(search2_Btn);
-            panel9.Controls.Add(type_Cmb);
-            panel9.Controls.Add(label3);
-            panel9.Controls.Add(location_Cmb);
-            panel9.Controls.Add(label1);
-            panel9.Controls.Add(unit_Cmb);
-            panel9.Controls.Add(label2);
-            panel9.Dock = DockStyle.Left;
-            panel9.Location = new Point(367, 7);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(350, 134);
-            panel9.TabIndex = 33;
-            // 
-            // search2_Btn
-            // 
-            search2_Btn.Anchor = AnchorStyles.Top;
-            search2_Btn.Location = new Point(134, 97);
-            search2_Btn.Name = "search2_Btn";
-            search2_Btn.Size = new Size(132, 29);
-            search2_Btn.TabIndex = 31;
-            search2_Btn.Text = "Search";
-            search2_Btn.UseVisualStyleBackColor = true;
-            search2_Btn.Click += search2_Btn_Click;
-            // 
-            // type_Cmb
-            // 
-            type_Cmb.Anchor = AnchorStyles.Top;
-            type_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
-            type_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            type_Cmb.DropDownHeight = 200;
-            type_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
-            type_Cmb.FormattingEnabled = true;
-            type_Cmb.IntegralHeight = false;
-            type_Cmb.Location = new Point(81, 68);
-            type_Cmb.Name = "type_Cmb";
-            type_Cmb.Size = new Size(255, 23);
-            type_Cmb.TabIndex = 29;
-            type_Cmb.DropDown += type_Cmb_DropDown;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Top;
-            label3.AutoSize = true;
-            label3.BackColor = Color.Gray;
-            label3.Location = new Point(19, 72);
-            label3.Name = "label3";
-            label3.Size = new Size(34, 15);
-            label3.TabIndex = 30;
-            label3.Text = "Type:";
-            // 
-            // location_Cmb
-            // 
-            location_Cmb.Anchor = AnchorStyles.Top;
-            location_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
-            location_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            location_Cmb.DropDownHeight = 200;
-            location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
-            location_Cmb.FormattingEnabled = true;
-            location_Cmb.IntegralHeight = false;
-            location_Cmb.Location = new Point(81, 12);
-            location_Cmb.Name = "location_Cmb";
-            location_Cmb.Size = new Size(255, 23);
-            location_Cmb.TabIndex = 25;
-            location_Cmb.DropDown += location_Cmb_DropDown_1;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Gray;
-            label1.Location = new Point(19, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(56, 15);
-            label1.TabIndex = 24;
-            label1.Text = "Location:";
-            // 
-            // unit_Cmb
-            // 
-            unit_Cmb.Anchor = AnchorStyles.Top;
-            unit_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
-            unit_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            unit_Cmb.DropDownHeight = 200;
-            unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
-            unit_Cmb.FormattingEnabled = true;
-            unit_Cmb.IntegralHeight = false;
-            unit_Cmb.Location = new Point(81, 40);
-            unit_Cmb.Name = "unit_Cmb";
-            unit_Cmb.Size = new Size(255, 23);
-            unit_Cmb.TabIndex = 26;
-            unit_Cmb.DropDown += unit_Cmb_DropDown_1;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Gray;
-            label2.Location = new Point(19, 44);
-            label2.Name = "label2";
-            label2.Size = new Size(32, 15);
-            label2.TabIndex = 27;
-            label2.Text = "Unit:";
-            // 
-            // panel6
-            // 
-            panel6.Dock = DockStyle.Left;
-            panel6.Location = new Point(357, 7);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(10, 134);
-            panel6.TabIndex = 32;
             // 
             // panel7
             // 
@@ -389,7 +270,7 @@
             panel7.Controls.Add(cleaningHardwares_Btn);
             panel7.Controls.Add(disposedHardwares_Btn);
             panel7.Controls.Add(replacement_Btn);
-            panel7.Location = new Point(1899, 20);
+            panel7.Location = new Point(1887, 7);
             panel7.Name = "panel7";
             panel7.Size = new Size(10, 10);
             panel7.TabIndex = 23;
@@ -462,6 +343,166 @@
             replacement_Btn.UseVisualStyleBackColor = false;
             replacement_Btn.Click += repairingHardwares_Btn_Click;
             // 
+            // panel10
+            // 
+            panel10.Dock = DockStyle.Left;
+            panel10.Location = new Point(717, 7);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(10, 134);
+            panel10.TabIndex = 34;
+            // 
+            // panel9
+            // 
+            panel9.BackColor = Color.FromArgb(60, 76, 102);
+            panel9.Controls.Add(search2_Btn);
+            panel9.Controls.Add(type_Cmb);
+            panel9.Controls.Add(label3);
+            panel9.Controls.Add(location_Cmb);
+            panel9.Controls.Add(label1);
+            panel9.Controls.Add(unit_Cmb);
+            panel9.Controls.Add(label2);
+            panel9.Dock = DockStyle.Left;
+            panel9.Location = new Point(367, 7);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(350, 134);
+            panel9.TabIndex = 33;
+            // 
+            // search2_Btn
+            // 
+            search2_Btn.Anchor = AnchorStyles.Top;
+            search2_Btn.ForeColor = Color.Black;
+            search2_Btn.Location = new Point(134, 97);
+            search2_Btn.Name = "search2_Btn";
+            search2_Btn.Size = new Size(132, 29);
+            search2_Btn.TabIndex = 31;
+            search2_Btn.Text = "Search";
+            search2_Btn.UseVisualStyleBackColor = true;
+            search2_Btn.Click += search2_Btn_Click;
+            // 
+            // type_Cmb
+            // 
+            type_Cmb.Anchor = AnchorStyles.Top;
+            type_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
+            type_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            type_Cmb.DropDownHeight = 200;
+            type_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            type_Cmb.FormattingEnabled = true;
+            type_Cmb.IntegralHeight = false;
+            type_Cmb.Location = new Point(81, 68);
+            type_Cmb.Name = "type_Cmb";
+            type_Cmb.Size = new Size(255, 23);
+            type_Cmb.TabIndex = 29;
+            type_Cmb.DropDown += type_Cmb_DropDown;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top;
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(19, 72);
+            label3.Name = "label3";
+            label3.Size = new Size(34, 15);
+            label3.TabIndex = 30;
+            label3.Text = "Type:";
+            // 
+            // location_Cmb
+            // 
+            location_Cmb.Anchor = AnchorStyles.Top;
+            location_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
+            location_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            location_Cmb.DropDownHeight = 200;
+            location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            location_Cmb.FormattingEnabled = true;
+            location_Cmb.IntegralHeight = false;
+            location_Cmb.Location = new Point(81, 12);
+            location_Cmb.Name = "location_Cmb";
+            location_Cmb.Size = new Size(255, 23);
+            location_Cmb.TabIndex = 25;
+            location_Cmb.DropDown += location_Cmb_DropDown_1;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(19, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 15);
+            label1.TabIndex = 24;
+            label1.Text = "Location:";
+            // 
+            // unit_Cmb
+            // 
+            unit_Cmb.Anchor = AnchorStyles.Top;
+            unit_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
+            unit_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            unit_Cmb.DropDownHeight = 200;
+            unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            unit_Cmb.FormattingEnabled = true;
+            unit_Cmb.IntegralHeight = false;
+            unit_Cmb.Location = new Point(81, 40);
+            unit_Cmb.Name = "unit_Cmb";
+            unit_Cmb.Size = new Size(255, 23);
+            unit_Cmb.TabIndex = 26;
+            unit_Cmb.DropDown += unit_Cmb_DropDown_1;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top;
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(19, 44);
+            label2.Name = "label2";
+            label2.Size = new Size(32, 15);
+            label2.TabIndex = 27;
+            label2.Text = "Unit:";
+            // 
+            // panel6
+            // 
+            panel6.Dock = DockStyle.Left;
+            panel6.Location = new Point(357, 7);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(10, 134);
+            panel6.TabIndex = 32;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.FromArgb(60, 76, 102);
+            panel4.Controls.Add(search_Cmb);
+            panel4.Controls.Add(label4);
+            panel4.Dock = DockStyle.Left;
+            panel4.Location = new Point(7, 7);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(350, 134);
+            panel4.TabIndex = 29;
+            // 
+            // search_Cmb
+            // 
+            search_Cmb.Anchor = AnchorStyles.Top;
+            search_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
+            search_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            search_Cmb.FormattingEnabled = true;
+            search_Cmb.Location = new Point(65, 51);
+            search_Cmb.Name = "search_Cmb";
+            search_Cmb.Size = new Size(261, 23);
+            search_Cmb.TabIndex = 23;
+            search_Cmb.TextChanged += search_Cmb_TextChanged;
+            search_Cmb.KeyDown += search_Cmb_KeyDown;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top;
+            label4.AutoSize = true;
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(14, 56);
+            label4.Name = "label4";
+            label4.Size = new Size(45, 15);
+            label4.TabIndex = 24;
+            label4.Text = "Search:";
+            // 
             // panel5
             // 
             panel5.Anchor = AnchorStyles.Top;
@@ -525,40 +566,6 @@
             reservedHardwares_Btn.UseVisualStyleBackColor = false;
             reservedHardwares_Btn.Click += reservedHardwares_Btn_Click_1;
             // 
-            // panel4
-            // 
-            panel4.BackColor = Color.Gray;
-            panel4.Controls.Add(search_Cmb);
-            panel4.Controls.Add(label4);
-            panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(7, 7);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(350, 134);
-            panel4.TabIndex = 29;
-            // 
-            // search_Cmb
-            // 
-            search_Cmb.Anchor = AnchorStyles.Top;
-            search_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
-            search_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            search_Cmb.FormattingEnabled = true;
-            search_Cmb.Location = new Point(65, 51);
-            search_Cmb.Name = "search_Cmb";
-            search_Cmb.Size = new Size(261, 23);
-            search_Cmb.TabIndex = 23;
-            search_Cmb.TextChanged += search_Cmb_TextChanged;
-            search_Cmb.KeyDown += search_Cmb_KeyDown;
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Top;
-            label4.AutoSize = true;
-            label4.Location = new Point(14, 56);
-            label4.Name = "label4";
-            label4.Size = new Size(45, 15);
-            label4.TabIndex = 24;
-            label4.Text = "Search:";
-            // 
             // Read
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -576,14 +583,13 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            panel11.ResumeLayout(false);
             panel8.ResumeLayout(false);
+            panel7.ResumeLayout(false);
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            panel5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -619,9 +625,8 @@
         private Label label2;
         private Panel panel6;
         public Panel panel8;
-        private Button hideColumns_Btn;
         private Panel panel10;
-        public Panel panel11;
         private Button button1;
+        private Button hideColumn_Btn;
     }
 }

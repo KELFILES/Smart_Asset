@@ -98,7 +98,7 @@ namespace Smart_Asset
                         { "Warranty", CalculateWarranty() },
                         { "Supplier", supplier_Tb.Text },
                         { "PurchaseDate", purchaseDate_Dtp.Text },
-                        { "DocumentCreated", dateNow}
+                        { "DateThisAdded", dateNow}
                     };
 
                     // Insert the document into the database

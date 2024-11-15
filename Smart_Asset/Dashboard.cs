@@ -11,12 +11,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OxyPlot.WindowsForms;
 using OxyPlot.Axes;
+using Microsoft.Office.Interop.Word;
+using Microsoft.Office.Interop.Outlook;
+using MigraDoc.DocumentObjectModel.Internals;
+using MigraDoc.DocumentObjectModel;
 
 
 namespace Smart_Asset
 {
     public partial class Dashboard : Form
     {
+
+
         public Dashboard()
         {
             InitializeComponent();
@@ -39,286 +45,159 @@ namespace Smart_Asset
             }
         }
 
-        private void Dashboard_Load(object sender, EventArgs e)
+        private async void Dashboard_Load(object sender, EventArgs e)
         {
+            UIAdjustment();
 
-            CreateBarChart(panel4);
+
             //CreateScatterPlot(panel4);
-            CreatePieChart(panel5);
-            CreateAreaChart(panel7);
-            CreateDiagonalLineChart(panel6);
+            //CreateDiagonalLineChart(panel6);
+
+            //LOAD DATABASE DATA
+            var retrievedDbData = await MyDbMethods.ReadAllDatabaseInBSON("SmartAssetDb");
+            DataRetriever.SummarizeData(retrievedDbData);
+
+
+            loadAllData();
+
+            //MyOtherMethods.ShowCalendarAtCenter(panel3);
 
         }
 
-
-        private void CreateDiagonalLineChart(Panel targetPanel)
+        void UIAdjustment()
         {
-            targetPanel.Controls.Clear();
+            //MyOtherMethods.CenterInForm(flowLayoutPanel1, this);
 
-            var plotView = new PlotView { Dock = DockStyle.Fill };
+            List<Panel> panels = new List<Panel> { panel9, panel21, panel19, panel17, panel15, panel14, panel10, panel12 };
+            MyOtherMethods.CenterAlignPanelsHorizontally(panel16, panels);
 
-            var plotModel = new PlotModel
-            {
-                Title = "Diagonal Line Chart",
-                TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
-                Background = OxyColors.Transparent
-            };
+            List<Panel> panels_Graph = new List<Panel> { leftGraph_Pnl, centerGraph_Pnl, rightGraph_Pnl};
+            MyOtherMethods.CenterAlignPanelsHorizontally(panel2, panels_Graph);
 
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Minimum = 0,
-                Maximum = 5,
-                Title = "Categories",
-                AxislineColor = OxyColors.Cyan, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
-
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                Minimum = 0,
-                Maximum = 100,
-                Title = "Values",
-                AxislineColor = OxyColors.Magenta, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
-
-            var lineSeries = new LineSeries
-            {
-                Title = "Diagonal Line Series",
-                Color = OxyColors.Coral,
-                StrokeThickness = 2,
-                MarkerType = MarkerType.Diamond,
-                MarkerSize = 8,
-                MarkerStroke = OxyColors.DarkSlateBlue,
-                MarkerFill = OxyColors.Coral
-            };
-
-            lineSeries.Points.Add(new DataPoint(1, 25));
-            lineSeries.Points.Add(new DataPoint(2, 60));
-            lineSeries.Points.Add(new DataPoint(3, 45));
-            lineSeries.Points.Add(new DataPoint(4, 80));
-
-            plotModel.Series.Add(lineSeries);
-            plotView.Model = plotModel;
-
-            targetPanel.Controls.Add(plotView);
+            MyOtherMethods.FitMonthCalendarToPanel(panel3, monthCalendar1);
         }
 
-
-
-        private void CreateBarChart(Panel targetPanel)
+        private void Dashboard_SizeChanged(object sender, EventArgs e)
         {
-            targetPanel.Controls.Clear();
+            List<Panel> panels = new List<Panel> { panel9, panel21, panel19, panel17, panel15, panel14, panel10, panel12 };
+            MyOtherMethods.CenterAlignPanelsHorizontally(panel16, panels);
 
-            var plotView = new PlotView { Dock = DockStyle.Fill };
-
-            var plotModel = new PlotModel
-            {
-                Title = "Colorful Bar Chart",
-                TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
-                Background = OxyColors.Transparent
-            };
-
-            plotModel.Axes.Add(new CategoryAxis
-            {
-                Position = AxisPosition.Left,
-                Key = "Categories",
-                ItemsSource = new[] { "Category A", "Category B", "Category C", "Category D" },
-                TextColor = OxyColors.White, // Set axis text color to white
-                AxislineColor = OxyColors.Cyan, // Set axis line color
-                AxislineThickness = 2 // Set axis line thickness
-            });
-
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Minimum = 0,
-                Maximum = 100,
-                Title = "Values",
-                AxislineColor = OxyColors.Magenta, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
-
-            var barSeries = new BarSeries
-            {
-                FillColor = OxyColors.SteelBlue,
-                LabelPlacement = LabelPlacement.Inside,
-                LabelFormatString = "{0:.0}",
-                ItemsSource = new[]
-                {
-            new BarItem { Value = 25 },
-            new BarItem { Value = 60 },
-            new BarItem { Value = 45 },
-            new BarItem { Value = 80 }
-        }
-            };
-
-            plotModel.Series.Add(barSeries);
-            plotView.Model = plotModel;
-
-            targetPanel.Controls.Add(plotView);
+            List<Panel> panels_Graph = new List<Panel> { leftGraph_Pnl, centerGraph_Pnl, rightGraph_Pnl };
+            MyOtherMethods.CenterAlignPanelsHorizontally(panel2, panels_Graph);
         }
 
 
-        private void CreateScatterPlot(Panel targetPanel)
+        //STATIC FIELDS
+        public static int totalAllAssets;
+        public static int totalWorkingAssets;
+        public static int totalCleaning;
+        public static int totalReplaced;
+        public static int totalDisposed;
+        public static int totalBorrowed;
+        public static int totalReserved;
+        public static int totalArchived;
+
+
+
+        //LOAD ALL DATA
+        public void loadAllData()
         {
-            targetPanel.Controls.Clear();
+            // 0. All Assets (with Disposed_Hardwares)
+            box0Title_Lbl.Text = "All Assets";
+            MyOtherMethods.CenterInPanel(box0Title_Lbl, panel19);
+            box0Title_Lbl.Visible = true;
+            box0_Lbl.Text = Convert.ToString(totalAllAssets);
+            MyOtherMethods.CenterInPanel(box0_Lbl, panel19);
+            box0_Lbl.Visible = true;
 
-            var plotView = new PlotView { Dock = DockStyle.Fill };
+            // 1. Working Assets (Excluding Archived and Disposed_Hardwares)
+            box1Title_Lbl.Text = "Working Assets";
+            MyOtherMethods.CenterInPanel(box1Title_Lbl, panel21);
+            box1Title_Lbl.Visible = true;
+            box1_Lbl.Text = Convert.ToString(totalWorkingAssets);
+            MyOtherMethods.CenterInPanel(box1_Lbl, panel21);
+            box1_Lbl.Visible = true;
 
-            var plotModel = new PlotModel
+            // 2. Cleaning
+            box2Title_Lbl.Text = "Cleaning";
+            MyOtherMethods.CenterInPanel(box2Title_Lbl, panel19);
+            box2Title_Lbl.Visible = true;
+            box2_Lbl.Text = Convert.ToString(totalCleaning);
+            MyOtherMethods.CenterInPanel(box2_Lbl, panel19);
+            box2_Lbl.Visible = true;
+
+            // 3. Replaced
+            box3Title_Lbl.Text = "Replaced";
+            MyOtherMethods.CenterInPanel(box3Title_Lbl, panel17);
+            box3Title_Lbl.Visible = true;
+            box3_Lbl.Text = Convert.ToString(totalReplaced);
+            MyOtherMethods.CenterInPanel(box3_Lbl, panel17);
+            box3_Lbl.Visible = true;
+
+            // 4. Disposed Hardwares
+            box4Title_Lbl.Text = "Disposed";
+            MyOtherMethods.CenterInPanel(box4Title_Lbl, panel15);
+            box4Title_Lbl.Visible = true;
+            box4_Lbl.Text = Convert.ToString(totalDisposed);
+            MyOtherMethods.CenterInPanel(box4_Lbl, panel15);
+            box4_Lbl.Visible = true;
+
+            // 5. Borrowed
+            box5Title_Lbl.Text = "Borrowed";
+            MyOtherMethods.CenterInPanel(box5Title_Lbl, panel14);
+            box5Title_Lbl.Visible = true;
+            box5_Lbl.Text = Convert.ToString(totalBorrowed);
+            MyOtherMethods.CenterInPanel(box5_Lbl, panel14);
+            box5_Lbl.Visible = true;
+
+            // 6. Reserved Hardwares
+            box6Title_Lbl.Text = "Reserved";
+            MyOtherMethods.CenterInPanel(box6Title_Lbl, panel10);
+            box6Title_Lbl.Visible = true;
+            box6_Lbl.Text = Convert.ToString(totalReserved);
+            MyOtherMethods.CenterInPanel(box6_Lbl, panel10);
+            box6_Lbl.Visible = true;
+
+            // 7. Archived
+            box7Title_Lbl.Text = "Archived";
+            MyOtherMethods.CenterInPanel(box7Title_Lbl, panel12);
+            box7Title_Lbl.Visible = true;
+            box7_Lbl.Text = Convert.ToString(totalArchived);
+            MyOtherMethods.CenterInPanel(box7_Lbl, panel12);
+            box7_Lbl.Visible = true;
+
+
+
+            //VALUES FOR CreateBarChart
+            List<string> categories = new List<string> { "Category A", "Category B", "Category C", "Category D", "Category E" };
+            List<double> values = new List<double> { 25, 60, 45, 80, 55 };
+            List<OxyColor> colors = new List<OxyColor>
             {
-                Title = "Scatter Plot Example",
-                TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
-                Background = OxyColors.Transparent
+                OxyColor.FromRgb(255, 128, 0),  // Orange
+                OxyColor.FromRgb(0, 204, 102),  // Green
+                OxyColor.FromRgb(51, 153, 255), // Blue
+                OxyColor.FromRgb(204, 51, 255), // Purple
+                OxyColor.FromRgb(255, 51, 51)   // Red
             };
+            Graphs.CreateBarChart(leftGraph_Pnl, categories, values, colors);
 
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "X Axis",
-                AxislineColor = OxyColors.Cyan, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
 
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                Title = "Y Axis",
-                AxislineColor = OxyColors.Magenta, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
 
-            var scatterSeries = new ScatterSeries
-            {
-                Title = "Data Points",
-                MarkerType = MarkerType.Circle,
-                MarkerSize = 7,
-                MarkerFill = OxyColors.SeaGreen,
-                MarkerStroke = OxyColors.DarkGreen,
-                MarkerStrokeThickness = 1.5
-            };
 
-            scatterSeries.Points.Add(new ScatterPoint(1.0, 1.0));
-            scatterSeries.Points.Add(new ScatterPoint(2.0, 3.0));
-            scatterSeries.Points.Add(new ScatterPoint(3.0, 2.5));
-            scatterSeries.Points.Add(new ScatterPoint(4.0, 5.0));
-            scatterSeries.Points.Add(new ScatterPoint(5.0, 4.5));
+            Graphs.CreatePieChart(rightGraph_Pnl);
+            Graphs.CreateAreaChart(centerGraph_Pnl);
 
-            plotModel.Series.Add(scatterSeries);
-            plotView.Model = plotModel;
-
-            targetPanel.Controls.Add(plotView);
         }
-
-
-
-        private void CreateAreaChart(Panel targetPanel)
-        {
-            targetPanel.Controls.Clear();
-
-            var plotView = new PlotView { Dock = DockStyle.Fill };
-
-            var plotModel = new PlotModel
-            {
-                Title = "Area Chart Example",
-                TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
-                Background = OxyColors.Transparent
-            };
-
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "X Axis",
-                AxislineColor = OxyColors.Cyan, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
-
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                Title = "Y Axis",
-                AxislineColor = OxyColors.Magenta, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
-            });
-
-            var areaSeries = new AreaSeries
-            {
-                Title = "Data Series",
-                Color = OxyColor.FromAColor(200, OxyColors.LightSeaGreen),
-                StrokeThickness = 2,
-                MarkerType = MarkerType.Triangle,
-                MarkerSize = 6,
-                MarkerFill = OxyColors.Teal,
-                MarkerStroke = OxyColors.DarkSlateGray
-            };
-
-            areaSeries.Points.Add(new DataPoint(0, 0));
-            areaSeries.Points.Add(new DataPoint(1, 2));
-            areaSeries.Points.Add(new DataPoint(2, 5));
-            areaSeries.Points.Add(new DataPoint(3, 3));
-            areaSeries.Points.Add(new DataPoint(4, 6));
-
-            plotModel.Series.Add(areaSeries);
-            plotView.Model = plotModel;
-
-            targetPanel.Controls.Add(plotView);
-        }
-
-
-
-
-        private void CreatePieChart(Panel targetPanel)
-        {
-            targetPanel.Controls.Clear();
-
-            var plotView = new PlotView { Dock = DockStyle.Fill };
-
-            var plotModel = new PlotModel
-            {
-                Title = "Colorful Pie Chart",
-                TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
-                Background = OxyColors.Transparent
-            };
-
-            var pieSeries = new PieSeries
-            {
-                StrokeThickness = 2.0,
-                AngleSpan = 360,
-                StartAngle = 0
-            };
-
-            pieSeries.Slices.Add(new PieSlice("Category A", 40) { IsExploded = true, Fill = OxyColors.Crimson });
-            pieSeries.Slices.Add(new PieSlice("Category B", 30) { IsExploded = true, Fill = OxyColors.MediumSeaGreen });
-            pieSeries.Slices.Add(new PieSlice("Category C", 20) { IsExploded = false, Fill = OxyColors.DodgerBlue });
-            pieSeries.Slices.Add(new PieSlice("Category D", 10) { IsExploded = false, Fill = OxyColors.Goldenrod });
-
-            plotModel.Series.Add(pieSeries);
-            plotView.Model = plotModel;
-
-            targetPanel.Controls.Add(plotView);
-        }
-
-
 
 
         private void Dashboard_Shown(object sender, EventArgs e)
-        { 
+        {
 
         }
+
+
+
+
+
     }
 }

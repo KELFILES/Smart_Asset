@@ -10,6 +10,7 @@ using ZXing.QrCode;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.Drawing.Drawing2D;
 
 namespace Smart_Asset
 {
@@ -161,7 +162,15 @@ namespace Smart_Asset
         {
             BtnName.Location = new Point((pnlName.Width - BtnName.Width) / 2, BtnName.Location.Y);
         }
-
+        public static void CenterInForm(Panel PnlName, Form frmName)
+        {
+            PnlName.Location = new Point((frmName.Width - PnlName.Width) / 2, PnlName.Location.Y);
+        }
+        public static void AlignToRightCorner(Panel pnlName, Form frmName)
+        {
+            // Set the panel's location to the right corner of the form
+            pnlName.Location = new Point(frmName.Width - pnlName.Width - 10, pnlName.Location.Y);
+        }
 
         public static void SaveExistingFileToComputer()
         {
@@ -196,6 +205,74 @@ namespace Smart_Asset
                 }
             }
         }
+
+
+        public static void ApplyGradient(Panel panel, Color color1, Color color2)
+        {
+            panel.Paint += (sender, e) =>
+            {
+                Rectangle rect = panel.ClientRectangle;
+
+                // Create a LinearGradientBrush with two colors
+                using (LinearGradientBrush brush = new LinearGradientBrush(rect, color1, color2, 90f))
+                {
+                    // Fill the Panel with the gradient
+                    e.Graphics.FillRectangle(brush, rect);
+                }
+            };
+
+            // Refresh the panel to trigger the Paint event
+            panel.Invalidate();
+        }
+
+
+        public static void CenterAlignPanelsHorizontally(Panel parentPanel, List<Panel> childPanels)
+        {
+            if (childPanels == null || childPanels.Count == 0) return;
+
+            int gap = 10; // Space between each panel
+
+            // Calculate the total width of all panels including the gaps
+            int totalWidth = childPanels.Sum(panel => panel.Width) + gap * (childPanels.Count - 1);
+
+            // Calculate the starting X position to center the panels horizontally
+            int startX = (parentPanel.Width - totalWidth) / 2;
+            int startY = (parentPanel.Height - childPanels[0].Height) / 2;
+
+            // Align the panels from left to right
+            int currentX = startX;
+
+            foreach (var panel in childPanels)
+            {
+                // Set the location of the current panel
+                panel.Location = new Point(currentX, startY);
+
+                // Move the X position for the next panel
+                currentX += panel.Width + gap;
+            }
+        }
+
+
+
+        public static void FitMonthCalendarToPanel(Panel pnlName, MonthCalendar monthCalendar)
+        {
+            // Define padding value
+            int padding = 5;
+
+            // Calculate the maximum width and height for the MonthCalendar
+            int maxWidth = pnlName.Width - (2 * padding);
+            int maxHeight = pnlName.Height - (2 * padding);
+
+            // Set the size of the MonthCalendar while ensuring it fits within the panel
+            monthCalendar.Width = maxWidth;
+            monthCalendar.Height = maxHeight;
+
+            // Center the MonthCalendar within the panel
+            monthCalendar.Left = (pnlName.Width - monthCalendar.Width) / 2;
+            monthCalendar.Top = (pnlName.Height - monthCalendar.Height) / 2;
+        }
+
+
 
 
     }

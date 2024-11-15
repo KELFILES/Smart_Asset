@@ -109,8 +109,8 @@ namespace Smart_Asset
             assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
             assets_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            replacement_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
-            replacement_Btn.Padding = new Padding(35, 0, 20, 0);
+            replaced_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
+            replaced_Btn.Padding = new Padding(35, 0, 20, 0);
 
             cleaning_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
             cleaning_Btn.Padding = new Padding(35, 0, 20, 0);
@@ -225,32 +225,6 @@ namespace Smart_Asset
             formName.Dock = DockStyle.Fill;
             mainPanel.Controls.Add(formName);
             formName.Show(); // Show the form after configuring
-        }
-
-
-
-        private void create_Btn_Click(object sender, EventArgs e)
-        {
-
-
-            #region NOTES
-            /*
-            INSTEAD NA GAWIN KO LAHAT GANITO GINAWA KO NA LANG METHOD PARA MAIKSI
-            hideSubMenu();
-
-            header_Lbl.Text = "ASSET MANAGEMENT: CREATE";
-
-            // Reuse or create a new instance of the form, and dispose of the current form in the mainPanel
-            DisposeCurrentFormInMainPanel();
-
-            cr = EnsureFormIsNotDisposed(ref cr);
-            cr.TopLevel = false;
-            cr.FormBorderStyle = FormBorderStyle.None;
-            cr.Dock = DockStyle.Fill;
-            mainPanel.Controls.Add(cr);
-            cr.Show();
-            */
-            #endregion
         }
 
         private void read_Btn_Click(object sender, EventArgs e)
@@ -624,12 +598,12 @@ namespace Smart_Asset
 
         private void repairingHardwares_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(replacement_Btn);
+            SubButtonEnterColor(replaced_Btn);
         }
 
         private void repairingHardwares_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(replacement_Btn);
+            SubButtonLeaveColor(replaced_Btn);
         }
 
         private void cleaning_Btn_MouseEnter(object sender, EventArgs e)
@@ -706,7 +680,7 @@ namespace Smart_Asset
             // Create a new instance of the 'Read' form
             rd = new Read();
 
-            showFormSelected(ref rd, "REPLACEMENT");
+            showFormSelected(ref rd, "REPLACED");
 
             // Trigger the replacement button click on the 'Read' form
             rd.replacement_Btn.PerformClick();
@@ -944,5 +918,16 @@ namespace Smart_Asset
 
         }
 
+        private void changePassword_Lbl_Click(object sender, EventArgs e)
+        {
+            ChangePassword cp = new ChangePassword();
+            cp.StartPosition = FormStartPosition.CenterScreen;
+            cp.Show();
+        }
+
+        private void header_Lbl_TextChanged(object sender, EventArgs e)
+        {
+            this.Text = header_Lbl.Text;
+        }
     }
 }

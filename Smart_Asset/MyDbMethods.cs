@@ -3019,8 +3019,8 @@ namespace Smart_Asset
                                 document[header] = value;
                             }
 
-                            document["Location"] = "Reserved_Hardwares";
-                            document["DocumentCreated"] = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+                            // Removed "Location" field as requested
+                            document["DateThisAdded"] = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
 
                             documents.Add(document);
                             if (!string.IsNullOrWhiteSpace(serialNo))
@@ -3042,6 +3042,7 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred during batch upload: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private static async Task<HashSet<string>> FetchExistingPropertyIDsAsync(IMongoCollection<BsonDocument> reservedHardwareCollection)
         {
@@ -3364,6 +3365,73 @@ namespace Smart_Asset
                 MessageBox.Show($"Error updating the password in the database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+        private static readonly HashSet<string> ExcludedCollections = new HashSet<string>
+        {
+            "Archive",
+            "Deployment_Unit_List",
+            "Type_List",
+            "Deployment_Location_List",
+            "Serial_List",
+            "Images",
+            "Users",
+            "CustomUsers_Permissions"
+        };
+
+        public static async Task<List<BsonDocument>> ReadAllDatabaseInBSON(string dbName)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            // Create a list to hold all documents from all collections
+            var allDocuments = new List<BsonDocument>();
+
+            // Get all collection names using IAsyncCursor and convert to a list
+            var collectionNamesCursor = await database.ListCollectionNamesAsync();
+            var collectionNames = await collectionNamesCursor.ToListAsync();
+
+            // Iterate over all collections, except the excluded ones
+            foreach (var collectionName in collectionNames)
+            {
+                if (ExcludedCollections.Contains(collectionName))
+                    continue;
+
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                // Retrieve all documents from the current collection asynchronously
+                var documents = await collection.Find(new BsonDocument()).ToListAsync();
+
+                // Add the collection name to each document and include required fields
+                foreach (var doc in documents)
+                {
+                    var resultDoc = new BsonDocument
+                    {
+                        { "_id", doc.GetValue("_id", BsonNull.Value) },
+                        { "Type", doc.GetValue("Type", BsonNull.Value) },
+                        { "Brand", doc.GetValue("Brand", BsonNull.Value) },
+                        { "Model", doc.GetValue("Model", BsonNull.Value) },
+                        { "PropertyID", doc.GetValue("PropertyID", BsonNull.Value) },
+                        { "SerialNo", doc.GetValue("SerialNo", BsonNull.Value) },
+                        { "PONumber", doc.GetValue("PONumber", BsonNull.Value) },
+                        { "SINumber", doc.GetValue("SINumber", BsonNull.Value) },
+                        { "Cost", doc.GetValue("Cost", BsonNull.Value) },
+                        { "Warranty", doc.GetValue("Warranty", BsonNull.Value) },
+                        { "Supplier", doc.GetValue("Supplier", BsonNull.Value) },
+                        { "PurchaseDate", doc.GetValue("PurchaseDate", BsonNull.Value) },
+                        { "DateThisAdded", doc.GetValue("DateThisAdded", BsonNull.Value) },
+                        { "CurrentLocation", collectionName }
+                    };
+
+                    allDocuments.Add(resultDoc);
+                }
+            }
+
+            return allDocuments;
+        }
+
 
 
 

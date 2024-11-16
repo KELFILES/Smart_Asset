@@ -95,7 +95,7 @@ namespace Smart_Asset
         public static int totalDisposed;
         public static int totalBorrowed;
         public static int totalReserved;
-        public static int totalArchived;
+        public static int totalArchive;
 
 
 
@@ -162,7 +162,7 @@ namespace Smart_Asset
             box7Title_Lbl.Text = "Archived";
             MyOtherMethods.CenterInPanel(box7Title_Lbl, panel12);
             box7Title_Lbl.Visible = true;
-            box7_Lbl.Text = Convert.ToString(totalArchived);
+            box7_Lbl.Text = Convert.ToString(totalArchive);
             MyOtherMethods.CenterInPanel(box7_Lbl, panel12);
             box7_Lbl.Visible = true;
 

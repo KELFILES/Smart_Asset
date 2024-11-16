@@ -25,7 +25,7 @@ namespace Smart_Asset
 
             // 0. All Assets (with Disposed_Hardwares)
             int totalAllAssetsCount = allDocuments.Count(doc =>
-                doc.GetValue("CurrentLocation", "").AsString != "Archived");
+                doc.GetValue("CurrentLocation", "").AsString != "Archive");
             Console.WriteLine($"All Assets (with Disposed_Hardwares): {totalAllAssetsCount}");
             Console.WriteLine(new string('-', 50));
 
@@ -35,7 +35,7 @@ namespace Smart_Asset
 
             // 1. Total Assets Count (Excluding "Archived" and "Disposed_Hardwares")
             int totalAssetsCount = allDocuments.Count(doc =>
-                doc.GetValue("CurrentLocation", "").AsString != "Archived" &&
+                doc.GetValue("CurrentLocation", "").AsString != "Archive" &&
                 doc.GetValue("CurrentLocation", "").AsString != "Disposed_Hardwares" &&
                 doc.GetValue("CurrentLocation", "").AsString != "Replacement");
             Console.WriteLine($"Total Assets Count (Excluding Archived and Disposed_Hardwares): {totalAssetsCount}");
@@ -80,7 +80,7 @@ namespace Smart_Asset
 
                 if (location.Equals("Archive"))
                 {
-                    Dashboard.totalArchived = locationCount;
+                    Dashboard.totalArchive = locationCount;
                 }
 
             }

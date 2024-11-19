@@ -3170,11 +3170,11 @@ namespace Smart_Asset
                 var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNoFrom);
                 await originalCollection.DeleteOneAsync(filter);
 
-                MessageBox.Show($"SerialNo '{serialNoFrom}' was successfully transferred to location '{targetLocation}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show($"SerialNo '{serialNoFrom}' was successfully transferred to location '{targetLocation}'.", "Transfer Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during transfer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show($"Error during transfer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -3371,7 +3371,6 @@ namespace Smart_Asset
 
         private static readonly HashSet<string> ExcludedCollections = new HashSet<string>
         {
-            "Archive",
             "Deployment_Unit_List",
             "Type_List",
             "Deployment_Location_List",
@@ -3429,7 +3428,16 @@ namespace Smart_Asset
                 }
             }
 
+            /*
+            // Print all documents in JSON format
+            foreach (var doc in allDocuments)
+            {
+                Console.WriteLine(doc.ToJson(new MongoDB.Bson.IO.JsonWriterSettings { Indent = true }));
+            }
+            */
+
             return allDocuments;
+
         }
 
 

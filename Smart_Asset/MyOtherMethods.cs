@@ -274,7 +274,6 @@ namespace Smart_Asset
 
 
 
-
     }
 }
     

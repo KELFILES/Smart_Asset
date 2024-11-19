@@ -258,6 +258,9 @@
     <None Update="Images\startup_Image.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\sti cover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\sti_Image.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

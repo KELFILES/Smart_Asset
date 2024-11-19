@@ -41,7 +41,7 @@
             backupAndRestoreData_Btn = new Button();
             createReport_Btn = new Button();
             ManageUsers_Btn = new Button();
-            artificialIntelligence_Btn = new Button();
+            aIChat_Btn = new Button();
             fileMaintenance_SubMenuPanel = new Panel();
             assetHistory_Btn = new Button();
             archived_Btn = new Button();
@@ -122,7 +122,7 @@
             panel5.Controls.Add(backupAndRestoreData_Btn);
             panel5.Controls.Add(createReport_Btn);
             panel5.Controls.Add(ManageUsers_Btn);
-            panel5.Controls.Add(artificialIntelligence_Btn);
+            panel5.Controls.Add(aIChat_Btn);
             panel5.Controls.Add(fileMaintenance_SubMenuPanel);
             panel5.Controls.Add(ManageAsset_Btn);
             panel5.Controls.Add(dashboard_Btn);
@@ -265,25 +265,25 @@
             ManageUsers_Btn.MouseEnter += ManageUsers_Btn_MouseEnter;
             ManageUsers_Btn.MouseLeave += ManageUsers_Btn_MouseLeave;
             // 
-            // artificialIntelligence_Btn
+            // aIChat_Btn
             // 
-            artificialIntelligence_Btn.Dock = DockStyle.Top;
-            artificialIntelligence_Btn.FlatAppearance.BorderSize = 0;
-            artificialIntelligence_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
-            artificialIntelligence_Btn.FlatStyle = FlatStyle.Flat;
-            artificialIntelligence_Btn.ForeColor = Color.Gainsboro;
-            artificialIntelligence_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            artificialIntelligence_Btn.Location = new Point(0, 412);
-            artificialIntelligence_Btn.Name = "artificialIntelligence_Btn";
-            artificialIntelligence_Btn.Padding = new Padding(10, 0, 0, 0);
-            artificialIntelligence_Btn.Size = new Size(246, 45);
-            artificialIntelligence_Btn.TabIndex = 36;
-            artificialIntelligence_Btn.Text = "AI Recommendation";
-            artificialIntelligence_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            artificialIntelligence_Btn.UseVisualStyleBackColor = true;
-            artificialIntelligence_Btn.Click += artificialIntelligence_Btn_Click_1;
-            artificialIntelligence_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
-            artificialIntelligence_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
+            aIChat_Btn.Dock = DockStyle.Top;
+            aIChat_Btn.FlatAppearance.BorderSize = 0;
+            aIChat_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            aIChat_Btn.FlatStyle = FlatStyle.Flat;
+            aIChat_Btn.ForeColor = Color.Gainsboro;
+            aIChat_Btn.ImageAlign = ContentAlignment.MiddleRight;
+            aIChat_Btn.Location = new Point(0, 412);
+            aIChat_Btn.Name = "aIChat_Btn";
+            aIChat_Btn.Padding = new Padding(10, 0, 0, 0);
+            aIChat_Btn.Size = new Size(246, 45);
+            aIChat_Btn.TabIndex = 36;
+            aIChat_Btn.Text = "AI Chat";
+            aIChat_Btn.TextAlign = ContentAlignment.MiddleLeft;
+            aIChat_Btn.UseVisualStyleBackColor = true;
+            aIChat_Btn.Click += artificialIntelligence_Btn_Click_1;
+            aIChat_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
+            aIChat_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
             // 
             // fileMaintenance_SubMenuPanel
             // 
@@ -621,9 +621,8 @@
         private Panel logo_Panel;
         private Panel panel5;
         private Panel fileMaintenance_SubMenuPanel;
-        private Button ManageAsset_Btn;
         private Button dashboard_Btn;
-        private Button artificialIntelligence_Btn;
+        private Button aIChat_Btn;
         private Button qmark_Btn;
         private Panel mainPanel;
         private PictureBox pictureBox1;
@@ -647,6 +646,7 @@
         private Button disposed_Btn;
         private Button replaced_Btn;
         private Button cleaning_Btn;
-        private Button assets_Btn;
+        public Button assets_Btn;
+        public Button ManageAsset_Btn;
     }
 }

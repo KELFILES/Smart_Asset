@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OxyPlot.Legends;
 
 namespace Smart_Asset
 {
@@ -78,10 +79,11 @@ namespace Smart_Asset
 
             var plotModel = new PlotModel
             {
-                Title = "Dynamic Colorful Bar Chart",
+                Title = "Top 5 Most Expensive Assets",
                 TitleFontSize = 20,
                 TitleColor = OxyColors.White,
-                Background = OxyColors.Black
+                Background = OxyColors.Black,
+                TitlePadding = 40 // Adjust this value to manually center the title
             };
 
             // Ensure the number of categories and values match
@@ -109,8 +111,8 @@ namespace Smart_Asset
             {
                 Position = AxisPosition.Bottom,
                 Minimum = 0,
-                Maximum = values.Max() + 10, // Set maximum based on the highest value
-                Title = "Values",
+                Maximum = values.Max() + 10,
+                Title = "Price (₱)",
                 AxislineColor = OxyColors.Magenta,
                 AxislineThickness = 2,
                 TextColor = OxyColors.White,
@@ -124,21 +126,25 @@ namespace Smart_Asset
             var barSeries = new BarSeries
             {
                 LabelPlacement = LabelPlacement.Inside,
-                LabelFormatString = "{0:.0}",
+                LabelFormatString = "₱{0:N2}", // Use Peso sign with two decimal places
                 StrokeColor = OxyColors.White,
                 StrokeThickness = 1
             };
 
-            // Default colors if none are provided
+            // Use the provided colors or default to a repeating color pattern
             if (colors == null || colors.Count < values.Count)
             {
                 colors = Enumerable.Repeat(OxyColors.SteelBlue, values.Count).ToList();
+            }
+            else
+            {
+                colors = colors.Take(values.Count).ToList();
             }
 
             // Add bars to the series
             for (int i = 0; i < values.Count; i++)
             {
-                var barColor = i < colors.Count ? colors[i] : OxyColors.SteelBlue;
+                var barColor = colors[i];
                 barSeries.Items.Add(new BarItem { Value = values[i], Color = barColor });
             }
 
@@ -148,6 +154,7 @@ namespace Smart_Asset
             // Add the plot view to the target panel
             targetPanel.Controls.Add(plotView);
         }
+
 
 
         public static void CreateScatterPlot(Panel targetPanel)
@@ -206,7 +213,7 @@ namespace Smart_Asset
 
 
 
-        public static void CreateAreaChart(Panel targetPanel)
+        public static void CreateAreaChart(Panel targetPanel, int[] monthlyPurchaseCounts, int currentMonth)
         {
             targetPanel.Controls.Clear();
 
@@ -214,67 +221,89 @@ namespace Smart_Asset
 
             var plotModel = new PlotModel
             {
-                Title = "Area Chart Example",
+                Title = $"Monthly Asset Purchases for {DateTime.Now.Year}",
                 TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
+                TitleColor = OxyColors.White,
                 Background = OxyColors.Transparent
             };
 
-            plotModel.Axes.Add(new LinearAxis
+            // Define the list of abbreviated month names (Jan, Feb, etc.)
+            var monthNames = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+            // X Axis (Category Axis for Months)
+            plotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Bottom,
-                Title = "X Axis",
-                AxislineColor = OxyColors.Cyan, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
+                Title = "Month",
+                AxislineColor = OxyColors.Cyan,
+                AxislineThickness = 2,
+                TextColor = OxyColors.White,
+                ItemsSource = monthNames.Take(currentMonth).ToList(), // Use only up to the current month
+                IsPanEnabled = false, // Disable panning to prevent disappearance during scrolling
+                IsZoomEnabled = false // Disable zooming for better stability
             });
 
+            // Y Axis (Linear Axis for Purchase Counts)
             plotModel.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-                Title = "Y Axis",
-                AxislineColor = OxyColors.Magenta, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
+                Title = "Purchases",
+                AxislineColor = OxyColors.Magenta,
+                AxislineThickness = 2,
+                TextColor = OxyColors.White,
+                MinimumPadding = 0.1,
+                MaximumPadding = 0.1
             });
 
+            // Area Series for Monthly Purchases Data
             var areaSeries = new AreaSeries
             {
-                Title = "Data Series",
+                Title = "Monthly Purchases",
                 Color = OxyColor.FromAColor(200, OxyColors.LightSeaGreen),
                 StrokeThickness = 2,
-                MarkerType = MarkerType.Triangle,
+                MarkerType = MarkerType.Circle,
                 MarkerSize = 6,
                 MarkerFill = OxyColors.Teal,
                 MarkerStroke = OxyColors.DarkSlateGray
             };
 
-            areaSeries.Points.Add(new DataPoint(0, 0));
-            areaSeries.Points.Add(new DataPoint(1, 2));
-            areaSeries.Points.Add(new DataPoint(2, 5));
-            areaSeries.Points.Add(new DataPoint(3, 3));
-            areaSeries.Points.Add(new DataPoint(4, 6));
+            // Add data points to the area series
+            for (int month = 0; month < currentMonth; month++)
+            {
+                areaSeries.Points.Add(new DataPoint(month, monthlyPurchaseCounts[month]));
+            }
 
+            // Add the area series to the plot model
             plotModel.Series.Add(areaSeries);
             plotView.Model = plotModel;
 
+            // Add the plot view to the target panel
             targetPanel.Controls.Add(plotView);
         }
 
 
 
-
-        public static void CreatePieChart(Panel targetPanel)
+        public static void CreatePieChart(Panel targetPanel, Dictionary<string, int> assetCounts)
         {
             targetPanel.Controls.Clear();
 
             var plotView = new PlotView { Dock = DockStyle.Fill };
 
+            // Sort and take only the top 10 asset types
+            var sortedAssetCounts = assetCounts
+                .OrderByDescending(kv => kv.Value)
+                .Take(10)
+                .ToList();
+
+            // Determine the number of slices (flexible up to 10)
+            int sliceCount = sortedAssetCounts.Count;
+            string title = $"Top {sliceCount} Asset Counts by Type";
+
             var plotModel = new PlotModel
             {
-                Title = "Colorful Pie Chart",
+                Title = title,
                 TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
+                TitleColor = OxyColors.White,
                 Background = OxyColors.Transparent
             };
 
@@ -282,18 +311,53 @@ namespace Smart_Asset
             {
                 StrokeThickness = 2.0,
                 AngleSpan = 360,
-                StartAngle = 0
+                StartAngle = 0,
+                FontSize = 14,
+                ExplodedDistance = 0, // Remove explosion effect to reduce space between slices
+                TextColor = OxyColors.White // Set label text color to white
             };
 
-            pieSeries.Slices.Add(new PieSlice("Category A", 40) { IsExploded = true, Fill = OxyColors.Crimson });
-            pieSeries.Slices.Add(new PieSlice("Category B", 30) { IsExploded = true, Fill = OxyColors.MediumSeaGreen });
-            pieSeries.Slices.Add(new PieSlice("Category C", 20) { IsExploded = false, Fill = OxyColors.DodgerBlue });
-            pieSeries.Slices.Add(new PieSlice("Category D", 10) { IsExploded = false, Fill = OxyColors.Goldenrod });
+            // Define colors for the slices
+            List<OxyColor> colors = new List<OxyColor>
+            {
+                OxyColors.Crimson,
+                OxyColors.MediumSeaGreen,
+                OxyColors.DodgerBlue,
+                OxyColors.Goldenrod,
+                OxyColors.Purple,
+                OxyColors.OrangeRed,
+                OxyColors.Teal,
+                OxyColors.Violet,
+                OxyColors.SkyBlue,
+                OxyColors.DarkCyan
+            };
+
+            // Add slices for each asset type
+            for (int i = 0; i < sliceCount; i++)
+            {
+                var assetType = sortedAssetCounts[i].Key;
+                var count = sortedAssetCounts[i].Value;
+
+                pieSeries.Slices.Add(new PieSlice(assetType, count)
+                {
+                    IsExploded = false,
+                    Fill = colors[i % colors.Count]
+                });
+            }
+
+            // Configure legend manually using Legend properties
+            plotModel.Legends.Add(new Legend
+            {
+                LegendPosition = LegendPosition.RightTop,
+                LegendTextColor = OxyColors.White,
+                LegendFontSize = 14
+            });
 
             plotModel.Series.Add(pieSeries);
             plotView.Model = plotModel;
 
             targetPanel.Controls.Add(plotView);
         }
+
     }
 }

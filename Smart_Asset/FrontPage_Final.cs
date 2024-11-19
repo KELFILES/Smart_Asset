@@ -35,10 +35,28 @@ namespace Smart_Asset
 
             StaticUserID = userID_Lbl;
             StaticAsset = assets_Btn;
+            StaticName = name_Lbl;
+            StaticManageAsset = ManageAsset_Btn;
+            StaticCleaning = cleaning_Btn;
+            StaticReplaced = replaced_Btn;
+            StaticDisposed = disposed_Btn;
+            StaticBorrowed = borrowed_Btn;
+            StaticReserved = reserved_Btn;
+            StaticArchived = archived_Btn;
+
+
         }
         //STATIC
         public static Label StaticUserID;
         public static Button StaticAsset;
+        public static Label StaticName;
+        public static Button StaticManageAsset;
+        public static Button StaticCleaning;
+        public static Button StaticReplaced;
+        public static Button StaticDisposed;
+        public static Button StaticBorrowed;
+        public static Button StaticReserved;
+        public static Button StaticArchived;
 
 
         // Enable double buffering for the entire form
@@ -101,7 +119,6 @@ namespace Smart_Asset
 
             this.WindowState = FormWindowState.Maximized;
 
-
             //SET BUTTONS ICON IMAGE
             dashboard_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
             dashboard_Btn.Padding = new Padding(10, 0, 20, 0);
@@ -130,8 +147,8 @@ namespace Smart_Asset
             reserved_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
             reserved_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            artificialIntelligence_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
-            artificialIntelligence_Btn.Padding = new Padding(10, 0, 20, 0);
+            aIChat_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
+            aIChat_Btn.Padding = new Padding(10, 0, 20, 0);
 
             ManageUsers_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "manageUsers_Icon.ico"));
             ManageUsers_Btn.Padding = new Padding(10, 0, 20, 0);
@@ -354,12 +371,12 @@ namespace Smart_Asset
 
         private void artificialIntelligence_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(artificialIntelligence_Btn);
+            ButtonEnterColor(aIChat_Btn);
         }
 
         private void artificialIntelligence_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(artificialIntelligence_Btn);
+            ButtonLeaveColor(aIChat_Btn);
         }
 
         private void questionMark_Btn_Click(object sender, EventArgs e)

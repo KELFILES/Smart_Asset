@@ -15,6 +15,7 @@ using Microsoft.Office.Interop.Word;
 using Microsoft.Office.Interop.Outlook;
 using MigraDoc.DocumentObjectModel.Internals;
 using MigraDoc.DocumentObjectModel;
+using System.Security.Policy;
 
 
 namespace Smart_Asset
@@ -32,7 +33,25 @@ namespace Smart_Asset
                           ControlStyles.UserPaint |
                           ControlStyles.AllPaintingInWmPaint, true);
             this.UpdateStyles();
+
+            //static FIELDS
+            staticLeftGraphPanel = leftGraph_Pnl;
+            staticCenterGraphPanel = centerGraph_Pnl;
+            staticRightGraphPanel = rightGraph_Pnl;
         }
+
+        //STATIC FIELDS
+        public static int totalAllAssets;
+        public static int totalWorkingAssets;
+        public static int totalCleaning;
+        public static int totalReplaced;
+        public static int totalDisposed;
+        public static int totalBorrowed;
+        public static int totalReserved;
+        public static int totalArchive;
+        public static Panel staticLeftGraphPanel;
+        public static Panel staticCenterGraphPanel;
+        public static Panel staticRightGraphPanel;
 
         // Alternatively, override CreateParams to enable double buffering
         protected override CreateParams CreateParams
@@ -57,7 +76,6 @@ namespace Smart_Asset
             var retrievedDbData = await MyDbMethods.ReadAllDatabaseInBSON("SmartAssetDb");
             DataRetriever.SummarizeData(retrievedDbData);
 
-
             loadAllData();
 
             //MyOtherMethods.ShowCalendarAtCenter(panel3);
@@ -71,10 +89,13 @@ namespace Smart_Asset
             List<Panel> panels = new List<Panel> { panel9, panel21, panel19, panel17, panel15, panel14, panel10, panel12 };
             MyOtherMethods.CenterAlignPanelsHorizontally(panel16, panels);
 
-            List<Panel> panels_Graph = new List<Panel> { leftGraph_Pnl, centerGraph_Pnl, rightGraph_Pnl};
+            List<Panel> panels_Graph = new List<Panel> { leftGraph_Pnl, centerGraph_Pnl, rightGraph_Pnl };
             MyOtherMethods.CenterAlignPanelsHorizontally(panel2, panels_Graph);
 
             MyOtherMethods.FitMonthCalendarToPanel(panel3, monthCalendar1);
+
+
+            topName_Lbl.Text = FrontPage_Final.StaticName.Text;
         }
 
         private void Dashboard_SizeChanged(object sender, EventArgs e)
@@ -87,15 +108,9 @@ namespace Smart_Asset
         }
 
 
-        //STATIC FIELDS
-        public static int totalAllAssets;
-        public static int totalWorkingAssets;
-        public static int totalCleaning;
-        public static int totalReplaced;
-        public static int totalDisposed;
-        public static int totalBorrowed;
-        public static int totalReserved;
-        public static int totalArchive;
+
+
+
 
 
 
@@ -165,28 +180,6 @@ namespace Smart_Asset
             box7_Lbl.Text = Convert.ToString(totalArchive);
             MyOtherMethods.CenterInPanel(box7_Lbl, panel12);
             box7_Lbl.Visible = true;
-
-
-
-            //VALUES FOR CreateBarChart
-            List<string> categories = new List<string> { "Category A", "Category B", "Category C", "Category D", "Category E" };
-            List<double> values = new List<double> { 25, 60, 45, 80, 55 };
-            List<OxyColor> colors = new List<OxyColor>
-            {
-                OxyColor.FromRgb(255, 128, 0),  // Orange
-                OxyColor.FromRgb(0, 204, 102),  // Green
-                OxyColor.FromRgb(51, 153, 255), // Blue
-                OxyColor.FromRgb(204, 51, 255), // Purple
-                OxyColor.FromRgb(255, 51, 51)   // Red
-            };
-            Graphs.CreateBarChart(leftGraph_Pnl, categories, values, colors);
-
-
-
-
-            Graphs.CreatePieChart(rightGraph_Pnl);
-            Graphs.CreateAreaChart(centerGraph_Pnl);
-
         }
 
 
@@ -195,9 +188,196 @@ namespace Smart_Asset
 
         }
 
+        private void panel9_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
 
+        private void box0Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
 
+        private void box0_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
 
+        private void box0_Pb_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
 
+        private void panel21_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
+
+        private void box1_Pb_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
+
+        private void box1Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
+
+        private void box1_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticAsset.PerformClick();
+        }
+
+        private void panel19_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticCleaning.PerformClick();
+        }
+
+        private void box2Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticCleaning.PerformClick();
+        }
+
+        private void box2_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticCleaning.PerformClick();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticCleaning.PerformClick();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReplaced.PerformClick();
+        }
+
+        private void box3Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReplaced.PerformClick();
+        }
+
+        private void box3_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReplaced.PerformClick();
+        }
+
+        private void panel17_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReplaced.PerformClick();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticDisposed.PerformClick();
+        }
+
+        private void box4Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticDisposed.PerformClick();
+        }
+
+        private void box4_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticDisposed.PerformClick();
+        }
+
+        private void panel15_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticDisposed.PerformClick();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticBorrowed.PerformClick();
+        }
+
+        private void box5Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticBorrowed.PerformClick();
+        }
+
+        private void box5_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticBorrowed.PerformClick();
+        }
+
+        private void panel14_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticBorrowed.PerformClick();
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReserved.PerformClick();
+        }
+
+        private void box6Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReserved.PerformClick();
+        }
+
+        private void box6_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReserved.PerformClick();
+        }
+
+        private void panel10_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticReserved.PerformClick();
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticArchived.PerformClick();
+        }
+
+        private void box7Title_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticArchived.PerformClick();
+        }
+
+        private void box7_Lbl_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticArchived.PerformClick();
+        }
+
+        private void panel12_Click(object sender, EventArgs e)
+        {
+            FrontPage_Final.StaticManageAsset.PerformClick();
+            FrontPage_Final.StaticArchived.PerformClick();
+        }
     }
 }

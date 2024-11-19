@@ -27,7 +27,7 @@ namespace Smart_Asset
             // 0. All Assets (with Disposed_Hardwares)
             int totalAllAssetsCount = allDocuments.Count(doc =>
                 doc.GetValue("CurrentLocation", "").AsString != "Archive");
-            Console.WriteLine($"All Assets (with Disposed_Hardwares): {totalAllAssetsCount}");
+            Console.WriteLine($"All Assets (Including Disposed_Hardwares): {totalAllAssetsCount}");
             Console.WriteLine(new string('-', 50));
 
             // SET DASHBOARD TOTAL ASSETS
@@ -46,45 +46,53 @@ namespace Smart_Asset
             Dashboard.totalWorkingAssets = totalAssetsCount;
 
             // 2. Count of Assets by CurrentLocation
-            var locations = new[] { "Cleaning", "Replacement", "Disposed_Hardwares", "Borrowed", "Reserved_Hardwares", "Archive" };
+            var predefinedLocations = new[] { "Cleaning", "Replacement", "Disposed_Hardwares", "Borrowed", "Reserved_Hardwares", "Archive" };
             Console.WriteLine("Count of Assets by CurrentLocation:");
-            foreach (var location in locations)
+
+            // First, display counts for predefined locations
+            foreach (var location in predefinedLocations)
             {
                 int locationCount = allDocuments.Count(doc => doc.GetValue("CurrentLocation", "").AsString == location);
                 Console.WriteLine($"{location}: {locationCount}");
 
-                if (location.Equals("Cleaning"))
+                // Update dashboard values for predefined locations
+                switch (location)
                 {
-                    Dashboard.totalCleaning = locationCount;
+                    case "Cleaning":
+                        Dashboard.totalCleaning = locationCount;
+                        break;
+                    case "Replacement":
+                        Dashboard.totalReplaced = locationCount;
+                        break;
+                    case "Disposed_Hardwares":
+                        Dashboard.totalDisposed = locationCount;
+                        break;
+                    case "Borrowed":
+                        Dashboard.totalBorrowed = locationCount;
+                        break;
+                    case "Reserved_Hardwares":
+                        Dashboard.totalReserved = locationCount;
+                        break;
+                    case "Archive":
+                        Dashboard.totalArchive = locationCount;
+                        break;
                 }
-
-                //This is Replaced 
-                if (location.Equals("Replacement"))
-                {
-                    Dashboard.totalReplaced = locationCount;
-                }
-
-                if (location.Equals("Disposed_Hardwares"))
-                {
-                    Dashboard.totalDisposed = locationCount;
-                }
-
-                if(location.Equals("Borrowed"))
-                {
-                    Dashboard.totalBorrowed = locationCount;
-                }
-
-                if (location.Equals("Reserved_Hardwares"))
-                {
-                    Dashboard.totalReserved = locationCount;
-                }
-
-                if (location.Equals("Archive"))
-                {
-                    Dashboard.totalArchive = locationCount;
-                }
-
             }
+
+            // Get all unique CurrentLocation values excluding predefined locations
+            var otherLocations = allDocuments
+                .Select(doc => doc.GetValue("CurrentLocation", "").AsString)
+                .Distinct()
+                .Except(predefinedLocations)
+                .ToList();
+
+            // Display counts for other locations
+            foreach (var location in otherLocations)
+            {
+                int locationCount = allDocuments.Count(doc => doc.GetValue("CurrentLocation", "").AsString == location);
+                Console.WriteLine($"{location}: {locationCount}");
+            }
+
             Console.WriteLine(new string('-', 50));
 
 
@@ -169,7 +177,7 @@ namespace Smart_Asset
                 .ToDictionary(g => g.Key, g => g.Count());
 
             // Display the counts in the console
-            Console.WriteLine("Top Asset Counts by Type (Excluding Archive, Disposed_Hardwares, and Replacement):");
+            Console.WriteLine("Top Working Asset Counts by Type (Excluding Archive, Disposed_Hardwares, and Replacement):");
             foreach (var type in assetCounts)
             {
                 Console.WriteLine($"{type.Key}: {type.Value}");

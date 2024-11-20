@@ -39,7 +39,6 @@
             panel1 = new Panel();
             panel2 = new Panel();
             panel8 = new Panel();
-            hideColumn_Btn = new Button();
             button1 = new Button();
             add_Btn = new Button();
             panel7 = new Panel();
@@ -64,6 +63,7 @@
             archive_Btn = new Button();
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
+            generateQr_Btn = new Button();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
@@ -208,7 +208,7 @@
             // panel8
             // 
             panel8.BackColor = Color.FromArgb(60, 76, 102);
-            panel8.Controls.Add(hideColumn_Btn);
+            panel8.Controls.Add(generateQr_Btn);
             panel8.Controls.Add(button1);
             panel8.Controls.Add(add_Btn);
             panel8.Dock = DockStyle.Left;
@@ -217,21 +217,6 @@
             panel8.Size = new Size(189, 134);
             panel8.TabIndex = 35;
             // 
-            // hideColumn_Btn
-            // 
-            hideColumn_Btn.Anchor = AnchorStyles.Right;
-            hideColumn_Btn.BackColor = Color.RoyalBlue;
-            hideColumn_Btn.FlatStyle = FlatStyle.Flat;
-            hideColumn_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            hideColumn_Btn.ForeColor = Color.White;
-            hideColumn_Btn.Location = new Point(32, 87);
-            hideColumn_Btn.Name = "hideColumn_Btn";
-            hideColumn_Btn.Size = new Size(126, 32);
-            hideColumn_Btn.TabIndex = 15;
-            hideColumn_Btn.Text = "Hide Column";
-            hideColumn_Btn.UseVisualStyleBackColor = false;
-            hideColumn_Btn.Click += hideColumn_Btn_Click;
-            // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Right;
@@ -239,7 +224,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(32, 49);
+            button1.Location = new Point(31, 49);
             button1.Name = "button1";
             button1.Size = new Size(126, 32);
             button1.TabIndex = 14;
@@ -254,7 +239,7 @@
             add_Btn.FlatStyle = FlatStyle.Flat;
             add_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             add_Btn.ForeColor = Color.White;
-            add_Btn.Location = new Point(32, 12);
+            add_Btn.Location = new Point(31, 12);
             add_Btn.Name = "add_Btn";
             add_Btn.Size = new Size(126, 32);
             add_Btn.TabIndex = 13;
@@ -566,6 +551,21 @@
             reservedHardwares_Btn.UseVisualStyleBackColor = false;
             reservedHardwares_Btn.Click += reservedHardwares_Btn_Click_1;
             // 
+            // generateQr_Btn
+            // 
+            generateQr_Btn.Anchor = AnchorStyles.Right;
+            generateQr_Btn.BackColor = Color.RoyalBlue;
+            generateQr_Btn.FlatStyle = FlatStyle.Flat;
+            generateQr_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            generateQr_Btn.ForeColor = Color.White;
+            generateQr_Btn.Location = new Point(31, 87);
+            generateQr_Btn.Name = "generateQr_Btn";
+            generateQr_Btn.Size = new Size(126, 32);
+            generateQr_Btn.TabIndex = 15;
+            generateQr_Btn.Text = "Generate QR";
+            generateQr_Btn.UseVisualStyleBackColor = false;
+            generateQr_Btn.Click += generateQr_Btn_Click;
+            // 
             // Read
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -627,6 +627,6 @@
         public Panel panel8;
         private Panel panel10;
         private Button button1;
-        private Button hideColumn_Btn;
+        private Button generateQr_Btn;
     }
 }

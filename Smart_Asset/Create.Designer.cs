@@ -132,6 +132,7 @@
             serial2_Cb.Name = "serial2_Cb";
             serial2_Cb.Size = new Size(303, 23);
             serial2_Cb.TabIndex = 27;
+            serial2_Cb.Enter += serial2_Cb_Enter;
             serial2_Cb.KeyPress += serial2_Cb_KeyPress;
             serial2_Cb.MouseEnter += serial2_Cb_MouseEnter;
             // 
@@ -144,6 +145,7 @@
             button3.TabIndex = 26;
             button3.Text = "SAVE";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // generate_Btn
             // 

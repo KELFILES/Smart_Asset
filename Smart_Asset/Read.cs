@@ -329,7 +329,7 @@ namespace Smart_Asset
             Cursor = Cursors.Arrow;
 
             // Insert "N/A" at the first position
-            location_Cmb.Items.Insert(0, "N/A");
+            //location_Cmb.Items.Insert(0, "N/A");
         }
 
         private async void unit_Cmb_DropDown_1(object sender, EventArgs e)
@@ -342,7 +342,7 @@ namespace Smart_Asset
             Cursor = Cursors.Arrow;
 
             // Insert "N/A" at the first position
-            unit_Cmb.Items.Insert(0, "N/A");
+            //unit_Cmb.Items.Insert(0, "N/A");
         }
 
         private void serialNo_Cmb_MouseEnter(object sender, EventArgs e)
@@ -841,7 +841,7 @@ namespace Smart_Asset
             Cursor = Cursors.Arrow;
 
             // Insert "N/A" at the first position
-            type_Cmb.Items.Insert(0, "N/A");
+            //type_Cmb.Items.Insert(0, "N/A");
 
 
         }
@@ -1299,9 +1299,14 @@ namespace Smart_Asset
 
         private void hideColumn_Btn_Click(object sender, EventArgs e)
         {
-            s1.Reload();
-            HideColumn hc = new HideColumn();
-            hc.Show();
+
+        }
+
+        private void generateQr_Btn_Click(object sender, EventArgs e)
+        {
+            GenerateQR gqr = new GenerateQR();
+            gqr.StartPosition = FormStartPosition.CenterScreen;
+            gqr.Show();
         }
     }
 }

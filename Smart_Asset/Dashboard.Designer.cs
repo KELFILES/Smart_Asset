@@ -41,27 +41,27 @@
             box0Title_Lbl = new Label();
             box0_Lbl = new Label();
             panel12 = new Panel();
-            pictureBox6 = new PictureBox();
+            box7_Pb = new PictureBox();
             box7Title_Lbl = new Label();
             box7_Lbl = new Label();
             panel10 = new Panel();
-            pictureBox5 = new PictureBox();
+            box6_Pb = new PictureBox();
             box6Title_Lbl = new Label();
             box6_Lbl = new Label();
             panel14 = new Panel();
-            pictureBox4 = new PictureBox();
+            box5_Pb = new PictureBox();
             box5Title_Lbl = new Label();
             box5_Lbl = new Label();
             panel15 = new Panel();
-            pictureBox3 = new PictureBox();
+            box4_Pb = new PictureBox();
             box4Title_Lbl = new Label();
             box4_Lbl = new Label();
             panel17 = new Panel();
-            pictureBox2 = new PictureBox();
+            box3_Pb = new PictureBox();
             box3Title_Lbl = new Label();
             box3_Lbl = new Label();
             panel19 = new Panel();
-            pictureBox1 = new PictureBox();
+            box2_Pb = new PictureBox();
             box2Title_Lbl = new Label();
             box2_Lbl = new Label();
             panel21 = new Panel();
@@ -85,17 +85,17 @@
             panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)box0_Pb).BeginInit();
             panel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)box7_Pb).BeginInit();
             panel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)box6_Pb).BeginInit();
             panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)box5_Pb).BeginInit();
             panel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)box4_Pb).BeginInit();
             panel17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)box3_Pb).BeginInit();
             panel19.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)box2_Pb).BeginInit();
             panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)box1_Pb).BeginInit();
             panel2.SuspendLayout();
@@ -198,6 +198,7 @@
             box0_Pb.Location = new Point(59, 17);
             box0_Pb.Name = "box0_Pb";
             box0_Pb.Size = new Size(54, 44);
+            box0_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
             box0_Pb.TabIndex = 2;
             box0_Pb.TabStop = false;
             box0_Pb.Click += box0_Pb_Click;
@@ -231,7 +232,7 @@
             // panel12
             // 
             panel12.BackColor = Color.FromArgb(249, 147, 73);
-            panel12.Controls.Add(pictureBox6);
+            panel12.Controls.Add(box7_Pb);
             panel12.Controls.Add(box7Title_Lbl);
             panel12.Controls.Add(box7_Lbl);
             panel12.Cursor = Cursors.Hand;
@@ -241,15 +242,16 @@
             panel12.TabIndex = 47;
             panel12.Click += panel12_Click;
             // 
-            // pictureBox6
+            // box7_Pb
             // 
-            pictureBox6.Cursor = Cursors.Hand;
-            pictureBox6.Location = new Point(58, 17);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(54, 44);
-            pictureBox6.TabIndex = 8;
-            pictureBox6.TabStop = false;
-            pictureBox6.Click += pictureBox6_Click;
+            box7_Pb.Cursor = Cursors.Hand;
+            box7_Pb.Location = new Point(58, 17);
+            box7_Pb.Name = "box7_Pb";
+            box7_Pb.Size = new Size(54, 44);
+            box7_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            box7_Pb.TabIndex = 8;
+            box7_Pb.TabStop = false;
+            box7_Pb.Click += pictureBox6_Click;
             // 
             // box7Title_Lbl
             // 
@@ -280,8 +282,8 @@
             // 
             // panel10
             // 
-            panel10.BackColor = Color.FromArgb(140, 73, 212);
-            panel10.Controls.Add(pictureBox5);
+            panel10.BackColor = Color.FromArgb(220, 59, 174);
+            panel10.Controls.Add(box6_Pb);
             panel10.Controls.Add(box6Title_Lbl);
             panel10.Controls.Add(box6_Lbl);
             panel10.Cursor = Cursors.Hand;
@@ -291,15 +293,16 @@
             panel10.TabIndex = 48;
             panel10.Click += panel10_Click;
             // 
-            // pictureBox5
+            // box6_Pb
             // 
-            pictureBox5.Cursor = Cursors.Hand;
-            pictureBox5.Location = new Point(59, 17);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(54, 44);
-            pictureBox5.TabIndex = 7;
-            pictureBox5.TabStop = false;
-            pictureBox5.Click += pictureBox5_Click;
+            box6_Pb.Cursor = Cursors.Hand;
+            box6_Pb.Location = new Point(59, 17);
+            box6_Pb.Name = "box6_Pb";
+            box6_Pb.Size = new Size(54, 44);
+            box6_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            box6_Pb.TabIndex = 7;
+            box6_Pb.TabStop = false;
+            box6_Pb.Click += pictureBox5_Click;
             // 
             // box6Title_Lbl
             // 
@@ -331,8 +334,8 @@
             // 
             // panel14
             // 
-            panel14.BackColor = Color.FromArgb(220, 59, 174);
-            panel14.Controls.Add(pictureBox4);
+            panel14.BackColor = Color.FromArgb(255, 185, 0);
+            panel14.Controls.Add(box5_Pb);
             panel14.Controls.Add(box5Title_Lbl);
             panel14.Controls.Add(box5_Lbl);
             panel14.Cursor = Cursors.Hand;
@@ -342,15 +345,16 @@
             panel14.TabIndex = 49;
             panel14.Click += panel14_Click;
             // 
-            // pictureBox4
+            // box5_Pb
             // 
-            pictureBox4.Cursor = Cursors.Hand;
-            pictureBox4.Location = new Point(57, 17);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(54, 44);
-            pictureBox4.TabIndex = 6;
-            pictureBox4.TabStop = false;
-            pictureBox4.Click += pictureBox4_Click;
+            box5_Pb.Cursor = Cursors.Hand;
+            box5_Pb.Location = new Point(57, 17);
+            box5_Pb.Name = "box5_Pb";
+            box5_Pb.Size = new Size(54, 44);
+            box5_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            box5_Pb.TabIndex = 6;
+            box5_Pb.TabStop = false;
+            box5_Pb.Click += pictureBox4_Click;
             // 
             // box5Title_Lbl
             // 
@@ -383,7 +387,7 @@
             // panel15
             // 
             panel15.BackColor = Color.FromArgb(142, 126, 253);
-            panel15.Controls.Add(pictureBox3);
+            panel15.Controls.Add(box4_Pb);
             panel15.Controls.Add(box4Title_Lbl);
             panel15.Controls.Add(box4_Lbl);
             panel15.Cursor = Cursors.Hand;
@@ -393,15 +397,16 @@
             panel15.TabIndex = 50;
             panel15.Click += panel15_Click;
             // 
-            // pictureBox3
+            // box4_Pb
             // 
-            pictureBox3.Cursor = Cursors.Hand;
-            pictureBox3.Location = new Point(53, 17);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(54, 44);
-            pictureBox3.TabIndex = 5;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
+            box4_Pb.Cursor = Cursors.Hand;
+            box4_Pb.Location = new Point(53, 17);
+            box4_Pb.Name = "box4_Pb";
+            box4_Pb.Size = new Size(54, 44);
+            box4_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            box4_Pb.TabIndex = 5;
+            box4_Pb.TabStop = false;
+            box4_Pb.Click += pictureBox3_Click;
             // 
             // box4Title_Lbl
             // 
@@ -433,8 +438,8 @@
             // 
             // panel17
             // 
-            panel17.BackColor = Color.FromArgb(255, 185, 0);
-            panel17.Controls.Add(pictureBox2);
+            panel17.BackColor = Color.FromArgb(140, 73, 212);
+            panel17.Controls.Add(box3_Pb);
             panel17.Controls.Add(box3Title_Lbl);
             panel17.Controls.Add(box3_Lbl);
             panel17.Cursor = Cursors.Hand;
@@ -444,15 +449,16 @@
             panel17.TabIndex = 51;
             panel17.Click += panel17_Click;
             // 
-            // pictureBox2
+            // box3_Pb
             // 
-            pictureBox2.Cursor = Cursors.Hand;
-            pictureBox2.Location = new Point(56, 17);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(54, 44);
-            pictureBox2.TabIndex = 5;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            box3_Pb.Cursor = Cursors.Hand;
+            box3_Pb.Location = new Point(56, 17);
+            box3_Pb.Name = "box3_Pb";
+            box3_Pb.Size = new Size(54, 44);
+            box3_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            box3_Pb.TabIndex = 5;
+            box3_Pb.TabStop = false;
+            box3_Pb.Click += pictureBox2_Click;
             // 
             // box3Title_Lbl
             // 
@@ -485,7 +491,7 @@
             // panel19
             // 
             panel19.BackColor = Color.FromArgb(0, 189, 140);
-            panel19.Controls.Add(pictureBox1);
+            panel19.Controls.Add(box2_Pb);
             panel19.Controls.Add(box2Title_Lbl);
             panel19.Controls.Add(box2_Lbl);
             panel19.Cursor = Cursors.Hand;
@@ -495,15 +501,16 @@
             panel19.TabIndex = 52;
             panel19.Click += panel19_Click;
             // 
-            // pictureBox1
+            // box2_Pb
             // 
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Location = new Point(62, 17);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(54, 44);
-            pictureBox1.TabIndex = 4;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            box2_Pb.Cursor = Cursors.Hand;
+            box2_Pb.Location = new Point(62, 17);
+            box2_Pb.Name = "box2_Pb";
+            box2_Pb.Size = new Size(54, 44);
+            box2_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            box2_Pb.TabIndex = 4;
+            box2_Pb.TabStop = false;
+            box2_Pb.Click += pictureBox1_Click;
             // 
             // box2Title_Lbl
             // 
@@ -552,6 +559,7 @@
             box1_Pb.Location = new Point(57, 17);
             box1_Pb.Name = "box1_Pb";
             box1_Pb.Size = new Size(54, 44);
+            box1_Pb.SizeMode = PictureBoxSizeMode.CenterImage;
             box1_Pb.TabIndex = 3;
             box1_Pb.TabStop = false;
             box1_Pb.Click += box1_Pb_Click;
@@ -707,22 +715,22 @@
             ((System.ComponentModel.ISupportInitialize)box0_Pb).EndInit();
             panel12.ResumeLayout(false);
             panel12.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)box7_Pb).EndInit();
             panel10.ResumeLayout(false);
             panel10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)box6_Pb).EndInit();
             panel14.ResumeLayout(false);
             panel14.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)box5_Pb).EndInit();
             panel15.ResumeLayout(false);
             panel15.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)box4_Pb).EndInit();
             panel17.ResumeLayout(false);
             panel17.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)box3_Pb).EndInit();
             panel19.ResumeLayout(false);
             panel19.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)box2_Pb).EndInit();
             panel21.ResumeLayout(false);
             panel21.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)box1_Pb).EndInit();
@@ -780,11 +788,11 @@
         private Label label1;
         private PictureBox box0_Pb;
         private PictureBox box1_Pb;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox6;
-        private PictureBox pictureBox5;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox2;
+        private PictureBox box2_Pb;
+        private PictureBox box7_Pb;
+        private PictureBox box6_Pb;
+        private PictureBox box5_Pb;
+        private PictureBox box4_Pb;
+        private PictureBox box3_Pb;
     }
 }

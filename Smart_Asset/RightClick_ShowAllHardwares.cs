@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smart_Asset.Images;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,6 +41,7 @@ namespace Smart_Asset
         Dispose_Window dp = new Dispose_Window();
         Replacement rpl = new Replacement();
         ShowImage si = new ShowImage();
+        Settings1 s1 = new Settings1();
 
 
         // Constructor that accepts Form1 (Read) as a parameter
@@ -291,6 +293,13 @@ namespace Smart_Asset
             si.StartPosition = FormStartPosition.CenterScreen;
             si.serialNoValue_Lb.Text = string.Join(", ", getData);
             si.Show();
+        }
+
+        private void hideTableColumn_Click(object sender, EventArgs e)
+        {
+            s1.Reload();
+            HideColumn hc = new HideColumn();
+            hc.Show();
         }
     }
 }

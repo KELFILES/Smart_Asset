@@ -96,6 +96,16 @@ namespace Smart_Asset
 
 
             topName_Lbl.Text = FrontPage_Final.StaticName.Text;
+
+
+            box0_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "asset_Icon.ico"));
+            box1_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "workingAssets.ico"));
+            box2_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "cleaning_Icon.ico"));
+            box3_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "replacement_Icon.ico")); 
+            box4_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "disposed_Icon.ico"));
+            box5_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "borrowed_Icon.ico"));
+            box6_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "assetCategories_Icon.ico"));
+            box7_Pb.Image = Image.FromFile(System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Images", "archive_Icon.ico"));
         }
 
         private void Dashboard_SizeChanged(object sender, EventArgs e)

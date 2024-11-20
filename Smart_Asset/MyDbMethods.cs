@@ -3428,13 +3428,13 @@ namespace Smart_Asset
                 }
             }
 
-            /*
+            
             // Print all documents in JSON format
             foreach (var doc in allDocuments)
             {
                 Console.WriteLine(doc.ToJson(new MongoDB.Bson.IO.JsonWriterSettings { Indent = true }));
             }
-            */
+            
 
             return allDocuments;
 

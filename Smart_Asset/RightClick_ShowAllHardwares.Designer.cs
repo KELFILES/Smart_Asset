@@ -35,6 +35,7 @@
             replace_Btn = new Button();
             borrow_Btn = new Button();
             showImage_Btn = new Button();
+            hideTableColumn = new Button();
             SuspendLayout();
             // 
             // refresh_Btn
@@ -107,11 +108,22 @@
             showImage_Btn.UseVisualStyleBackColor = true;
             showImage_Btn.Click += showImage_Btn_Click;
             // 
+            // hideTableColumn
+            // 
+            hideTableColumn.Location = new Point(12, 271);
+            hideTableColumn.Name = "hideTableColumn";
+            hideTableColumn.Size = new Size(172, 31);
+            hideTableColumn.TabIndex = 9;
+            hideTableColumn.Text = "Hide Table Column";
+            hideTableColumn.UseVisualStyleBackColor = true;
+            hideTableColumn.Click += hideTableColumn_Click;
+            // 
             // RightClick_ShowAllHardwares
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(193, 301);
+            ClientSize = new Size(193, 325);
+            Controls.Add(hideTableColumn);
             Controls.Add(showImage_Btn);
             Controls.Add(borrow_Btn);
             Controls.Add(replace_Btn);
@@ -133,5 +145,6 @@
         public Button replace_Btn;
         public Button borrow_Btn;
         public Button showImage_Btn;
+        public Button hideTableColumn;
     }
 }

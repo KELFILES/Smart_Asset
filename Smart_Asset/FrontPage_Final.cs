@@ -80,6 +80,7 @@ namespace Smart_Asset
         Swap sw;
         Borrow br = new Borrow();
         ManageUsers mu = new ManageUsers();
+        CreateReport crtRep = new CreateReport();
         Settings1 s1 = new Settings1();
 
         public static string selectedButton = "";
@@ -483,8 +484,12 @@ namespace Smart_Asset
         private void createReport_Btn_Click_1(object sender, EventArgs e)
         {
             //showFormSelected(ref mngrl, "CREATE REPORT");
+
+            //UPDATE HEADER IMAGE
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "createReport_Icon.ico"));
-            MessageBox.Show("STILL ON PROGRESS!");
+
+
+            showFormSelected(ref crtRep, "CREATE REPORTS");
         }
 
         private void logout_Btn_Click_1(object sender, EventArgs e)

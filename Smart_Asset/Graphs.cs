@@ -79,7 +79,7 @@ namespace Smart_Asset
 
             var plotModel = new PlotModel
             {
-                Title = "Top 5 Most Expensive Assets",
+                Title = "Top 5 Most Expensive Working Assets",
                 TitleFontSize = 20,
                 TitleColor = OxyColors.White,
                 Background = OxyColors.Black,
@@ -297,7 +297,7 @@ namespace Smart_Asset
 
             // Determine the number of slices (flexible up to 10)
             int sliceCount = sortedAssetCounts.Count;
-            string title = $"Top {sliceCount} Asset Counts by Type";
+            string title = $"Top {sliceCount} Types of Working Assets";
 
             var plotModel = new PlotModel
             {

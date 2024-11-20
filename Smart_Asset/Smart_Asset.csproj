@@ -264,6 +264,9 @@
     <None Update="Images\sti_Image.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\workingAssets.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\X_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

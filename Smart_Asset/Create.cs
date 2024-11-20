@@ -47,6 +47,7 @@ namespace Smart_Asset
         //FIELDS
         Transfer tf = new Transfer();
         public string pathName = null;
+        private bool isQr1havePhoto = false;
 
 
         private void Create_Resize(object sender, EventArgs e)
@@ -372,7 +373,7 @@ namespace Smart_Asset
 
         private void serial2_Cb_MouseEnter(object sender, EventArgs e)
         {
-            MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serial2_Cb);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -429,7 +430,38 @@ namespace Smart_Asset
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (qr_pictureBox != null && isQr1havePhoto == true)
+            {
+                // Open folder selection dialog
+                string folderPath = MyDbMethods.SelectFolderFromFileExplorer();
 
+                // Check if a valid folder path was selected
+                if (!string.IsNullOrEmpty(folderPath))
+                {
+                    // Ensure the file path includes the ".png" extension
+                    string fileName = $"{serial2_Cb.Text}.png"; // Append ".png" to the file name
+                    string filePath = System.IO.Path.Combine(folderPath, fileName);
 
+                    // Save the image from the PictureBox to the full file path
+                    MyDbMethods.SaveImageFromPictureBox(qr_pictureBox, filePath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+                else
+                {
+                    // Handle the case where the user cancels the folder selection dialog
+                    MessageBox.Show("Save operation was canceled. No folder selected.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("CANNOT SAVE NO IMAGE");
+            }
+        }
+
+        private async void serial2_Cb_Enter(object sender, EventArgs e)
+        {
+            await MyDbMethods.LoadDatabase_AllSerialNo("SmartAssetDb", serial2_Cb);
+        }
     }
 }

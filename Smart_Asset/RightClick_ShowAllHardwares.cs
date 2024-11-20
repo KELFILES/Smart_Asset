@@ -27,6 +27,7 @@ namespace Smart_Asset
             {
                 panel9.Visible = false;
             }
+            
         }
 
         // Enable double buffering for the entire form

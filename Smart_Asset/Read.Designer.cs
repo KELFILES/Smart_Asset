@@ -39,6 +39,7 @@
             panel1 = new Panel();
             panel2 = new Panel();
             panel8 = new Panel();
+            generateQr_Btn = new Button();
             button1 = new Button();
             add_Btn = new Button();
             panel7 = new Panel();
@@ -48,6 +49,9 @@
             replacement_Btn = new Button();
             panel10 = new Panel();
             panel9 = new Panel();
+            typePlus_Btn = new Button();
+            unitPlus_Btn = new Button();
+            locationPlus_Btn = new Button();
             search2_Btn = new Button();
             type_Cmb = new ComboBox();
             label3 = new Label();
@@ -63,7 +67,6 @@
             archive_Btn = new Button();
             showAllHardwares_Btn = new Button();
             reservedHardwares_Btn = new Button();
-            generateQr_Btn = new Button();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
@@ -212,10 +215,25 @@
             panel8.Controls.Add(button1);
             panel8.Controls.Add(add_Btn);
             panel8.Dock = DockStyle.Left;
-            panel8.Location = new Point(727, 7);
+            panel8.Location = new Point(804, 7);
             panel8.Name = "panel8";
             panel8.Size = new Size(189, 134);
             panel8.TabIndex = 35;
+            // 
+            // generateQr_Btn
+            // 
+            generateQr_Btn.Anchor = AnchorStyles.Right;
+            generateQr_Btn.BackColor = Color.RoyalBlue;
+            generateQr_Btn.FlatStyle = FlatStyle.Flat;
+            generateQr_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            generateQr_Btn.ForeColor = Color.White;
+            generateQr_Btn.Location = new Point(31, 87);
+            generateQr_Btn.Name = "generateQr_Btn";
+            generateQr_Btn.Size = new Size(126, 32);
+            generateQr_Btn.TabIndex = 15;
+            generateQr_Btn.Text = "Generate QR";
+            generateQr_Btn.UseVisualStyleBackColor = false;
+            generateQr_Btn.Click += generateQr_Btn_Click;
             // 
             // button1
             // 
@@ -331,7 +349,7 @@
             // panel10
             // 
             panel10.Dock = DockStyle.Left;
-            panel10.Location = new Point(717, 7);
+            panel10.Location = new Point(794, 7);
             panel10.Name = "panel10";
             panel10.Size = new Size(10, 134);
             panel10.TabIndex = 34;
@@ -339,6 +357,9 @@
             // panel9
             // 
             panel9.BackColor = Color.FromArgb(60, 76, 102);
+            panel9.Controls.Add(typePlus_Btn);
+            panel9.Controls.Add(unitPlus_Btn);
+            panel9.Controls.Add(locationPlus_Btn);
             panel9.Controls.Add(search2_Btn);
             panel9.Controls.Add(type_Cmb);
             panel9.Controls.Add(label3);
@@ -349,14 +370,50 @@
             panel9.Dock = DockStyle.Left;
             panel9.Location = new Point(367, 7);
             panel9.Name = "panel9";
-            panel9.Size = new Size(350, 134);
+            panel9.Size = new Size(427, 134);
             panel9.TabIndex = 33;
+            // 
+            // typePlus_Btn
+            // 
+            typePlus_Btn.Anchor = AnchorStyles.Top;
+            typePlus_Btn.ForeColor = Color.Black;
+            typePlus_Btn.Location = new Point(356, 68);
+            typePlus_Btn.Name = "typePlus_Btn";
+            typePlus_Btn.Size = new Size(36, 23);
+            typePlus_Btn.TabIndex = 34;
+            typePlus_Btn.Text = "+";
+            typePlus_Btn.UseVisualStyleBackColor = true;
+            typePlus_Btn.Click += typePlus_Btn_Click;
+            // 
+            // unitPlus_Btn
+            // 
+            unitPlus_Btn.Anchor = AnchorStyles.Top;
+            unitPlus_Btn.ForeColor = Color.Black;
+            unitPlus_Btn.Location = new Point(356, 40);
+            unitPlus_Btn.Name = "unitPlus_Btn";
+            unitPlus_Btn.Size = new Size(36, 23);
+            unitPlus_Btn.TabIndex = 33;
+            unitPlus_Btn.Text = "+";
+            unitPlus_Btn.UseVisualStyleBackColor = true;
+            unitPlus_Btn.Click += unitPlus_Btn_Click;
+            // 
+            // locationPlus_Btn
+            // 
+            locationPlus_Btn.Anchor = AnchorStyles.Top;
+            locationPlus_Btn.ForeColor = Color.Black;
+            locationPlus_Btn.Location = new Point(356, 13);
+            locationPlus_Btn.Name = "locationPlus_Btn";
+            locationPlus_Btn.Size = new Size(36, 23);
+            locationPlus_Btn.TabIndex = 32;
+            locationPlus_Btn.Text = "+";
+            locationPlus_Btn.UseVisualStyleBackColor = true;
+            locationPlus_Btn.Click += locationPlus_Btn_Click;
             // 
             // search2_Btn
             // 
             search2_Btn.Anchor = AnchorStyles.Top;
             search2_Btn.ForeColor = Color.Black;
-            search2_Btn.Location = new Point(134, 97);
+            search2_Btn.Location = new Point(148, 97);
             search2_Btn.Name = "search2_Btn";
             search2_Btn.Size = new Size(132, 29);
             search2_Btn.TabIndex = 31;
@@ -373,7 +430,7 @@
             type_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             type_Cmb.FormattingEnabled = true;
             type_Cmb.IntegralHeight = false;
-            type_Cmb.Location = new Point(81, 68);
+            type_Cmb.Location = new Point(95, 68);
             type_Cmb.Name = "type_Cmb";
             type_Cmb.Size = new Size(255, 23);
             type_Cmb.TabIndex = 29;
@@ -385,7 +442,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(19, 72);
+            label3.Location = new Point(33, 72);
             label3.Name = "label3";
             label3.Size = new Size(34, 15);
             label3.TabIndex = 30;
@@ -400,7 +457,7 @@
             location_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             location_Cmb.FormattingEnabled = true;
             location_Cmb.IntegralHeight = false;
-            location_Cmb.Location = new Point(81, 12);
+            location_Cmb.Location = new Point(95, 12);
             location_Cmb.Name = "location_Cmb";
             location_Cmb.Size = new Size(255, 23);
             location_Cmb.TabIndex = 25;
@@ -412,7 +469,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(19, 15);
+            label1.Location = new Point(33, 15);
             label1.Name = "label1";
             label1.Size = new Size(56, 15);
             label1.TabIndex = 24;
@@ -427,7 +484,7 @@
             unit_Cmb.DropDownStyle = ComboBoxStyle.DropDownList;
             unit_Cmb.FormattingEnabled = true;
             unit_Cmb.IntegralHeight = false;
-            unit_Cmb.Location = new Point(81, 40);
+            unit_Cmb.Location = new Point(95, 40);
             unit_Cmb.Name = "unit_Cmb";
             unit_Cmb.Size = new Size(255, 23);
             unit_Cmb.TabIndex = 26;
@@ -439,7 +496,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(19, 44);
+            label2.Location = new Point(33, 44);
             label2.Name = "label2";
             label2.Size = new Size(32, 15);
             label2.TabIndex = 27;
@@ -551,21 +608,6 @@
             reservedHardwares_Btn.UseVisualStyleBackColor = false;
             reservedHardwares_Btn.Click += reservedHardwares_Btn_Click_1;
             // 
-            // generateQr_Btn
-            // 
-            generateQr_Btn.Anchor = AnchorStyles.Right;
-            generateQr_Btn.BackColor = Color.RoyalBlue;
-            generateQr_Btn.FlatStyle = FlatStyle.Flat;
-            generateQr_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            generateQr_Btn.ForeColor = Color.White;
-            generateQr_Btn.Location = new Point(31, 87);
-            generateQr_Btn.Name = "generateQr_Btn";
-            generateQr_Btn.Size = new Size(126, 32);
-            generateQr_Btn.TabIndex = 15;
-            generateQr_Btn.Text = "Generate QR";
-            generateQr_Btn.UseVisualStyleBackColor = false;
-            generateQr_Btn.Click += generateQr_Btn_Click;
-            // 
             // Read
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -628,5 +670,8 @@
         private Panel panel10;
         private Button button1;
         private Button generateQr_Btn;
+        private Button locationPlus_Btn;
+        private Button typePlus_Btn;
+        private Button unitPlus_Btn;
     }
 }

@@ -159,11 +159,66 @@ namespace Smart_Asset
             }
         }
 
+
+        //OVERLOADING METHOD FOR WORD FILE USING TEXTBOX
+        public static async Task ExportTextBoxToWord(TextBox textBox, string filePath)
+        {
+            Word.Application wordApp = null;
+            Word.Document document = null;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                await Task.Run(() =>
+                {
+                    wordApp = new Word.Application { Visible = false };
+                    document = wordApp.Documents.Add();
+
+                    // Read the TextBox content
+                    string[] lines = textBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+                    // Add each line as a paragraph
+                    foreach (string line in lines)
+                    {
+                        Word.Paragraph paragraph = document.Content.Paragraphs.Add();
+                        paragraph.Range.Text = line;
+                        paragraph.Range.InsertParagraphAfter();
+                    }
+
+                    document.SaveAs2(filePath);
+                });
+
+                MessageBox.Show($"Exported successfully to Word!\nFile Path: {filePath}", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            finally
+            {
+                document?.Close();
+                wordApp?.Quit();
+                ReleaseComObject(document);
+                ReleaseComObject(wordApp);
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+
+
+
+
         // 3. Export to PDF
         public static async Task ExportDataGridViewToPdf(DataGridView dataGridView, string filePath, bool includeHeaders)
         {
             try
             {
+                // Validate the filePath
+                if (string.IsNullOrWhiteSpace(filePath))
+                {
+                    throw new ArgumentException("Invalid file path. Please select a valid location.");
+                }
+
                 Cursor.Current = Cursors.WaitCursor;
 
                 await Task.Run(() =>
@@ -224,6 +279,58 @@ namespace Smart_Asset
                 });
 
                 MessageBox.Show("Data exported successfully to PDF!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during export: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+
+        //OVERLOADING METHOD FOR PDF FILE USING TEXTBOX
+        public static async Task ExportTextBoxToPdf(TextBox textBox, string filePath)
+        {
+            try
+            {
+                // Validate the filePath
+                if (string.IsNullOrWhiteSpace(filePath))
+                {
+                    throw new ArgumentException("Invalid file path. Please select a valid location.");
+                }
+
+                Cursor.Current = Cursors.WaitCursor;
+
+                await Task.Run(() =>
+                {
+                    var document = new Document();
+                    var section = document.AddSection();
+
+                    // Read and add each line from the TextBox
+                    string[] lines = textBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+                    foreach (string line in lines)
+                    {
+                        var paragraph = section.AddParagraph();
+                        paragraph.AddText(line);
+                    }
+
+                    // Render the MigraDoc document to a PDF
+                    var renderer = new PdfDocumentRenderer(true);
+                    renderer.Document = document;
+                    renderer.RenderDocument();
+
+                    // Save the file
+                    renderer.PdfDocument.Save(filePath);
+                    Console.WriteLine($"File saved to: {filePath}");
+                });
+
+                MessageBox.Show($"Exported successfully to PDF!\nFile Path: {filePath}", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

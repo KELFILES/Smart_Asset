@@ -64,6 +64,14 @@ namespace Smart_Asset
 
         private async void add_Btn_Click(object sender, EventArgs e)
         {
+
+            if (String.IsNullOrEmpty(item_Tb.Text) || item_Tb.Text.Equals(""))
+            {
+                MessageBox.Show("Field Cannot Be Empty!");
+                return;
+            }
+
+
             var fields = new Dictionary<string, string>
             {
                 {"List", $"{item_Tb.Text}"}

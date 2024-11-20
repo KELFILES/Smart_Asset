@@ -221,7 +221,7 @@
             backupAndRestoreData_Btn.Text = "Backup and Restore Data";
             backupAndRestoreData_Btn.TextAlign = ContentAlignment.MiddleLeft;
             backupAndRestoreData_Btn.UseVisualStyleBackColor = true;
-            backupAndRestoreData_Btn.Click += createReport_Btn_Click_1;
+            backupAndRestoreData_Btn.Click += backupData_Btn_Click;
             backupAndRestoreData_Btn.MouseEnter += backupData_Btn_MouseEnter;
             backupAndRestoreData_Btn.MouseLeave += backupData_Btn_MouseLeave;
             // 

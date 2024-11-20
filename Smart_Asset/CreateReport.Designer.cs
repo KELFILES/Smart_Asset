@@ -87,6 +87,7 @@
             mainboard_Tb.Location = new Point(7, 7);
             mainboard_Tb.Multiline = true;
             mainboard_Tb.Name = "mainboard_Tb";
+            mainboard_Tb.ReadOnly = true;
             mainboard_Tb.ScrollBars = ScrollBars.Both;
             mainboard_Tb.Size = new Size(1816, 748);
             mainboard_Tb.TabIndex = 13;
@@ -108,7 +109,7 @@
             exportTo_Cb.DropDownStyle = ComboBoxStyle.DropDownList;
             exportTo_Cb.FlatStyle = FlatStyle.Flat;
             exportTo_Cb.FormattingEnabled = true;
-            exportTo_Cb.Items.AddRange(new object[] { "Microsoft Excel File (.xlsx)", "Microsoft Word File (.docx)", "PDF File (.pdf)", "CSV File (.csv)", "XML File (.xml)", "JSON File (.json)", "HTML File (.html)", "Text File (.txt)" });
+            exportTo_Cb.Items.AddRange(new object[] { "Microsoft Word File (.docx)", "PDF File (.pdf)" });
             exportTo_Cb.Location = new Point(836, 53);
             exportTo_Cb.Name = "exportTo_Cb";
             exportTo_Cb.Size = new Size(294, 23);
@@ -142,6 +143,7 @@
             export_Btn.TabIndex = 14;
             export_Btn.Text = "EXPORT";
             export_Btn.UseVisualStyleBackColor = false;
+            export_Btn.Click += export_Btn_Click;
             // 
             // panel2
             // 

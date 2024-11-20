@@ -544,18 +544,15 @@ namespace Smart_Asset
 
         }
 
-        private void AssetCategories_Btn_Click(object sender, EventArgs e)
-        {
-            //showFormSelected(ref rd, "ASSET CATEGORIES");
-            headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "assetCategories_Icon.ico"));
-            MessageBox.Show("STILL ON PROGRESS!");
-        }
+
 
         private void backupData_Btn_Click(object sender, EventArgs e)
         {
             //showFormSelected(ref rd, "BACKUP DATA");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
+
             MessageBox.Show("STILL ON PROGRESS!");
+            //showFormSelected(ref crtRep, "BACKUP AND RESTORE");
         }
 
         private void ManageUsers_Btn_MouseEnter(object sender, EventArgs e)

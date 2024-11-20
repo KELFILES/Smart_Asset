@@ -1308,5 +1308,23 @@ namespace Smart_Asset
             gqr.StartPosition = FormStartPosition.CenterScreen;
             gqr.Show();
         }
+
+        private void locationPlus_Btn_Click(object sender, EventArgs e)
+        {
+            Deployment_Location_List dll = new Deployment_Location_List();
+            dll.Show();
+        }
+
+        private void unitPlus_Btn_Click(object sender, EventArgs e)
+        {
+            Deployment_Unit_List dul = new Deployment_Unit_List();
+            dul.Show();
+        }
+
+        private void typePlus_Btn_Click(object sender, EventArgs e)
+        {
+            TypeList_Add tla = new TypeList_Add();
+            tla.Show();
+        }
     }
 }

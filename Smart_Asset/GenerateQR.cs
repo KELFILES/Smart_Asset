@@ -117,6 +117,32 @@ namespace Smart_Asset
 
         private async void button2_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(location_Cmb.Text) && String.IsNullOrEmpty(unit_Cmb.Text) ||
+                location_Cmb.Text.Equals("") && unit_Cmb.Text.Equals(""))
+            {
+                MessageBox.Show("Location and Unit is Required");
+                return;
+            }
+
+            else if (String.IsNullOrEmpty(location_Cmb.Text) || location_Cmb.Text.Equals(""))
+            {
+                MessageBox.Show("Location is Required");
+                return;
+            }
+
+            else if (String.IsNullOrEmpty(unit_Cmb.Text) || unit_Cmb.Text.Equals(""))
+            {
+                MessageBox.Show("Unit is Required");
+                return;
+            }
+
+
+
+
+
+
+
+
             isQr2havePhoto = true;
 
             // Clear the previous image from the PictureBox

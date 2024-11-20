@@ -112,6 +112,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Dispose_Window.cs" />
+    <Compile Update="ShowQR.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Repair_Window.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -174,9 +174,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(229, 473);
             label2.Name = "label2";
-            label2.Size = new Size(326, 30);
+            label2.Size = new Size(312, 30);
             label2.TabIndex = 28;
-            label2.Text = "QR Code Generator for Serial No.:";
+            label2.Text = "QR Code Generator for Unit/Set:";
             // 
             // qr2_pictureBox
             // 

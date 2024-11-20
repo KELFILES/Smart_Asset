@@ -21,6 +21,14 @@ namespace Smart_Asset
             InitializeComponent();
         }
 
+        private void RightClick_ShowAllHardwares_Load(object sender, EventArgs e)
+        {
+            if (getData == null || getData.Count == 0)
+            {
+                panel9.Visible = false;
+            }
+        }
+
         // Enable double buffering for the entire form
         protected override CreateParams CreateParams
         {
@@ -301,5 +309,15 @@ namespace Smart_Asset
             HideColumn hc = new HideColumn();
             hc.Show();
         }
+
+        private void showQR_Btn_Click(object sender, EventArgs e)
+        {
+            ShowQR sqr = new ShowQR();
+            sqr.StartPosition = FormStartPosition.CenterScreen;
+            sqr.serial2_Cb.Text = string.Join(", ", getData);
+            sqr.Show();
+        }
+
+
     }
 }

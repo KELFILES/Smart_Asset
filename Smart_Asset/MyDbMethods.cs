@@ -2550,6 +2550,14 @@ namespace Smart_Asset
 
         public static async Task<bool> UpsertDocumentAsync(string dbName, string collectionName, string userId, Dictionary<string, string> fields)
         {
+            /*
+            Console.WriteLine("Fields to upsert:");
+            foreach (var field in fields)
+            {
+                Console.WriteLine($"Key: {field.Key}, Value: {field.Value}");
+            }
+            */
+
             var client = new MongoClient(DefaultConnectionString);
             var database = client.GetDatabase(dbName);
             var collection = database.GetCollection<BsonDocument>(collectionName);
@@ -2557,15 +2565,23 @@ namespace Smart_Asset
             var filter = Builders<BsonDocument>.Filter.Eq("userID", userId);
             var update = new BsonDocument("$set", new BsonDocument(fields));
 
+            //Console.WriteLine($"Filter: {filter.ToJson()}");
+            //Console.WriteLine($"Update Document: {update.ToJson()}");
+
             try
             {
                 // Perform the upsert operation
                 var result = await collection.UpdateOneAsync(filter, update, new UpdateOptions { IsUpsert = true });
-                return result.ModifiedCount > 0 || result.UpsertedId != null; // Success if modified or inserted
+
+                //Console.WriteLine($"MatchedCount: {result.MatchedCount}, ModifiedCount: {result.ModifiedCount}, UpsertedId: {result.UpsertedId}");
+
+                // Success if matched, modified, or inserted
+                return result.MatchedCount > 0 || result.UpsertedId != null;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in upsert operation: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                 return false;
             }
         }
@@ -2848,6 +2864,7 @@ namespace Smart_Asset
 
             // Build the filter for userID
             var filter = Builders<BsonDocument>.Filter.Eq("userID", objectId);
+
 
             try
             {
@@ -3441,6 +3458,45 @@ namespace Smart_Asset
 
         }
 
+
+
+        public static Dictionary<string, string> GetPermissions(string dbNameVal, string collNameVal, string userIDVal)
+        {
+            // Initialize MongoDB client and access database and collection
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbNameVal);
+            var collection = database.GetCollection<BsonDocument>(collNameVal);
+
+            // Filter to find the document with the specified userID
+            var filter = Builders<BsonDocument>.Filter.Eq("userID", userIDVal);
+            var document = collection.Find(filter).FirstOrDefault();
+
+            if (document == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            // Create a dictionary to store the permissions
+            var permissions = new Dictionary<string, string>();
+
+            // Loop through the desired fields and add them to the dictionary
+            foreach (var field in document)
+            {
+                if (field.Name == "Add" || field.Name == "Archive" || field.Name == "Archived" ||
+                    field.Name == "ArtificialIntelligence" || field.Name == "AssetHistory" ||
+                    field.Name == "Assets" || field.Name == "BackupAndRestoreData" ||
+                    field.Name == "Borrow" || field.Name == "Borrowed" || field.Name == "Cleaning" ||
+                    field.Name == "CreateReport" || field.Name == "Dashboard" ||
+                    field.Name == "Disposed" || field.Name == "Edit" ||
+                    field.Name == "Replace" || field.Name == "Replacement" ||
+                    field.Name == "Reserved" || field.Name == "Show Image" || field.Name == "Transfer")
+                {
+                    permissions[field.Name] = field.Value.ToString();
+                }
+            }
+
+            return permissions;
+        }
 
 
 

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -59,6 +60,40 @@ namespace Smart_Asset
         public static Button StaticArchived;
 
 
+
+
+            //FOR LOGGED IN USER INFO
+            public static string login_Name { get; set; }
+            public static string login_Username { get; set; }
+            public static string login_Role { get; set; }
+            public static string login_UserID { get; set; }
+        
+
+
+            //FOR USER PERMISSION
+            public static string permission_Add { get; set; }
+            public static string permission_Archive { get; set; }
+            public static string permission_Archived { get; set; }
+            public static string permission_ArtificialIntelligence { get; set; }
+            public static string permission_AssetHistory { get; set; }
+            public static string permission_Assets { get; set; }
+            public static string permission_BackupAndRestoreData { get; set; }
+            public static string permission_Borrow { get; set; }
+            public static string permission_Borrowed { get; set; }
+            public static string permission_Cleaning { get; set; }
+            public static string permission_CreateReport { get; set; }
+            public static string permission_Dashboard { get; set; }
+            public static string permission_Disposed { get; set; }
+            public static string permission_Edit { get; set; }
+            public static string permission_Replace { get; set; }
+            public static string permission_Replacement { get; set; }
+            public static string permission_Reserved { get; set; }
+            public static string permission_ShowImage { get; set; }
+            public static string permission_Transfer { get; set; }
+        
+
+
+
         // Enable double buffering for the entire form
         protected override CreateParams CreateParams
         {
@@ -112,6 +147,22 @@ namespace Smart_Asset
 
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
+
+            
+            // Print all static properties of permission
+            var properties = typeof(FrontPage_Final).GetProperties(BindingFlags.Static | BindingFlags.Public);
+
+            foreach (var property in properties)
+            {
+                if (property.Name.StartsWith("permission_")) // Filter for permission properties
+                {
+                    var value = property.GetValue(null); // Get static property value
+                    Console.WriteLine($"{property.Name}: {value}");
+                }
+            }
+            
+
+
             // Scroll the panel to the top
             sideMenu_Panel.AutoScrollPosition = new Point(0, 0);
 

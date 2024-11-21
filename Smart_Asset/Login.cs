@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -70,8 +71,55 @@ namespace Smart_Asset
                 Console.WriteLine($"UserID: {userDetails.UserID}");
 
 
-
                 FrontPage_Final pff = new FrontPage_Final();
+
+
+                //PASS USER DETAILS TO FRONTPAGE
+                FrontPage_Final.login_Name = userDetails.Name;
+                FrontPage_Final.login_Username = userDetails.Username;
+                FrontPage_Final.login_Role = userDetails.Role;
+                FrontPage_Final.login_UserID = userDetails.UserID;
+
+
+                if (userDetails.Role.Equals("Custom User"))
+                {
+                    var pulledDataInColl = MyDbMethods.GetPermissions("SmartAssetDb", "CustomUsers_Permissions", $"{userDetails.UserID}");
+
+                    var permissionMapping = new Dictionary<string, Action<string>>
+                    {
+                        { "Add", value => FrontPage_Final.permission_Add = value },
+                        { "Archive", value => FrontPage_Final.permission_Archive = value },
+                        { "Archived", value => FrontPage_Final.permission_Archived = value },
+                        { "ArtificialIntelligence", value => FrontPage_Final.permission_ArtificialIntelligence = value },
+                        { "AssetHistory", value => FrontPage_Final.permission_AssetHistory = value },
+                        { "Assets", value => FrontPage_Final.permission_Assets = value },
+                        { "BackupAndRestoreData", value => FrontPage_Final.permission_BackupAndRestoreData = value },
+                        { "Borrow", value => FrontPage_Final.permission_Borrow = value },
+                        { "Borrowed", value => FrontPage_Final.permission_Borrowed = value },
+                        { "Cleaning", value => FrontPage_Final.permission_Cleaning = value },
+                        { "CreateReport", value => FrontPage_Final.permission_CreateReport = value },
+                        { "Dashboard", value => FrontPage_Final.permission_Dashboard = value },
+                        { "Disposed", value => FrontPage_Final.permission_Disposed = value },
+                        { "Edit", value => FrontPage_Final.permission_Edit = value },
+                        { "Replace", value => FrontPage_Final.permission_Replace = value },
+                        { "Replacement", value => FrontPage_Final.permission_Replacement = value },
+                        { "Reserved", value => FrontPage_Final.permission_Reserved = value },
+                        { "ShowImage", value => FrontPage_Final.permission_ShowImage = value },
+                        { "Transfer", value => FrontPage_Final.permission_Transfer = value },
+                    };
+
+                    foreach (var data in pulledDataInColl)
+                    {
+                        if (permissionMapping.TryGetValue(data.Key, out var action))
+                        {
+                            action(data.Value);
+                        }
+
+                        //Console.WriteLine($"Key: {data.Key}, Value: {data.Value}");
+                    }
+                }
+
+
 
                 pff.name_Lbl.Text = userDetails.Name;
                 pff.userID_Lbl.Text = userDetails.UserID;

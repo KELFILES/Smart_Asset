@@ -32,6 +32,8 @@ namespace Smart_Asset
             if (isCorrectPass)
             {
                 await MyDbMethods.DeleteUserByUserIDAsync("SmartAssetDb", "Users", userIDVal_Lbl.Text);
+                await MyDbMethods.RemoveDocumentAsync("SmartAssetDb", "CustomUsers_Permissions", "userID", $"{userIDVal_Lbl.Text}");
+
             }
             else
             {

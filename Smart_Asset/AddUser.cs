@@ -87,7 +87,7 @@ namespace Smart_Asset
                     { "Borrowed", borrowed_Cb.Checked ? "1" : "0" },
                     { "Reserved", reserved_Cb.Checked ? "1" : "0" },
                     { "Archived", archived_Cb.Checked ? "1" : "0" },
-                    { "Asset History", assetHistory_Cb.Checked ? "1" : "0" },
+                    { "AssetHistory", assetHistory_Cb.Checked ? "1" : "0" },
 
                     { "Add", add_Cb.Checked ? "1" : "0" },
                     { "Edit", edit_Cb.Checked ? "1" : "0" },
@@ -95,12 +95,12 @@ namespace Smart_Asset
                     { "Transfer", transfer_Cb.Checked ? "1" : "0" },
                     { "Borrow", borrow_Cb.Checked ? "1" : "0" },
                     { "Archive", archive_Cb.Checked ? "1" : "0" },
-                    { "Show Image", showImage_Cb.Checked ? "1" : "0" },
+                    { "ShowImage", showImage_Cb.Checked ? "1" : "0" },
 
                     { "Dashboard", dashboard_Cb.Checked ? "1" : "0" },
-                    { "Artificial Intelligence", artificialIntelligence_Cb.Checked ? "1" : "0" },
-                    { "Create Report", createReport_Cb.Checked ? "1" : "0" },
-                    { "Backup And Restore Data", backupAndRestoreData_Cb.Checked ? "1" : "0" }
+                    { "ArtificialIntelligence", artificialIntelligence_Cb.Checked ? "1" : "0" },
+                    { "CreateReport", createReport_Cb.Checked ? "1" : "0" },
+                    { "BackupAndRestoreData", backupAndRestoreData_Cb.Checked ? "1" : "0" }
                 };
 
                 // Use the UpsertDocumentAsync method to insert or update the permissions document

@@ -204,6 +204,14 @@ namespace Smart_Asset
 
         private async void changePermission_Btn_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrEmpty(userIDVal_Lbl.Text))
+            {
+                MessageBox.Show("UserID is missing or invalid.");
+                return;
+            }
+
+
             // Prepare the permissions fields as Dictionary<string, string>
             var permissionsFields = new Dictionary<string, string>
             {
@@ -215,18 +223,18 @@ namespace Smart_Asset
                 { "Borrowed", borrowed_Cb.Checked ? "1" : "0" },
                 { "Reserved", reserved_Cb.Checked ? "1" : "0" },
                 { "Archived", archived_Cb.Checked ? "1" : "0" },
-                { "Asset History", assetHistory_Cb.Checked ? "1" : "0" },
+                { "AssetHistory", assetHistory_Cb.Checked ? "1" : "0" },
                 { "Add", add_Cb.Checked ? "1" : "0" },
                 { "Edit", edit_Cb.Checked ? "1" : "0" },
                 { "Replace", replace_Cb.Checked ? "1" : "0" },
                 { "Transfer", transfer_Cb.Checked ? "1" : "0" },
                 { "Borrow", borrow_Cb.Checked ? "1" : "0" },
                 { "Archive", archive_Cb.Checked ? "1" : "0" },
-                { "Show Image", showImage_Cb.Checked ? "1" : "0" },
+                { "ShowImage", showImage_Cb.Checked ? "1" : "0" },
                 { "Dashboard", dashboard_Cb.Checked ? "1" : "0" },
-                { "Artificial Intelligence", artificialIntelligence_Cb.Checked ? "1" : "0" },
-                { "Create Report", createReport_Cb.Checked ? "1" : "0" },
-                { "Backup And Restore Data", backupAndRestoreData_Cb.Checked ? "1" : "0" }
+                { "ArtificialIntelligence", artificialIntelligence_Cb.Checked ? "1" : "0" },
+                { "CreateReport", createReport_Cb.Checked ? "1" : "0" },
+                { "BackupAndRestoreData", backupAndRestoreData_Cb.Checked ? "1" : "0" }
             };
 
             // Call the UpsertDocumentAsync method and check the result

@@ -295,7 +295,6 @@ namespace Smart_Asset
                 .Take(10)
                 .ToList();
 
-            // Determine the number of slices (flexible up to 10)
             int sliceCount = sortedAssetCounts.Count;
             string title = $"Top {sliceCount} Types of Working Assets";
 
@@ -313,24 +312,27 @@ namespace Smart_Asset
                 AngleSpan = 360,
                 StartAngle = 0,
                 FontSize = 14,
-                ExplodedDistance = 0, // Remove explosion effect to reduce space between slices
-                TextColor = OxyColors.White // Set label text color to white
+                ExplodedDistance = 0.05, // Slightly explode slices for better separation
+                TextColor = OxyColors.White,
+                InsideLabelPosition = 0.7, // Adjust to make more room inside slices
+                OutsideLabelFormat = "{0}: {1}", // Show labels outside the pie chart
+                LabelField = "Label" // Ensure labels display asset types
             };
 
             // Define colors for the slices
             List<OxyColor> colors = new List<OxyColor>
-            {
-                OxyColors.Crimson,
-                OxyColors.MediumSeaGreen,
-                OxyColors.DodgerBlue,
-                OxyColors.Goldenrod,
-                OxyColors.Purple,
-                OxyColors.OrangeRed,
-                OxyColors.Teal,
-                OxyColors.Violet,
-                OxyColors.SkyBlue,
-                OxyColors.DarkCyan
-            };
+    {
+        OxyColors.Crimson,
+        OxyColors.MediumSeaGreen,
+        OxyColors.DodgerBlue,
+        OxyColors.Goldenrod,
+        OxyColors.Purple,
+        OxyColors.OrangeRed,
+        OxyColors.Teal,
+        OxyColors.Violet,
+        OxyColors.SkyBlue,
+        OxyColors.DarkCyan
+    };
 
             // Add slices for each asset type
             for (int i = 0; i < sliceCount; i++)
@@ -345,7 +347,6 @@ namespace Smart_Asset
                 });
             }
 
-            // Configure legend manually using Legend properties
             plotModel.Legends.Add(new Legend
             {
                 LegendPosition = LegendPosition.RightTop,

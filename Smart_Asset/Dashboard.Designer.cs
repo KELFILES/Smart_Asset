@@ -73,11 +73,9 @@
             panel11 = new Panel();
             topName_Lbl = new Label();
             label1 = new Label();
-            panel13 = new Panel();
-            rightGraph_Pnl = new Panel();
             panel7 = new Panel();
             panel3 = new Panel();
-            monthCalendar1 = new MonthCalendar();
+            rightGraph_Pnl = new Panel();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
@@ -101,7 +99,6 @@
             panel2.SuspendLayout();
             panel8.SuspendLayout();
             panel11.SuspendLayout();
-            panel13.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -127,6 +124,7 @@
             // 
             // panel5
             // 
+            panel5.AutoScroll = true;
             panel5.BackColor = Color.FromArgb(255, 243, 26);
             panel5.Controls.Add(centerGraph_Pnl);
             panel5.Controls.Add(panel6);
@@ -134,38 +132,41 @@
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 494);
             panel5.Name = "panel5";
-            panel5.Padding = new Padding(7);
+            panel5.Padding = new Padding(3);
             panel5.Size = new Size(1664, 628);
             panel5.TabIndex = 10;
             // 
             // centerGraph_Pnl
             // 
+            centerGraph_Pnl.AutoScroll = true;
             centerGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
-            centerGraph_Pnl.Dock = DockStyle.Left;
-            centerGraph_Pnl.Location = new Point(815, 7);
+            centerGraph_Pnl.Dock = DockStyle.Fill;
+            centerGraph_Pnl.Location = new Point(806, 3);
             centerGraph_Pnl.Name = "centerGraph_Pnl";
-            centerGraph_Pnl.Size = new Size(841, 614);
+            centerGraph_Pnl.Size = new Size(855, 622);
             centerGraph_Pnl.TabIndex = 22;
             // 
             // panel6
             // 
             panel6.Dock = DockStyle.Left;
-            panel6.Location = new Point(805, 7);
+            panel6.Location = new Point(801, 3);
             panel6.Name = "panel6";
-            panel6.Size = new Size(10, 614);
+            panel6.Size = new Size(5, 622);
             panel6.TabIndex = 21;
             // 
             // leftGraph_Pnl
             // 
+            leftGraph_Pnl.AutoScroll = true;
             leftGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
             leftGraph_Pnl.Dock = DockStyle.Left;
-            leftGraph_Pnl.Location = new Point(7, 7);
+            leftGraph_Pnl.Location = new Point(3, 3);
             leftGraph_Pnl.Name = "leftGraph_Pnl";
-            leftGraph_Pnl.Size = new Size(798, 614);
+            leftGraph_Pnl.Size = new Size(798, 622);
             leftGraph_Pnl.TabIndex = 18;
             // 
             // panel16
             // 
+            panel16.AutoScroll = true;
             panel16.Controls.Add(panel9);
             panel16.Controls.Add(panel12);
             panel16.Controls.Add(panel10);
@@ -599,7 +600,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Padding = new Padding(7);
+            panel2.Padding = new Padding(5);
             panel2.Size = new Size(1664, 337);
             panel2.TabIndex = 1;
             // 
@@ -607,22 +608,24 @@
             // 
             panel8.BackColor = Color.FromArgb(26, 128, 195);
             panel8.Controls.Add(panel11);
-            panel8.Controls.Add(panel13);
             panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(7, 7);
+            panel8.Location = new Point(5, 5);
             panel8.Name = "panel8";
-            panel8.Size = new Size(1171, 323);
+            panel8.Size = new Size(1139, 327);
             panel8.TabIndex = 4;
             // 
             // panel11
             // 
+            panel11.AutoScroll = true;
+            panel11.AutoSize = true;
+            panel11.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel11.BackgroundImage = (Image)resources.GetObject("panel11.BackgroundImage");
             panel11.Controls.Add(topName_Lbl);
             panel11.Controls.Add(label1);
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(0, 0);
             panel11.Name = "panel11";
-            panel11.Size = new Size(741, 323);
+            panel11.Size = new Size(1139, 327);
             panel11.TabIndex = 3;
             // 
             // topName_Lbl
@@ -630,7 +633,7 @@
             topName_Lbl.AutoSize = true;
             topName_Lbl.Font = new Font("Segoe UI Emoji", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             topName_Lbl.ForeColor = Color.FromArgb(252, 194, 114);
-            topName_Lbl.Location = new Point(90, 208);
+            topName_Lbl.Location = new Point(303, 227);
             topName_Lbl.Name = "topName_Lbl";
             topName_Lbl.Size = new Size(308, 64);
             topName_Lbl.TabIndex = 3;
@@ -641,57 +644,38 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe Script", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(42, 148);
+            label1.Location = new Point(255, 167);
             label1.Name = "label1";
             label1.Size = new Size(235, 57);
             label1.TabIndex = 2;
             label1.Text = "WELCOME!";
             // 
-            // panel13
-            // 
-            panel13.BackColor = Color.DeepSkyBlue;
-            panel13.Controls.Add(rightGraph_Pnl);
-            panel13.Dock = DockStyle.Right;
-            panel13.Location = new Point(741, 0);
-            panel13.Name = "panel13";
-            panel13.Padding = new Padding(7);
-            panel13.Size = new Size(430, 323);
-            panel13.TabIndex = 2;
-            // 
-            // rightGraph_Pnl
-            // 
-            rightGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
-            rightGraph_Pnl.Dock = DockStyle.Fill;
-            rightGraph_Pnl.Location = new Point(7, 7);
-            rightGraph_Pnl.Name = "rightGraph_Pnl";
-            rightGraph_Pnl.Size = new Size(416, 309);
-            rightGraph_Pnl.TabIndex = 26;
-            // 
             // panel7
             // 
             panel7.Dock = DockStyle.Right;
-            panel7.Location = new Point(1178, 7);
+            panel7.Location = new Point(1144, 5);
             panel7.Name = "panel7";
-            panel7.Size = new Size(10, 323);
+            panel7.Size = new Size(5, 327);
             panel7.TabIndex = 1;
             // 
             // panel3
             // 
             panel3.BackColor = Color.Black;
-            panel3.Controls.Add(monthCalendar1);
+            panel3.Controls.Add(rightGraph_Pnl);
             panel3.Dock = DockStyle.Right;
-            panel3.Location = new Point(1188, 7);
+            panel3.Location = new Point(1149, 5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(469, 323);
+            panel3.Size = new Size(510, 327);
             panel3.TabIndex = 0;
             // 
-            // monthCalendar1
+            // rightGraph_Pnl
             // 
-            monthCalendar1.BackColor = SystemColors.HotTrack;
-            monthCalendar1.CalendarDimensions = new Size(2, 2);
-            monthCalendar1.Location = new Point(5, 7);
-            monthCalendar1.Name = "monthCalendar1";
-            monthCalendar1.TabIndex = 2;
+            rightGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
+            rightGraph_Pnl.Dock = DockStyle.Fill;
+            rightGraph_Pnl.Location = new Point(0, 0);
+            rightGraph_Pnl.Name = "rightGraph_Pnl";
+            rightGraph_Pnl.Size = new Size(510, 327);
+            rightGraph_Pnl.TabIndex = 28;
             // 
             // Dashboard
             // 
@@ -736,9 +720,9 @@
             ((System.ComponentModel.ISupportInitialize)box1_Pb).EndInit();
             panel2.ResumeLayout(false);
             panel8.ResumeLayout(false);
+            panel8.PerformLayout();
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
-            panel13.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -776,13 +760,10 @@
         private Panel panel8;
         private Panel panel7;
         private Panel panel3;
-        private MonthCalendar monthCalendar1;
         private Panel panel5;
         private Panel centerGraph_Pnl;
         private Panel panel6;
         private Panel leftGraph_Pnl;
-        private Panel panel13;
-        private Panel rightGraph_Pnl;
         private Panel panel11;
         private Label topName_Lbl;
         private Label label1;
@@ -794,5 +775,6 @@
         private PictureBox box5_Pb;
         private PictureBox box4_Pb;
         private PictureBox box3_Pb;
+        private Panel rightGraph_Pnl;
     }
 }

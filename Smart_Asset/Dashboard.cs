@@ -92,7 +92,6 @@ namespace Smart_Asset
             List<Panel> panels_Graph = new List<Panel> { leftGraph_Pnl, centerGraph_Pnl, rightGraph_Pnl };
             MyOtherMethods.CenterAlignPanelsHorizontally(panel2, panels_Graph);
 
-            MyOtherMethods.FitMonthCalendarToPanel(panel3, monthCalendar1);
 
 
             topName_Lbl.Text = FrontPage_Final.StaticName.Text;

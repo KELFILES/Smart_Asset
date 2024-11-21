@@ -51,9 +51,9 @@
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.None;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(335, 107);
+            pictureBox1.Location = new Point(366, 114);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(453, 253);
+            pictureBox1.Size = new Size(422, 239);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;

@@ -148,18 +148,22 @@ namespace Smart_Asset
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
 
-            
-            // Print all static properties of permission
-            var properties = typeof(FrontPage_Final).GetProperties(BindingFlags.Static | BindingFlags.Public);
 
-            foreach (var property in properties)
+            // Print all static properties of permission
+            if (login_Role.Equals("Custom User"))
             {
-                if (property.Name.StartsWith("permission_")) // Filter for permission properties
+                var properties = typeof(FrontPage_Final).GetProperties(BindingFlags.Static | BindingFlags.Public);
+
+                foreach (var property in properties)
                 {
-                    var value = property.GetValue(null); // Get static property value
-                    Console.WriteLine($"{property.Name}: {value}");
+                    if (property.Name.StartsWith("permission_")) // Filter for permission properties
+                    {
+                        var value = property.GetValue(null); // Get static property value
+                        Console.WriteLine($"{property.Name}: {value}");
+                    }
                 }
             }
+
             
 
 

@@ -153,7 +153,7 @@ namespace Smart_Asset
             }
 
             // The text or URL to encode in the QR code (directly using a string here)
-            string textToEncode = location_Cmb.Text + unit_Cmb.Text; // Replace with the URL or text to encode
+            string textToEncode = location_Cmb.Text + "_" + unit_Cmb.Text; // Replace with the URL or text to encode
             Console.WriteLine("EYYY" + textToEncode);
             // Get the dimensions from the PictureBox
             int width = qr2_pictureBox.Width;

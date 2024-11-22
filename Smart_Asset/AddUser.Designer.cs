@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel2 = new Panel();
+            label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             name_Tb = new TextBox();
@@ -73,7 +74,6 @@
             disposed_Cb = new CheckBox();
             lowerLabel_Lbl = new Label();
             topLabel_Lbl = new Label();
-            label3 = new Label();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -101,6 +101,17 @@
             panel2.Padding = new Padding(10);
             panel2.Size = new Size(574, 451);
             panel2.TabIndex = 17;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(38, 214);
+            label3.Name = "label3";
+            label3.Size = new Size(489, 20);
+            label3.TabIndex = 14;
+            label3.Text = "Note! The default password will be Username + 123 (Ex.\"Username123\").";
             // 
             // label2
             // 
@@ -538,7 +549,7 @@
             // 
             replacement_Cb.AutoSize = true;
             replacement_Cb.ForeColor = Color.White;
-            replacement_Cb.Location = new Point(41, 84);
+            replacement_Cb.Location = new Point(41, 109);
             replacement_Cb.Name = "replacement_Cb";
             replacement_Cb.Size = new Size(95, 19);
             replacement_Cb.TabIndex = 3;
@@ -560,7 +571,7 @@
             // 
             cleaning_Cb.AutoSize = true;
             cleaning_Cb.ForeColor = Color.White;
-            cleaning_Cb.Location = new Point(41, 109);
+            cleaning_Cb.Location = new Point(41, 84);
             cleaning_Cb.Name = "cleaning_Cb";
             cleaning_Cb.Size = new Size(73, 19);
             cleaning_Cb.TabIndex = 4;
@@ -610,17 +621,6 @@
             topLabel_Lbl.Size = new Size(137, 32);
             topLabel_Lbl.TabIndex = 5;
             topLabel_Lbl.Text = "TOP LABEL";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(38, 214);
-            label3.Name = "label3";
-            label3.Size = new Size(489, 20);
-            label3.TabIndex = 14;
-            label3.Text = "Note! The default password will be Username + 123 (Ex.\"Username123\").";
             // 
             // AddUser
             // 

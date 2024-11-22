@@ -31,7 +31,7 @@
             refresh_Btn = new Button();
             edit_Btn = new Button();
             archive_Btn = new Button();
-            Transfer = new Button();
+            Transfer_Btn = new Button();
             replace_Btn = new Button();
             borrow_Btn = new Button();
             showImage_Btn = new Button();
@@ -88,15 +88,15 @@
             archive_Btn.UseVisualStyleBackColor = true;
             archive_Btn.Click += archieve_Btn_Click;
             // 
-            // Transfer
+            // Transfer_Btn
             // 
-            Transfer.Location = new Point(9, 3);
-            Transfer.Name = "Transfer";
-            Transfer.Size = new Size(172, 31);
-            Transfer.TabIndex = 5;
-            Transfer.Text = "Transfer";
-            Transfer.UseVisualStyleBackColor = true;
-            Transfer.Click += Transfer_Click;
+            Transfer_Btn.Location = new Point(9, 3);
+            Transfer_Btn.Name = "Transfer_Btn";
+            Transfer_Btn.Size = new Size(172, 31);
+            Transfer_Btn.TabIndex = 5;
+            Transfer_Btn.Text = "Transfer";
+            Transfer_Btn.UseVisualStyleBackColor = true;
+            Transfer_Btn.Click += Transfer_Click;
             // 
             // replace_Btn
             // 
@@ -175,7 +175,7 @@
             // 
             // panel5
             // 
-            panel5.Controls.Add(Transfer);
+            panel5.Controls.Add(Transfer_Btn);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 125);
             panel5.Name = "panel5";
@@ -272,7 +272,7 @@
         public Button refresh_Btn;
         public Button edit_Btn;
         public Button archive_Btn;
-        public Button Transfer;
+        public Button Transfer_Btn;
         public Button replace_Btn;
         public Button borrow_Btn;
         public Button showImage_Btn;

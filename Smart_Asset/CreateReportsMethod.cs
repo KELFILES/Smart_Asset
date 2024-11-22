@@ -50,26 +50,37 @@ namespace Smart_Asset
 
             // 3. Location-Based Asset Distribution
             reportBuilder.AppendLine("3. Location-Based Asset Distribution:");
-            var predefinedLocations = new[] { "Cleaning", "Replacement", "Disposed_Hardwares", "Borrowed", "Reserved_Hardwares", "Archive" };
+            var predefinedLocations = new[] { "Cleaning", "Replacement", "Disposed_Hardwares", "Borrowed", "Reserved_Hardwares" };
 
+            int totalAssets = 0; // Initialize a counter for the total assets
+
+            // Process predefined locations
             foreach (var location in predefinedLocations)
             {
                 int locationCount = allDocuments.Count(doc => doc.GetValue("CurrentLocation", "").AsString == location);
                 reportBuilder.AppendLine($"   - {location}: {locationCount}");
+                totalAssets += locationCount; // Add to total
             }
 
+            // Process other locations, excluding "Archive"
             var otherLocations = allDocuments
                 .Select(doc => doc.GetValue("CurrentLocation", "").AsString)
                 .Distinct()
                 .Except(predefinedLocations)
+                .Where(location => location != "Archive") // Exclude "Archive"
                 .ToList();
 
             foreach (var location in otherLocations)
             {
                 int locationCount = allDocuments.Count(doc => doc.GetValue("CurrentLocation", "").AsString == location);
                 reportBuilder.AppendLine($"   - {location}: {locationCount}");
+                totalAssets += locationCount; // Add to total
             }
+
+            // Append the total count to the report
+            reportBuilder.AppendLine($"   Total Assets: {totalAssets}");
             reportBuilder.AppendLine();
+
 
             // 4.Purchased Assets Count by Year (Excluding Archive)
             reportBuilder.AppendLine("4. Purchased Assets Count by Year (Excluding Archive):");
@@ -234,19 +245,18 @@ namespace Smart_Asset
 
 
 
-            // 10. Top 10 Types of Working Assets
-            reportBuilder.AppendLine("10. Top 10 Types of Working Assets:");
-            var mostCommonTypes = allDocuments
+            // 10. Types of Working Assets
+            reportBuilder.AppendLine("10. All types of Working Assets:");
+            var allTypes = allDocuments
                 .Where(doc =>
                     doc.GetValue("CurrentLocation", "").AsString != "Archive" &&
                     doc.GetValue("CurrentLocation", "").AsString != "Disposed_Hardwares" &&
                     doc.GetValue("CurrentLocation", "").AsString != "Replacement" &&
                     !string.IsNullOrEmpty(doc.GetValue("Type", "").AsString)) // Ensure valid Type values
                 .GroupBy(doc => doc.GetValue("Type", "").AsString) // Group by Type
-                .OrderByDescending(g => g.Count()) // Order by descending count
-                .Take(10); // Limit to the top 10 types
+                .OrderByDescending(g => g.Count()); // Order by descending count
 
-            foreach (var typeGroup in mostCommonTypes)
+            foreach (var typeGroup in allTypes)
             {
                 reportBuilder.AppendLine($"   - {typeGroup.Key}: {typeGroup.Count()}");
             }
@@ -258,7 +268,7 @@ namespace Smart_Asset
 
 
 
-            
+
 
 
 

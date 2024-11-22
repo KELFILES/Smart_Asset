@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Smart_Asset.MyDbMethods;
 
 namespace Smart_Asset
 {
@@ -33,9 +35,37 @@ namespace Smart_Asset
 
         private void ChangeRole_Load(object sender, EventArgs e)
         {
-            assetEnabled_Panel.Visible = false;
+            assetEnabled_Panel.Visible = true;
             MyOtherMethods.CenterInPanel(changePermission_Btn, panel5);
+
+            RetriveAndLoadPermission();
         }
+
+
+
+
+
+
+        public void RetriveAndLoadPermission()
+        {
+
+
+            MyDbMethods.UpdateCheckBoxes("SmartAssetDb", "CustomUsers_Permissions", $"{userIDVal_Lbl.Text}", this);
+
+            if(assets_Cb.Checked)
+            {
+                assetEnabled_Panel.Visible = true;
+            }
+            else
+            {
+                assetEnabled_Panel.Visible = false;
+            }
+
+        }
+
+
+
+
 
         private void comboBox1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -141,58 +171,7 @@ namespace Smart_Asset
 
         private async void userIDVal_Lbl_TextChanged(object sender, EventArgs e)
         {
-            finalUserIDVal = userIDVal_Lbl.Text;
-
-            // Retrieve permissions from the database
-            var permissions = await MyDbMethods.GetPermissionsAsync("SmartAssetDb", "CustomUsers_Permissions", finalUserIDVal);
-
-            if (permissions != null)
-            {
-                // Set each checkbox based on the permission value (true or false)
-                assets_Cb.Checked = permissions.Assets;
-                replacement_Cb.Checked = permissions.Replacement;
-                cleaning_Cb.Checked = permissions.Cleaning;
-                disposed_Cb.Checked = permissions.Disposed;
-                borrowed_Cb.Checked = permissions.Borrowed;
-                reserved_Cb.Checked = permissions.Reserved;
-                archived_Cb.Checked = permissions.Archived;
-                assetHistory_Cb.Checked = permissions.AssetHistory;
-                add_Cb.Checked = permissions.Add;
-                edit_Cb.Checked = permissions.Edit;
-                replace_Cb.Checked = permissions.Replace;
-                transfer_Cb.Checked = permissions.Transfer;
-                borrow_Cb.Checked = permissions.Borrow;
-                archive_Cb.Checked = permissions.Archive;
-                showImage_Cb.Checked = permissions.ShowImage;
-                dashboard_Cb.Checked = permissions.Dashboard;
-                artificialIntelligence_Cb.Checked = permissions.ArtificialIntelligence;
-                createReport_Cb.Checked = permissions.CreateReport;
-                backupAndRestoreData_Cb.Checked = permissions.BackupAndRestoreData;
-            }
-            else
-            {
-                Console.WriteLine("No permissions found for the specified userID.");
-                // Optionally, uncheck all checkboxes if no permissions are found
-                assets_Cb.Checked = false;
-                replacement_Cb.Checked = false;
-                cleaning_Cb.Checked = false;
-                disposed_Cb.Checked = false;
-                borrowed_Cb.Checked = false;
-                reserved_Cb.Checked = false;
-                archived_Cb.Checked = false;
-                assetHistory_Cb.Checked = false;
-                add_Cb.Checked = false;
-                edit_Cb.Checked = false;
-                replace_Cb.Checked = false;
-                transfer_Cb.Checked = false;
-                borrow_Cb.Checked = false;
-                archive_Cb.Checked = false;
-                showImage_Cb.Checked = false;
-                dashboard_Cb.Checked = false;
-                artificialIntelligence_Cb.Checked = false;
-                createReport_Cb.Checked = false;
-                backupAndRestoreData_Cb.Checked = false;
-            }
+            RetriveAndLoadPermission();
         }
 
 

@@ -44,7 +44,7 @@ namespace Smart_Asset
         public static string selectedButton = "";
         public static List<string> selectedUserIDs = new List<string>();
         RightClick_ManageUsers rcm = new RightClick_ManageUsers();
-
+        public static string staticSelectedOneUserID;
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -96,6 +96,9 @@ namespace Smart_Asset
                     rcm.GetRetrievingUserID(new List<string> { userID }, new List<string> { name }, new List<string> { role });
 
                     Console.WriteLine("SELECTED USER ID: " + userID + ", SELECTED NAME: " + name + ", SELECTED ROLE: " + role);
+
+                    //pass it to static variable to be retrieved in other forms
+                    staticSelectedOneUserID = userID;
 
                 }
                 else if (dataGridView1.SelectedRows.Count > 1)

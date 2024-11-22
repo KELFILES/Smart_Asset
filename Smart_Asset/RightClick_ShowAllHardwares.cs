@@ -23,11 +23,47 @@ namespace Smart_Asset
 
         private void RightClick_ShowAllHardwares_Load(object sender, EventArgs e)
         {
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                LoadPermissionsColor();
+            }
+
+
+
             if (getData == null || getData.Count == 0)
             {
                 panel9.Visible = false;
             }
             
+        }
+
+
+        private void LoadPermissionsColor()
+        {
+            if (FrontPage_Final.permission_Edit.Equals("0"))
+            {
+                edit_Btn.ForeColor = Color.Red;
+            }
+            if (FrontPage_Final.permission_Replace.Equals("0"))
+            {
+                edit_Btn.ForeColor = Color.Red;
+            }
+            if (FrontPage_Final.permission_Transfer.Equals("0"))
+            {
+                Transfer_Btn.ForeColor = Color.Red;
+            }
+            if (FrontPage_Final.permission_Borrow.Equals("0"))
+            {
+                borrow_Btn.ForeColor = Color.Red;
+            }
+            if (FrontPage_Final.permission_Archive.Equals("0"))
+            {
+                archive_Btn.ForeColor = Color.Red;
+            }
+            if (FrontPage_Final.permission_ShowImage.Equals("0"))
+            {
+                showImage_Btn.ForeColor = Color.Red;
+            }
         }
 
         // Enable double buffering for the entire form
@@ -156,6 +192,17 @@ namespace Smart_Asset
 
         private async void archieve_Btn_Click(object sender, EventArgs e)
         {
+
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                if (FrontPage_Final.permission_Archive.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Archive.");
+                    return;
+                }
+            }
+
+
             try
             {
                 if (getData == null || getData.Count == 0)
@@ -184,6 +231,17 @@ namespace Smart_Asset
         private async void edit_Btn_Click(object sender, EventArgs e)
         {
 
+
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                if (FrontPage_Final.permission_Edit.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Edit.");
+                    return;
+                }
+            }
+
+
             try
             {
                 if (getData == null || getData.Count == 0)
@@ -211,6 +269,17 @@ namespace Smart_Asset
 
         private void Transfer_Click(object sender, EventArgs e)
         {
+
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                if (FrontPage_Final.permission_Transfer.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Transfer.");
+                    return;
+                }
+            }
+
+
             try
             {
                 if (getData == null || getData.Count == 0)
@@ -237,6 +306,17 @@ namespace Smart_Asset
 
         private void replace_Btn_Click(object sender, EventArgs e)
         {
+
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                if (FrontPage_Final.permission_Replace.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Replace.");
+                    return;
+                }
+            }
+
+
             if (getData == null || getData.Count == 0)
             {
                 MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -261,6 +341,15 @@ namespace Smart_Asset
 
         private void borrow_Btn_Click(object sender, EventArgs e)
         {
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                if (FrontPage_Final.permission_Borrow.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Borrow.");
+                    return;
+                }
+            }
+
             try
             {
                 if (getData == null || getData.Count == 0)
@@ -287,6 +376,16 @@ namespace Smart_Asset
 
         private void showImage_Btn_Click(object sender, EventArgs e)
         {
+
+            if (FrontPage_Final.login_Role.Equals("Custom User"))
+            {
+                if (FrontPage_Final.permission_ShowImage.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Show Image.");
+                    return;
+                }
+            }
+
             if (getData == null || getData.Count == 0)
             {
                 MessageBox.Show("No Row selected. Please select at least one Row.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);

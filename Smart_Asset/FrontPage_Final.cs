@@ -39,7 +39,7 @@ namespace Smart_Asset
             StaticName = name_Lbl;
             StaticManageAsset = ManageAsset_Btn;
             StaticCleaning = cleaning_Btn;
-            StaticReplaced = replaced_Btn;
+            StaticReplaced = replacement_Btn;
             StaticDisposed = disposed_Btn;
             StaticBorrowed = borrowed_Btn;
             StaticReserved = reserved_Btn;
@@ -147,7 +147,14 @@ namespace Smart_Asset
 
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
-            loadPermissions();
+            loadPermissionsColor();
+
+            if(login_Role.Equals("Custom User") || login_Role.Equals("Admin"))
+            {
+                //DISABLE MANAGE USERS
+                ManageUsers_Btn.Enabled = false;
+                ManageUsers_Btn.Visible = false;
+            }
 
             // Print all static properties of permission
             if (login_Role.Equals("Custom User"))
@@ -186,8 +193,8 @@ namespace Smart_Asset
             assets_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "asset_Icon.ico"));
             assets_Btn.Padding = new Padding(35, 0, 20, 0);
 
-            replaced_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
-            replaced_Btn.Padding = new Padding(35, 0, 20, 0);
+            replacement_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "replacement_Icon.ico"));
+            replacement_Btn.Padding = new Padding(35, 0, 20, 0);
 
             cleaning_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "cleaning_Icon.ico"));
             cleaning_Btn.Padding = new Padding(35, 0, 20, 0);
@@ -226,72 +233,68 @@ namespace Smart_Asset
 
 
 
-        private void loadPermissions()
+        private void loadPermissionsColor()
         {
             //Console.WriteLine("Permission Dashboard:" + permission_Dashboard);
             if (login_Role.Equals("Custom User"))
             {
 
-                //DISABLE MANAGE USERS
-                ManageUsers_Btn.Enabled = false;
-                ManageUsers_Btn.Visible = false;
-
 
                 if (permission_Dashboard.Equals("0"))
-                    {
-                        dashboard_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Assets.Equals("0"))
-                    {
-                        assets_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Cleaning.Equals("0"))
-                    {
-                        cleaning_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Cleaning.Equals("0"))
-                    {
-                        cleaning_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Replace.Equals("0"))
-                    {
-                        replaced_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Disposed.Equals("0"))
-                    {
-                        disposed_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Borrowed.Equals("0"))
-                    {
-                        borrowed_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Reserved.Equals("0"))
-                    {
-                        reserved_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_Archived.Equals("0"))
-                    {
-                        archived_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_AssetHistory.Equals("0"))
-                    {
-                        assetHistory_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_ArtificialIntelligence.Equals("0"))
-                    {
-                        aIChat_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_CreateReport.Equals("0"))
-                    {
-                        createReport_Btn.ForeColor = Color.Red;
-                    }
-                    if (permission_BackupAndRestoreData.Equals("0"))
-                    {
-                        backupAndRestoreData_Btn.ForeColor = Color.Red;
-                    }
+                {
+                    dashboard_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Assets.Equals("0"))
+                {
+                    assets_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Cleaning.Equals("0"))
+                {
+                    cleaning_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Cleaning.Equals("0"))
+                {
+                    cleaning_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Replacement.Equals("0"))
+                {
+                    replacement_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Disposed.Equals("0"))
+                {
+                    disposed_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Borrowed.Equals("0"))
+                {
+                    borrowed_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Reserved.Equals("0"))
+                {
+                    reserved_Btn.ForeColor = Color.Red;
+                }
+                if (permission_Archived.Equals("0"))
+                {
+                    archived_Btn.ForeColor = Color.Red;
+                }
+                if (permission_AssetHistory.Equals("0"))
+                {
+                    assetHistory_Btn.ForeColor = Color.Red;
+                }
+                if (permission_ArtificialIntelligence.Equals("0"))
+                {
+                    aIChat_Btn.ForeColor = Color.Red;
+                }
+                if (permission_CreateReport.Equals("0"))
+                {
+                    createReport_Btn.ForeColor = Color.Red;
+                }
+                if (permission_BackupAndRestoreData.Equals("0"))
+                {
+                    backupAndRestoreData_Btn.ForeColor = Color.Red;
+                }
 
 
-                    //all inside Assets Module
+                //all inside Assets Module
 
 
 
@@ -459,6 +462,7 @@ namespace Smart_Asset
 
         private void ManageUsers_Btn_Click_1(object sender, EventArgs e)
         {
+
             showFormSelected(ref mu, "MANAGE USERS");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "manageUsers_Icon.ico"));
             //MyDbMethods.ReadManageUsers("SmartAssetDb", mu.dataGridView1, "Users");
@@ -628,6 +632,17 @@ namespace Smart_Asset
 
         private void artificialIntelligence_Btn_Click_1(object sender, EventArgs e)
         {
+            header_Lbl.Text = "AI CHAT";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_ArtificialIntelligence.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable AI Chat.");
+                    return;
+                }
+            }
+
             //showFormSelected(ref db, "DASHBOARD");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
             MessageBox.Show("STILL ON PROGRESS!");
@@ -640,13 +655,24 @@ namespace Smart_Asset
 
         private void createReport_Btn_Click_1(object sender, EventArgs e)
         {
+            header_Lbl.Text = "CREATE REPORT";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_CreateReport.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Create Report.");
+                    return;
+                }
+            }
+
             //showFormSelected(ref mngrl, "CREATE REPORT");
 
             //UPDATE HEADER IMAGE
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "createReport_Icon.ico"));
 
 
-            showFormSelected(ref crtRep, "CREATE REPORTS");
+            showFormSelected(ref crtRep, "CREATE REPORT");
         }
 
         private void logout_Btn_Click_1(object sender, EventArgs e)
@@ -718,6 +744,17 @@ namespace Smart_Asset
 
         private void backupData_Btn_Click(object sender, EventArgs e)
         {
+            header_Lbl.Text = "BACKUP AND RESTORE DATA";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_BackupAndRestoreData.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Backup and Restore Data.");
+                    return;
+                }
+            }
+
             //showFormSelected(ref rd, "BACKUP DATA");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
 
@@ -787,12 +824,12 @@ namespace Smart_Asset
 
         private void repairingHardwares_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(replaced_Btn);
+            SubButtonEnterColor(replacement_Btn);
         }
 
         private void repairingHardwares_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(replaced_Btn);
+            SubButtonLeaveColor(replacement_Btn);
         }
 
         private void cleaning_Btn_MouseEnter(object sender, EventArgs e)
@@ -864,7 +901,7 @@ namespace Smart_Asset
 
             if (login_Role.Equals("Custom User"))
             {
-                if (permission_Replace.Equals("0"))
+                if (permission_Replacement.Equals("0"))
                 {
                     MessageBox.Show("Access Denied! \nContact the Administrator to enable Replaced.");
                     return;

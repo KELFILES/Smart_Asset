@@ -432,7 +432,7 @@
             // 
             replacement_Cb.AutoSize = true;
             replacement_Cb.ForeColor = Color.White;
-            replacement_Cb.Location = new Point(41, 84);
+            replacement_Cb.Location = new Point(41, 109);
             replacement_Cb.Name = "replacement_Cb";
             replacement_Cb.Size = new Size(95, 19);
             replacement_Cb.TabIndex = 3;
@@ -454,7 +454,7 @@
             // 
             cleaning_Cb.AutoSize = true;
             cleaning_Cb.ForeColor = Color.White;
-            cleaning_Cb.Location = new Point(41, 109);
+            cleaning_Cb.Location = new Point(41, 84);
             cleaning_Cb.Name = "cleaning_Cb";
             cleaning_Cb.Size = new Size(73, 19);
             cleaning_Cb.TabIndex = 4;

@@ -3504,7 +3504,7 @@ namespace Smart_Asset
                     field.Name == "CreateReport" || field.Name == "Dashboard" ||
                     field.Name == "Disposed" || field.Name == "Edit" ||
                     field.Name == "Replace" || field.Name == "Replacement" ||
-                    field.Name == "Reserved" || field.Name == "Show Image" || field.Name == "Transfer")
+                    field.Name == "Reserved" || field.Name == "ShowImage" || field.Name == "Transfer")
                 {
                     permissions[field.Name] = field.Value.ToString();
                 }
@@ -3514,6 +3514,76 @@ namespace Smart_Asset
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+        public static void UpdateCheckBoxes(string dbNameVal, string collNameVal, string userIDVal, Form form)
+        {
+            // Initialize MongoDB client and access database and collection
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbNameVal);
+            var collection = database.GetCollection<BsonDocument>(collNameVal);
+
+            // Retrieve the document using userID
+            var filter = Builders<BsonDocument>.Filter.Eq("userID", userIDVal);
+            var document = collection.Find(filter).FirstOrDefault();
+
+            if (document == null)
+            {
+                MessageBox.Show("No permissions found for the given userID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Iterate through each field in the document
+            foreach (var field in document)
+            {
+                // Skip system fields (_id and userID)
+                if (field.Name == "_id" || field.Name == "userID") continue;
+
+                // Get the corresponding CheckBox by name
+                var checkBoxName = $"{field.Name}_Cb";
+                var checkBox = form.Controls.Find(checkBoxName, true).FirstOrDefault() as CheckBox;
+
+                if (checkBox != null)
+                {
+                    // Update the CheckBox state based on the value
+                    checkBox.Checked = field.Value.ToString() == "1";
+                }
+            }
+
+            // Handle the visibility and state of assetEnabled_Panel
+            var assetsCheckBox = form.Controls.Find("assets_Cb", true).FirstOrDefault() as CheckBox;
+            var assetEnabledPanel = form.Controls.Find("assetEnabled_Panel", true).FirstOrDefault() as Panel;
+
+            if (assetsCheckBox != null && assetEnabledPanel != null)
+            {
+                if (assetsCheckBox.Checked)
+                {
+                    assetEnabledPanel.Visible = true;
+                }
+                else
+                {
+                    // Disable all child CheckBoxes in assetEnabled_Panel
+                    foreach (Control control in assetEnabledPanel.Controls)
+                    {
+                        if (control is CheckBox cb)
+                        {
+                            cb.Checked = false;
+                        }
+                    }
+
+                    assetEnabledPanel.Visible = false;
+                }
+            }
+        }
 
 
 

@@ -30,16 +30,16 @@
         {
             panel1 = new Panel();
             panel2 = new Panel();
-            button1 = new Button();
-            label3 = new Label();
-            serialNoTo_Cmb = new ComboBox();
-            label2 = new Label();
-            label1 = new Label();
-            serialNoFrom_Cmb = new ComboBox();
-            label8 = new Label();
-            label5 = new Label();
             label7 = new Label();
             notes_Tb = new RichTextBox();
+            button1 = new Button();
+            label3 = new Label();
+            serialNoTop_Cmb = new ComboBox();
+            label2 = new Label();
+            label1 = new Label();
+            serialNoBottom_Cmb = new ComboBox();
+            label8 = new Label();
+            label5 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -61,10 +61,10 @@
             panel2.Controls.Add(notes_Tb);
             panel2.Controls.Add(button1);
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(serialNoTo_Cmb);
+            panel2.Controls.Add(serialNoTop_Cmb);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Controls.Add(serialNoFrom_Cmb);
+            panel2.Controls.Add(serialNoBottom_Cmb);
             panel2.Controls.Add(label8);
             panel2.Controls.Add(label5);
             panel2.Location = new Point(21, 29);
@@ -72,10 +72,33 @@
             panel2.Size = new Size(1117, 555);
             panel2.TabIndex = 0;
             // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 11F);
+            label7.ForeColor = Color.Red;
+            label7.Location = new Point(215, 241);
+            label7.Name = "label7";
+            label7.Size = new Size(125, 20);
+            label7.TabIndex = 33;
+            label7.Text = "Notes: \"Optional\"";
+            // 
+            // notes_Tb
+            // 
+            notes_Tb.Anchor = AnchorStyles.Top;
+            notes_Tb.BackColor = Color.Silver;
+            notes_Tb.BorderStyle = BorderStyle.None;
+            notes_Tb.Location = new Point(197, 264);
+            notes_Tb.Name = "notes_Tb";
+            notes_Tb.Size = new Size(716, 232);
+            notes_Tb.TabIndex = 32;
+            notes_Tb.Text = "";
+            // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(515, 507);
+            button1.Location = new Point(510, 502);
             button1.Name = "button1";
             button1.Size = new Size(109, 34);
             button1.TabIndex = 31;
@@ -96,16 +119,16 @@
             label3.TabIndex = 30;
             label3.Text = "REPLACEMENT:";
             // 
-            // serialNoTo_Cmb
+            // serialNoTop_Cmb
             // 
-            serialNoTo_Cmb.Anchor = AnchorStyles.Top;
-            serialNoTo_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            serialNoTo_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            serialNoTo_Cmb.FormattingEnabled = true;
-            serialNoTo_Cmb.Location = new Point(216, 202);
-            serialNoTo_Cmb.Name = "serialNoTo_Cmb";
-            serialNoTo_Cmb.Size = new Size(715, 23);
-            serialNoTo_Cmb.TabIndex = 29;
+            serialNoTop_Cmb.Anchor = AnchorStyles.Top;
+            serialNoTop_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            serialNoTop_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            serialNoTop_Cmb.FormattingEnabled = true;
+            serialNoTop_Cmb.Location = new Point(198, 127);
+            serialNoTop_Cmb.Name = "serialNoTop_Cmb";
+            serialNoTop_Cmb.Size = new Size(715, 23);
+            serialNoTop_Cmb.TabIndex = 29;
             // 
             // label2
             // 
@@ -125,22 +148,22 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(515, 165);
+            label1.Location = new Point(548, 169);
             label1.Name = "label1";
-            label1.Size = new Size(105, 25);
+            label1.Size = new Size(35, 25);
             label1.TabIndex = 27;
-            label1.Text = "Replace To:";
+            label1.Text = "To:";
             // 
-            // serialNoFrom_Cmb
+            // serialNoBottom_Cmb
             // 
-            serialNoFrom_Cmb.Anchor = AnchorStyles.Top;
-            serialNoFrom_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            serialNoFrom_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-            serialNoFrom_Cmb.FormattingEnabled = true;
-            serialNoFrom_Cmb.Location = new Point(216, 127);
-            serialNoFrom_Cmb.Name = "serialNoFrom_Cmb";
-            serialNoFrom_Cmb.Size = new Size(715, 23);
-            serialNoFrom_Cmb.TabIndex = 26;
+            serialNoBottom_Cmb.Anchor = AnchorStyles.Top;
+            serialNoBottom_Cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            serialNoBottom_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            serialNoBottom_Cmb.FormattingEnabled = true;
+            serialNoBottom_Cmb.Location = new Point(198, 200);
+            serialNoBottom_Cmb.Name = "serialNoBottom_Cmb";
+            serialNoBottom_Cmb.Size = new Size(715, 23);
+            serialNoBottom_Cmb.TabIndex = 26;
             // 
             // label8
             // 
@@ -160,34 +183,11 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14F);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(506, 88);
+            label5.Location = new Point(474, 88);
             label5.Name = "label5";
-            label5.Size = new Size(129, 25);
+            label5.Size = new Size(201, 25);
             label5.TabIndex = 8;
-            label5.Text = "Replace From:";
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Top;
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 11F);
-            label7.ForeColor = Color.Red;
-            label7.Location = new Point(215, 241);
-            label7.Name = "label7";
-            label7.Size = new Size(125, 20);
-            label7.TabIndex = 33;
-            label7.Text = "Notes: \"Optional\"";
-            // 
-            // notes_Tb
-            // 
-            notes_Tb.Anchor = AnchorStyles.Top;
-            notes_Tb.BackColor = Color.Silver;
-            notes_Tb.BorderStyle = BorderStyle.None;
-            notes_Tb.Location = new Point(215, 264);
-            notes_Tb.Name = "notes_Tb";
-            notes_Tb.Size = new Size(716, 232);
-            notes_Tb.TabIndex = 32;
-            notes_Tb.Text = "";
+            label5.Text = "Replace this hardware:";
             // 
             // Replacement
             // 
@@ -208,9 +208,9 @@
         private Panel panel1;
         private Panel panel2;
         private Label label5;
-        public ComboBox serialNoFrom_Cmb;
+        public ComboBox serialNoBottom_Cmb;
         private Label label8;
-        public ComboBox serialNoTo_Cmb;
+        public ComboBox serialNoTop_Cmb;
         private Label label2;
         private Label label1;
         private Button button1;

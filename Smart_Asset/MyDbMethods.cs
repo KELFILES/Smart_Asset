@@ -446,6 +446,10 @@ namespace Smart_Asset
             }
         }
 
+
+
+        
+
         public static void ReadLocation(string dbName, DataGridView dataGridViewName, string collectionName)
         {
             var client = new MongoClient(DefaultConnectionString);
@@ -1645,13 +1649,23 @@ namespace Smart_Asset
                     try
                     {
                         var transferCollection = database.GetCollection<BsonDocument>(transferColl);
-                        await transferCollection.InsertOneAsync(document);
-
-                        var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
                         var filter = Builders<BsonDocument>.Filter.Eq("SerialNo", serialNo);
-                        await sourceCollection.DeleteOneAsync(filter);
 
-                        successfulTransfers.Add(serialNo);
+                        // Check if the document already exists in the target collection
+                        var existingDocument = await transferCollection.Find(filter).FirstOrDefaultAsync();
+                        if (existingDocument != null)
+                        {
+                            MessageBox.Show($"Done transferring, the serial number {serialNo} is already in the target collection.", "Transfer Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            await transferCollection.InsertOneAsync(document);
+
+                            var sourceCollection = database.GetCollection<BsonDocument>(sourceCollectionName);
+                            await sourceCollection.DeleteOneAsync(filter);
+
+                            successfulTransfers.Add(serialNo);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1674,6 +1688,7 @@ namespace Smart_Asset
                 MessageBox.Show($"The following SerialNos failed to transfer:\n{string.Join("\n", failedTransfers)}", "Transfer Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         public static async Task TransferDocumentBySerialNo(string dbName, string transferColl, string serialNos, string notes, string name, string returnDate)
         {

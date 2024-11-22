@@ -30,14 +30,30 @@ namespace Smart_Asset
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            // Get the location of 'SerialNoTo' (bottom ComboBox)
-            string locationTo = await MyDbMethods.Get_LocationAsync("SmartAssetDb", serialNoTo_Cmb.Text);
+            // Get the location of 'SerialNoTop' (bottom ComboBox)
+            string locationTo = await MyDbMethods.Get_LocationAsync("SmartAssetDb", serialNoTop_Cmb.Text);
 
-            // Move 'SerialNoTo' (bottom ComboBox) to the "Replacement" collection
-            await MyDbMethods.MoveToReplacement("SmartAssetDb", serialNoTo_Cmb.Text, notes_Tb.Text);
+            // Get the location of 'SerialNoBottom' (bottom ComboBox)
+            string locationBottom = await MyDbMethods.Get_LocationAsync("SmartAssetDb", serialNoBottom_Cmb.Text);
 
-            // Transfer 'SerialNoFrom' (top ComboBox) to the location of 'SerialNoTo'
-            await MyDbMethods.TransferSerialNoToLocation("SmartAssetDb", locationTo, serialNoFrom_Cmb.Text, notes_Tb.Text);
+
+            Console.WriteLine("Retrieved Location: " + locationTo);
+
+
+            await MyDbMethods.MoveToReplacement("SmartAssetDb", serialNoTop_Cmb.Text, notes_Tb.Text);
+
+
+
+            //await MyDbMethods.TransferSerialNoToLocation("SmartAssetDb", locationTo, serialNoFrom_Cmb.Text, notes_Tb.Text);
+
+
+            await MyDbMethods.TransferDocumentBySerialNo("SmartAssetDb", locationTo, serialNoBottom_Cmb.Text);
         }
+
+
+
+
+
+
     }
 }

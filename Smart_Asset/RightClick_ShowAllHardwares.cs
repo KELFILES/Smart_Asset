@@ -253,7 +253,7 @@ namespace Smart_Asset
 
             rpl.FormBorderStyle = FormBorderStyle.FixedSingle;
             rpl.StartPosition = FormStartPosition.CenterScreen;
-            rpl.serialNoFrom_Cmb.Text = string.Join(", ", getData);
+            rpl.serialNoTop_Cmb.Text = string.Join(", ", getData);
             rpl.Show();
 
 

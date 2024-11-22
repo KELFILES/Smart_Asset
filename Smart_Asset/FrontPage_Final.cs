@@ -147,7 +147,7 @@ namespace Smart_Asset
 
         private void FrontPage_Final_Load(object sender, EventArgs e)
         {
-
+            loadPermissions();
 
             // Print all static properties of permission
             if (login_Role.Equals("Custom User"))
@@ -164,14 +164,18 @@ namespace Smart_Asset
                 }
             }
 
-            
+
+
+
+
+
 
 
             // Scroll the panel to the top
             sideMenu_Panel.AutoScrollPosition = new Point(0, 0);
 
-            // To show the dashboard first
-            dashboard_Btn.PerformClick();
+
+
 
             this.WindowState = FormWindowState.Maximized;
 
@@ -214,7 +218,91 @@ namespace Smart_Asset
 
             backupAndRestoreData_Btn.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
             backupAndRestoreData_Btn.Padding = new Padding(10, 0, 20, 0);
+
+
+            // To show the dashboard first
+            dashboard_Btn.PerformClick();
         }
+
+
+
+        private void loadPermissions()
+        {
+            //Console.WriteLine("Permission Dashboard:" + permission_Dashboard);
+            if (login_Role.Equals("Custom User"))
+            {
+
+                //DISABLE MANAGE USERS
+                ManageUsers_Btn.Enabled = false;
+                ManageUsers_Btn.Visible = false;
+
+
+                if (permission_Dashboard.Equals("0"))
+                    {
+                        dashboard_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Assets.Equals("0"))
+                    {
+                        assets_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Cleaning.Equals("0"))
+                    {
+                        cleaning_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Cleaning.Equals("0"))
+                    {
+                        cleaning_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Replace.Equals("0"))
+                    {
+                        replaced_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Disposed.Equals("0"))
+                    {
+                        disposed_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Borrowed.Equals("0"))
+                    {
+                        borrowed_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Reserved.Equals("0"))
+                    {
+                        reserved_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_Archived.Equals("0"))
+                    {
+                        archived_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_AssetHistory.Equals("0"))
+                    {
+                        assetHistory_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_ArtificialIntelligence.Equals("0"))
+                    {
+                        aIChat_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_CreateReport.Equals("0"))
+                    {
+                        createReport_Btn.ForeColor = Color.Red;
+                    }
+                    if (permission_BackupAndRestoreData.Equals("0"))
+                    {
+                        backupAndRestoreData_Btn.ForeColor = Color.Red;
+                    }
+
+
+                    //all inside Assets Module
+
+
+
+
+            }
+        }
+
+
+
+
+
 
         private void customizeDesign()
         {
@@ -319,7 +407,21 @@ namespace Smart_Asset
 
         private void dashboard_Btn_Click(object sender, EventArgs e)
         {
-            showFormSelected(ref db, "DASHBOARD");
+            header_Lbl.Text = "DASHBOARD";
+
+            if(login_Role.Equals("Custom User"))
+            {
+                if (permission_Dashboard.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Dashboard.");
+                    return;
+                }
+            }
+
+
+
+
+                showFormSelected(ref db, "DASHBOARD");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
         }
 
@@ -571,6 +673,19 @@ namespace Smart_Asset
 
         private void asset_Btn_Click(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "ASSETS";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Assets.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Assets.");
+                    return;
+                }
+            }
+
+
             //RESET THE SERIALNO. SELECTED
             //Read.selectedSerialNos.Clear();
 
@@ -744,6 +859,19 @@ namespace Smart_Asset
 
         private void repairing_Btn_Click(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "REPLACED";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Replace.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Replaced.");
+                    return;
+                }
+            }
+
+
             // Dispose of the previous instance of 'Read' form properly
             if (rd != null && !rd.IsDisposed)
             {
@@ -778,6 +906,18 @@ namespace Smart_Asset
 
         private void cleaning_Btn_Click_1(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "CLEANING";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Cleaning.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Cleaning.");
+                    return;
+                }
+            }
+
             // Dispose of the previous instance of 'Read' form properly
             if (rd != null && !rd.IsDisposed)
             {
@@ -813,6 +953,19 @@ namespace Smart_Asset
 
         private void disposed_Btn_Click_1(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "DISPOSED";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Disposed.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Disposed.");
+                    return;
+                }
+            }
+
+
             // Dispose of the previous instance of 'Read' form properly
             if (rd != null && !rd.IsDisposed)
             {
@@ -847,6 +1000,18 @@ namespace Smart_Asset
 
         private void borrowed_Btn_Click(object sender, EventArgs e)
         {
+            header_Lbl.Text = "BORROWED";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Borrowed.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Borrowed.");
+                    return;
+                }
+            }
+
+
             // Dispose of the previous instance of 'Read' form properly
             if (rd != null && !rd.IsDisposed)
             {
@@ -887,6 +1052,19 @@ namespace Smart_Asset
 
         private async void reserved_Btn_Click(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "RESERVED";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Reserved.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Reserved.");
+                    return;
+                }
+            }
+
+
             // Dispose of the previous instance of 'Read' form properly
             if (rd != null && !rd.IsDisposed)
             {
@@ -925,6 +1103,19 @@ namespace Smart_Asset
 
         private void archived_Btn_Click(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "ARCHIVED";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_Archived.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Archive.");
+                    return;
+                }
+            }
+
+
             // Dispose of the previous instance of 'Read' form properly
             if (rd != null && !rd.IsDisposed)
             {
@@ -935,7 +1126,7 @@ namespace Smart_Asset
             // Create a new instance of the 'Read' form
             rd = new Read();
 
-            showFormSelected(ref rd, "ARCHIVE");
+            showFormSelected(ref rd, "ARCHIVED");
 
             // Trigger the archive button click on the 'Read' form
             rd.archive_Btn.PerformClick();
@@ -961,6 +1152,18 @@ namespace Smart_Asset
 
         private void AssetHistory_Button_Click(object sender, EventArgs e)
         {
+
+            header_Lbl.Text = "ASSET HISTORY";
+
+            if (login_Role.Equals("Custom User"))
+            {
+                if (permission_AssetHistory.Equals("0"))
+                {
+                    MessageBox.Show("Access Denied! \nContact the Administrator to enable Asset History.");
+                    return;
+                }
+            }
+
             //showFormSelected(ref rd, "ASSET HISTORY");
             MessageBox.Show("STILL ON PROGRESS!");
 

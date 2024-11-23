@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smart_Asset.Images;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -131,6 +132,12 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
+        }
+
+        private void hideTableColumn_Btn_Click(object sender, EventArgs e)
+        {
+            HideColumn hc = new HideColumn();
+            hc.Show();
         }
     }
 }

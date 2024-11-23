@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            notes_Cb = new CheckBox();
             hide_Btn = new Button();
             clear_Btn = new Button();
             selectAll_Btn = new Button();
@@ -47,7 +48,6 @@
             brand_Cb = new CheckBox();
             type_Cb = new CheckBox();
             topLabel_Lbl = new Label();
-            notes_Cb = new CheckBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -78,6 +78,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(278, 597);
             panel1.TabIndex = 0;
+            // 
+            // notes_Cb
+            // 
+            notes_Cb.AutoSize = true;
+            notes_Cb.ForeColor = Color.White;
+            notes_Cb.Location = new Point(59, 435);
+            notes_Cb.Name = "notes_Cb";
+            notes_Cb.Size = new Size(57, 19);
+            notes_Cb.TabIndex = 24;
+            notes_Cb.Text = "Notes";
+            notes_Cb.UseVisualStyleBackColor = true;
             // 
             // hide_Btn
             // 
@@ -266,24 +277,13 @@
             // topLabel_Lbl
             // 
             topLabel_Lbl.AutoSize = true;
-            topLabel_Lbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            topLabel_Lbl.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             topLabel_Lbl.ForeColor = Color.White;
-            topLabel_Lbl.Location = new Point(49, 32);
+            topLabel_Lbl.Location = new Point(23, 31);
             topLabel_Lbl.Name = "topLabel_Lbl";
-            topLabel_Lbl.Size = new Size(195, 32);
+            topLabel_Lbl.Size = new Size(239, 30);
             topLabel_Lbl.TabIndex = 6;
-            topLabel_Lbl.Text = "HIDE COLUMNS";
-            // 
-            // notes_Cb
-            // 
-            notes_Cb.AutoSize = true;
-            notes_Cb.ForeColor = Color.White;
-            notes_Cb.Location = new Point(59, 435);
-            notes_Cb.Name = "notes_Cb";
-            notes_Cb.Size = new Size(57, 19);
-            notes_Cb.TabIndex = 24;
-            notes_Cb.Text = "Notes";
-            notes_Cb.UseVisualStyleBackColor = true;
+            topLabel_Lbl.Text = "HIDE TABLE COLUMNS";
             // 
             // HideColumn
             // 
@@ -294,7 +294,7 @@
             Controls.Add(panel1);
             Name = "HideColumn";
             Padding = new Padding(7);
-            Text = "HideColumns";
+            Text = "HideTableColumns";
             Load += HideColumn_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

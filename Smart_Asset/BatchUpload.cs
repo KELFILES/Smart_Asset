@@ -34,10 +34,10 @@ namespace Smart_Asset
 
         private void BatchUpload_Load(object sender, EventArgs e)
         {
-            MyOtherMethods.CenterInPanel(label1, panel2);
-            MyOtherMethods.CenterInPanel(instructions_Btn, panel2);
-            MyOtherMethods.CenterInPanel(uploadFile_Btn, panel2);
-            MyOtherMethods.CenterInPanel(label2, panel2);
+            MyOtherMethods.CenterInPanel(label1, panel1);
+            MyOtherMethods.CenterInPanel(instructions_Btn, panel1);
+            MyOtherMethods.CenterInPanel(uploadFile_Btn, panel1);
+            MyOtherMethods.CenterInPanel(label2, panel1);
         }
 
         private void instructions_Btn_Click(object sender, EventArgs e)

@@ -83,7 +83,7 @@ namespace Smart_Asset
 
 
             // 4.Purchased Assets Count by Year (Excluding Archive)
-            reportBuilder.AppendLine("4. Purchased Assets Count by Year (Excluding Archive):");
+            reportBuilder.AppendLine("4. Purchased Assets Count by Year:");
 
             // Filter valid PurchaseDates, exclude "Archive", and group by year
             var assetsByYear = allDocuments

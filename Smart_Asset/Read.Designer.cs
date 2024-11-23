@@ -526,6 +526,7 @@
             search_Cmb.Anchor = AnchorStyles.Top;
             search_Cmb.AutoCompleteMode = AutoCompleteMode.Append;
             search_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            search_Cmb.DropDownStyle = ComboBoxStyle.Simple;
             search_Cmb.FormattingEnabled = true;
             search_Cmb.Location = new Point(65, 51);
             search_Cmb.Name = "search_Cmb";

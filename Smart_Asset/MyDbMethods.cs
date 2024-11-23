@@ -3586,6 +3586,75 @@ namespace Smart_Asset
         }
 
 
+        public static async Task<bool> CheckDocumentExistsAsync_ForLocationList(string dbNameVal, string item)
+        {
+            // Initialize MongoDB client and access the database
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbNameVal);
+
+            // Get all collection names in the database
+            var collections = await database.ListCollectionNamesAsync();
+            var collectionList = await collections.ToListAsync();
+
+            foreach (var collectionName in collectionList)
+            {
+                // Check if the collection name matches exactly before '_'
+                if (collectionName.Contains("_"))
+                {
+                    var prefix = collectionName.Split('_')[0]; // Get the part before '_'
+                    if (prefix == item)
+                    {
+                        // Access the collection
+                        var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                        // Check if the collection contains any documents
+                        var count = await collection.CountDocumentsAsync(FilterDefinition<BsonDocument>.Empty);
+                        if (count > 0)
+                        {
+                            return true; // Collection exists and contains documents
+                        }
+                    }
+                }
+            }
+
+            return false; // No matching collection name found or no documents inside
+        }
+
+
+        public static async Task<bool> CheckDocumentExistsAsync_ForUnitList(string dbNameVal, string item)
+        {
+            // Initialize MongoDB client and access the database
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbNameVal);
+
+            // Get all collection names in the database
+            var collections = await database.ListCollectionNamesAsync();
+            var collectionList = await collections.ToListAsync();
+
+            foreach (var collectionName in collectionList)
+            {
+                // Check if the collection name contains '_'
+                if (collectionName.Contains("_"))
+                {
+                    var suffix = collectionName.Split('_').Last(); // Get the part after the last '_'
+                    if (suffix == item) // Match the text after '_'
+                    {
+                        // Access the collection
+                        var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                        // Check if the collection contains any documents
+                        var count = await collection.CountDocumentsAsync(FilterDefinition<BsonDocument>.Empty);
+                        if (count > 0)
+                        {
+                            return true; // Collection exists and contains documents
+                        }
+                    }
+                }
+            }
+
+            return false; // No matching collection name found or no documents inside
+        }
+
 
     }
 }

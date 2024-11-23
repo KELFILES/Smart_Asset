@@ -31,6 +31,7 @@
             RetriveToReserved_Btn = new Button();
             refresh_Btn = new Button();
             dispose_Btn = new Button();
+            hideTableColumn_Btn = new Button();
             SuspendLayout();
             // 
             // RetriveToReserved_Btn
@@ -63,11 +64,22 @@
             dispose_Btn.UseVisualStyleBackColor = true;
             dispose_Btn.Click += dispose_Btn_Click;
             // 
+            // hideTableColumn_Btn
+            // 
+            hideTableColumn_Btn.Location = new Point(9, 123);
+            hideTableColumn_Btn.Name = "hideTableColumn_Btn";
+            hideTableColumn_Btn.Size = new Size(172, 31);
+            hideTableColumn_Btn.TabIndex = 3;
+            hideTableColumn_Btn.Text = "Hide Table Column";
+            hideTableColumn_Btn.UseVisualStyleBackColor = true;
+            hideTableColumn_Btn.Click += hideTableColumn_Btn_Click;
+            // 
             // RightClick_Replacement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(193, 262);
+            Controls.Add(hideTableColumn_Btn);
             Controls.Add(dispose_Btn);
             Controls.Add(refresh_Btn);
             Controls.Add(RetriveToReserved_Btn);
@@ -83,5 +95,6 @@
         private Button RetriveToReserved_Btn;
         public Button refresh_Btn;
         private Button dispose_Btn;
+        private Button hideTableColumn_Btn;
     }
 }

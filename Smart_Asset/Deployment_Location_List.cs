@@ -53,23 +53,53 @@ namespace Smart_Asset
 
         private async void add_Btn_Click(object sender, EventArgs e)
         {
+            // Verify if the item exists in the DataGridView
+            bool itemFoundInGrid = dataGridView1.Rows
+                .Cast<DataGridViewRow>()
+                .Any(row => row.Cells["List"].Value?.ToString() == item_Tb.Text); // Replace "LocationName" with the correct column name
+
+            //CHECK IF ITEM NOT FOUND
+            if (itemFoundInGrid)
+            {
+                MessageBox.Show("Item already exist in list!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate that the text field is not empty
             if (String.IsNullOrEmpty(item_Tb.Text) || item_Tb.Text.Equals(""))
             {
                 MessageBox.Show("Field Cannot Be Empty!");
                 return;
             }
 
+            // Display a confirmation prompt
+            var dialogResult = MessageBox.Show(
+                $"Are you sure you want to add \"{item_Tb.Text}\" to the list?",
+                "Confirmation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
 
-            var fields = new Dictionary<string, string>
+            // Proceed only if the user clicks "Yes"
+            if (dialogResult == DialogResult.Yes)
             {
-                {"List", $"{item_Tb.Text}"}
-            };
+                // Prepare the fields to insert
+                var fields = new Dictionary<string, string>
+                {
+                    {"List", $"{item_Tb.Text}"}
+                };
 
-            await MyDbMethods.InsertDocument("SmartAssetDb", "Deployment_Location_List", fields, true);
+                // Insert the item into the database
+                await MyDbMethods.InsertDocument("SmartAssetDb", "Deployment_Location_List", fields, true);
 
-
-            //show again the list
-            await MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
+                // Refresh the DataGridView to show the updated list
+                await MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
+            }
+            else
+            {
+                // Optional: Log or display a message for cancellation
+                MessageBox.Show("Action canceled.");
+            }
         }
 
         // Enable double buffering for the entire form
@@ -130,10 +160,62 @@ namespace Smart_Asset
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            await MyDbMethods.RemoveDocumentAsync("SmartAssetDb", "Deployment_Location_List", "List", $"{item_Tb.Text}");
+            // Validate that the text field is not empty
+            if (string.IsNullOrEmpty(item_Tb.Text))
+            {
+                MessageBox.Show("Field Cannot Be Empty!");
+                return;
+            }
 
-            //show again the list
-            await MyDbMethods.showAllItemsInDb("SmartAssetDb", "Deployment_Location_List", dataGridView1);
+            string itemToCheck = item_Tb.Text;
+            string dbName = "SmartAssetDb";
+
+            // Check if any collection name matches the specified pattern
+            bool exists = await MyDbMethods.CheckDocumentExistsAsync_ForLocationList(dbName, itemToCheck);
+            if (exists)
+            {
+                MessageBox.Show($"You cannot delete {item_Tb.Text} because it has been used. Try remove or transfer document uses Location: {item_Tb.Text} first.");
+                return;
+            }
+
+
+            // Verify if the item exists in the DataGridView
+            bool itemFoundInGrid = dataGridView1.Rows
+                .Cast<DataGridViewRow>()
+                .Any(row => row.Cells["List"].Value?.ToString() == itemToCheck); // Replace "LocationName" with the correct column name
+
+            if (!itemFoundInGrid)
+            {
+                MessageBox.Show("Item Not Found in the list!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Display a confirmation prompt
+            var dialogResult = MessageBox.Show(
+                $"Are you sure you want to remove \"{itemToCheck}\" from the list?",
+                "Confirmation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            // Proceed only if the user clicks "Yes"
+            if (dialogResult == DialogResult.Yes)
+            {
+                // Remove the item from the database
+                await MyDbMethods.RemoveDocumentAsync(dbName, "Deployment_Location_List", "List", itemToCheck);
+
+                // Refresh the DataGridView to show the updated list
+                await MyDbMethods.showAllItemsInDb(dbName, "Deployment_Location_List", dataGridView1);
+
+                MessageBox.Show($"\"{itemToCheck}\" has been successfully removed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Action canceled.");
+            }
         }
+
+
+
     }
 }

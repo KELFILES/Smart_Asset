@@ -46,7 +46,7 @@ namespace Smart_Asset
             }
             if (FrontPage_Final.permission_Replace.Equals("0"))
             {
-                edit_Btn.ForeColor = Color.Red;
+                replace_Btn.ForeColor = Color.Red;
             }
             if (FrontPage_Final.permission_Transfer.Equals("0"))
             {

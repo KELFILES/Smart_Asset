@@ -122,6 +122,7 @@ namespace Smart_Asset
         RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
         RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
         RightClick_DisposedHardwares dsp = new RightClick_DisposedHardwares();
+        Ai_ChatBot aic= new Ai_ChatBot();
 
         public static string name = "";
         public static string username = "";
@@ -643,9 +644,8 @@ namespace Smart_Asset
                 }
             }
 
-            //showFormSelected(ref db, "DASHBOARD");
+            showFormSelected(ref aic, "AI CHAT");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "artificialIntelligence_Icon.ico"));
-            MessageBox.Show("STILL ON PROGRESS!");
         }
         private void ManageRoles_Btn_Click_1(object sender, EventArgs e)
         {

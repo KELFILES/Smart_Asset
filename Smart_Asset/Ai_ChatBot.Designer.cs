@@ -1,5 +1,4 @@
-﻿
-namespace Smart_Asset
+﻿namespace Smart_Asset
 {
     partial class Ai_ChatBot
     {
@@ -75,6 +74,7 @@ namespace Smart_Asset
             panel4.Padding = new Padding(50, 20, 50, 20);
             panel4.Size = new Size(1648, 1083);
             panel4.TabIndex = 2;
+            panel4.Click += panel4_Click;
             // 
             // panel2
             // 
@@ -106,6 +106,8 @@ namespace Smart_Asset
             mainFlowLayoutPanel.Size = new Size(1548, 892);
             mainFlowLayoutPanel.TabIndex = 12;
             mainFlowLayoutPanel.WrapContents = false;
+            mainFlowLayoutPanel.Click += mainFlowLayoutPanel_Click;
+            mainFlowLayoutPanel.Resize += mainFlowLayoutPanel_Resize;
             // 
             // panel5
             // 
@@ -166,7 +168,7 @@ namespace Smart_Asset
             progress_Lbl.AutoSize = true;
             progress_Lbl.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             progress_Lbl.ForeColor = SystemColors.ControlLightLight;
-            progress_Lbl.Location = new Point(89, 17);
+            progress_Lbl.Location = new Point(166, 25);
             progress_Lbl.Name = "progress_Lbl";
             progress_Lbl.Size = new Size(0, 20);
             progress_Lbl.TabIndex = 12;
@@ -205,6 +207,7 @@ namespace Smart_Asset
             send_Btn.TabIndex = 6;
             send_Btn.Text = "Send";
             send_Btn.UseVisualStyleBackColor = false;
+            send_Btn.Click += send_Btn_Click;
             // 
             // typeQuestion_Rt
             // 
@@ -216,6 +219,9 @@ namespace Smart_Asset
             typeQuestion_Rt.Size = new Size(1117, 27);
             typeQuestion_Rt.TabIndex = 10;
             typeQuestion_Rt.Text = "";
+            typeQuestion_Rt.Click += typeQuestion_Rt_Click;
+            typeQuestion_Rt.TextChanged += typeQuestion_Rt_TextChanged;
+            typeQuestion_Rt.KeyDown += typeQuestion_Rt_KeyDown;
             // 
             // Ai_ChatBot
             // 
@@ -225,6 +231,8 @@ namespace Smart_Asset
             Controls.Add(panel1);
             Name = "Ai_ChatBot";
             Text = "AiChat";
+            Load += AiChat_Load;
+            MouseDown += AiChat_MouseDown;
             panel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel3.ResumeLayout(false);

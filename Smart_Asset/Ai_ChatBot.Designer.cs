@@ -39,11 +39,11 @@ namespace Smart_Asset
             panel8 = new Panel();
             panel6 = new Panel();
             insertFile_Btn = new Button();
+            progress_Lbl = new Label();
             panel7 = new Panel();
             label1 = new Label();
             send_Btn = new Button();
             typeQuestion_Rt = new RichTextBox();
-            progress_Lbl = new Label();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -75,7 +75,6 @@ namespace Smart_Asset
             panel4.Padding = new Padding(50, 20, 50, 20);
             panel4.Size = new Size(1648, 1083);
             panel4.TabIndex = 2;
-
             // 
             // panel2
             // 
@@ -107,7 +106,6 @@ namespace Smart_Asset
             mainFlowLayoutPanel.Size = new Size(1548, 892);
             mainFlowLayoutPanel.TabIndex = 12;
             mainFlowLayoutPanel.WrapContents = false;
-
             // 
             // panel5
             // 
@@ -161,7 +159,17 @@ namespace Smart_Asset
             insertFile_Btn.TabIndex = 13;
             insertFile_Btn.Text = "Insert File";
             insertFile_Btn.UseVisualStyleBackColor = false;
-
+            insertFile_Btn.Click += insertFile_Btn_Click;
+            // 
+            // progress_Lbl
+            // 
+            progress_Lbl.AutoSize = true;
+            progress_Lbl.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            progress_Lbl.ForeColor = SystemColors.ControlLightLight;
+            progress_Lbl.Location = new Point(89, 17);
+            progress_Lbl.Name = "progress_Lbl";
+            progress_Lbl.Size = new Size(0, 20);
+            progress_Lbl.TabIndex = 12;
             // 
             // panel7
             // 
@@ -197,7 +205,6 @@ namespace Smart_Asset
             send_Btn.TabIndex = 6;
             send_Btn.Text = "Send";
             send_Btn.UseVisualStyleBackColor = false;
-
             // 
             // typeQuestion_Rt
             // 
@@ -209,25 +216,14 @@ namespace Smart_Asset
             typeQuestion_Rt.Size = new Size(1117, 27);
             typeQuestion_Rt.TabIndex = 10;
             typeQuestion_Rt.Text = "";
-
             // 
-            // progress_Lbl
-            // 
-            progress_Lbl.AutoSize = true;
-            progress_Lbl.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            progress_Lbl.ForeColor = SystemColors.ControlLightLight;
-            progress_Lbl.Location = new Point(89, 17);
-            progress_Lbl.Name = "progress_Lbl";
-            progress_Lbl.Size = new Size(0, 20);
-            progress_Lbl.TabIndex = 12;
-            // 
-            // AiChat
+            // Ai_ChatBot
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1648, 1083);
             Controls.Add(panel1);
-            Name = "AiChat";
+            Name = "Ai_ChatBot";
             Text = "AiChat";
             panel1.ResumeLayout(false);
             panel4.ResumeLayout(false);

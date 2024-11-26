@@ -1,8 +1,4 @@
-﻿
-
-
-
-using iText.Kernel.Pdf;
+﻿using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
 
 using DocumentFormat.OpenXml.Packaging;
@@ -698,10 +694,9 @@ namespace Smart_Asset
             }
         }
 
-
-
-
-
-
+        private void Ai_ChatBot_Resize(object sender, EventArgs e)
+        {
+            MyOtherMethods.CenterInPanel(insertFile_Btn, panel6);
+        }
     }
 }

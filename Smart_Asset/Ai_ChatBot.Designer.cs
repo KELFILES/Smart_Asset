@@ -233,6 +233,7 @@
             Text = "AiChat";
             Load += AiChat_Load;
             MouseDown += AiChat_MouseDown;
+            Resize += Ai_ChatBot_Resize;
             panel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel3.ResumeLayout(false);

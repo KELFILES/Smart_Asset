@@ -115,6 +115,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Dispose_Window.cs" />
+    <Compile Update="RightClick_BackupAndRestore.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ShowQR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +204,9 @@
     <None Update="Images\backupData_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\bakcup_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\borrowed_Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -256,6 +262,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\replacement_Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\restore_Image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\startupLogo_Image.png">

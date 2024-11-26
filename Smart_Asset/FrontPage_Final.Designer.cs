@@ -318,6 +318,7 @@
             assetHistory_Btn.Text = "Asset History";
             assetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
             assetHistory_Btn.UseVisualStyleBackColor = true;
+            assetHistory_Btn.Visible = false;
             assetHistory_Btn.Click += AssetHistory_Button_Click;
             assetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter;
             assetHistory_Btn.MouseLeave += AssetHistory_Btn_MouseLeave;

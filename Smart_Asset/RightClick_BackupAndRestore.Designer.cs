@@ -28,44 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            refresh_Btn = new Button();
-            hideTableColumn_Btn = new Button();
+            Backup_Btn = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
-            // refresh_Btn
+            // Backup_Btn
             // 
-            refresh_Btn.Location = new Point(12, 12);
-            refresh_Btn.Name = "refresh_Btn";
-            refresh_Btn.Size = new Size(172, 31);
-            refresh_Btn.TabIndex = 1;
-            refresh_Btn.Text = "Refresh";
-            refresh_Btn.UseVisualStyleBackColor = true;
+            Backup_Btn.Location = new Point(12, 12);
+            Backup_Btn.Name = "Backup_Btn";
+            Backup_Btn.Size = new Size(172, 31);
+            Backup_Btn.TabIndex = 1;
+            Backup_Btn.Text = "Backup Data";
+            Backup_Btn.UseVisualStyleBackColor = true;
+            Backup_Btn.Click += localBackup_Btn_Click;
             // 
-            // hideTableColumn_Btn
+            // button1
             // 
-            hideTableColumn_Btn.Location = new Point(9, 49);
-            hideTableColumn_Btn.Name = "hideTableColumn_Btn";
-            hideTableColumn_Btn.Size = new Size(172, 31);
-            hideTableColumn_Btn.TabIndex = 3;
-            hideTableColumn_Btn.Text = "Hide Table Column";
-            hideTableColumn_Btn.UseVisualStyleBackColor = true;
+            button1.Location = new Point(9, 49);
+            button1.Name = "button1";
+            button1.Size = new Size(172, 31);
+            button1.TabIndex = 2;
+            button1.Text = "INVISIBLE";
+            button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
+            button1.Click += button1_Click;
             // 
             // RightClick_BackupAndRestore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(193, 262);
-            Controls.Add(hideTableColumn_Btn);
-            Controls.Add(refresh_Btn);
+            Controls.Add(button1);
+            Controls.Add(Backup_Btn);
             FormBorderStyle = FormBorderStyle.None;
             Name = "RightClick_BackupAndRestore";
             Text = "RightClick";
-            Load += RightClick_RepairingHardwares_Load;
             ResumeLayout(false);
         }
 
         #endregion
-        public Button refresh_Btn;
-        private Button hideTableColumn_Btn;
+        public Button Backup_Btn;
+        public Button button1;
     }
 }

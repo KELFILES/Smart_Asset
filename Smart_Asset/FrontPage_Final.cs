@@ -123,6 +123,7 @@ namespace Smart_Asset
         RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
         RightClick_DisposedHardwares dsp = new RightClick_DisposedHardwares();
         Ai_ChatBot aic= new Ai_ChatBot();
+        backupAndRestore bar = new backupAndRestore();
 
         public static string name = "";
         public static string username = "";
@@ -758,8 +759,7 @@ namespace Smart_Asset
             //showFormSelected(ref rd, "BACKUP DATA");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "backupData_Icon.ico"));
 
-            MessageBox.Show("STILL ON PROGRESS!");
-            //showFormSelected(ref crtRep, "BACKUP AND RESTORE");
+            showFormSelected(ref bar, "BACKUP AND RESTORE DATA");
         }
 
         private void ManageUsers_Btn_MouseEnter(object sender, EventArgs e)

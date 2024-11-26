@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing;
+﻿using MongoDB.Driver.Core.Misc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,135 +6,94 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Smart_Asset
 {
-    public partial class backup_Btn : Form
+    public partial class backupAndRestore : Form
     {
-        public backup_Btn()
+        public backupAndRestore()
         {
             InitializeComponent();
-        }
 
-        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+            // Enable double buffering for the entire form
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
+
+
+            StaticDataGridView1 = dataGridView1;
+        }
+        public static DataGridView StaticDataGridView1;
+
+
+        // Enable double buffering for the entire form
+        protected override CreateParams CreateParams
         {
-
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
 
-        Backup bc = new Backup();
-        Restore rs = new Restore();
 
+        //FIELD
+        public static string selectedButton = "";
+        public static List<string> selectedBackupRestore = new List<string>();
+        public static RightClick_BackupAndRestore rcb = new RightClick_BackupAndRestore();
+        public static string staticSelectedOneUserID;
 
+        //This is for Restore
+        public static string getClickBtnInfo_Restore = "";
 
-        // A list to store SerialNo values of selected rows
-        public static List<string> selectedSerialNos = new List<string>();
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                // Initialize selectedSerialNos if it's null
-                if (selectedSerialNos == null)
+                // Initialize selectedBackupRestore if it's null
+                if (dataGridView1.SelectedRows.Equals("") || dataGridView1.SelectedRows == null)
                 {
-                    selectedSerialNos = new List<string>();
+                    RightClick_BackupAndRestore.getClickBtnInfo_Backup = null;
                 }
 
-                // If no rows are selected, set selectedSerialNos to null
-                if (dataGridView1.SelectedRows.Count == 0)
-                {
-                    selectedSerialNos = null;
-                    
-                    rep.GetRetrievingSerial(null);
-
-                    return;
-                }
-
-                // Clear the previous data from the list
-                selectedSerialNos.Clear();
 
                 if (dataGridView1.SelectedRows.Count == 1)
                 {
-                    // If only one row is selected, store the SerialNo of that row
-                    string serialNo = dataGridView1.SelectedRows[0].Cells["SerialNo"].Value.ToString();
-                    selectedSerialNos.Add(serialNo);
-                    Console.WriteLine("Selected SerialNo: " + serialNo);
+                    RightClick_BackupAndRestore.getClickBtnInfo_Backup = "1";
 
-                    // Reinitialize rh if it's null
-                    if (rh == null)
+
+
+                    //FOR RESTORE
+                    // Ensure at least one row is selected
+                    if (dataGridView1.SelectedRows.Count > 0)
                     {
-                        rh = new RightClick_RepairingHardwares(this); // Reinitialize rc if it was disposed
+                        // Get the first selected row
+                        DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                        // Retrieve values from each cell
+                        string date = selectedRow.Cells["Date"].Value?.ToString();
+                        int totalCollections = Convert.ToInt32(selectedRow.Cells["Total Collections"].Value);
+                        long totalDocuments = Convert.ToInt64(selectedRow.Cells["Total Documents"].Value);
+
+                        RightClick_BackupAndRestore.SendCLickBtnInfo_Restore($"{date},{totalCollections},{totalDocuments} ");
+
+
                     }
-
-                    // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
-                    rh.GetRetrievingSerial(new List<string> { serialNo });
-
-                    // Reinitialize sah if it's null
-                    if (sah == null)
-                    {
-                        sah = new RightClick_ShowAllHardwares(this); // Reinitialize rc if it was disposed
-                    }
-
-                    // Reinitialize dp if it's null
-                    if (dp == null)
-                    {
-                        dp = new RightClick_DisposedHardwares(this); // Reinitialize rc if it was disposed
-                    }
-
-                    // Reinitialize dp if it's null
-                    if (rep == null)
-                    {
-                        rep = new RightClick_Replacement(this); // Reinitialize rc if it was disposed
-                    }
-
-                    // Wrap the single serialNo in a list and pass it to GetRetrievingSerial
-                    rh.GetRetrievingSerial(new List<string> { serialNo });
-                    sah.GetRetrievingSerial(new List<string> { serialNo });
-                    dp.GetRetrievingSerial(new List<string> { serialNo });
-                    rep.GetRetrievingSerial(new List<string> { serialNo });
                 }
-                else if (dataGridView1.SelectedRows.Count > 1)
+
+                if (dataGridView1.SelectedRows.Count >= 2)
                 {
-                    // If multiple rows are selected, store all their SerialNos
-                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                    {
-                        string serialNo = row.Cells["SerialNo"].Value.ToString();
-                        selectedSerialNos.Add(serialNo);
-                    }
-                    Console.WriteLine("Multiple SerialNos: " + string.Join(", ", selectedSerialNos));
-
-                    // Reinitialize rh if it's null
-                    if (rh == null)
-                    {
-                        rh = new RightClick_RepairingHardwares(this); // Reinitialize rh if it was disposed
-                    }
-
-                    // Reinitialize sah if it's null
-                    if (sah == null)
-                    {
-                        sah = new RightClick_ShowAllHardwares(this); // Reinitialize rh if it was disposed
-                    }
-
-                    if (dp == null)
-                    {
-                        dp = new RightClick_DisposedHardwares(this); // Reinitialize rh if it was disposed
-                    }
-
-                    if (rep == null)
-                    {
-                        rep = new RightClick_Replacement(this); // Reinitialize rc if it was disposed
-                    }
-
-                    // Pass the list of serialNos to RightClick for multiple rows
-                    rh.GetRetrievingSerial(selectedSerialNos);
-                    sah.GetRetrievingSerial(selectedSerialNos);
-                    dp.GetRetrievingSerial(selectedSerialNos);
-                    rep.GetRetrievingSerial(selectedSerialNos);
-
+                    RightClick_BackupAndRestore.getClickBtnInfo_Backup = "2";
                 }
+
             }
             catch (Exception ex)
             {
@@ -142,6 +101,130 @@ namespace Smart_Asset
                 MessageBox.Show($"An error occurred while processing the selection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
+        }
+
+        // Add this at the class level to keep track of the form instance
+        private AddUser _addUserForm;
+
+        private void addUsers_Btn_Click(object sender, EventArgs e)
+        {
+            // Check if the form is already open
+            if (_addUserForm != null && !_addUserForm.IsDisposed)
+            {
+                _addUserForm.Dispose(); // Dispose of the existing form
+            }
+
+            // Create a new instance of the form and show it
+            _addUserForm = new AddUser();
+            _addUserForm.StartPosition = FormStartPosition.CenterScreen;
+            _addUserForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            _addUserForm.Show();
+        }
+
+        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                // Dispose of the previous form if it's still open
+                if (rcb != null)
+                {
+                    rcb.Dispose();
+                    rcb = null;
+                }
+
+                // Always pass the current instance of Read to the RightClick form
+                rcb = new RightClick_BackupAndRestore(this);  // Pass 'this' to ensure form1 is initialized
+
+                // Convert the mouse position to screen coordinates
+                Point screenPoint = dataGridView1.PointToScreen(e.Location);
+
+                rcb.StartPosition = FormStartPosition.Manual;
+                rcb.Location = screenPoint;  // Directly set to the screen position
+
+                rcb.Deactivate += (s, ev) =>
+                {
+                    rcb.Hide();  // Just hide instead of disposing
+                };
+
+                rcb.Show();
+            }
+        }
+
+        public async static void Refresh_ManageUsers()
+        {
+            await MyDbMethods.LoadDatabaseSummary("SmartAssetDb", StaticDataGridView1);
+        }
+
+
+        private void LoadData()
+        {
+            MyDbMethods.ReadManageUsers("SmartAssetDb", dataGridView1, "Users");
+            InitializeDataSource();
+        }
+
+
+        private BindingSource bindingSource = new BindingSource();
+        private void InitializeDataSource()
+        {
+            dataGridView1.AllowUserToAddRows = false;
+            DataTable dataTable = new DataTable();
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                dataTable.Columns.Add(col.Name, typeof(string));
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+                if (!row.IsNewRow)
+                    dataTable.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray());
+
+            bindingSource.DataSource = dataTable;
+            dataGridView1.DataSource = bindingSource;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //---------------string filterText = searchUser_Tb.Text.Trim().ToLower();
+                var filterColumns = new[]
+                {
+                    "Name", "Username", "Role"
+                };
+
+                //-----------------bindingSource.Filter = string.Join(" OR ", filterColumns.Select(col => $"{col} LIKE '%{filterText}%'"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while filtering data: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void searchUser_Tb_Click(object sender, EventArgs e)
+        {
+            // Reload data to refresh the DataGridView
+            LoadData();
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (dataGridView1.Columns["UserID"] != null)
+            {
+                dataGridView1.Columns["UserID"].Visible = false;
+            }
+        }
+
+        private async void backupAndRestore_Load(object sender, EventArgs e)
+        {
+
+
+            //SHOW DATABASE DATA
+            await MyDbMethods.LoadDatabaseSummary("SmartAssetDb", StaticDataGridView1);
+
+
+        }
+
+        private void systemRestore_Btn_Click(object sender, EventArgs e)
+        {
+            MyDbMethods.RestoreBackup("SmartAssetDb");
         }
     }
 }

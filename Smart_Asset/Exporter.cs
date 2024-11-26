@@ -208,7 +208,6 @@ namespace Smart_Asset
 
 
 
-        // 3. Export to PDF
         public static async Task ExportDataGridViewToPdf(DataGridView dataGridView, string filePath, bool includeHeaders)
         {
             try
@@ -224,50 +223,71 @@ namespace Smart_Asset
                 await Task.Run(() =>
                 {
                     var document = new Document();
-                    var section = document.AddSection();
 
-                    var table = section.AddTable();
-                    table.Borders.Width = 0.5;
+                    // Split columns into manageable groups
+                    const double pageWidthCm = 18; // Adjust for page width
+                    double columnWidthCm = 3;     // Estimated column width
+                    int columnsPerPage = (int)(pageWidthCm / columnWidthCm);
 
-                    // Keep track of the visible columns
                     var visibleColumns = new List<DataGridViewColumn>();
                     foreach (DataGridViewColumn column in dataGridView.Columns)
                     {
                         if (column.Visible)
                         {
-                            table.AddColumn(Unit.FromCentimeter(3));
                             visibleColumns.Add(column);
                         }
                     }
 
-                    // Add header row if needed
-                    if (includeHeaders)
+                    // Process columns in groups
+                    for (int i = 0; i < visibleColumns.Count; i += columnsPerPage)
                     {
-                        var headerRow = table.AddRow();
-                        headerRow.Shading.Color = Colors.LightGray;
-                        int colIndex = 0;
+                        var section = document.AddSection();
+                        var table = section.AddTable();
+                        table.Borders.Width = 0.5;
 
-                        foreach (var column in visibleColumns)
+                        var currentGroup = visibleColumns.Skip(i).Take(columnsPerPage).ToList();
+
+                        // Add columns to the table
+                        foreach (var column in currentGroup)
                         {
-                            headerRow.Cells[colIndex].AddParagraph(column.HeaderText);
-                            colIndex++;
+                            table.AddColumn(Unit.FromCentimeter(columnWidthCm));
                         }
-                    }
 
-                    // Add data rows
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        // Skip hidden rows
-                        if (row.IsNewRow || !row.Visible) continue;
-
-                        var dataRow = table.AddRow();
-                        int colIndex = 0;
-
-                        foreach (var column in visibleColumns)
+                        // Add header row if needed
+                        if (includeHeaders)
                         {
-                            string cellValue = row.Cells[column.Index].Value?.ToString() ?? string.Empty;
-                            dataRow.Cells[colIndex].AddParagraph(cellValue);
-                            colIndex++;
+                            var headerRow = table.AddRow();
+                            headerRow.Shading.Color = Colors.LightGray;
+                            int colIndex = 0;
+
+                            foreach (var column in currentGroup)
+                            {
+                                headerRow.Cells[colIndex].AddParagraph(column.HeaderText);
+                                colIndex++;
+                            }
+                        }
+
+                        // Add data rows
+                        foreach (DataGridViewRow row in dataGridView.Rows)
+                        {
+                            // Skip hidden rows
+                            if (row.IsNewRow || !row.Visible) continue;
+
+                            var dataRow = table.AddRow();
+                            int colIndex = 0;
+
+                            foreach (var column in currentGroup)
+                            {
+                                string cellValue = row.Cells[column.Index].Value?.ToString() ?? string.Empty;
+                                dataRow.Cells[colIndex].AddParagraph(cellValue);
+                                colIndex++;
+                            }
+                        }
+
+                        // Add a new section for the next group of columns (creates a page break)
+                        if (i + columnsPerPage < visibleColumns.Count)
+                        {
+                            document.AddSection(); // This ensures the next group of columns starts on a new page
                         }
                     }
 
@@ -291,6 +311,7 @@ namespace Smart_Asset
                 Cursor.Current = Cursors.Default;
             }
         }
+
 
 
         //OVERLOADING METHOD FOR PDF FILE USING TEXTBOX

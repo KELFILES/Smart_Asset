@@ -1,6 +1,6 @@
 ﻿namespace Smart_Asset
 {
-    partial class backup_Btn
+    partial class backupAndRestore
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             panel5 = new Panel();
             dataGridView1 = new DataGridView();
             panel2 = new Panel();
-            label1 = new Label();
+            systemRestore_Btn = new Button();
             panel1.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -64,10 +67,37 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(254, 242, 0);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(20, 20);
             dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridView1.Size = new Size(1834, 871);
             dataGridView1.TabIndex = 0;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
@@ -76,36 +106,41 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(253, 175, 23);
-            panel2.Controls.Add(label1);
+            panel2.Controls.Add(systemRestore_Btn);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(15, 15);
             panel2.Name = "panel2";
             panel2.Size = new Size(1874, 100);
             panel2.TabIndex = 0;
             // 
-            // label1
+            // systemRestore_Btn
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(725, 29);
-            label1.Name = "label1";
-            label1.Size = new Size(418, 40);
-            label1.TabIndex = 2;
-            label1.Text = "BACKUP AND RESTORE";
+            systemRestore_Btn.Anchor = AnchorStyles.Right;
+            systemRestore_Btn.BackColor = Color.RoyalBlue;
+            systemRestore_Btn.FlatStyle = FlatStyle.Flat;
+            systemRestore_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            systemRestore_Btn.ForeColor = Color.White;
+            systemRestore_Btn.Location = new Point(1683, 28);
+            systemRestore_Btn.Name = "systemRestore_Btn";
+            systemRestore_Btn.Size = new Size(171, 43);
+            systemRestore_Btn.TabIndex = 14;
+            systemRestore_Btn.Text = "System Restore";
+            systemRestore_Btn.UseVisualStyleBackColor = false;
+            systemRestore_Btn.Click += systemRestore_Btn_Click;
             // 
-            // backup_Btn
+            // backupAndRestore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
             Controls.Add(panel1);
-            Name = "backup_Btn";
+            Name = "backupAndRestore";
             Text = "BackupAndRestore";
+            Load += backupAndRestore_Load;
             panel1.ResumeLayout(false);
             panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -114,7 +149,7 @@
         private Panel panel1;
         private Panel panel5;
         private Panel panel2;
-        private Label label1;
         private DataGridView dataGridView1;
+        private Button systemRestore_Btn;
     }
 }

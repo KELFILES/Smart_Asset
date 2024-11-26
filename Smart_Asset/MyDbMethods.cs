@@ -11,6 +11,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Smart_Asset
 {
@@ -448,7 +449,7 @@ namespace Smart_Asset
 
 
 
-        
+
 
         public static void ReadLocation(string dbName, DataGridView dataGridViewName, string collectionName)
         {
@@ -3460,7 +3461,7 @@ namespace Smart_Asset
                 }
             }
 
-            
+
             // Print all documents in JSON format
             /*
             foreach (var doc in allDocuments)
@@ -3654,6 +3655,399 @@ namespace Smart_Asset
 
             return false; // No matching collection name found or no documents inside
         }
+
+
+
+
+
+        public static async Task LoadDatabaseSummary(string dbName, DataGridView dataGridView)
+        {
+            var client = new MongoClient(DefaultConnectionString);
+            var database = client.GetDatabase(dbName);
+
+            // Prepare a DataTable for the summary
+            var summaryTable = new DataTable();
+            summaryTable.Columns.Add("Date", typeof(string));
+            summaryTable.Columns.Add("Total Collections", typeof(int));
+            summaryTable.Columns.Add("Total Documents", typeof(long));
+
+            // Get the current date in 12-hour format with AM/PM
+            var currentDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt");
+
+            // Get all collections
+            var collections = await database.ListCollectionsAsync();
+            var collectionList = await collections.ToListAsync();
+
+            int totalCollections = 0;
+            long totalDocuments = 0;
+
+            foreach (var collectionInfo in collectionList)
+            {
+                var collectionName = collectionInfo["name"].AsString;
+
+                // Use BsonDocument for collection
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                // Get the document count
+                var documentCount = await collection.CountDocumentsAsync(FilterDefinition<BsonDocument>.Empty);
+
+                totalCollections++;
+                totalDocuments += documentCount;
+            }
+
+            // Add the summary row to the DataTable
+            summaryTable.Rows.Add(currentDate, totalCollections, totalDocuments);
+
+            // Bind the DataTable to the DataGridView
+            dataGridView.DataSource = summaryTable;
+        }
+
+
+
+        
+
+        public class ProgressDialog : Form
+        {
+            private Label progressLabel;
+
+            public ProgressDialog()
+            {
+                this.Text = "Backup Progress";
+                this.Size = new System.Drawing.Size(400, 150);
+                this.StartPosition = FormStartPosition.CenterScreen;
+
+                progressLabel = new Label
+                {
+                    Dock = DockStyle.Fill,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                    Text = "Starting backup..."
+                };
+
+                this.Controls.Add(progressLabel);
+            }
+
+            public void UpdateProgress(string message)
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action<string>(UpdateProgress), message);
+                }
+                else
+                {
+                    progressLabel.Text = message;
+                }
+            }
+        }
+
+
+
+        public static void CreateBackup(string dbName, string path)
+        {
+            try
+            {
+                // Ensure the path ends with a directory separator
+                if (!path.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                {
+                    path += Path.DirectorySeparatorChar;
+                }
+
+                // Create a timestamp for the backup
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+
+                // Prompt the user to create a password
+                string password = PromptPassword();
+                if (string.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Password creation canceled. Backup aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Specify the .rar file path with the timestamp
+                string rarFilePath = Path.Combine(path, $"{timestamp}.rar");
+
+                // Ensure WinRAR is installed and accessible
+                string winRarPath = @"C:\Program Files\WinRAR\WinRAR.exe"; // Adjust this path if necessary
+                if (!File.Exists(winRarPath))
+                {
+                    throw new FileNotFoundException("WinRAR executable not found at the specified location.");
+                }
+
+                // Initialize MongoDB client
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+
+                // Get all collection names
+                var collectionNames = database.ListCollectionNames().ToList();
+
+                // Create a temporary folder for the backup
+                string tempBackupFolder = Path.Combine(Path.GetTempPath(), $"Backup {timestamp}");
+                Directory.CreateDirectory(tempBackupFolder);
+
+                foreach (var collectionName in collectionNames)
+                {
+                    // Access each collection
+                    var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                    // Get all documents from the collection
+                    var documents = collection.Find(new BsonDocument()).ToList();
+
+                    // Save documents to a JSON file in the temporary folder
+                    string filePath = Path.Combine(tempBackupFolder, $"{collectionName}.json");
+                    using (StreamWriter writer = new StreamWriter(filePath))
+                    {
+                        foreach (var document in documents)
+                        {
+                            writer.WriteLine(document.ToJson());
+                        }
+                    }
+
+                    Console.WriteLine($"Backed up collection: {collectionName}");
+                }
+
+                // Compress and encrypt the temporary folder directly into a .rar file
+                string arguments = $"a -p{password} -r \"{rarFilePath}\" \"{tempBackupFolder}\"";
+
+                // Run the WinRAR process
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = winRarPath,
+                        Arguments = arguments,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                process.Start();
+                process.WaitForExit();
+
+                if (process.ExitCode != 0)
+                {
+                    throw new Exception("Failed to create password-protected RAR file.");
+                }
+
+                Console.WriteLine("Encrypted RAR file created successfully.");
+
+                // Clean up the temporary folder
+                Directory.Delete(tempBackupFolder, true);
+
+                // Inform the user
+                MessageBox.Show($"Backup completed successfully!\nEncrypted RAR file: {rarFilePath}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while creating a backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static string PromptPassword()
+        {
+            using (Form passwordForm = new Form())
+            {
+                passwordForm.Text = "Create Password for Backup";
+                passwordForm.Width = 300;
+                passwordForm.Height = 150;
+
+                Label label = new Label() { Left = 20, Top = 20, Text = "Enter Password:", AutoSize = true };
+                TextBox passwordBox = new TextBox() { Left = 20, Top = 50, Width = 240, PasswordChar = '*' };
+                Button confirmButton = new Button() { Text = "OK", Left = 190, Width = 70, Top = 80, DialogResult = DialogResult.OK };
+
+                passwordForm.Controls.Add(label);
+                passwordForm.Controls.Add(passwordBox);
+                passwordForm.Controls.Add(confirmButton);
+
+                passwordForm.AcceptButton = confirmButton;
+
+                if (passwordForm.ShowDialog() == DialogResult.OK)
+                {
+                    return passwordBox.Text;
+                }
+            }
+
+            return null; // User canceled
+        }
+
+        private static void CreatePasswordProtectedRar(string folderPath, string outputRarFilePath, string password)
+        {
+            try
+            {
+                // Ensure WinRAR is installed and accessible
+                string winRarPath = @"C:\Program Files\WinRAR\WinRAR.exe"; // Adjust the path if necessary
+                if (!File.Exists(winRarPath))
+                {
+                    throw new FileNotFoundException("WinRAR executable not found at the specified location.");
+                }
+
+                // Construct the WinRAR command
+                string arguments = $"a -p{password} -r \"{outputRarFilePath}\" \"{folderPath}\"";
+
+                // Execute the command
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = winRarPath,
+                        Arguments = arguments,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                process.Start();
+                process.WaitForExit();
+
+                if (process.ExitCode != 0)
+                {
+                    throw new Exception("Failed to create password-protected RAR file.");
+                }
+
+                Console.WriteLine("Encrypted RAR file created successfully.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error during RAR encryption: {ex.Message}");
+            }
+        }
+
+
+
+
+
+
+
+        public static void RestoreBackup(string dbName)
+        {
+            try
+            {
+                // Prompt the user to select the backup (.rar) file
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "RAR files (*.rar)|*.rar",
+                    Title = "Select Backup File"
+                };
+
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    MessageBox.Show("Backup restoration canceled.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string rarFilePath = openFileDialog.FileName;
+
+                // Prompt the user to enter the password for the backup file
+                string password = PromptPassword("Enter Password for Backup");
+                if (string.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Password entry canceled. Restoration aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Ensure WinRAR is installed and accessible
+                string winRarPath = @"C:\Program Files\WinRAR\WinRAR.exe"; // Adjust this path if necessary
+                if (!File.Exists(winRarPath))
+                {
+                    throw new FileNotFoundException("WinRAR executable not found at the specified location.");
+                }
+
+                // Create a temporary directory for extraction
+                string tempExtractFolder = Path.Combine(Path.GetTempPath(), $"Restore_{DateTime.Now:yyyyMMdd_HHmmss}");
+                Directory.CreateDirectory(tempExtractFolder);
+
+                // Extract the RAR file
+                string extractArguments = $"x -p{password} \"{rarFilePath}\" \"{tempExtractFolder}\\\"";
+
+                Process extractProcess = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = winRarPath,
+                        Arguments = extractArguments,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                extractProcess.Start();
+                extractProcess.WaitForExit();
+
+                if (extractProcess.ExitCode != 0)
+                {
+                    string error = extractProcess.StandardError.ReadToEnd();
+                    throw new Exception($"Failed to extract RAR file. Error: {error}");
+                }
+
+                // Initialize MongoDB client
+                var client = new MongoClient(DefaultConnectionString);
+                var database = client.GetDatabase(dbName);
+
+                // Iterate through extracted files and restore collections
+                foreach (string filePath in Directory.GetFiles(tempExtractFolder, "*.json", SearchOption.AllDirectories))
+                {
+                    string collectionName = Path.GetFileNameWithoutExtension(filePath);
+                    var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                    // Read JSON file and insert documents into the collection
+                    using (StreamReader reader = new StreamReader(filePath))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            var document = BsonDocument.Parse(line);
+                            collection.InsertOne(document);
+                        }
+                    }
+
+                    Console.WriteLine($"Restored collection: {collectionName}");
+                }
+
+                // Clean up the temporary extraction folder
+                Directory.Delete(tempExtractFolder, true);
+
+                // Inform the user
+                MessageBox.Show("Database restoration completed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during restoration: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static string PromptPassword(string prompt)
+        {
+            using (Form passwordForm = new Form())
+            {
+                passwordForm.Text = prompt;
+                passwordForm.Width = 300;
+                passwordForm.Height = 150;
+
+                Label label = new Label() { Left = 20, Top = 20, Text = "Enter Password:", AutoSize = true };
+                TextBox passwordBox = new TextBox() { Left = 20, Top = 50, Width = 240, PasswordChar = '*' };
+                Button confirmButton = new Button() { Text = "OK", Left = 190, Width = 70, Top = 80, DialogResult = DialogResult.OK };
+
+                passwordForm.Controls.Add(label);
+                passwordForm.Controls.Add(passwordBox);
+                passwordForm.Controls.Add(confirmButton);
+
+                passwordForm.AcceptButton = confirmButton;
+
+                if (passwordForm.ShowDialog() == DialogResult.OK)
+                {
+                    return passwordBox.Text;
+                }
+            }
+
+            return null; // User canceled
+        }
+
+
+
 
 
     }

@@ -274,6 +274,65 @@ namespace Smart_Asset
 
 
 
+
+        public static string SelectFilePath(string description, string filter = "All Files|*.*")
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = description;
+                openFileDialog.Filter = filter;
+                openFileDialog.Multiselect = false;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+
+                    DialogResult result = MessageBox.Show(
+                        $"You selected the file:\n{selectedFilePath}\n\nDo you want to proceed?",
+                        "Confirm File Selection",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    return result == DialogResult.Yes ? selectedFilePath : null;
+                }
+            }
+
+            MessageBox.Show("No file was selected.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return null; // Return null if no file is selected
+        }
+
+        /// <summary>
+        /// Opens a FolderBrowserDialog to select a folder and returns the selected folder path with confirmation via MessageBox.
+        /// </summary>
+        /// <param name="prompt">The message to display as the dialog's description or instruction.</param>
+        /// <returns>The selected folder path, or null/empty if no folder is selected.</returns>
+        public static string SelectFolderPath(string description)
+        {
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            {
+                folderBrowserDialog.Description = description;
+                folderBrowserDialog.ShowNewFolderButton = true;
+
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFolderPath = folderBrowserDialog.SelectedPath;
+
+                    DialogResult result = MessageBox.Show(
+                        $"You selected the folder:\n{selectedFolderPath}\n\nDo you want to proceed?",
+                        "Confirm Folder Selection",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    return result == DialogResult.Yes ? selectedFolderPath : null;
+                }
+            }
+
+            MessageBox.Show("No folder was selected.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return null; // Return null if no folder is selected
+        }
     }
+
+
+
 }
     

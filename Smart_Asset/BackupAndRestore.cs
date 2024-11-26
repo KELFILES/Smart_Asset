@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver.Core.Misc;
+﻿using MongoDB.Driver.Core.Configuration;
+using MongoDB.Driver.Core.Misc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -94,7 +95,7 @@ namespace Smart_Asset
                     RightClick_BackupAndRestore.getClickBtnInfo_Backup = "2";
                 }
 
-            } 
+            }
             catch (Exception ex)
             {
                 // Handle any unexpected errors
@@ -152,7 +153,7 @@ namespace Smart_Asset
 
         public async static void Refresh_ManageUsers()
         {
-            await MyDbMethods.LoadDatabaseSummary("SmartAssetDb", StaticDataGridView1);
+            
         }
 
 
@@ -204,28 +205,72 @@ namespace Smart_Asset
             LoadData();
         }
 
-        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            if (dataGridView1.Columns["UserID"] != null)
-            {
-                dataGridView1.Columns["UserID"].Visible = false;
-            }
-        }
+
 
         private async void backupAndRestore_Load(object sender, EventArgs e)
         {
+            try
+            {
 
-
-            //SHOW DATABASE DATA
-            await MyDbMethods.LoadDatabaseSummary("SmartAssetDb", StaticDataGridView1);
-
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during loading: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
 
         private void systemRestore_Btn_Click(object sender, EventArgs e)
         {
             MyDbMethods.RestoreBackup("SmartAssetDb");
         }
+
+        private void systemBackup_Btn_Click(object sender, EventArgs e)
+        {
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.Description = "Select a folder to save the backup.";
+                folderDialog.ShowNewFolderButton = true;
+
+                // Show the folder dialog to the user
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the selected folder path
+                    string selectedPath = folderDialog.SelectedPath;
+
+                    // Confirm the backup action
+                    DialogResult result = MessageBox.Show(
+                        $"Do you want to create a backup in the selected folder?\n\nPath: {selectedPath}",
+                        "Confirm Backup",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Call the backup method
+                        MyDbMethods.CreateBackup("SmartAssetDb", selectedPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Backup canceled.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No folder selected. Backup canceled.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+
+
+
+
+
+
     }
 }
  

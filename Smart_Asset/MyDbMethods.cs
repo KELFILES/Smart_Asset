@@ -12,6 +12,19 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using MongoDB.Bson.IO;
+using MongoDB.Bson.Serialization;
+using System.Configuration;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using Microsoft.Extensions.Configuration;
+using iText.Commons.Bouncycastle.Crypto;
+using Amazon.SecurityToken.Model;
+using System.Net;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Color = System.Drawing.Color;
+using Font = System.Drawing.Font;
+using Control = System.Windows.Forms.Control;
 
 namespace Smart_Asset
 {
@@ -51,6 +64,16 @@ namespace Smart_Asset
             get => collectionName;
             set => collectionName = value;
         }
+
+
+
+        // Class-level static fields for API details
+        private static readonly string ApiUrl = "https://cloud.mongodb.com/api/atlas/v1.0";
+        private static readonly string ApiPublicKey = "brnsuaaq";
+        private static readonly string ApiPrivateKey = "aa731669-6a93-4382-ab94-53ca5a026ff8";
+        private static readonly string GroupId = "66b0584610c48008642ca6ca";
+        private static readonly string ClusterName = "Smart_Asset_Project";
+
 
 
         //TEST MONGODB CONNECTION
@@ -3660,51 +3683,11 @@ namespace Smart_Asset
 
 
 
-        public static async Task LoadDatabaseSummary(string dbName, DataGridView dataGridView)
-        {
-            var client = new MongoClient(DefaultConnectionString);
-            var database = client.GetDatabase(dbName);
-
-            // Prepare a DataTable for the summary
-            var summaryTable = new DataTable();
-            summaryTable.Columns.Add("Date", typeof(string));
-            summaryTable.Columns.Add("Total Collections", typeof(int));
-            summaryTable.Columns.Add("Total Documents", typeof(long));
-
-            // Get the current date in 12-hour format with AM/PM
-            var currentDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt");
-
-            // Get all collections
-            var collections = await database.ListCollectionsAsync();
-            var collectionList = await collections.ToListAsync();
-
-            int totalCollections = 0;
-            long totalDocuments = 0;
-
-            foreach (var collectionInfo in collectionList)
-            {
-                var collectionName = collectionInfo["name"].AsString;
-
-                // Use BsonDocument for collection
-                var collection = database.GetCollection<BsonDocument>(collectionName);
-
-                // Get the document count
-                var documentCount = await collection.CountDocumentsAsync(FilterDefinition<BsonDocument>.Empty);
-
-                totalCollections++;
-                totalDocuments += documentCount;
-            }
-
-            // Add the summary row to the DataTable
-            summaryTable.Rows.Add(currentDate, totalCollections, totalDocuments);
-
-            // Bind the DataTable to the DataGridView
-            dataGridView.DataSource = summaryTable;
-        }
 
 
 
-        
+
+
 
         public class ProgressDialog : Form
         {
@@ -3741,10 +3724,20 @@ namespace Smart_Asset
 
 
 
-        public static void CreateBackup(string dbName, string path)
+        public static async Task CreateBackup(string dbName, string path)
         {
             try
             {
+                // Validate the user's password with retry mechanism
+                bool isPasswordValid = await ValidatePasswordWithRetry(FrontPage_Final.StaticUserID.Text, "SmartAssetDb", "Users");
+                if (!isPasswordValid)
+                {
+                    ShowCustomMessageBox("Password validation failed. Backup aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                ShowCustomMessageBox("Password validated successfully. Proceeding with backup creation...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 // Ensure the path ends with a directory separator
                 if (!path.EndsWith(Path.DirectorySeparatorChar.ToString()))
                 {
@@ -3752,18 +3745,19 @@ namespace Smart_Asset
                 }
 
                 // Create a timestamp for the backup
-                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
-                // Prompt the user to create a password
-                string password = PromptPassword();
-                if (string.IsNullOrEmpty(password))
+                // Prompt the user to create a password for the backup file
+                string backupPassword = PromptPassword("Set a Password for the Backup File");
+                if (string.IsNullOrEmpty(backupPassword))
                 {
-                    MessageBox.Show("Password creation canceled. Backup aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowCustomMessageBox("Backup password creation canceled. Backup aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Specify the .rar file path with the timestamp
-                string rarFilePath = Path.Combine(path, $"{timestamp}.rar");
+                // Specify the .rar file path with the specified name
+                string rarFileName = $"Encrypted Asset ({timestamp}).rar";
+                string rarFilePath = Path.Combine(path, rarFileName);
 
                 // Ensure WinRAR is installed and accessible
                 string winRarPath = @"C:\Program Files\WinRAR\WinRAR.exe"; // Adjust this path if necessary
@@ -3780,7 +3774,7 @@ namespace Smart_Asset
                 var collectionNames = database.ListCollectionNames().ToList();
 
                 // Create a temporary folder for the backup
-                string tempBackupFolder = Path.Combine(Path.GetTempPath(), $"Backup {timestamp}");
+                string tempBackupFolder = Path.Combine(Path.GetTempPath(), $"Backup_{timestamp}");
                 Directory.CreateDirectory(tempBackupFolder);
 
                 foreach (var collectionName in collectionNames)
@@ -3791,21 +3785,27 @@ namespace Smart_Asset
                     // Get all documents from the collection
                     var documents = collection.Find(new BsonDocument()).ToList();
 
-                    // Save documents to a JSON file in the temporary folder
-                    string filePath = Path.Combine(tempBackupFolder, $"{collectionName}.json");
-                    using (StreamWriter writer = new StreamWriter(filePath))
+                    // Save documents to a BSON file in the temporary folder
+                    string filePath = Path.Combine(tempBackupFolder, $"{collectionName}.bson");
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                     {
-                        foreach (var document in documents)
+                        using (var bsonWriter = new BsonBinaryWriter(fs))
                         {
-                            writer.WriteLine(document.ToJson());
+                            var context = BsonSerializationContext.CreateRoot(bsonWriter);
+                            var serializer = BsonSerializer.SerializerRegistry.GetSerializer<BsonDocument>();
+
+                            foreach (var document in documents)
+                            {
+                                serializer.Serialize(context, document);
+                            }
                         }
                     }
 
                     Console.WriteLine($"Backed up collection: {collectionName}");
                 }
 
-                // Compress and encrypt the temporary folder directly into a .rar file
-                string arguments = $"a -p{password} -r \"{rarFilePath}\" \"{tempBackupFolder}\"";
+                // Compress and encrypt the files in the temporary folder directly into a .rar file
+                string arguments = $"a -p{backupPassword} -ep1 \"{rarFilePath}\" \"{Path.Combine(tempBackupFolder, "*")}\"";
 
                 // Run the WinRAR process
                 Process process = new Process
@@ -3835,40 +3835,249 @@ namespace Smart_Asset
                 Directory.Delete(tempBackupFolder, true);
 
                 // Inform the user
-                MessageBox.Show($"Backup completed successfully!\nEncrypted RAR file: {rarFilePath}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ShowCustomMessageBox($"Backup completed successfully!\nEncrypted RAR file: {rarFilePath}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (DirectoryNotFoundException dnfe)
+            {
+                ShowCustomMessageBox($"Directory not found: {dnfe.Message}", "Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FileNotFoundException fnfe)
+            {
+                ShowCustomMessageBox($"File not found: {fnfe.Message}", "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (UnauthorizedAccessException uae)
+            {
+                ShowCustomMessageBox($"Access denied: {uae.Message}", "Access Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while creating a backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowCustomMessageBox($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private static string PromptPassword()
+
+
+
+
+        public static async Task<bool> ValidatePasswordWithRetry(string userId, string dbName, string collectionName)
         {
-            using (Form passwordForm = new Form())
+            // Attempt thresholds
+            const int MAX_TRIES_1 = 3;
+            const int MAX_TRIES_2 = 5;
+            const int MAX_TRIES_3 = 10;
+            const int MAX_TRIES_4 = 15;
+
+            // Time penalties in milliseconds
+            const int PENALTY_1 = 60_000;   // 1 minute
+            const int PENALTY_2 = 3 * 60_000;   // 3 minutes
+            const int PENALTY_3 = 8 * 60_000;   // 8 minutes
+            const int PENALTY_4 = 60 * 60_000;  // 1 hour
+
+            // Thresholds and penalties
+            var thresholds = new[] { MAX_TRIES_1, MAX_TRIES_2, MAX_TRIES_3, MAX_TRIES_4 };
+            var penalties = new[] { PENALTY_1, PENALTY_2, PENALTY_3, PENALTY_4 };
+
+            int attempts = 0; // Counter for total attempts
+            int currentPenaltyIndex = -1; // Tracks the current penalty level
+
+            while (true)
             {
-                passwordForm.Text = "Create Password for Backup";
-                passwordForm.Width = 300;
-                passwordForm.Height = 150;
-
-                Label label = new Label() { Left = 20, Top = 20, Text = "Enter Password:", AutoSize = true };
-                TextBox passwordBox = new TextBox() { Left = 20, Top = 50, Width = 240, PasswordChar = '*' };
-                Button confirmButton = new Button() { Text = "OK", Left = 190, Width = 70, Top = 80, DialogResult = DialogResult.OK };
-
-                passwordForm.Controls.Add(label);
-                passwordForm.Controls.Add(passwordBox);
-                passwordForm.Controls.Add(confirmButton);
-
-                passwordForm.AcceptButton = confirmButton;
-
-                if (passwordForm.ShowDialog() == DialogResult.OK)
+                // Prompt the user for their password
+                string userPassword = PromptPassword("Enter Your Account Password");
+                if (string.IsNullOrEmpty(userPassword))
                 {
-                    return passwordBox.Text;
+                    ShowCustomMessageBox("Password entry canceled.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                // Encrypt and validate the user's password
+                string encryptedPassword = MyOtherMethods.EncryptPassword(userPassword);
+                bool isCorrectPass = await MyDbMethods.ValidateUserUsingUserID(dbName, collectionName, userId, encryptedPassword);
+
+                if (isCorrectPass)
+                {
+                    ShowCustomMessageBox("Password validated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+                else
+                {
+                    attempts++;
+                    int cumulativeAttempts = 0;
+
+                    // Determine the current penalty level
+                    for (int i = 0; i < thresholds.Length; i++)
+                    {
+                        cumulativeAttempts += thresholds[i];
+                        if (attempts == cumulativeAttempts)
+                        {
+                            currentPenaltyIndex = i;
+
+                            // Inform the user about the penalty
+                            int waitTimeMinutes = penalties[i] / 60_000; // Convert milliseconds to minutes
+                            ShowCustomMessageBox(
+                                $"You have reached {attempts} failed attempts. Please wait {waitTimeMinutes} minutes before retrying.",
+                                "Warning",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+
+                            // Apply penalty delay
+                            await Task.Delay(penalties[i]);
+                            break;
+                        }
+                    }
+
+                    // Handle exceeding maximum attempts
+                    if (attempts > cumulativeAttempts)
+                    {
+                        // Store violation details dynamically
+                        SaveViolationDetails(userId);
+
+                        ShowCustomMessageBox(
+                            $"You have exceeded the maximum number of {cumulativeAttempts} failed attempts. The application will now close.",
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
+
+                        // Exit the application
+                        Environment.Exit(0);
+                        return false; // Unreachable, added for consistency
+                    }
                 }
             }
-
-            return null; // User canceled
         }
+
+
+
+        private static void SaveViolationDetails(string userId)
+        {
+            // Load the configuration file
+            var config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+
+            // Access or create the AppSettings section
+            var settings = config.AppSettings.Settings;
+
+            // Add or update "LastViolationUserId"
+            if (settings["LastViolationUserId"] == null)
+            {
+                settings.Add("LastViolationUserId", userId);
+            }
+            else
+            {
+                settings["LastViolationUserId"].Value = userId;
+            }
+
+            // Add or update "ViolationTimestamp"
+            if (settings["ViolationTimestamp"] == null)
+            {
+                settings.Add("ViolationTimestamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            else
+            {
+                settings["ViolationTimestamp"].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
+            // Save the updated configuration
+            config.Save(ConfigurationSaveMode.Modified);
+            System.Configuration.ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+        }
+
+
+        public static DialogResult ShowCustomMessageBox(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            using (Form messageBoxForm = new Form())
+            {
+                // Configure the form
+                messageBoxForm.Text = title;
+                messageBoxForm.StartPosition = FormStartPosition.CenterScreen; // Center the form on the screen
+                messageBoxForm.AutoSize = true;
+                messageBoxForm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                messageBoxForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                messageBoxForm.MaximizeBox = false;
+                messageBoxForm.MinimizeBox = false;
+                messageBoxForm.ShowIcon = false;
+                messageBoxForm.Padding = new Padding(10);
+
+                // Create a table layout for icon and message
+                TableLayoutPanel layoutPanel = new TableLayoutPanel
+                {
+                    ColumnCount = 2,
+                    AutoSize = true,
+                    Dock = DockStyle.Fill
+                };
+
+                // Add the icon (if any)
+                if (icon != MessageBoxIcon.None)
+                {
+                    PictureBox iconBox = new PictureBox
+                    {
+                        Width = 48,
+                        Height = 48,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Dock = DockStyle.Left,
+                        Margin = new Padding(10)
+                    };
+
+                    switch (icon)
+                    {
+                        case MessageBoxIcon.Error:
+                            iconBox.Image = SystemIcons.Error.ToBitmap();
+                            break;
+                        case MessageBoxIcon.Warning:
+                            iconBox.Image = SystemIcons.Warning.ToBitmap();
+                            break;
+                        case MessageBoxIcon.Information:
+                            iconBox.Image = SystemIcons.Information.ToBitmap();
+                            break;
+                        case MessageBoxIcon.Question:
+                            iconBox.Image = SystemIcons.Question.ToBitmap();
+                            break;
+                    }
+
+                    layoutPanel.Controls.Add(iconBox, 0, 0);
+                }
+
+                // Add the message label
+                Label messageLabel = new Label
+                {
+                    Text = message,
+                    AutoSize = true,
+                    MaximumSize = new Size(400, 0), // Limit the width for text wrapping
+                    Dock = DockStyle.Fill,
+                    Margin = new Padding(10)
+                };
+                layoutPanel.Controls.Add(messageLabel, 1, 0);
+
+                // Add buttons
+                FlowLayoutPanel buttonPanel = new FlowLayoutPanel
+                {
+                    FlowDirection = FlowDirection.RightToLeft,
+                    AutoSize = true,
+                    Dock = DockStyle.Bottom
+                };
+
+                Button okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true };
+                buttonPanel.Controls.Add(okButton);
+                messageBoxForm.AcceptButton = okButton;
+
+                if (buttons == MessageBoxButtons.OKCancel)
+                {
+                    Button cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
+                    buttonPanel.Controls.Add(cancelButton);
+                    messageBoxForm.CancelButton = cancelButton;
+                }
+
+                // Add the layout panel and button panel to the form
+                messageBoxForm.Controls.Add(layoutPanel);
+                messageBoxForm.Controls.Add(buttonPanel);
+
+                // Show the custom message box
+                return messageBoxForm.ShowDialog();
+            }
+        }
+
+
 
         private static void CreatePasswordProtectedRar(string folderPath, string outputRarFilePath, string password)
         {
@@ -3919,96 +4128,92 @@ namespace Smart_Asset
 
 
 
-           
-        public static void RestoreBackup(string dbName)
+
+        public static async Task RestoreBackup(string dbName)
         {
             try
             {
-                // Prompt the user to select the backup (.rar) file
-                OpenFileDialog openFileDialog = new OpenFileDialog
-                {
-                    Filter = "RAR files (*.rar)|*.rar",
-                    Title = "Select Backup File"
-                };
-
-                if (openFileDialog.ShowDialog() != DialogResult.OK)
-                {
-                    MessageBox.Show("Backup restoration canceled.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                string rarFilePath = openFileDialog.FileName;
-
-                // Prompt the user to enter the password for the backup file
-                string password = PromptPassword("Enter Password for Backup");
-                if (string.IsNullOrEmpty(password))
+                // Prompt the user to enter their password for validation
+                string userPassword = PromptPassword("Enter Your Password for Validation");
+                if (string.IsNullOrEmpty(userPassword))
                 {
                     MessageBox.Show("Password entry canceled. Restoration aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Ensure WinRAR is installed and accessible
-                string winRarPath = @"C:\Program Files\WinRAR\WinRAR.exe"; // Adjust this path if necessary
-                if (!File.Exists(winRarPath))
+                // Encrypt the entered password for validation
+                string encryptedPassword = MyOtherMethods.EncryptPassword(userPassword);
+
+                // Validate the user using the encrypted password
+                bool isCorrectPass = await MyDbMethods.ValidateUserUsingUserID(
+                    "SmartAssetDb",
+                    "Users",
+                    FrontPage_Final.StaticUserID.Text,
+                    encryptedPassword
+                );
+
+                if (!isCorrectPass)
                 {
-                    throw new FileNotFoundException("WinRAR executable not found at the specified location.");
+                    MessageBox.Show("Invalid UserID or Password.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
-                // Create a temporary directory for extraction
-                string tempExtractFolder = Path.Combine(Path.GetTempPath(), $"Restore_{DateTime.Now:yyyyMMdd_HHmmss}");
-                Directory.CreateDirectory(tempExtractFolder);
+                // User authenticated, proceed with backup restoration
+                MessageBox.Show("Password validated successfully. Proceeding with restoration...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Extract the RAR file
-                string extractArguments = $"x -p{password} \"{rarFilePath}\" \"{tempExtractFolder}\\\"";
-
-                Process extractProcess = new Process
+                // Prompt the user to select multiple JSON files
+                OpenFileDialog openFileDialog = new OpenFileDialog
                 {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = winRarPath,
-                        Arguments = extractArguments,
-                        RedirectStandardOutput = true,
-                        RedirectStandardError = true,
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    }
+                    Filter = "JSON files (*.json)|*.json",
+                    Title = "Select Backup JSON Files",
+                    Multiselect = true // Enable multi-selection
                 };
 
-                extractProcess.Start();
-                extractProcess.WaitForExit();
-
-                if (extractProcess.ExitCode != 0)
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
                 {
-                    string error = extractProcess.StandardError.ReadToEnd();
-                    throw new Exception($"Failed to extract RAR file. Error: {error}");
+                    MessageBox.Show("Restoration has been canceled.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
+
+                string[] jsonFilePaths = openFileDialog.FileNames;
 
                 // Initialize MongoDB client
                 var client = new MongoClient(DefaultConnectionString);
                 var database = client.GetDatabase(dbName);
 
-                // Iterate through extracted files and restore collections
-                foreach (string filePath in Directory.GetFiles(tempExtractFolder, "*.json", SearchOption.AllDirectories))
+                // Process each selected JSON file
+                foreach (string jsonFilePath in jsonFilePaths)
                 {
-                    string collectionName = Path.GetFileNameWithoutExtension(filePath);
-                    var collection = database.GetCollection<BsonDocument>(collectionName);
-
-                    // Read JSON file and insert documents into the collection
-                    using (StreamReader reader = new StreamReader(filePath))
+                    try
                     {
-                        string line;
-                        while ((line = reader.ReadLine()) != null)
+                        // Determine the collection name from the file name
+                        string collectionName = Path.GetFileNameWithoutExtension(jsonFilePath);
+                        var collection = database.GetCollection<BsonDocument>(collectionName);
+
+                        using (StreamReader reader = new StreamReader(jsonFilePath))
                         {
-                            var document = BsonDocument.Parse(line);
-                            collection.InsertOne(document);
+                            string line;
+                            while ((line = reader.ReadLine()) != null)
+                            {
+                                try
+                                {
+                                    var document = BsonDocument.Parse(line); // Parse JSON into BSON
+                                    collection.InsertOne(document);
+                                }
+                                catch (Exception parseEx)
+                                {
+                                    Console.WriteLine($"Failed to parse or insert document in file {jsonFilePath}: {parseEx.Message}");
+                                }
+                            }
                         }
+
+                        Console.WriteLine($"Restored collection: {collectionName}");
                     }
-
-                    Console.WriteLine($"Restored collection: {collectionName}");
+                    catch (Exception fileEx)
+                    {
+                        Console.WriteLine($"Failed to restore from file {jsonFilePath}: {fileEx.Message}");
+                    }
                 }
-
-                // Clean up the temporary extraction folder
-                Directory.Delete(tempExtractFolder, true);
 
                 // Inform the user
                 MessageBox.Show("Database restoration completed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -4019,32 +4224,84 @@ namespace Smart_Asset
             }
         }
 
-        private static string PromptPassword(string prompt)
+        public static string PromptPassword(string prompt)
         {
             using (Form passwordForm = new Form())
             {
+                // Configure the form
                 passwordForm.Text = prompt;
-                passwordForm.Width = 300;
-                passwordForm.Height = 150;
+                passwordForm.StartPosition = FormStartPosition.CenterScreen; // Center the form on the screen
+                passwordForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                passwordForm.MaximizeBox = false;
+                passwordForm.MinimizeBox = false;
+                passwordForm.Width = 340; // Default width of 240 + 100px
+                passwordForm.AutoSize = true;
+                passwordForm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                passwordForm.Padding = new Padding(10);
 
-                Label label = new Label() { Left = 20, Top = 20, Text = "Enter Password:", AutoSize = true };
-                TextBox passwordBox = new TextBox() { Left = 20, Top = 50, Width = 240, PasswordChar = '*' };
-                Button confirmButton = new Button() { Text = "OK", Left = 190, Width = 70, Top = 80, DialogResult = DialogResult.OK };
+                // Create a layout panel for better alignment
+                TableLayoutPanel layoutPanel = new TableLayoutPanel
+                {
+                    ColumnCount = 1,
+                    RowCount = 3,
+                    Dock = DockStyle.Fill,
+                    AutoSize = true
+                };
 
-                passwordForm.Controls.Add(label);
-                passwordForm.Controls.Add(passwordBox);
-                passwordForm.Controls.Add(confirmButton);
+                // Add the label
+                Label label = new Label
+                {
+                    Text = "Enter Password:",
+                    AutoSize = true,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill
+                };
+                layoutPanel.Controls.Add(label, 0, 0);
 
+                // Add the password box
+                TextBox passwordBox = new TextBox
+                {
+                    PasswordChar = '*',
+                    Width = 300, // Adjusted width for consistency with form
+                    Anchor = AnchorStyles.None
+                };
+                layoutPanel.Controls.Add(passwordBox, 0, 1);
+
+                // Add the confirm button
+                Button confirmButton = new Button
+                {
+                    Text = "OK",
+                    DialogResult = DialogResult.OK,
+                    AutoSize = true,
+                    Anchor = AnchorStyles.None
+                };
+                layoutPanel.Controls.Add(confirmButton, 0, 2);
+
+                // Set layout panel as the main control
+                passwordForm.Controls.Add(layoutPanel);
+
+                // Set confirm button as default
                 passwordForm.AcceptButton = confirmButton;
 
+                // Show the dialog and return the password
                 if (passwordForm.ShowDialog() == DialogResult.OK)
                 {
                     return passwordBox.Text;
                 }
             }
 
-            return null; // User canceled
+            return null; // Return null if the user cancels
         }
+
+
+
+
+
+
+        
+
+
+
 
 
 

@@ -44,7 +44,7 @@ namespace Smart_Asset
         public static List<string> selectedUserIDs = new List<string>();
         RightClick_ManageUsers rcm = new RightClick_ManageUsers();
         public static string staticSelectedOneUserID;
-
+        
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             try

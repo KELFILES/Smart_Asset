@@ -23,8 +23,10 @@ namespace Smart_Asset
             {
                 Title = "Diagonal Line Chart",
                 TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
-                Background = OxyColors.Transparent
+                TitleColor = OxyColors.Black, // Set title text color to white
+                Background = OxyColors.Transparent,
+                TextColor = OxyColors.Black,
+                
             };
 
             plotModel.Axes.Add(new LinearAxis
@@ -35,7 +37,7 @@ namespace Smart_Asset
                 Title = "Categories",
                 AxislineColor = OxyColors.Cyan, // Set axis line color
                 AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
+                TextColor = OxyColors.Black // Set axis text color to white
             });
 
             plotModel.Axes.Add(new LinearAxis
@@ -46,7 +48,7 @@ namespace Smart_Asset
                 Title = "Values",
                 AxislineColor = OxyColors.Magenta, // Set axis line color
                 AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
+                TextColor = OxyColors.Black // Set axis text color to white
             });
 
             var lineSeries = new LineSeries
@@ -79,10 +81,10 @@ namespace Smart_Asset
 
             var plotModel = new PlotModel
             {
-                Title = "Top 5 Most Expensive Working Assets",
+                Title = "Top Expensive Working Assets",
                 TitleFontSize = 20,
-                TitleColor = OxyColors.White,
-                Background = OxyColors.Black,
+                TitleColor = OxyColors.Black,
+                Background = OxyColors.White,
                 TitlePadding = 40 // Adjust this value to manually center the title
             };
 
@@ -99,7 +101,7 @@ namespace Smart_Asset
                 Position = AxisPosition.Left,
                 Key = "Categories",
                 ItemsSource = categories,
-                TextColor = OxyColors.White,
+                TextColor = OxyColors.Black,
                 AxislineColor = OxyColors.Cyan,
                 AxislineThickness = 2,
                 MajorTickSize = 0,
@@ -115,9 +117,9 @@ namespace Smart_Asset
                 Title = "Price (₱)",
                 AxislineColor = OxyColors.Magenta,
                 AxislineThickness = 2,
-                TextColor = OxyColors.White,
-                MajorGridlineColor = OxyColor.FromAColor(60, OxyColors.White),
-                MinorGridlineColor = OxyColor.FromAColor(30, OxyColors.White),
+                TextColor = OxyColors.Black,
+                MajorGridlineColor = OxyColor.FromAColor(60, OxyColors.Black),
+                MinorGridlineColor = OxyColor.FromAColor(30, OxyColors.Black),
                 MajorGridlineStyle = LineStyle.Solid,
                 MinorGridlineStyle = LineStyle.Dot
             });
@@ -127,7 +129,7 @@ namespace Smart_Asset
             {
                 LabelPlacement = LabelPlacement.Inside,
                 LabelFormatString = "₱{0:N2}", // Use Peso sign with two decimal places
-                StrokeColor = OxyColors.White,
+                StrokeColor = OxyColors.Black,
                 StrokeThickness = 1
             };
 
@@ -167,7 +169,7 @@ namespace Smart_Asset
             {
                 Title = "Scatter Plot Example",
                 TitleFontSize = 18,
-                TitleColor = OxyColors.White, // Set title text color to white
+                TitleColor = OxyColors.Black, // Set title text color to white
                 Background = OxyColors.Transparent
             };
 
@@ -177,7 +179,7 @@ namespace Smart_Asset
                 Title = "X Axis",
                 AxislineColor = OxyColors.Cyan, // Set axis line color
                 AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
+                TextColor = OxyColors.Black // Set axis text color to white
             });
 
             plotModel.Axes.Add(new LinearAxis
@@ -186,7 +188,7 @@ namespace Smart_Asset
                 Title = "Y Axis",
                 AxislineColor = OxyColors.Magenta, // Set axis line color
                 AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.White // Set axis text color to white
+                TextColor = OxyColors.Black // Set axis text color to white
             });
 
             var scatterSeries = new ScatterSeries
@@ -223,7 +225,7 @@ namespace Smart_Asset
             {
                 Title = $"Monthly Asset Purchases for {DateTime.Now.Year}",
                 TitleFontSize = 18,
-                TitleColor = OxyColors.White,
+                TitleColor = OxyColors.Black,
                 Background = OxyColors.Transparent
             };
 
@@ -237,7 +239,7 @@ namespace Smart_Asset
                 Title = "Month",
                 AxislineColor = OxyColors.Cyan,
                 AxislineThickness = 2,
-                TextColor = OxyColors.White,
+                TextColor = OxyColors.Black,
                 ItemsSource = monthNames.Take(currentMonth).ToList(), // Use only up to the current month
                 IsPanEnabled = false, // Disable panning to prevent disappearance during scrolling
                 IsZoomEnabled = false // Disable zooming for better stability
@@ -250,7 +252,7 @@ namespace Smart_Asset
                 Title = "Purchases",
                 AxislineColor = OxyColors.Magenta,
                 AxislineThickness = 2,
-                TextColor = OxyColors.White,
+                TextColor = OxyColors.Black,
                 MinimumPadding = 0.1,
                 MaximumPadding = 0.1
             });
@@ -296,13 +298,14 @@ namespace Smart_Asset
                 .ToList();
 
             int sliceCount = sortedAssetCounts.Count;
-            string title = $"Top {sliceCount} Types of Working Assets";
+            string title = $"Top Types of Working Assets";
 
             var plotModel = new PlotModel
             {
                 Title = title,
                 TitleFontSize = 18,
-                TitleColor = OxyColors.White,
+                TitleColor = OxyColors.Black,
+                TextColor = OxyColors.Black,
                 Background = OxyColors.Transparent
             };
 
@@ -313,7 +316,7 @@ namespace Smart_Asset
                 StartAngle = 0,
                 FontSize = 14,
                 ExplodedDistance = 0.05, // Slightly explode slices for better separation
-                TextColor = OxyColors.White,
+                TextColor = OxyColors.Black,
                 InsideLabelPosition = 0.7, // Adjust to make more room inside slices
                 OutsideLabelFormat = "{0}: {1}", // Show labels outside the pie chart
                 LabelField = "Label" // Ensure labels display asset types
@@ -321,18 +324,18 @@ namespace Smart_Asset
 
             // Define colors for the slices
             List<OxyColor> colors = new List<OxyColor>
-    {
-        OxyColors.Crimson,
-        OxyColors.MediumSeaGreen,
-        OxyColors.DodgerBlue,
-        OxyColors.Goldenrod,
-        OxyColors.Purple,
-        OxyColors.OrangeRed,
-        OxyColors.Teal,
-        OxyColors.Violet,
-        OxyColors.SkyBlue,
-        OxyColors.DarkCyan
-    };
+            {
+                OxyColors.Crimson,
+                OxyColors.MediumSeaGreen,
+                OxyColors.DodgerBlue,
+                OxyColors.Goldenrod,
+                OxyColors.Purple,
+                OxyColors.OrangeRed,
+                OxyColors.Teal,
+                OxyColors.Violet,
+                OxyColors.SkyBlue,
+                OxyColors.DarkCyan
+            };
 
             // Add slices for each asset type
             for (int i = 0; i < sliceCount; i++)
@@ -350,7 +353,7 @@ namespace Smart_Asset
             plotModel.Legends.Add(new Legend
             {
                 LegendPosition = LegendPosition.RightTop,
-                LegendTextColor = OxyColors.White,
+                LegendTextColor = OxyColors.Black,
                 LegendFontSize = 14
             });
 

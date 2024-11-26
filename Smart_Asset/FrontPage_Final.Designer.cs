@@ -58,7 +58,6 @@
             panel3 = new Panel();
             header_Lbl = new Label();
             headerPicture_Pb = new PictureBox();
-            qmark_Btn = new Button();
             mainPanel = new Panel();
             sideMenu_Panel.SuspendLayout();
             logout_Panel.SuspendLayout();
@@ -87,6 +86,7 @@
             // 
             // logout_Panel
             // 
+            logout_Panel.BackColor = Color.FromArgb(2, 119, 189);
             logout_Panel.Controls.Add(logout_Btn);
             logout_Panel.Dock = DockStyle.Bottom;
             logout_Panel.Location = new Point(0, 967);
@@ -104,11 +104,11 @@
             logout_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             logout_Btn.FlatAppearance.MouseOverBackColor = Color.DimGray;
             logout_Btn.FlatStyle = FlatStyle.Flat;
-            logout_Btn.Font = new Font("Segoe UI", 8F);
+            logout_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             logout_Btn.ForeColor = Color.Gainsboro;
-            logout_Btn.Location = new Point(100, 20);
+            logout_Btn.Location = new Point(90, 20);
             logout_Btn.Name = "logout_Btn";
-            logout_Btn.Size = new Size(56, 26);
+            logout_Btn.Size = new Size(66, 26);
             logout_Btn.TabIndex = 32;
             logout_Btn.Text = "Logout";
             logout_Btn.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             // panel5
             // 
             panel5.AutoScroll = true;
-            panel5.BackColor = Color.FromArgb(11, 8, 20);
+            panel5.BackColor = Color.FromArgb(2, 119, 189);
             panel5.Controls.Add(panel1);
             panel5.Controls.Add(backupAndRestoreData_Btn);
             panel5.Controls.Add(createReport_Btn);
@@ -134,6 +134,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(2, 119, 189);
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(changePassword_Lbl);
             panel1.Controls.Add(userID_Lbl);
@@ -141,6 +142,7 @@
             panel1.Controls.Add(name_Lbl);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Bottom;
+            panel1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             panel1.Location = new Point(0, 704);
             panel1.Name = "panel1";
             panel1.Size = new Size(246, 201);
@@ -167,7 +169,7 @@
             userID_Lbl.ForeColor = Color.White;
             userID_Lbl.Location = new Point(18, 78);
             userID_Lbl.Name = "userID_Lbl";
-            userID_Lbl.Size = new Size(51, 19);
+            userID_Lbl.Size = new Size(55, 16);
             userID_Lbl.TabIndex = 3;
             userID_Lbl.Text = "UserID";
             userID_Lbl.TabIndexChanged += userID_Lbl_TabIndexChanged;
@@ -179,7 +181,7 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(18, 59);
             label2.Name = "label2";
-            label2.Size = new Size(58, 19);
+            label2.Size = new Size(63, 16);
             label2.TabIndex = 2;
             label2.Text = "User ID:";
             // 
@@ -190,7 +192,7 @@
             name_Lbl.ForeColor = Color.White;
             name_Lbl.Location = new Point(18, 30);
             name_Lbl.Name = "name_Lbl";
-            name_Lbl.Size = new Size(45, 19);
+            name_Lbl.Size = new Size(48, 16);
             name_Lbl.TabIndex = 1;
             name_Lbl.Text = "Name";
             // 
@@ -201,86 +203,94 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(17, 11);
             label1.Name = "label1";
-            label1.Size = new Size(40, 19);
+            label1.Size = new Size(44, 16);
             label1.TabIndex = 0;
             label1.Text = "User:";
             // 
             // backupAndRestoreData_Btn
             // 
+            backupAndRestoreData_Btn.BackColor = Color.FromArgb(2, 119, 189);
             backupAndRestoreData_Btn.Dock = DockStyle.Top;
             backupAndRestoreData_Btn.FlatAppearance.BorderSize = 0;
             backupAndRestoreData_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             backupAndRestoreData_Btn.FlatStyle = FlatStyle.Flat;
+            backupAndRestoreData_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             backupAndRestoreData_Btn.ForeColor = Color.Gainsboro;
             backupAndRestoreData_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            backupAndRestoreData_Btn.Location = new Point(0, 547);
+            backupAndRestoreData_Btn.Location = new Point(0, 541);
             backupAndRestoreData_Btn.Name = "backupAndRestoreData_Btn";
             backupAndRestoreData_Btn.Padding = new Padding(10, 0, 0, 0);
             backupAndRestoreData_Btn.Size = new Size(246, 45);
             backupAndRestoreData_Btn.TabIndex = 39;
             backupAndRestoreData_Btn.Text = "Backup and Restore Data";
             backupAndRestoreData_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            backupAndRestoreData_Btn.UseVisualStyleBackColor = true;
+            backupAndRestoreData_Btn.UseVisualStyleBackColor = false;
             backupAndRestoreData_Btn.Click += backupData_Btn_Click;
             backupAndRestoreData_Btn.MouseEnter += backupData_Btn_MouseEnter;
             backupAndRestoreData_Btn.MouseLeave += backupData_Btn_MouseLeave;
             // 
             // createReport_Btn
             // 
+            createReport_Btn.BackColor = Color.FromArgb(2, 119, 189);
             createReport_Btn.Dock = DockStyle.Top;
             createReport_Btn.FlatAppearance.BorderSize = 0;
             createReport_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             createReport_Btn.FlatStyle = FlatStyle.Flat;
+            createReport_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             createReport_Btn.ForeColor = Color.Gainsboro;
             createReport_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            createReport_Btn.Location = new Point(0, 502);
+            createReport_Btn.Location = new Point(0, 496);
             createReport_Btn.Name = "createReport_Btn";
             createReport_Btn.Padding = new Padding(10, 0, 0, 0);
             createReport_Btn.Size = new Size(246, 45);
             createReport_Btn.TabIndex = 38;
             createReport_Btn.Text = "Create Report";
             createReport_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            createReport_Btn.UseVisualStyleBackColor = true;
+            createReport_Btn.UseVisualStyleBackColor = false;
             createReport_Btn.Click += createReport_Btn_Click_1;
             createReport_Btn.MouseEnter += createReport_Btn_MouseEnter;
             createReport_Btn.MouseLeave += createReport_Btn_MouseLeave;
             // 
             // ManageUsers_Btn
             // 
+            ManageUsers_Btn.BackColor = Color.FromArgb(2, 119, 189);
             ManageUsers_Btn.Dock = DockStyle.Top;
             ManageUsers_Btn.FlatAppearance.BorderSize = 0;
             ManageUsers_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             ManageUsers_Btn.FlatStyle = FlatStyle.Flat;
+            ManageUsers_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             ManageUsers_Btn.ForeColor = Color.Gainsboro;
             ManageUsers_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            ManageUsers_Btn.Location = new Point(0, 457);
+            ManageUsers_Btn.Location = new Point(0, 451);
             ManageUsers_Btn.Name = "ManageUsers_Btn";
             ManageUsers_Btn.Padding = new Padding(10, 0, 0, 0);
             ManageUsers_Btn.Size = new Size(246, 45);
             ManageUsers_Btn.TabIndex = 37;
             ManageUsers_Btn.Text = "Manage Users";
             ManageUsers_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            ManageUsers_Btn.UseVisualStyleBackColor = true;
+            ManageUsers_Btn.UseVisualStyleBackColor = false;
             ManageUsers_Btn.Click += ManageUsers_Btn_Click_1;
             ManageUsers_Btn.MouseEnter += ManageUsers_Btn_MouseEnter;
             ManageUsers_Btn.MouseLeave += ManageUsers_Btn_MouseLeave;
             // 
             // aIChat_Btn
             // 
+            aIChat_Btn.BackColor = Color.FromArgb(2, 119, 189);
             aIChat_Btn.Dock = DockStyle.Top;
             aIChat_Btn.FlatAppearance.BorderSize = 0;
             aIChat_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             aIChat_Btn.FlatStyle = FlatStyle.Flat;
+            aIChat_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             aIChat_Btn.ForeColor = Color.Gainsboro;
             aIChat_Btn.ImageAlign = ContentAlignment.MiddleRight;
-            aIChat_Btn.Location = new Point(0, 412);
+            aIChat_Btn.Location = new Point(0, 406);
             aIChat_Btn.Name = "aIChat_Btn";
             aIChat_Btn.Padding = new Padding(10, 0, 0, 0);
             aIChat_Btn.Size = new Size(246, 45);
             aIChat_Btn.TabIndex = 36;
             aIChat_Btn.Text = "AI Chat";
             aIChat_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            aIChat_Btn.UseVisualStyleBackColor = true;
+            aIChat_Btn.UseVisualStyleBackColor = false;
             aIChat_Btn.Click += artificialIntelligence_Btn_Click_1;
             aIChat_Btn.MouseEnter += artificialIntelligence_Btn_MouseEnter;
             aIChat_Btn.MouseLeave += artificialIntelligence_Btn_MouseLeave;
@@ -299,15 +309,18 @@
             fileMaintenance_SubMenuPanel.Dock = DockStyle.Top;
             fileMaintenance_SubMenuPanel.Location = new Point(0, 90);
             fileMaintenance_SubMenuPanel.Name = "fileMaintenance_SubMenuPanel";
-            fileMaintenance_SubMenuPanel.Size = new Size(246, 322);
+            fileMaintenance_SubMenuPanel.Size = new Size(246, 316);
             fileMaintenance_SubMenuPanel.TabIndex = 23;
             // 
             // assetHistory_Btn
             // 
+            assetHistory_Btn.BackColor = Color.FromArgb(41, 130, 176);
             assetHistory_Btn.Dock = DockStyle.Top;
             assetHistory_Btn.FlatAppearance.BorderSize = 0;
-            assetHistory_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            assetHistory_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            assetHistory_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             assetHistory_Btn.FlatStyle = FlatStyle.Flat;
+            assetHistory_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             assetHistory_Btn.ForeColor = Color.Gainsboro;
             assetHistory_Btn.ImageAlign = ContentAlignment.MiddleRight;
             assetHistory_Btn.Location = new Point(0, 280);
@@ -317,17 +330,20 @@
             assetHistory_Btn.TabIndex = 29;
             assetHistory_Btn.Text = "Asset History";
             assetHistory_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            assetHistory_Btn.UseVisualStyleBackColor = true;
+            assetHistory_Btn.UseVisualStyleBackColor = false;
             assetHistory_Btn.Click += AssetHistory_Button_Click;
             assetHistory_Btn.MouseEnter += AssetHistory_Btn_MouseEnter;
             assetHistory_Btn.MouseLeave += AssetHistory_Btn_MouseLeave;
             // 
             // archived_Btn
             // 
+            archived_Btn.BackColor = Color.FromArgb(41, 130, 176);
             archived_Btn.Dock = DockStyle.Top;
             archived_Btn.FlatAppearance.BorderSize = 0;
-            archived_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            archived_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            archived_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             archived_Btn.FlatStyle = FlatStyle.Flat;
+            archived_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             archived_Btn.ForeColor = Color.Gainsboro;
             archived_Btn.ImageAlign = ContentAlignment.MiddleRight;
             archived_Btn.Location = new Point(0, 240);
@@ -337,17 +353,20 @@
             archived_Btn.TabIndex = 28;
             archived_Btn.Text = "Archived";
             archived_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            archived_Btn.UseVisualStyleBackColor = true;
+            archived_Btn.UseVisualStyleBackColor = false;
             archived_Btn.Click += archived_Btn_Click;
             archived_Btn.MouseEnter += archived_Btn_MouseEnter;
             archived_Btn.MouseLeave += archived_Btn_MouseLeave;
             // 
             // reserved_Btn
             // 
+            reserved_Btn.BackColor = Color.FromArgb(41, 130, 176);
             reserved_Btn.Dock = DockStyle.Top;
             reserved_Btn.FlatAppearance.BorderSize = 0;
-            reserved_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            reserved_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            reserved_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             reserved_Btn.FlatStyle = FlatStyle.Flat;
+            reserved_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             reserved_Btn.ForeColor = Color.Gainsboro;
             reserved_Btn.ImageAlign = ContentAlignment.MiddleRight;
             reserved_Btn.Location = new Point(0, 200);
@@ -357,17 +376,20 @@
             reserved_Btn.TabIndex = 27;
             reserved_Btn.Text = "Reserved";
             reserved_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            reserved_Btn.UseVisualStyleBackColor = true;
+            reserved_Btn.UseVisualStyleBackColor = false;
             reserved_Btn.Click += reserved_Btn_Click;
             reserved_Btn.MouseEnter += reserved_Btn_MouseEnter;
             reserved_Btn.MouseLeave += reserved_Btn_MouseLeave;
             // 
             // borrowed_Btn
             // 
+            borrowed_Btn.BackColor = Color.FromArgb(41, 130, 176);
             borrowed_Btn.Dock = DockStyle.Top;
             borrowed_Btn.FlatAppearance.BorderSize = 0;
-            borrowed_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            borrowed_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            borrowed_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             borrowed_Btn.FlatStyle = FlatStyle.Flat;
+            borrowed_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             borrowed_Btn.ForeColor = Color.Gainsboro;
             borrowed_Btn.ImageAlign = ContentAlignment.MiddleRight;
             borrowed_Btn.Location = new Point(0, 160);
@@ -377,17 +399,20 @@
             borrowed_Btn.TabIndex = 26;
             borrowed_Btn.Text = "Borrowed";
             borrowed_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            borrowed_Btn.UseVisualStyleBackColor = true;
+            borrowed_Btn.UseVisualStyleBackColor = false;
             borrowed_Btn.Click += borrowed_Btn_Click;
             borrowed_Btn.MouseEnter += borrowed_Btn_MouseEnter;
             borrowed_Btn.MouseLeave += borrowed_Btn_MouseLeave;
             // 
             // disposed_Btn
             // 
+            disposed_Btn.BackColor = Color.FromArgb(41, 130, 176);
             disposed_Btn.Dock = DockStyle.Top;
             disposed_Btn.FlatAppearance.BorderSize = 0;
-            disposed_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            disposed_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            disposed_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             disposed_Btn.FlatStyle = FlatStyle.Flat;
+            disposed_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             disposed_Btn.ForeColor = Color.Gainsboro;
             disposed_Btn.ImageAlign = ContentAlignment.MiddleRight;
             disposed_Btn.Location = new Point(0, 120);
@@ -397,17 +422,20 @@
             disposed_Btn.TabIndex = 25;
             disposed_Btn.Text = "Disposed";
             disposed_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            disposed_Btn.UseVisualStyleBackColor = true;
+            disposed_Btn.UseVisualStyleBackColor = false;
             disposed_Btn.Click += disposed_Btn_Click_1;
             disposed_Btn.MouseEnter += disposed_Btn_MouseEnter;
             disposed_Btn.MouseLeave += disposed_Btn_MouseLeave;
             // 
             // replacement_Btn
             // 
+            replacement_Btn.BackColor = Color.FromArgb(41, 130, 176);
             replacement_Btn.Dock = DockStyle.Top;
             replacement_Btn.FlatAppearance.BorderSize = 0;
-            replacement_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            replacement_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            replacement_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             replacement_Btn.FlatStyle = FlatStyle.Flat;
+            replacement_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             replacement_Btn.ForeColor = Color.Gainsboro;
             replacement_Btn.ImageAlign = ContentAlignment.MiddleRight;
             replacement_Btn.Location = new Point(0, 80);
@@ -417,17 +445,20 @@
             replacement_Btn.TabIndex = 24;
             replacement_Btn.Text = "Replacement";
             replacement_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            replacement_Btn.UseVisualStyleBackColor = true;
+            replacement_Btn.UseVisualStyleBackColor = false;
             replacement_Btn.Click += repairing_Btn_Click;
             replacement_Btn.MouseEnter += repairingHardwares_Btn_MouseEnter;
             replacement_Btn.MouseLeave += repairingHardwares_Btn_MouseLeave;
             // 
             // cleaning_Btn
             // 
+            cleaning_Btn.BackColor = Color.FromArgb(41, 130, 176);
             cleaning_Btn.Dock = DockStyle.Top;
             cleaning_Btn.FlatAppearance.BorderSize = 0;
-            cleaning_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            cleaning_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            cleaning_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             cleaning_Btn.FlatStyle = FlatStyle.Flat;
+            cleaning_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             cleaning_Btn.ForeColor = Color.Gainsboro;
             cleaning_Btn.ImageAlign = ContentAlignment.MiddleRight;
             cleaning_Btn.Location = new Point(0, 40);
@@ -437,17 +468,20 @@
             cleaning_Btn.TabIndex = 23;
             cleaning_Btn.Text = "Cleaning";
             cleaning_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            cleaning_Btn.UseVisualStyleBackColor = true;
+            cleaning_Btn.UseVisualStyleBackColor = false;
             cleaning_Btn.Click += cleaning_Btn_Click_1;
             cleaning_Btn.MouseEnter += cleaning_Btn_MouseEnter;
             cleaning_Btn.MouseLeave += cleaning_Btn_MouseLeave;
             // 
             // assets_Btn
             // 
+            assets_Btn.BackColor = Color.FromArgb(41, 130, 176);
             assets_Btn.Dock = DockStyle.Top;
             assets_Btn.FlatAppearance.BorderSize = 0;
-            assets_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
+            assets_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 91, 143);
+            assets_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 91, 143);
             assets_Btn.FlatStyle = FlatStyle.Flat;
+            assets_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             assets_Btn.ForeColor = Color.Gainsboro;
             assets_Btn.ImageAlign = ContentAlignment.MiddleRight;
             assets_Btn.Location = new Point(0, 0);
@@ -457,17 +491,19 @@
             assets_Btn.TabIndex = 4;
             assets_Btn.Text = "Assets";
             assets_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            assets_Btn.UseVisualStyleBackColor = true;
+            assets_Btn.UseVisualStyleBackColor = false;
             assets_Btn.Click += asset_Btn_Click;
             assets_Btn.MouseEnter += asset_Btn_MouseEnter;
             assets_Btn.MouseLeave += asset_Btn_MouseLeave;
             // 
             // ManageAsset_Btn
             // 
+            ManageAsset_Btn.BackColor = Color.FromArgb(2, 119, 189);
             ManageAsset_Btn.Dock = DockStyle.Top;
             ManageAsset_Btn.FlatAppearance.BorderSize = 0;
             ManageAsset_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             ManageAsset_Btn.FlatStyle = FlatStyle.Flat;
+            ManageAsset_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             ManageAsset_Btn.ForeColor = Color.Gainsboro;
             ManageAsset_Btn.ImageAlign = ContentAlignment.MiddleRight;
             ManageAsset_Btn.Location = new Point(0, 45);
@@ -477,17 +513,19 @@
             ManageAsset_Btn.TabIndex = 13;
             ManageAsset_Btn.Text = "Manage Asset";
             ManageAsset_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            ManageAsset_Btn.UseVisualStyleBackColor = true;
+            ManageAsset_Btn.UseVisualStyleBackColor = false;
             ManageAsset_Btn.Click += ManageAsset_Btn_Click;
             ManageAsset_Btn.MouseEnter += fileMaintenance_Btn_MouseEnter;
             ManageAsset_Btn.MouseLeave += fileMaintenance_Btn_MouseLeave;
             // 
             // dashboard_Btn
             // 
+            dashboard_Btn.BackColor = Color.FromArgb(2, 119, 189);
             dashboard_Btn.Dock = DockStyle.Top;
             dashboard_Btn.FlatAppearance.BorderSize = 0;
             dashboard_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             dashboard_Btn.FlatStyle = FlatStyle.Flat;
+            dashboard_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             dashboard_Btn.ForeColor = Color.Gainsboro;
             dashboard_Btn.ImageAlign = ContentAlignment.MiddleRight;
             dashboard_Btn.Location = new Point(0, 0);
@@ -497,13 +535,14 @@
             dashboard_Btn.TabIndex = 12;
             dashboard_Btn.Text = "Dashboard";
             dashboard_Btn.TextAlign = ContentAlignment.MiddleLeft;
-            dashboard_Btn.UseVisualStyleBackColor = true;
+            dashboard_Btn.UseVisualStyleBackColor = false;
             dashboard_Btn.Click += dashboard_Btn_Click;
             dashboard_Btn.MouseEnter += dashboard_Btn_MouseEnter;
             dashboard_Btn.MouseLeave += dashboard_Btn_MouseLeave;
             // 
             // logo_Panel
             // 
+            logo_Panel.BackColor = Color.FromArgb(2, 119, 189);
             logo_Panel.Controls.Add(pictureBox1);
             logo_Panel.Dock = DockStyle.Top;
             logo_Panel.Location = new Point(0, 0);
@@ -516,20 +555,19 @@
             pictureBox1.Image = Properties.Resources.frontPage_Logo1;
             pictureBox1.ImageLocation = "";
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new Point(24, 16);
+            pictureBox1.Location = new Point(38, 13);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(194, 95);
+            pictureBox1.Size = new Size(158, 98);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
             // panel3
             // 
-            panel3.BackColor = Color.FromArgb(11, 7, 17);
+            panel3.BackColor = Color.FromArgb(2, 119, 189);
             panel3.BorderStyle = BorderStyle.Fixed3D;
             panel3.Controls.Add(header_Lbl);
             panel3.Controls.Add(headerPicture_Pb);
-            panel3.Controls.Add(qmark_Btn);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(252, 2);
             panel3.Name = "panel3";
@@ -541,13 +579,13 @@
             // 
             header_Lbl.AutoSize = true;
             header_Lbl.Dock = DockStyle.Left;
-            header_Lbl.Font = new Font("Segoe Script", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            header_Lbl.Font = new Font("Microsoft Sans Serif", 20.75F, FontStyle.Bold);
             header_Lbl.ForeColor = SystemColors.ButtonFace;
             header_Lbl.ImageAlign = ContentAlignment.MiddleLeft;
             header_Lbl.Location = new Point(115, 10);
             header_Lbl.Name = "header_Lbl";
             header_Lbl.Padding = new Padding(10, 0, 0, 0);
-            header_Lbl.Size = new Size(127, 34);
+            header_Lbl.Size = new Size(147, 32);
             header_Lbl.TabIndex = 7;
             header_Lbl.Text = "HEADER";
             header_Lbl.TextAlign = ContentAlignment.MiddleRight;
@@ -563,22 +601,9 @@
             headerPicture_Pb.TabIndex = 5;
             headerPicture_Pb.TabStop = false;
             // 
-            // qmark_Btn
-            // 
-            qmark_Btn.FlatStyle = FlatStyle.Flat;
-            qmark_Btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            qmark_Btn.ForeColor = SystemColors.ButtonFace;
-            qmark_Btn.Image = Properties.Resources.questionMark_Icon;
-            qmark_Btn.Location = new Point(1615, 13);
-            qmark_Btn.Name = "qmark_Btn";
-            qmark_Btn.Size = new Size(21, 21);
-            qmark_Btn.TabIndex = 4;
-            qmark_Btn.UseVisualStyleBackColor = true;
-            qmark_Btn.Click += button3_Click;
-            // 
             // mainPanel
             // 
-            mainPanel.BackColor = Color.FromArgb(30, 30, 45);
+            mainPanel.BackColor = Color.White;
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(252, 57);
             mainPanel.Name = "mainPanel";
@@ -623,7 +648,6 @@
         private Panel fileMaintenance_SubMenuPanel;
         private Button dashboard_Btn;
         private Button aIChat_Btn;
-        private Button qmark_Btn;
         private Panel mainPanel;
         private PictureBox pictureBox1;
         private Panel logout_Panel;

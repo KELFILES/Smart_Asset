@@ -85,7 +85,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.DimGray;
+            panel2.BackColor = Color.FromArgb(0, 91, 143);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
@@ -106,12 +106,12 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(38, 214);
+            label3.ForeColor = Color.Yellow;
+            label3.Location = new Point(40, 216);
             label3.Name = "label3";
-            label3.Size = new Size(489, 20);
+            label3.Size = new Size(519, 20);
             label3.TabIndex = 14;
-            label3.Text = "Note! The default password will be Username + 123 (Ex.\"Username123\").";
+            label3.Text = "Reminder: The default password will be Username + 123 (Ex.\"Username123\").";
             // 
             // label2
             // 
@@ -206,7 +206,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Black;
+            panel1.BackColor = Color.FromArgb(0, 91, 143);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(584, 10);
@@ -217,7 +217,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.DimGray;
+            panel3.BackColor = Color.FromArgb(0, 91, 143);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(lowerLabel_Lbl);
             panel3.Controls.Add(topLabel_Lbl);
@@ -241,7 +241,7 @@
             // 
             // otherModules_Panel
             // 
-            otherModules_Panel.BackColor = Color.Transparent;
+            otherModules_Panel.BackColor = Color.FromArgb(2, 119, 189);
             otherModules_Panel.BorderStyle = BorderStyle.FixedSingle;
             otherModules_Panel.Controls.Add(button3);
             otherModules_Panel.Controls.Add(button4);
@@ -333,7 +333,7 @@
             // 
             // assetEnabled_Panel
             // 
-            assetEnabled_Panel.BackColor = Color.Transparent;
+            assetEnabled_Panel.BackColor = Color.FromArgb(2, 119, 189);
             assetEnabled_Panel.BorderStyle = BorderStyle.FixedSingle;
             assetEnabled_Panel.Controls.Add(button2);
             assetEnabled_Panel.Controls.Add(button5);
@@ -461,7 +461,7 @@
             // 
             // manageAsset_Panel
             // 
-            manageAsset_Panel.BackColor = Color.Transparent;
+            manageAsset_Panel.BackColor = Color.FromArgb(2, 119, 189);
             manageAsset_Panel.BorderStyle = BorderStyle.FixedSingle;
             manageAsset_Panel.Controls.Add(clear_Btn);
             manageAsset_Panel.Controls.Add(selectAll_Btn);
@@ -607,9 +607,9 @@
             lowerLabel_Lbl.ForeColor = Color.White;
             lowerLabel_Lbl.Location = new Point(185, 79);
             lowerLabel_Lbl.Name = "lowerLabel_Lbl";
-            lowerLabel_Lbl.Size = new Size(235, 20);
+            lowerLabel_Lbl.Size = new Size(260, 20);
             lowerLabel_Lbl.TabIndex = 6;
-            lowerLabel_Lbl.Text = "Notes- The access of role selected";
+            lowerLabel_Lbl.Text = "Reminder- The access of role selected";
             // 
             // topLabel_Lbl
             // 
@@ -626,7 +626,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Gray;
+            BackColor = Color.FromArgb(0, 91, 143);
             ClientSize = new Size(1204, 471);
             Controls.Add(panel1);
             Controls.Add(panel2);

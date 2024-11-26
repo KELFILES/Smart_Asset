@@ -24,8 +24,7 @@ namespace Smart_Asset
         {
             InitializeComponent();
 
-            // Attach the Resize event handler
-            this.Resize += Login_Resize;
+
         }
 
         // Enable double buffering for the entire form
@@ -129,42 +128,21 @@ namespace Smart_Asset
             }
             else
             {
-                MessageBox.Show("User not found or fields missing.");
+                MessageBox.Show("Login Failed. Invalid Username or Password.");
             }
         }
 
         private void Login_Shown(object sender, EventArgs e)
         {
-            bgBox.BackColor = Color.FromArgb(200, Color.Black); // Set BackColor
+            
 
-            // Construct the relative path to the image
-            string imagePath = System.IO.Path.Combine(Application.StartupPath, "Images", "login_Image.jpg");
 
-            // Load the image from the relative path
-            backgroundImage = Image.FromFile(imagePath); // Use class-level backgroundImage
-
-            // Assuming panel1 is of type DoubleBufferedPanel
-            // Handle the panel's Paint event to draw the background image manually
-            panel1.Paint += (s, ev) =>
-            {
-                // Draw the background image to fit the panel's size
-                ev.Graphics.DrawImage(backgroundImage, 0, 0, panel1.Width, panel1.Height);
-            };
-
-            // Force the panel to redraw when the form is resized
-            this.Resize += (s, ev) =>
-            {
-                panel1.Invalidate(); // This forces the panel to be redrawn
-            };
-
-            // Adjust the initial location of bgBox
-            AdjustBgBox();
         }
 
         private void Login_Resize(object sender, EventArgs e)
         {
             // Adjust the location of bgBox when the form is resized
-            AdjustBgBox();
+            //AdjustBgBox();
         }
 
         private void AdjustBgBox()
@@ -203,7 +181,7 @@ namespace Smart_Asset
 
         private async void Login_Load(object sender, EventArgs e)
         {
-
+            //this.Size = new SizeMaximumSize);
         }
 
         private void forgotPassword_Lbl_Click(object sender, EventArgs e)

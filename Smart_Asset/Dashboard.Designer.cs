@@ -139,7 +139,7 @@
             // centerGraph_Pnl
             // 
             centerGraph_Pnl.AutoScroll = true;
-            centerGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
+            centerGraph_Pnl.BackColor = Color.White;
             centerGraph_Pnl.Dock = DockStyle.Fill;
             centerGraph_Pnl.Location = new Point(806, 3);
             centerGraph_Pnl.Name = "centerGraph_Pnl";
@@ -157,7 +157,7 @@
             // leftGraph_Pnl
             // 
             leftGraph_Pnl.AutoScroll = true;
-            leftGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
+            leftGraph_Pnl.BackColor = Color.White;
             leftGraph_Pnl.Dock = DockStyle.Left;
             leftGraph_Pnl.Location = new Point(3, 3);
             leftGraph_Pnl.Name = "leftGraph_Pnl";
@@ -167,6 +167,7 @@
             // panel16
             // 
             panel16.AutoScroll = true;
+            panel16.BackColor = Color.White;
             panel16.Controls.Add(panel9);
             panel16.Controls.Add(panel12);
             panel16.Controls.Add(panel10);
@@ -184,6 +185,7 @@
             // panel9
             // 
             panel9.BackColor = Color.Tomato;
+            panel9.BorderStyle = BorderStyle.FixedSingle;
             panel9.Controls.Add(box0_Pb);
             panel9.Controls.Add(box0Title_Lbl);
             panel9.Controls.Add(box0_Lbl);
@@ -670,7 +672,7 @@
             // 
             // rightGraph_Pnl
             // 
-            rightGraph_Pnl.BackColor = Color.FromArgb(10, 19, 45);
+            rightGraph_Pnl.BackColor = Color.White;
             rightGraph_Pnl.Dock = DockStyle.Fill;
             rightGraph_Pnl.Location = new Point(0, 0);
             rightGraph_Pnl.Name = "rightGraph_Pnl";

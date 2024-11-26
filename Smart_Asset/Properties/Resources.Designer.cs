@@ -153,6 +153,16 @@ namespace Smart_Asset.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap frontPage_Logo2 {
+            get {
+                object obj = ResourceManager.GetObject("frontPage_Logo2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap questionMark_Icon {
             get {
                 object obj = ResourceManager.GetObject("questionMark_Icon", resourceCulture);

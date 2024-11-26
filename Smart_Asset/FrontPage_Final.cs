@@ -28,9 +28,7 @@ namespace Smart_Asset
 
 
 
-            // Store the original back color when the form loads
-            originalBackColor = sideMenu_Panel.BackColor;
-            SubOriginalBackColor = fileMaintenance_SubMenuPanel.BackColor;
+
 
             fileMaintenance_SubMenuPanel.Visible = false;
 
@@ -62,35 +60,35 @@ namespace Smart_Asset
 
 
 
-            //FOR LOGGED IN USER INFO
-            public static string login_Name { get; set; }
-            public static string login_Username { get; set; }
-            public static string login_Role { get; set; }
-            public static string login_UserID { get; set; }
-        
+        //FOR LOGGED IN USER INFO
+        public static string login_Name { get; set; }
+        public static string login_Username { get; set; }
+        public static string login_Role { get; set; }
+        public static string login_UserID { get; set; }
 
 
-            //FOR USER PERMISSION
-            public static string permission_Add { get; set; }
-            public static string permission_Archive { get; set; }
-            public static string permission_Archived { get; set; }
-            public static string permission_ArtificialIntelligence { get; set; }
-            public static string permission_AssetHistory { get; set; }
-            public static string permission_Assets { get; set; }
-            public static string permission_BackupAndRestoreData { get; set; }
-            public static string permission_Borrow { get; set; }
-            public static string permission_Borrowed { get; set; }
-            public static string permission_Cleaning { get; set; }
-            public static string permission_CreateReport { get; set; }
-            public static string permission_Dashboard { get; set; }
-            public static string permission_Disposed { get; set; }
-            public static string permission_Edit { get; set; }
-            public static string permission_Replace { get; set; }
-            public static string permission_Replacement { get; set; }
-            public static string permission_Reserved { get; set; }
-            public static string permission_ShowImage { get; set; }
-            public static string permission_Transfer { get; set; }
-        
+
+        //FOR USER PERMISSION
+        public static string permission_Add { get; set; }
+        public static string permission_Archive { get; set; }
+        public static string permission_Archived { get; set; }
+        public static string permission_ArtificialIntelligence { get; set; }
+        public static string permission_AssetHistory { get; set; }
+        public static string permission_Assets { get; set; }
+        public static string permission_BackupAndRestoreData { get; set; }
+        public static string permission_Borrow { get; set; }
+        public static string permission_Borrowed { get; set; }
+        public static string permission_Cleaning { get; set; }
+        public static string permission_CreateReport { get; set; }
+        public static string permission_Dashboard { get; set; }
+        public static string permission_Disposed { get; set; }
+        public static string permission_Edit { get; set; }
+        public static string permission_Replace { get; set; }
+        public static string permission_Replacement { get; set; }
+        public static string permission_Reserved { get; set; }
+        public static string permission_ShowImage { get; set; }
+        public static string permission_Transfer { get; set; }
+
 
 
 
@@ -122,7 +120,7 @@ namespace Smart_Asset
         RightClick_RepairingHardwares rh = new RightClick_RepairingHardwares();
         RightClick_ShowAllHardwares sah = new RightClick_ShowAllHardwares();
         RightClick_DisposedHardwares dsp = new RightClick_DisposedHardwares();
-        Ai_ChatBot aic= new Ai_ChatBot();
+        Ai_ChatBot aic = new Ai_ChatBot();
         backupAndRestore bar = new backupAndRestore();
 
         public static string name = "";
@@ -139,9 +137,6 @@ namespace Smart_Asset
             dsp.SendClickBtnInfo(selectedButton);
         }
 
-        // Declare a variable to store the original background color
-        private Color originalBackColor;
-        private Color SubOriginalBackColor;
 
         private Button toggleButton;
         private bool isMaximized = false;
@@ -151,7 +146,7 @@ namespace Smart_Asset
         {
             loadPermissionsColor();
 
-            if(login_Role.Equals("Custom User") || login_Role.Equals("Admin"))
+            if (login_Role.Equals("Custom User") || login_Role.Equals("Admin"))
             {
                 //DISABLE MANAGE USERS
                 ManageUsers_Btn.Enabled = false;
@@ -242,58 +237,6 @@ namespace Smart_Asset
             {
 
 
-                if (permission_Dashboard.Equals("0"))
-                {
-                    dashboard_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Assets.Equals("0"))
-                {
-                    assets_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Cleaning.Equals("0"))
-                {
-                    cleaning_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Cleaning.Equals("0"))
-                {
-                    cleaning_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Replacement.Equals("0"))
-                {
-                    replacement_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Disposed.Equals("0"))
-                {
-                    disposed_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Borrowed.Equals("0"))
-                {
-                    borrowed_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Reserved.Equals("0"))
-                {
-                    reserved_Btn.ForeColor = Color.Red;
-                }
-                if (permission_Archived.Equals("0"))
-                {
-                    archived_Btn.ForeColor = Color.Red;
-                }
-                if (permission_AssetHistory.Equals("0"))
-                {
-                    assetHistory_Btn.ForeColor = Color.Red;
-                }
-                if (permission_ArtificialIntelligence.Equals("0"))
-                {
-                    aIChat_Btn.ForeColor = Color.Red;
-                }
-                if (permission_CreateReport.Equals("0"))
-                {
-                    createReport_Btn.ForeColor = Color.Red;
-                }
-                if (permission_BackupAndRestoreData.Equals("0"))
-                {
-                    backupAndRestoreData_Btn.ForeColor = Color.Red;
-                }
 
 
                 //all inside Assets Module
@@ -414,7 +357,7 @@ namespace Smart_Asset
         {
             header_Lbl.Text = "DASHBOARD";
 
-            if(login_Role.Equals("Custom User"))
+            if (login_Role.Equals("Custom User"))
             {
                 if (permission_Dashboard.Equals("0"))
                 {
@@ -426,7 +369,7 @@ namespace Smart_Asset
 
 
 
-                showFormSelected(ref db, "DASHBOARD");
+            showFormSelected(ref db, "DASHBOARD");
             headerPicture_Pb.Image = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "dashboard_Icon.ico"));
         }
 
@@ -485,37 +428,33 @@ namespace Smart_Asset
 
         private void SubButtonEnterColor(Button btnName)
         {
-            // Change the back color to red with 20% transparency
-            btnName.BackColor = Color.FromArgb(255, 102, 187, 106); // 204 is 20% transparency
+
         }
 
         private void ButtonEnterColor(Button btnName)
         {
-            // Change the back color to red with 20% transparency
-            btnName.BackColor = Color.FromArgb(255, 109, 80, 166); // 204 is 20% transparency
+
         }
 
         private void ButtonLeaveColor(Button btnName)
         {
-            // Restore the original background color
-            btnName.BackColor = originalBackColor;
+
         }
 
 
         private void SubButtonLeaveColor(Button btnName)
         {
-            // Restore the original background color
-            btnName.BackColor = SubOriginalBackColor;
+
         }
 
         private void dashboard_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(dashboard_Btn);
+
         }
 
         private void dashboard_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(dashboard_Btn);
+
         }
 
         private void fileMaintenance_Btn_MouseEnter(object sender, EventArgs e)
@@ -528,7 +467,6 @@ namespace Smart_Asset
 
         private void fileMaintenance_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(ManageAsset_Btn);
 
             ManageAsset_Btn.Image = null;
         }
@@ -540,7 +478,7 @@ namespace Smart_Asset
 
         private void artificialIntelligence_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(aIChat_Btn);
+
         }
 
         private void questionMark_Btn_Click(object sender, EventArgs e)
@@ -764,132 +702,132 @@ namespace Smart_Asset
 
         private void ManageUsers_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(ManageUsers_Btn);
+
         }
 
         private void createReport_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(createReport_Btn);
+
         }
 
         private void ManageUsers_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(ManageUsers_Btn);
+
         }
 
         private void createReport_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(createReport_Btn);
+
         }
 
         private void asset_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(assets_Btn);
+
         }
 
         private void asset_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(assets_Btn);
+
         }
 
         private void AssetHistory_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(assetHistory_Btn);
+
         }
 
         private void AssetHistory_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(assetHistory_Btn);
+
         }
 
         private void AssetCategories_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(reserved_Btn);
+
         }
 
         private void AssetCategories_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(reserved_Btn);
+
         }
 
         private void backupData_Btn_MouseEnter(object sender, EventArgs e)
         {
-            ButtonEnterColor(backupAndRestoreData_Btn);
+
         }
 
         private void backupData_Btn_MouseLeave(object sender, EventArgs e)
         {
-            ButtonLeaveColor(backupAndRestoreData_Btn);
+
         }
 
         private void repairingHardwares_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(replacement_Btn);
+
         }
 
         private void repairingHardwares_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(replacement_Btn);
+
         }
 
         private void cleaning_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(cleaning_Btn);
+
         }
 
         private void cleaning_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(cleaning_Btn);
+
         }
 
         private void disposed_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(disposed_Btn);
+
         }
 
         private void disposed_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(disposed_Btn);
+
         }
 
         private void borrowed_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(borrowed_Btn);
+
         }
 
         private void borrowed_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(borrowed_Btn);
+
         }
 
         private void reserved_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(reserved_Btn);
+
         }
 
         private void reserved_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(reserved_Btn);
+
         }
 
         private void archived_Btn_MouseEnter(object sender, EventArgs e)
         {
-            SubButtonEnterColor(archived_Btn);
+
         }
 
         private void archived_Btn_MouseLeave(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(archived_Btn);
+
         }
 
         private void AssetHistory_Btn_MouseEnter_1(object sender, EventArgs e)
         {
-            SubButtonEnterColor(assetHistory_Btn);
+
         }
 
         private void assetHistory_Btn_MouseLeave_1(object sender, EventArgs e)
         {
-            SubButtonLeaveColor(assetHistory_Btn);
+
         }
 
 

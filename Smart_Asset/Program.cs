@@ -16,7 +16,7 @@ namespace Smart_Asset
             // Apply manual scaling adjustment
             AdjustScaling();
 
-            Application.Run(new Startup());
+            Application.Run(new Login());
             //Application.Run(new FrontPage_Final());
         }
 

@@ -37,7 +37,6 @@ namespace Smart_Asset
                 return cp;
             }
         }
-
         public static DataGridView StaticDataGridView1;
 
         //FIELD

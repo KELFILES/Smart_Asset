@@ -112,6 +112,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AssetHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ChangePermission.cs">
       <SubType>Form</SubType>
     </Compile>

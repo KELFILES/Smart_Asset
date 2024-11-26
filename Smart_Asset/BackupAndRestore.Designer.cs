@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             panel5 = new Panel();
             panel2 = new Panel();
             systemBackup_Btn = new Button();
             systemRestore_Btn = new Button();
             label3 = new Label();
-            panel3 = new Panel();
+            dataGridView1 = new DataGridView();
             panel1.SuspendLayout();
             panel5.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -55,7 +59,8 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(233, 234, 232);
-            panel5.Controls.Add(panel3);
+            panel5.Controls.Add(dataGridView1);
+            panel5.Controls.Add(systemBackup_Btn);
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(15, 115);
             panel5.Name = "panel5";
@@ -67,7 +72,6 @@
             // 
             panel2.BackColor = Color.FromArgb(253, 175, 23);
             panel2.Controls.Add(systemRestore_Btn);
-            panel2.Controls.Add(systemBackup_Btn);
             panel2.Controls.Add(label3);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(15, 15);
@@ -82,7 +86,7 @@
             systemBackup_Btn.FlatStyle = FlatStyle.Flat;
             systemBackup_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             systemBackup_Btn.ForeColor = Color.White;
-            systemBackup_Btn.Location = new Point(970, 37);
+            systemBackup_Btn.Location = new Point(583, 290);
             systemBackup_Btn.Name = "systemBackup_Btn";
             systemBackup_Btn.Size = new Size(171, 43);
             systemBackup_Btn.TabIndex = 15;
@@ -118,13 +122,43 @@
             label3.TabIndex = 31;
             label3.Text = "AUTOMATIC BACKUP";
             // 
-            // panel3
+            // dataGridView1
             // 
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(10, 10);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1854, 891);
-            panel3.TabIndex = 16;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(254, 242, 0);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(10, 10);
+            dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridView1.Size = new Size(1854, 891);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            dataGridView1.MouseDown += dataGridView1_MouseDown;
             // 
             // backupAndRestore
             // 
@@ -139,6 +173,7 @@
             panel5.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -150,6 +185,6 @@
         private Button systemRestore_Btn;
         private Button systemBackup_Btn;
         private Label label3;
-        private Panel panel3;
+        private DataGridView dataGridView1;
     }
 }

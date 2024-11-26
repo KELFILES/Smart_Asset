@@ -183,6 +183,7 @@
             panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(panel3);
+            panel1.Controls.Add(panel7);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -195,7 +196,6 @@
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(4, 9, 64);
             panel2.Controls.Add(panel8);
-            panel2.Controls.Add(panel7);
             panel2.Controls.Add(panel10);
             panel2.Controls.Add(panel9);
             panel2.Controls.Add(panel6);
@@ -273,7 +273,7 @@
             panel7.Controls.Add(cleaningHardwares_Btn);
             panel7.Controls.Add(disposedHardwares_Btn);
             panel7.Controls.Add(replacement_Btn);
-            panel7.Location = new Point(1887, 7);
+            panel7.Location = new Point(1898, 55);
             panel7.Name = "panel7";
             panel7.Size = new Size(10, 10);
             panel7.TabIndex = 23;
@@ -413,7 +413,7 @@
             // 
             search2_Btn.Anchor = AnchorStyles.Top;
             search2_Btn.ForeColor = Color.Black;
-            search2_Btn.Location = new Point(148, 97);
+            search2_Btn.Location = new Point(162, 97);
             search2_Btn.Name = "search2_Btn";
             search2_Btn.Size = new Size(132, 29);
             search2_Btn.TabIndex = 31;
@@ -528,7 +528,7 @@
             search_Cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             search_Cmb.DropDownStyle = ComboBoxStyle.Simple;
             search_Cmb.FormattingEnabled = true;
-            search_Cmb.Location = new Point(65, 51);
+            search_Cmb.Location = new Point(68, 56);
             search_Cmb.Name = "search_Cmb";
             search_Cmb.Size = new Size(261, 23);
             search_Cmb.TabIndex = 23;
@@ -540,7 +540,7 @@
             label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(14, 56);
+            label4.Location = new Point(17, 61);
             label4.Name = "label4";
             label4.Size = new Size(45, 15);
             label4.TabIndex = 24;

@@ -51,7 +51,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(10, 18, 45);
+            panel1.BackColor = Color.FromArgb(0, 91, 143);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
@@ -64,7 +64,7 @@
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel3.BackColor = SystemColors.WindowFrame;
+            panel3.BackColor = Color.FromArgb(2, 119, 189);
             panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(dataGridView1);
             panel3.Location = new Point(12, 273);
@@ -77,7 +77,7 @@
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.BackgroundColor = Color.Black;
+            dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(10, 10);
@@ -88,7 +88,7 @@
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.BackColor = Color.DimGray;
+            panel2.BackColor = Color.FromArgb(2, 119, 189);
             panel2.Controls.Add(serialNo_Cmb);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
@@ -120,11 +120,11 @@
             // 
             label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F);
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(526, 113);
+            label4.Location = new Point(522, 113);
             label4.Name = "label4";
-            label4.Size = new Size(76, 21);
+            label4.Size = new Size(87, 20);
             label4.TabIndex = 47;
             label4.Text = "SerialNo.:";
             // 
@@ -132,11 +132,11 @@
             // 
             label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F);
+            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(194, 113);
+            label3.Location = new Point(192, 110);
             label3.Name = "label3";
-            label3.Size = new Size(45, 21);
+            label3.Size = new Size(52, 20);
             label3.TabIndex = 46;
             label3.Text = "Type:";
             // 
@@ -155,11 +155,13 @@
             // enter_Btn
             // 
             enter_Btn.Anchor = AnchorStyles.Top;
-            enter_Btn.Location = new Point(508, 162);
+            enter_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            enter_Btn.ForeColor = Color.FromArgb(2, 119, 189);
+            enter_Btn.Location = new Point(508, 157);
             enter_Btn.Name = "enter_Btn";
-            enter_Btn.Size = new Size(94, 23);
+            enter_Btn.Size = new Size(94, 28);
             enter_Btn.TabIndex = 43;
-            enter_Btn.Text = "ENTER";
+            enter_Btn.Text = "CONFIRM";
             enter_Btn.UseVisualStyleBackColor = true;
             enter_Btn.Click += enter_Btn_Click;
             // 
@@ -190,7 +192,8 @@
             // addUnit_Btn
             // 
             addUnit_Btn.Anchor = AnchorStyles.Top;
-            addUnit_Btn.Font = new Font("Segoe UI", 12F);
+            addUnit_Btn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            addUnit_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             addUnit_Btn.Location = new Point(846, 55);
             addUnit_Btn.Name = "addUnit_Btn";
             addUnit_Btn.Size = new Size(33, 28);
@@ -202,7 +205,8 @@
             // addLocation_Btn
             // 
             addLocation_Btn.Anchor = AnchorStyles.Top;
-            addLocation_Btn.Font = new Font("Segoe UI", 12F);
+            addLocation_Btn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            addLocation_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             addLocation_Btn.Location = new Point(846, 25);
             addLocation_Btn.Name = "addLocation_Btn";
             addLocation_Btn.Size = new Size(33, 28);
@@ -215,11 +219,11 @@
             // 
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F);
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(167, 59);
+            label2.Location = new Point(192, 60);
             label2.Name = "label2";
-            label2.Size = new Size(42, 21);
+            label2.Size = new Size(47, 20);
             label2.TabIndex = 1;
             label2.Text = "Unit:";
             // 
@@ -227,11 +231,11 @@
             // 
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(167, 29);
+            label1.Location = new Point(156, 30);
             label1.Name = "label1";
-            label1.Size = new Size(72, 21);
+            label1.Size = new Size(83, 20);
             label1.TabIndex = 0;
             label1.Text = "Location:";
             // 

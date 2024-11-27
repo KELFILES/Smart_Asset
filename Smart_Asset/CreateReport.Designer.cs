@@ -47,7 +47,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(4, 9, 64);
+            panel1.BackColor = Color.FromArgb(0, 91, 143);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(panel2);
@@ -60,6 +60,7 @@
             // 
             // panel3
             // 
+            panel3.BackColor = Color.FromArgb(0, 91, 143);
             panel3.Controls.Add(panel5);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(7, 71);
@@ -70,7 +71,7 @@
             // 
             // panel5
             // 
-            panel5.BackColor = Color.FromArgb(255, 243, 26);
+            panel5.BackColor = Color.FromArgb(2, 119, 189);
             panel5.Controls.Add(mainboard_Tb);
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(30, 30);
@@ -94,6 +95,7 @@
             // 
             // panel4
             // 
+            panel4.BackColor = Color.FromArgb(0, 91, 143);
             panel4.Controls.Add(exportTo_Cb);
             panel4.Controls.Add(exportTo_Lbl);
             panel4.Controls.Add(export_Btn);
@@ -120,24 +122,25 @@
             // 
             exportTo_Lbl.Anchor = AnchorStyles.Top;
             exportTo_Lbl.AutoSize = true;
-            exportTo_Lbl.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            exportTo_Lbl.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             exportTo_Lbl.ForeColor = Color.White;
-            exportTo_Lbl.Location = new Point(929, 18);
+            exportTo_Lbl.Location = new Point(930, 22);
             exportTo_Lbl.Name = "exportTo_Lbl";
-            exportTo_Lbl.Size = new Size(104, 30);
+            exportTo_Lbl.Size = new Size(108, 24);
             exportTo_Lbl.TabIndex = 13;
             exportTo_Lbl.Text = "Export To:";
             // 
             // export_Btn
             // 
             export_Btn.Anchor = AnchorStyles.Top;
-            export_Btn.BackColor = Color.SteelBlue;
+            export_Btn.BackColor = Color.White;
             export_Btn.FlatAppearance.BorderColor = Color.FromArgb(255, 255, 128);
             export_Btn.FlatAppearance.MouseDownBackColor = Color.Red;
             export_Btn.FlatAppearance.MouseOverBackColor = Color.Lime;
             export_Btn.FlatStyle = FlatStyle.Flat;
-            export_Btn.ForeColor = Color.White;
-            export_Btn.Location = new Point(938, 82);
+            export_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            export_Btn.ForeColor = Color.FromArgb(2, 119, 189);
+            export_Btn.Location = new Point(938, 86);
             export_Btn.Name = "export_Btn";
             export_Btn.Size = new Size(88, 31);
             export_Btn.TabIndex = 14;
@@ -157,11 +160,11 @@
             // topText_Lbl
             // 
             topText_Lbl.AutoSize = true;
-            topText_Lbl.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            topText_Lbl.Font = new Font("Microsoft Sans Serif", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             topText_Lbl.ForeColor = Color.White;
             topText_Lbl.Location = new Point(895, 11);
             topText_Lbl.Name = "topText_Lbl";
-            topText_Lbl.Size = new Size(138, 40);
+            topText_Lbl.Size = new Size(206, 42);
             topText_Lbl.TabIndex = 0;
             topText_Lbl.Text = "REPORTS";
             // 

@@ -81,7 +81,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Gray;
+            panel1.BackColor = Color.FromArgb(0, 91, 143);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -92,7 +92,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.DimGray;
+            panel3.BackColor = Color.FromArgb(0, 91, 143);
             panel3.Controls.Add(panel5);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel2);
@@ -138,7 +138,7 @@
             // 
             // otherModules_Panel
             // 
-            otherModules_Panel.BackColor = Color.Transparent;
+            otherModules_Panel.BackColor = Color.FromArgb(2, 119, 189);
             otherModules_Panel.BorderStyle = BorderStyle.FixedSingle;
             otherModules_Panel.Controls.Add(button3);
             otherModules_Panel.Controls.Add(button4);
@@ -230,7 +230,7 @@
             // 
             // assetEnabled_Panel
             // 
-            assetEnabled_Panel.BackColor = Color.Transparent;
+            assetEnabled_Panel.BackColor = Color.FromArgb(2, 119, 189);
             assetEnabled_Panel.BorderStyle = BorderStyle.FixedSingle;
             assetEnabled_Panel.Controls.Add(button1);
             assetEnabled_Panel.Controls.Add(button2);
@@ -358,7 +358,7 @@
             // 
             // manageAsset_Panel
             // 
-            manageAsset_Panel.BackColor = Color.Transparent;
+            manageAsset_Panel.BackColor = Color.FromArgb(2, 119, 189);
             manageAsset_Panel.BorderStyle = BorderStyle.FixedSingle;
             manageAsset_Panel.Controls.Add(clear_Btn);
             manageAsset_Panel.Controls.Add(selectAll_Btn);
@@ -499,6 +499,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.FromArgb(0, 91, 143);
             panel2.Controls.Add(userIDVal_Lbl);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(nameVal_Lbl);

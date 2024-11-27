@@ -86,10 +86,12 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(10, 18, 45);
+            panel2.BackColor = Color.FromArgb(0, 91, 143);
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(panel1);
             panel2.Dock = DockStyle.Fill;
+            panel2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            panel2.ForeColor = Color.White;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(8);
@@ -110,7 +112,7 @@
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.AutoScroll = true;
-            panel3.BackColor = Color.DimGray;
+            panel3.BackColor = Color.FromArgb(2, 119, 189);
             panel3.Controls.Add(serial2_Cb);
             panel3.Controls.Add(button3);
             panel3.Controls.Add(generate_Btn);
@@ -130,7 +132,7 @@
             serial2_Cb.FormattingEnabled = true;
             serial2_Cb.Location = new Point(534, 127);
             serial2_Cb.Name = "serial2_Cb";
-            serial2_Cb.Size = new Size(303, 23);
+            serial2_Cb.Size = new Size(303, 28);
             serial2_Cb.TabIndex = 27;
             serial2_Cb.Enter += serial2_Cb_Enter;
             serial2_Cb.KeyPress += serial2_Cb_KeyPress;
@@ -139,9 +141,10 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(961, 286);
+            button3.ForeColor = Color.FromArgb(2, 119, 189);
+            button3.Location = new Point(963, 291);
             button3.Name = "button3";
-            button3.Size = new Size(82, 23);
+            button3.Size = new Size(82, 28);
             button3.TabIndex = 26;
             button3.Text = "SAVE";
             button3.UseVisualStyleBackColor = true;
@@ -150,12 +153,13 @@
             // generate_Btn
             // 
             generate_Btn.Anchor = AnchorStyles.None;
-            generate_Btn.Font = new Font("Segoe UI", 14F);
+            generate_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            generate_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             generate_Btn.Location = new Point(618, 170);
             generate_Btn.Name = "generate_Btn";
             generate_Btn.Size = new Size(108, 36);
             generate_Btn.TabIndex = 25;
-            generate_Btn.Text = "Generate";
+            generate_Btn.Text = "GENERATE";
             generate_Btn.UseVisualStyleBackColor = true;
             generate_Btn.Click += generate_Btn_Click;
             // 
@@ -198,7 +202,7 @@
             // 
             panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel4.AutoScroll = true;
-            panel4.BackColor = Color.Gray;
+            panel4.BackColor = Color.FromArgb(2, 119, 189);
             panel4.Controls.Add(uploadImage_Pb);
             panel4.Controls.Add(brand_Tb);
             panel4.Controls.Add(label5);
@@ -264,10 +268,11 @@
             // 
             label5.Anchor = AnchorStyles.Top;
             label5.AutoSize = true;
-            label5.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label5.Location = new Point(310, 109);
+            label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(378, 107);
             label5.Name = "label5";
-            label5.Size = new Size(59, 20);
+            label5.Size = new Size(62, 20);
             label5.TabIndex = 82;
             label5.Text = "Brand:";
             // 
@@ -278,7 +283,8 @@
             button1.FlatAppearance.MouseDownBackColor = Color.Red;
             button1.FlatAppearance.MouseOverBackColor = Color.Lime;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Microsoft Sans Serif", 12.75F);
+            button1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.FromArgb(2, 119, 189);
             button1.Location = new Point(454, 435);
             button1.Name = "button1";
             button1.Size = new Size(170, 30);
@@ -302,10 +308,11 @@
             // 
             label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
-            label4.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label4.Location = new Point(310, 276);
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(333, 272);
             label4.Name = "label4";
-            label4.Size = new Size(97, 20);
+            label4.Size = new Size(104, 20);
             label4.TabIndex = 78;
             label4.Text = "S.I Number:";
             // 
@@ -324,10 +331,11 @@
             // 
             label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
-            label3.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label3.Location = new Point(310, 243);
+            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(330, 239);
             label3.Name = "label3";
-            label3.Size = new Size(106, 20);
+            label3.Size = new Size(110, 20);
             label3.TabIndex = 76;
             label3.Text = "P.O Number:";
             // 
@@ -345,16 +353,19 @@
             // 
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 12.75F);
-            label2.Location = new Point(310, 177);
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(335, 173);
             label2.Name = "label2";
-            label2.Size = new Size(99, 20);
+            label2.Size = new Size(105, 20);
             label2.TabIndex = 74;
             label2.Text = "Property ID:";
             // 
             // clear2_Btn
             // 
             clear2_Btn.Anchor = AnchorStyles.Top;
+            clear2_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            clear2_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             clear2_Btn.Location = new Point(1248, 94);
             clear2_Btn.Name = "clear2_Btn";
             clear2_Btn.Size = new Size(75, 23);
@@ -369,7 +380,7 @@
             autoFill_Cb.AutoSize = true;
             autoFill_Cb.Location = new Point(1248, 69);
             autoFill_Cb.Name = "autoFill_Cb";
-            autoFill_Cb.Size = new Size(70, 19);
+            autoFill_Cb.Size = new Size(94, 24);
             autoFill_Cb.TabIndex = 72;
             autoFill_Cb.Text = "Auto Fill";
             autoFill_Cb.UseVisualStyleBackColor = true;
@@ -387,7 +398,8 @@
             // register_Btn
             // 
             register_Btn.Anchor = AnchorStyles.Top;
-            register_Btn.Font = new Font("Microsoft Sans Serif", 12.75F);
+            register_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            register_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             register_Btn.Location = new Point(734, 475);
             register_Btn.Name = "register_Btn";
             register_Btn.Size = new Size(125, 30);
@@ -402,7 +414,7 @@
             autoFill_checkBox.AutoSize = true;
             autoFill_checkBox.Location = new Point(1983, 68);
             autoFill_checkBox.Name = "autoFill_checkBox";
-            autoFill_checkBox.Size = new Size(80, 19);
+            autoFill_checkBox.Size = new Size(118, 24);
             autoFill_checkBox.TabIndex = 69;
             autoFill_checkBox.Text = "AUTO FILL";
             autoFill_checkBox.UseVisualStyleBackColor = true;
@@ -413,7 +425,7 @@
             purchaseDate_Dtp.Checked = false;
             purchaseDate_Dtp.Location = new Point(453, 400);
             purchaseDate_Dtp.Name = "purchaseDate_Dtp";
-            purchaseDate_Dtp.Size = new Size(211, 23);
+            purchaseDate_Dtp.Size = new Size(211, 26);
             purchaseDate_Dtp.TabIndex = 68;
             // 
             // supplier_Tb
@@ -430,7 +442,7 @@
             days_numericUpDown.Anchor = AnchorStyles.Top;
             days_numericUpDown.Location = new Point(793, 371);
             days_numericUpDown.Name = "days_numericUpDown";
-            days_numericUpDown.Size = new Size(48, 23);
+            days_numericUpDown.Size = new Size(48, 26);
             days_numericUpDown.TabIndex = 66;
             // 
             // months_numericUpDown
@@ -438,7 +450,7 @@
             months_numericUpDown.Anchor = AnchorStyles.Top;
             months_numericUpDown.Location = new Point(663, 370);
             months_numericUpDown.Name = "months_numericUpDown";
-            months_numericUpDown.Size = new Size(48, 23);
+            months_numericUpDown.Size = new Size(48, 26);
             months_numericUpDown.TabIndex = 65;
             // 
             // years_numericUpDown
@@ -446,7 +458,7 @@
             years_numericUpDown.Anchor = AnchorStyles.Top;
             years_numericUpDown.Location = new Point(517, 371);
             years_numericUpDown.Name = "years_numericUpDown";
-            years_numericUpDown.Size = new Size(48, 23);
+            years_numericUpDown.Size = new Size(48, 26);
             years_numericUpDown.TabIndex = 64;
             // 
             // cost_Tb
@@ -512,10 +524,11 @@
             label15.Anchor = AnchorStyles.Top;
             label15.AutoSize = true;
             label15.BackColor = Color.White;
-            label15.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label15.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label15.ForeColor = Color.Black;
             label15.Location = new Point(734, 373);
             label15.Name = "label15";
-            label15.Size = new Size(53, 20);
+            label15.Size = new Size(54, 20);
             label15.TabIndex = 58;
             label15.Text = "Days:";
             // 
@@ -524,10 +537,11 @@
             label14.Anchor = AnchorStyles.Top;
             label14.AutoSize = true;
             label14.BackColor = Color.White;
-            label14.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label14.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label14.ForeColor = Color.Black;
             label14.Location = new Point(587, 373);
             label14.Name = "label14";
-            label14.Size = new Size(69, 20);
+            label14.Size = new Size(73, 20);
             label14.TabIndex = 57;
             label14.Text = "Months:";
             // 
@@ -536,10 +550,11 @@
             label13.Anchor = AnchorStyles.Top;
             label13.AutoSize = true;
             label13.BackColor = Color.White;
-            label13.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label13.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label13.ForeColor = Color.Black;
             label13.Location = new Point(454, 373);
             label13.Name = "label13";
-            label13.Size = new Size(57, 20);
+            label13.Size = new Size(61, 20);
             label13.TabIndex = 56;
             label13.Text = "Years:";
             // 
@@ -547,10 +562,11 @@
             // 
             PurchaseDate_Lbl.Anchor = AnchorStyles.Top;
             PurchaseDate_Lbl.AutoSize = true;
-            PurchaseDate_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            PurchaseDate_Lbl.Location = new Point(311, 403);
+            PurchaseDate_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            PurchaseDate_Lbl.ForeColor = Color.White;
+            PurchaseDate_Lbl.Location = new Point(304, 400);
             PurchaseDate_Lbl.Name = "PurchaseDate_Lbl";
-            PurchaseDate_Lbl.Size = new Size(126, 20);
+            PurchaseDate_Lbl.Size = new Size(133, 20);
             PurchaseDate_Lbl.TabIndex = 55;
             PurchaseDate_Lbl.Text = "Purchase Date:";
             // 
@@ -558,10 +574,11 @@
             // 
             Supplier_Lbl.Anchor = AnchorStyles.Top;
             Supplier_Lbl.AutoSize = true;
-            Supplier_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Supplier_Lbl.Location = new Point(310, 342);
+            Supplier_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            Supplier_Lbl.ForeColor = Color.White;
+            Supplier_Lbl.Location = new Point(360, 338);
             Supplier_Lbl.Name = "Supplier_Lbl";
-            Supplier_Lbl.Size = new Size(75, 20);
+            Supplier_Lbl.Size = new Size(80, 20);
             Supplier_Lbl.TabIndex = 54;
             Supplier_Lbl.Text = "Supplier:";
             // 
@@ -569,10 +586,11 @@
             // 
             Warranty_Lbl.Anchor = AnchorStyles.Top;
             Warranty_Lbl.AutoSize = true;
-            Warranty_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Warranty_Lbl.Location = new Point(311, 374);
+            Warranty_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            Warranty_Lbl.ForeColor = Color.White;
+            Warranty_Lbl.Location = new Point(351, 373);
             Warranty_Lbl.Name = "Warranty_Lbl";
-            Warranty_Lbl.Size = new Size(82, 20);
+            Warranty_Lbl.Size = new Size(86, 20);
             Warranty_Lbl.TabIndex = 53;
             Warranty_Lbl.Text = "Warranty:";
             // 
@@ -580,10 +598,11 @@
             // 
             Cost_Lbl.Anchor = AnchorStyles.Top;
             Cost_Lbl.AutoSize = true;
-            Cost_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Cost_Lbl.Location = new Point(310, 309);
+            Cost_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            Cost_Lbl.ForeColor = Color.White;
+            Cost_Lbl.Location = new Point(386, 305);
             Cost_Lbl.Name = "Cost_Lbl";
-            Cost_Lbl.Size = new Size(49, 20);
+            Cost_Lbl.Size = new Size(51, 20);
             Cost_Lbl.TabIndex = 52;
             Cost_Lbl.Text = "Cost:";
             // 
@@ -591,10 +610,11 @@
             // 
             Serial_Lbl.Anchor = AnchorStyles.Top;
             Serial_Lbl.AutoSize = true;
-            Serial_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Serial_Lbl.Location = new Point(310, 210);
+            Serial_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            Serial_Lbl.ForeColor = Color.White;
+            Serial_Lbl.Location = new Point(348, 206);
             Serial_Lbl.Name = "Serial_Lbl";
-            Serial_Lbl.Size = new Size(87, 20);
+            Serial_Lbl.Size = new Size(92, 20);
             Serial_Lbl.TabIndex = 51;
             Serial_Lbl.Text = "Serial No.:";
             // 
@@ -602,10 +622,11 @@
             // 
             Model_Lbl.Anchor = AnchorStyles.Top;
             Model_Lbl.AutoSize = true;
-            Model_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            Model_Lbl.Location = new Point(310, 142);
+            Model_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            Model_Lbl.ForeColor = Color.White;
+            Model_Lbl.Location = new Point(375, 140);
             Model_Lbl.Name = "Model_Lbl";
-            Model_Lbl.Size = new Size(59, 20);
+            Model_Lbl.Size = new Size(62, 20);
             Model_Lbl.TabIndex = 50;
             Model_Lbl.Text = "Model:";
             // 
@@ -613,10 +634,11 @@
             // 
             type_Lbl.Anchor = AnchorStyles.Top;
             type_Lbl.AutoSize = true;
-            type_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
-            type_Lbl.Location = new Point(310, 75);
+            type_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            type_Lbl.ForeColor = Color.White;
+            type_Lbl.Location = new Point(388, 74);
             type_Lbl.Name = "type_Lbl";
-            type_Lbl.Size = new Size(50, 20);
+            type_Lbl.Size = new Size(52, 20);
             type_Lbl.TabIndex = 49;
             type_Lbl.Text = "Type:";
             // 

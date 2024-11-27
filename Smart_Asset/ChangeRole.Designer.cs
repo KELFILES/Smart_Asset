@@ -86,7 +86,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Gray;
+            panel1.BackColor = Color.FromArgb(0, 91, 143);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
@@ -98,7 +98,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.DimGray;
+            panel3.BackColor = Color.FromArgb(0, 91, 143);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(lowerLabel_Lbl);
             panel3.Controls.Add(topLabel_Lbl);
@@ -124,7 +124,7 @@
             // 
             // otherModules_Panel
             // 
-            otherModules_Panel.BackColor = Color.Transparent;
+            otherModules_Panel.BackColor = Color.FromArgb(2, 119, 189);
             otherModules_Panel.BorderStyle = BorderStyle.FixedSingle;
             otherModules_Panel.Controls.Add(button3);
             otherModules_Panel.Controls.Add(button4);
@@ -141,6 +141,8 @@
             // 
             // button3
             // 
+            button3.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            button3.ForeColor = Color.FromArgb(2, 119, 189);
             button3.Location = new Point(109, 272);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
@@ -151,6 +153,8 @@
             // 
             // button4
             // 
+            button4.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            button4.ForeColor = Color.FromArgb(2, 119, 189);
             button4.Location = new Point(28, 272);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
@@ -216,7 +220,7 @@
             // 
             // assetEnabled_Panel
             // 
-            assetEnabled_Panel.BackColor = Color.Transparent;
+            assetEnabled_Panel.BackColor = Color.FromArgb(2, 119, 189);
             assetEnabled_Panel.BorderStyle = BorderStyle.FixedSingle;
             assetEnabled_Panel.Controls.Add(button1);
             assetEnabled_Panel.Controls.Add(button2);
@@ -236,6 +240,8 @@
             // 
             // button1
             // 
+            button1.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            button1.ForeColor = Color.FromArgb(2, 119, 189);
             button1.Location = new Point(97, 272);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
@@ -246,6 +252,8 @@
             // 
             // button2
             // 
+            button2.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            button2.ForeColor = Color.FromArgb(2, 119, 189);
             button2.Location = new Point(16, 272);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
@@ -344,7 +352,7 @@
             // 
             // manageAsset_Panel
             // 
-            manageAsset_Panel.BackColor = Color.Transparent;
+            manageAsset_Panel.BackColor = Color.FromArgb(2, 119, 189);
             manageAsset_Panel.BorderStyle = BorderStyle.FixedSingle;
             manageAsset_Panel.Controls.Add(clear_Btn);
             manageAsset_Panel.Controls.Add(selectAll_Btn);
@@ -365,6 +373,8 @@
             // 
             // clear_Btn
             // 
+            clear_Btn.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            clear_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             clear_Btn.Location = new Point(97, 272);
             clear_Btn.Name = "clear_Btn";
             clear_Btn.Size = new Size(75, 23);
@@ -375,6 +385,8 @@
             // 
             // selectAll_Btn
             // 
+            selectAll_Btn.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            selectAll_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             selectAll_Btn.Location = new Point(16, 272);
             selectAll_Btn.Name = "selectAll_Btn";
             selectAll_Btn.Size = new Size(75, 23);
@@ -486,20 +498,20 @@
             // lowerLabel_Lbl
             // 
             lowerLabel_Lbl.AutoSize = true;
-            lowerLabel_Lbl.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lowerLabel_Lbl.ForeColor = Color.White;
-            lowerLabel_Lbl.Location = new Point(178, 72);
+            lowerLabel_Lbl.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            lowerLabel_Lbl.ForeColor = Color.FromArgb(255, 242, 0);
+            lowerLabel_Lbl.Location = new Point(156, 89);
             lowerLabel_Lbl.Name = "lowerLabel_Lbl";
-            lowerLabel_Lbl.Size = new Size(235, 20);
+            lowerLabel_Lbl.Size = new Size(266, 16);
             lowerLabel_Lbl.TabIndex = 6;
-            lowerLabel_Lbl.Text = "Notes- The access of role selected";
+            lowerLabel_Lbl.Text = "Reminder: Select the access for roles";
             // 
             // topLabel_Lbl
             // 
             topLabel_Lbl.AutoSize = true;
             topLabel_Lbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             topLabel_Lbl.ForeColor = Color.White;
-            topLabel_Lbl.Location = new Point(236, 29);
+            topLabel_Lbl.Location = new Point(224, 32);
             topLabel_Lbl.Name = "topLabel_Lbl";
             topLabel_Lbl.Size = new Size(137, 32);
             topLabel_Lbl.TabIndex = 5;
@@ -507,7 +519,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.DimGray;
+            panel2.BackColor = Color.FromArgb(0, 91, 143);
             panel2.Controls.Add(currentRoleVal_Lbl);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(nameVal_Lbl);
@@ -519,6 +531,8 @@
             panel2.Controls.Add(userIDVal_Lbl);
             panel2.Controls.Add(label3);
             panel2.Dock = DockStyle.Left;
+            panel2.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            panel2.ForeColor = Color.FromArgb(2, 119, 189);
             panel2.Location = new Point(7, 7);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(7);
@@ -582,11 +596,13 @@
             // 
             // change_Btn
             // 
+            change_Btn.Font = new Font("Microsoft Sans Serif", 8.75F, FontStyle.Bold);
+            change_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             change_Btn.Location = new Point(264, 305);
             change_Btn.Name = "change_Btn";
             change_Btn.Size = new Size(112, 31);
             change_Btn.TabIndex = 9;
-            change_Btn.Text = "CHANGE";
+            change_Btn.Text = "CONFIRM";
             change_Btn.UseVisualStyleBackColor = true;
             change_Btn.Click += change_Btn_Click;
             // 
@@ -595,7 +611,7 @@
             changeRoleTopLabel_Lbl.AutoSize = true;
             changeRoleTopLabel_Lbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             changeRoleTopLabel_Lbl.ForeColor = Color.White;
-            changeRoleTopLabel_Lbl.Location = new Point(224, 89);
+            changeRoleTopLabel_Lbl.Location = new Point(224, 73);
             changeRoleTopLabel_Lbl.Name = "changeRoleTopLabel_Lbl";
             changeRoleTopLabel_Lbl.Size = new Size(179, 32);
             changeRoleTopLabel_Lbl.TabIndex = 4;

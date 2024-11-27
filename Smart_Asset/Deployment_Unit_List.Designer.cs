@@ -42,6 +42,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(2, 119, 189);
             panel1.Controls.Add(search_Tb);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(button1);
@@ -50,6 +51,7 @@
             panel1.Controls.Add(item_Lbl);
             panel1.Controls.Add(dataGridView1);
             panel1.Dock = DockStyle.Fill;
+            panel1.ForeColor = Color.White;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(631, 528);
@@ -72,16 +74,18 @@
             // 
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 13F);
-            label1.Location = new Point(78, 24);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(75, 27);
             label1.Name = "label1";
-            label1.Size = new Size(68, 25);
+            label1.Size = new Size(71, 20);
             label1.TabIndex = 7;
             label1.Text = "Search:";
             // 
             // button1
             // 
-            button1.Font = new Font("Segoe UI", 13F);
+            button1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            button1.ForeColor = Color.FromArgb(2, 119, 189);
             button1.Location = new Point(405, 450);
             button1.Name = "button1";
             button1.Size = new Size(98, 41);
@@ -92,7 +96,8 @@
             // 
             // add_Btn
             // 
-            add_Btn.Font = new Font("Segoe UI", 13F);
+            add_Btn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            add_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             add_Btn.Location = new Point(133, 450);
             add_Btn.Name = "add_Btn";
             add_Btn.Size = new Size(98, 41);
@@ -116,10 +121,11 @@
             // 
             item_Lbl.Anchor = AnchorStyles.Top;
             item_Lbl.AutoSize = true;
-            item_Lbl.Font = new Font("Segoe UI", 13F);
-            item_Lbl.Location = new Point(75, 400);
+            item_Lbl.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            item_Lbl.ForeColor = Color.White;
+            item_Lbl.Location = new Point(75, 402);
             item_Lbl.Name = "item_Lbl";
-            item_Lbl.Size = new Size(52, 25);
+            item_Lbl.Size = new Size(50, 20);
             item_Lbl.TabIndex = 1;
             item_Lbl.Text = "Item:";
             // 
@@ -128,7 +134,7 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.BackgroundColor = Color.Black;
+            dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridView1.Location = new Point(32, 70);

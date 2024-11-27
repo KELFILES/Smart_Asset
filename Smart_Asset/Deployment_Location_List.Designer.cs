@@ -59,6 +59,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.FromArgb(2, 119, 189);
             panel2.Controls.Add(search_Tb);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(button2);
@@ -89,16 +90,18 @@
             // 
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 13F);
-            label1.Location = new Point(80, 31);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(77, 35);
             label1.Name = "label1";
-            label1.Size = new Size(68, 25);
+            label1.Size = new Size(71, 20);
             label1.TabIndex = 5;
             label1.Text = "Search:";
             // 
             // button2
             // 
-            button2.Font = new Font("Segoe UI", 13F);
+            button2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            button2.ForeColor = Color.FromArgb(2, 119, 189);
             button2.Location = new Point(402, 458);
             button2.Name = "button2";
             button2.Size = new Size(98, 41);
@@ -109,7 +112,8 @@
             // 
             // button3
             // 
-            button3.Font = new Font("Segoe UI", 13F);
+            button3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            button3.ForeColor = Color.FromArgb(2, 119, 189);
             button3.Location = new Point(130, 458);
             button3.Name = "button3";
             button3.Size = new Size(98, 41);
@@ -133,10 +137,11 @@
             // 
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 13F);
-            label2.Location = new Point(96, 402);
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(98, 404);
             label2.Name = "label2";
-            label2.Size = new Size(52, 25);
+            label2.Size = new Size(50, 20);
             label2.TabIndex = 1;
             label2.Text = "Item:";
             // 
@@ -145,7 +150,7 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.BackgroundColor = Color.Black;
+            dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridView1.Location = new Point(26, 78);

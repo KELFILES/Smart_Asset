@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,51 +41,100 @@ namespace Smart_Asset
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            System.Windows.Forms.Application.Exit();
         }
+
+
+
+
+
 
         private async void submit_Btn_Click_1(object sender, EventArgs e)
         {
-            string password = password_Tb.Text;
+            string password = password_Tb.Text.Trim();
+            string username = username_Tb.Text.Trim();
 
-            if (username_Tb.Text.Equals("SuperAdmin") && password.Equals("SuperAdmin123"))
+            // Encrypt the password
+            string encryptedPassword = MyOtherMethods.EncryptPassword(password);
+
+            // Ensure SuperAdmin exists if username and password match
+            if (username.Equals("SuperAdmin", StringComparison.OrdinalIgnoreCase) && password.Equals("SuperAdmin123"))
             {
-                //FOR FIRST USE OF DATABASE CREATE FIRST SUPER ADMIN
                 await MyDbMethods.EnsureSuperAdminExistsAsync("SmartAssetDb", "Users");
             }
 
-
-
-
-
-            // Encryption
-            encrypted = MyOtherMethods.EncryptPassword(password);
-
-            var userDetails = await MyDbMethods.GetUserDetailsAsync("SmartAssetDb", "Users", $"{username_Tb.Text}", $"{encrypted}");
+            // Retrieve user details from the database
+            var userDetails = await MyDbMethods.GetUserDetailsAsync("SmartAssetDb", "Users", username, encryptedPassword);
 
             if (userDetails != null)
             {
+                // Successful login
                 Console.WriteLine($"Name: {userDetails.Name}");
                 Console.WriteLine($"Username: {userDetails.Username}");
                 Console.WriteLine($"Role: {userDetails.Role}");
                 Console.WriteLine($"UserID: {userDetails.UserID}");
 
-
                 FrontPage_Final pff = new FrontPage_Final();
 
-
-                //PASS USER DETAILS TO FRONTPAGE
+                // Pass user details to FrontPage
                 FrontPage_Final.login_Name = userDetails.Name;
                 FrontPage_Final.login_Username = userDetails.Username;
                 FrontPage_Final.login_Role = userDetails.Role;
                 FrontPage_Final.login_UserID = userDetails.UserID;
 
-
-                if (userDetails.Role.Equals("Custom User"))
+                // Handle permissions for Custom User
+                if (userDetails.Role.Equals("Custom User", StringComparison.OrdinalIgnoreCase))
                 {
-                    var pulledDataInColl = MyDbMethods.GetPermissions("SmartAssetDb", "CustomUsers_Permissions", $"{userDetails.UserID}");
+                    var pulledDataInColl = MyDbMethods.GetPermissions("SmartAssetDb", "CustomUsers_Permissions", userDetails.UserID);
 
                     var permissionMapping = new Dictionary<string, Action<string>>
+            {
+                { "Add", value => FrontPage_Final.permission_Add = value },
+                { "Archive", value => FrontPage_Final.permission_Archive = value },
+                // Add remaining permissions...
+            };
+
+                    foreach (var data in pulledDataInColl)
+                    {
+                        if (permissionMapping.TryGetValue(data.Key, out var action))
+                        {
+                            action(data.Value);
+                        }
+                    }
+                }
+
+                // Set labels and show the next form
+                pff.name_Lbl.Text = userDetails.Name;
+                pff.userID_Lbl.Text = userDetails.UserID;
+
+                pff.Show();
+                this.Hide();
+
+
+
+
+                if (userDetails != null)
+                {
+                    Console.WriteLine($"Name: {userDetails.Name}");
+                    Console.WriteLine($"Username: {userDetails.Username}");
+                    Console.WriteLine($"Role: {userDetails.Role}");
+                    Console.WriteLine($"UserID: {userDetails.UserID}");
+
+
+
+
+                    //PASS USER DETAILS TO FRONTPAGE
+                    FrontPage_Final.login_Name = userDetails.Name;
+                    FrontPage_Final.login_Username = userDetails.Username;
+                    FrontPage_Final.login_Role = userDetails.Role;
+                    FrontPage_Final.login_UserID = userDetails.UserID;
+
+
+                    if (userDetails.Role.Equals("Custom User"))
+                    {
+                        var pulledDataInColl = MyDbMethods.GetPermissions("SmartAssetDb", "CustomUsers_Permissions", $"{userDetails.UserID}");
+
+                        var permissionMapping = new Dictionary<string, Action<string>>
                     {
                         { "Add", value => FrontPage_Final.permission_Add = value },
                         { "Archive", value => FrontPage_Final.permission_Archive = value },
@@ -107,30 +157,49 @@ namespace Smart_Asset
                         { "Transfer", value => FrontPage_Final.permission_Transfer = value },
                     };
 
-                    foreach (var data in pulledDataInColl)
-                    {
-                        if (permissionMapping.TryGetValue(data.Key, out var action))
+                        foreach (var data in pulledDataInColl)
                         {
-                            action(data.Value);
+                            if (permissionMapping.TryGetValue(data.Key, out var action))
+                            {
+                                action(data.Value);
+                            }
+
+                            //Console.WriteLine($"Key: {data.Key}, Value: {data.Value}");
                         }
-
-                        //Console.WriteLine($"Key: {data.Key}, Value: {data.Value}");
                     }
+
+
+
+                    pff.name_Lbl.Text = userDetails.Name;
+                    pff.userID_Lbl.Text = userDetails.UserID;
+
+                    pff.Show();
+                    this.Hide();
                 }
-
-
-
-                pff.name_Lbl.Text = userDetails.Name;
-                pff.userID_Lbl.Text = userDetails.UserID;
-
-                pff.Show();
-                this.Hide();
+                else
+                {
+                    MessageBox.Show("Login Failed. Invalid Username or Password.");
+                }
             }
             else
             {
-                MessageBox.Show("Login Failed. Invalid Username or Password.");
+                // Failed login
+                MessageBox.Show("Login Failed. Invalid Username or Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Clear TextBox values
+                password_Tb.Clear();
+                username_Tb.Clear();
+                password_Tb.Focus();
+
+                username_Tb.Select();
             }
+
+            // Clear sensitive data in memory
+            password = string.Empty;
+            encryptedPassword = string.Empty;
         }
+
+
 
         private void Login_Shown(object sender, EventArgs e)
         {
@@ -152,7 +221,7 @@ namespace Smart_Asset
             int newY = (this.ClientSize.Height - bgBox.Height) / 2;
 
             // Set the new location of bgBox without changing its size
-            bgBox.Location = new Point(newX, newY);
+            bgBox.Location = new System.Drawing.Point(newX, newY);
         }
 
         private void Login_KeyDown(object sender, KeyEventArgs e)
@@ -181,7 +250,7 @@ namespace Smart_Asset
 
         private async void Login_Load(object sender, EventArgs e)
         {
-            //this.Size = new SizeMaximumSize);
+            this.WindowState= FormWindowState.Maximized;
         }
 
         private void forgotPassword_Lbl_Click(object sender, EventArgs e)

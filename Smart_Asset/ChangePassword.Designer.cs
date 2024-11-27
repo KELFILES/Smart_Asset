@@ -51,7 +51,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.DimGray;
+            panel1.BackColor = Color.FromArgb(2, 119, 189);
             panel1.Controls.Add(change_Btn);
             panel1.Controls.Add(repeatPassword_Tb);
             panel1.Controls.Add(label3);
@@ -70,11 +70,13 @@
             // 
             // change_Btn
             // 
-            change_Btn.Location = new Point(336, 318);
+            change_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            change_Btn.ForeColor = Color.FromArgb(2, 119, 189);
+            change_Btn.Location = new Point(368, 328);
             change_Btn.Name = "change_Btn";
             change_Btn.Size = new Size(134, 33);
             change_Btn.TabIndex = 70;
-            change_Btn.Text = "Change";
+            change_Btn.Text = "CONFIRM";
             change_Btn.UseVisualStyleBackColor = true;
             change_Btn.Click += change_Btn_Click;
             // 
@@ -82,7 +84,7 @@
             // 
             repeatPassword_Tb.Anchor = AnchorStyles.Top;
             repeatPassword_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            repeatPassword_Tb.Location = new Point(223, 268);
+            repeatPassword_Tb.Location = new Point(262, 273);
             repeatPassword_Tb.Name = "repeatPassword_Tb";
             repeatPassword_Tb.PasswordChar = '*';
             repeatPassword_Tb.Size = new Size(388, 27);
@@ -92,11 +94,11 @@
             // 
             label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
-            label3.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label3.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Bold);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(68, 275);
+            label3.Location = new Point(94, 276);
             label3.Name = "label3";
-            label3.Size = new Size(146, 20);
+            label3.Size = new Size(162, 20);
             label3.TabIndex = 68;
             label3.Text = "Repeat Password:";
             // 
@@ -104,7 +106,7 @@
             // 
             newPassword_Tb.Anchor = AnchorStyles.Top;
             newPassword_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            newPassword_Tb.Location = new Point(223, 224);
+            newPassword_Tb.Location = new Point(262, 229);
             newPassword_Tb.Name = "newPassword_Tb";
             newPassword_Tb.PasswordChar = '*';
             newPassword_Tb.Size = new Size(388, 27);
@@ -114,11 +116,11 @@
             // 
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label2.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Bold);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(68, 231);
+            label2.Location = new Point(117, 232);
             label2.Name = "label2";
-            label2.Size = new Size(126, 20);
+            label2.Size = new Size(139, 20);
             label2.TabIndex = 66;
             label2.Text = "New Password:";
             // 
@@ -126,7 +128,7 @@
             // 
             currentPassword_Tb.Anchor = AnchorStyles.Top;
             currentPassword_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            currentPassword_Tb.Location = new Point(223, 181);
+            currentPassword_Tb.Location = new Point(262, 186);
             currentPassword_Tb.Name = "currentPassword_Tb";
             currentPassword_Tb.PasswordChar = '*';
             currentPassword_Tb.Size = new Size(388, 27);
@@ -136,11 +138,11 @@
             // 
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 12.75F);
+            label1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Bold);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(68, 188);
+            label1.Location = new Point(91, 189);
             label1.Name = "label1";
-            label1.Size = new Size(149, 20);
+            label1.Size = new Size(166, 20);
             label1.TabIndex = 64;
             label1.Text = "Current Password:";
             // 
@@ -148,7 +150,7 @@
             // 
             username_Tb.Anchor = AnchorStyles.Top;
             username_Tb.Font = new Font("Microsoft Sans Serif", 12.75F);
-            username_Tb.Location = new Point(223, 138);
+            username_Tb.Location = new Point(262, 143);
             username_Tb.Name = "username_Tb";
             username_Tb.Size = new Size(388, 27);
             username_Tb.TabIndex = 63;
@@ -157,11 +159,11 @@
             // 
             Model_Lbl.Anchor = AnchorStyles.Top;
             Model_Lbl.AutoSize = true;
-            Model_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F);
+            Model_Lbl.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Bold);
             Model_Lbl.ForeColor = Color.White;
-            Model_Lbl.Location = new Point(68, 145);
+            Model_Lbl.Location = new Point(156, 146);
             Model_Lbl.Name = "Model_Lbl";
-            Model_Lbl.Size = new Size(91, 20);
+            Model_Lbl.Size = new Size(100, 20);
             Model_Lbl.TabIndex = 62;
             Model_Lbl.Text = "Username:";
             // 
@@ -170,7 +172,7 @@
             topLabel_Lbl.AutoSize = true;
             topLabel_Lbl.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             topLabel_Lbl.ForeColor = Color.White;
-            topLabel_Lbl.Location = new Point(253, 53);
+            topLabel_Lbl.Location = new Point(280, 59);
             topLabel_Lbl.Name = "topLabel_Lbl";
             topLabel_Lbl.Size = new Size(303, 40);
             topLabel_Lbl.TabIndex = 7;
@@ -180,7 +182,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Gray;
+            BackColor = Color.FromArgb(0, 91, 143);
             ClientSize = new Size(800, 450);
             Controls.Add(panel1);
             Name = "ChangePassword";

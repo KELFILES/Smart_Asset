@@ -58,13 +58,13 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1648, 1083);
+            panel1.Size = new Size(1648, 1061);
             panel1.TabIndex = 0;
             // 
             // panel4
             // 
             panel4.AutoScroll = true;
-            panel4.BackColor = Color.FromArgb(0, 108, 183);
+            panel4.BackColor = Color.FromArgb(0, 91, 143);
             panel4.Controls.Add(panel2);
             panel4.Controls.Add(panel3);
             panel4.Controls.Add(groupBox1);
@@ -72,14 +72,14 @@
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(50, 20, 50, 20);
-            panel4.Size = new Size(1648, 1083);
+            panel4.Size = new Size(1648, 1061);
             panel4.TabIndex = 2;
             panel4.Click += panel4_Click;
             // 
             // panel2
             // 
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(50, 912);
+            panel2.Location = new Point(50, 890);
             panel2.Name = "panel2";
             panel2.Size = new Size(1548, 10);
             panel2.TabIndex = 13;
@@ -91,19 +91,19 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(50, 20);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1548, 902);
+            panel3.Size = new Size(1548, 880);
             panel3.TabIndex = 11;
             // 
             // mainFlowLayoutPanel
             // 
             mainFlowLayoutPanel.AutoScroll = true;
             mainFlowLayoutPanel.AutoSize = true;
-            mainFlowLayoutPanel.BackColor = Color.FromArgb(231, 235, 221);
+            mainFlowLayoutPanel.BackColor = Color.White;
             mainFlowLayoutPanel.Dock = DockStyle.Fill;
             mainFlowLayoutPanel.FlowDirection = FlowDirection.TopDown;
             mainFlowLayoutPanel.Location = new Point(0, 0);
             mainFlowLayoutPanel.Name = "mainFlowLayoutPanel";
-            mainFlowLayoutPanel.Size = new Size(1548, 892);
+            mainFlowLayoutPanel.Size = new Size(1548, 870);
             mainFlowLayoutPanel.TabIndex = 12;
             mainFlowLayoutPanel.WrapContents = false;
             mainFlowLayoutPanel.Click += mainFlowLayoutPanel_Click;
@@ -112,18 +112,18 @@
             // panel5
             // 
             panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(0, 892);
+            panel5.Location = new Point(0, 870);
             panel5.Name = "panel5";
             panel5.Size = new Size(1548, 10);
             panel5.TabIndex = 13;
             // 
             // groupBox1
             // 
-            groupBox1.BackColor = Color.FromArgb(253, 175, 23);
+            groupBox1.BackColor = Color.FromArgb(2, 119, 189);
             groupBox1.Controls.Add(panel8);
             groupBox1.Dock = DockStyle.Bottom;
             groupBox1.FlatStyle = FlatStyle.Popup;
-            groupBox1.Location = new Point(50, 922);
+            groupBox1.Location = new Point(50, 900);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1548, 141);
             groupBox1.TabIndex = 12;
@@ -141,6 +141,7 @@
             // 
             // panel6
             // 
+            panel6.BackColor = Color.FromArgb(2, 119, 189);
             panel6.Controls.Add(insertFile_Btn);
             panel6.Controls.Add(progress_Lbl);
             panel6.Dock = DockStyle.Top;
@@ -152,14 +153,15 @@
             // insertFile_Btn
             // 
             insertFile_Btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            insertFile_Btn.BackColor = Color.FromArgb(255, 243, 26);
+            insertFile_Btn.BackColor = Color.White;
             insertFile_Btn.FlatStyle = FlatStyle.Flat;
-            insertFile_Btn.Font = new Font("Segoe UI", 11.25F);
+            insertFile_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            insertFile_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             insertFile_Btn.Location = new Point(702, 10);
             insertFile_Btn.Name = "insertFile_Btn";
             insertFile_Btn.Size = new Size(155, 35);
             insertFile_Btn.TabIndex = 13;
-            insertFile_Btn.Text = "Insert File";
+            insertFile_Btn.Text = "UPLOAD FILE";
             insertFile_Btn.UseVisualStyleBackColor = false;
             insertFile_Btn.Click += insertFile_Btn_Click;
             // 
@@ -175,6 +177,7 @@
             // 
             // panel7
             // 
+            panel7.BackColor = Color.FromArgb(2, 119, 189);
             panel7.Controls.Add(label1);
             panel7.Controls.Add(send_Btn);
             panel7.Controls.Add(typeQuestion_Rt);
@@ -188,19 +191,21 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(80, 65);
             label1.Name = "label1";
-            label1.Size = new Size(83, 21);
+            label1.Size = new Size(86, 20);
             label1.TabIndex = 8;
             label1.Text = "Question:";
             // 
             // send_Btn
             // 
             send_Btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            send_Btn.BackColor = Color.FromArgb(255, 243, 26);
+            send_Btn.BackColor = Color.White;
             send_Btn.FlatStyle = FlatStyle.Flat;
-            send_Btn.Font = new Font("Segoe UI", 11.25F);
+            send_Btn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            send_Btn.ForeColor = Color.FromArgb(2, 119, 189);
             send_Btn.Location = new Point(1299, 56);
             send_Btn.Name = "send_Btn";
             send_Btn.Size = new Size(135, 36);
@@ -227,7 +232,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1648, 1083);
+            ClientSize = new Size(1648, 1061);
             Controls.Add(panel1);
             Name = "Ai_ChatBot";
             Text = "AiChat";

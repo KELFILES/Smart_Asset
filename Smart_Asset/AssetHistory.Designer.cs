@@ -44,7 +44,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(254, 242, 0);
+            panel1.BackColor = Color.FromArgb(0, 91, 143);
             panel1.Controls.Add(panel5);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
@@ -56,7 +56,7 @@
             // 
             // panel5
             // 
-            panel5.BackColor = Color.FromArgb(233, 234, 232);
+            panel5.BackColor = Color.FromArgb(2, 119, 189);
             panel5.Controls.Add(panel3);
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(15, 115);
@@ -76,6 +76,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 0);
@@ -85,7 +86,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(253, 175, 23);
+            panel2.BackColor = Color.FromArgb(2, 119, 189);
             panel2.Controls.Add(systemRestore_Btn);
             panel2.Controls.Add(systemBackup_Btn);
             panel2.Dock = DockStyle.Top;
@@ -97,11 +98,11 @@
             // systemRestore_Btn
             // 
             systemRestore_Btn.Anchor = AnchorStyles.Right;
-            systemRestore_Btn.BackColor = Color.RoyalBlue;
+            systemRestore_Btn.BackColor = Color.White;
             systemRestore_Btn.FlatStyle = FlatStyle.Flat;
-            systemRestore_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            systemRestore_Btn.ForeColor = Color.White;
-            systemRestore_Btn.Location = new Point(1683, 28);
+            systemRestore_Btn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            systemRestore_Btn.ForeColor = Color.FromArgb(2, 119, 189);
+            systemRestore_Btn.Location = new Point(1673, 37);
             systemRestore_Btn.Name = "systemRestore_Btn";
             systemRestore_Btn.Size = new Size(171, 43);
             systemRestore_Btn.TabIndex = 14;
@@ -112,11 +113,11 @@
             // systemBackup_Btn
             // 
             systemBackup_Btn.Anchor = AnchorStyles.Right;
-            systemBackup_Btn.BackColor = Color.RoyalBlue;
+            systemBackup_Btn.BackColor = Color.White;
             systemBackup_Btn.FlatStyle = FlatStyle.Flat;
-            systemBackup_Btn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            systemBackup_Btn.ForeColor = Color.White;
-            systemBackup_Btn.Location = new Point(970, 37);
+            systemBackup_Btn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            systemBackup_Btn.ForeColor = Color.FromArgb(2, 119, 189);
+            systemBackup_Btn.Location = new Point(1481, 37);
             systemBackup_Btn.Name = "systemBackup_Btn";
             systemBackup_Btn.Size = new Size(171, 43);
             systemBackup_Btn.TabIndex = 15;

@@ -106,7 +106,6 @@ namespace Smart_Asset
 
         private void refresh_Btn_Click(object sender, EventArgs e)
         {
-            backupAndRestore.Refresh_ManageUsers();
 
 
             // Close the form after the operation is complete

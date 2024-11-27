@@ -163,34 +163,56 @@ namespace Smart_Asset
         {
             targetPanel.Controls.Clear();
 
-            var plotView = new PlotView { Dock = DockStyle.Fill };
+            var plotView = new PlotView
+            {
+                Dock = DockStyle.Fill,
+                Margin = new Padding(5) // Optional margin
+            };
 
             var plotModel = new PlotModel
             {
                 Title = "Scatter Plot Example",
                 TitleFontSize = 18,
-                TitleColor = OxyColors.Black, // Set title text color to white
+                TitleColor = OxyColors.Black, // Title color
                 Background = OxyColors.Transparent
             };
 
-            plotModel.Axes.Add(new LinearAxis
+            // Configure X-axis
+            var xAxis = new LinearAxis
             {
                 Position = AxisPosition.Bottom,
                 Title = "X Axis",
-                AxislineColor = OxyColors.Cyan, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.Black // Set axis text color to white
-            });
+                AxislineColor = OxyColors.Cyan,
+                AxislineThickness = 2,
+                TextColor = OxyColors.Black,
+                Minimum = 0, // Leave extra space on the left
+                Maximum = 6.5, // Extra space on the right
+                AbsoluteMinimum = 0,
+                AbsoluteMaximum = 6.5,
+                MinimumPadding = 0,
+                MaximumPadding = 0
+            };
 
-            plotModel.Axes.Add(new LinearAxis
+            // Configure Y-axis
+            var yAxis = new LinearAxis
             {
                 Position = AxisPosition.Left,
                 Title = "Y Axis",
-                AxislineColor = OxyColors.Magenta, // Set axis line color
-                AxislineThickness = 2, // Set axis line thickness
-                TextColor = OxyColors.Black // Set axis text color to white
-            });
+                AxislineColor = OxyColors.Magenta,
+                AxislineThickness = 2,
+                TextColor = OxyColors.Black,
+                Minimum = 0, // Extra space at the bottom
+                Maximum = 6.5, // Extra space at the top
+                AbsoluteMinimum = 0,
+                AbsoluteMaximum = 6.5,
+                MinimumPadding = 0,
+                MaximumPadding = 0
+            };
 
+            plotModel.Axes.Add(xAxis);
+            plotModel.Axes.Add(yAxis);
+
+            // Scatter series
             var scatterSeries = new ScatterSeries
             {
                 Title = "Data Points",
@@ -210,7 +232,9 @@ namespace Smart_Asset
             plotModel.Series.Add(scatterSeries);
             plotView.Model = plotModel;
 
+            // Add plotView to the panel
             targetPanel.Controls.Add(plotView);
+            targetPanel.Refresh();
         }
 
 
@@ -240,9 +264,11 @@ namespace Smart_Asset
                 AxislineColor = OxyColors.Cyan,
                 AxislineThickness = 2,
                 TextColor = OxyColors.Black,
-                ItemsSource = monthNames.Take(currentMonth).ToList(), // Use only up to the current month
-                IsPanEnabled = false, // Disable panning to prevent disappearance during scrolling
-                IsZoomEnabled = false // Disable zooming for better stability
+                ItemsSource = monthNames.Take(currentMonth).ToList(),
+                Minimum = -0.5, // Add extra space before the first month
+                Maximum = currentMonth - 0.5, // Add extra space after the last month
+                IsPanEnabled = false, // Disable panning
+                IsZoomEnabled = false // Disable zooming
             });
 
             // Y Axis (Linear Axis for Purchase Counts)
@@ -253,6 +279,8 @@ namespace Smart_Asset
                 AxislineColor = OxyColors.Magenta,
                 AxislineThickness = 2,
                 TextColor = OxyColors.Black,
+                Minimum = 0,
+                Maximum = monthlyPurchaseCounts.Max() + 10, // Add extra space above the maximum value
                 MinimumPadding = 0.1,
                 MaximumPadding = 0.1
             });
@@ -282,7 +310,6 @@ namespace Smart_Asset
             // Add the plot view to the target panel
             targetPanel.Controls.Add(plotView);
         }
-
 
 
         public static void CreatePieChart(Panel targetPanel, Dictionary<string, int> assetCounts)
@@ -317,25 +344,24 @@ namespace Smart_Asset
                 FontSize = 14,
                 ExplodedDistance = 0.05, // Slightly explode slices for better separation
                 TextColor = OxyColors.Black,
-                InsideLabelPosition = 0.7, // Adjust to make more room inside slices
-                OutsideLabelFormat = "{0}: {1}", // Show labels outside the pie chart
-                LabelField = "Label" // Ensure labels display asset types
+                InsideLabelFormat = null, // Completely remove inside labels
+                OutsideLabelFormat = "{0}: {1}", // Only show outside labels
             };
 
             // Define colors for the slices
             List<OxyColor> colors = new List<OxyColor>
-            {
-                OxyColors.Crimson,
-                OxyColors.MediumSeaGreen,
-                OxyColors.DodgerBlue,
-                OxyColors.Goldenrod,
-                OxyColors.Purple,
-                OxyColors.OrangeRed,
-                OxyColors.Teal,
-                OxyColors.Violet,
-                OxyColors.SkyBlue,
-                OxyColors.DarkCyan
-            };
+    {
+        OxyColors.Crimson,
+        OxyColors.MediumSeaGreen,
+        OxyColors.DodgerBlue,
+        OxyColors.Goldenrod,
+        OxyColors.Purple,
+        OxyColors.OrangeRed,
+        OxyColors.Teal,
+        OxyColors.Violet,
+        OxyColors.SkyBlue,
+        OxyColors.DarkCyan
+    };
 
             // Add slices for each asset type
             for (int i = 0; i < sliceCount; i++)
@@ -362,6 +388,7 @@ namespace Smart_Asset
 
             targetPanel.Controls.Add(plotView);
         }
+
 
     }
 }
